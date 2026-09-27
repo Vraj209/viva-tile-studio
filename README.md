@@ -2,7 +2,7 @@
 
 A complete local landing-page implementation built around **“From imagination to a space that is yours.”** It follows one recognizable botanical design from artwork to tile, a continuous composition and an interior concept, then carries that artwork into the project enquiry.
 
-The page includes a readable hero, four-beat transformation, three application narratives, an accessible inspiration gallery, all six supplied process stages, conditional FAQs and a real server-side enquiry handler. This is a reviewable local implementation; it has **not been published externally**.
+The page includes a readable hero, four-beat transformation, three application narratives, an accessible inspiration gallery, all six supplied process stages, source-attributed technical specifications, conditional FAQs and a real server-side enquiry handler. This is a reviewable local implementation; it has **not been published externally**.
 
 ## Run locally
 
@@ -43,12 +43,12 @@ TypeScript is used throughout. Manrope Variable and Cormorant Garamond are bundl
 
 ## Sources and visual assumptions
 
-Only two text briefs were supplied. No logo, title sample, tile artwork, product photograph, interior photograph, video, model or technical document was available. The complete original wording is preserved without edits in:
+The initial implementation received only two text briefs, with no visual assets or technical document. The complete original wording is preserved without edits in:
 
 - [Business copy and commercial references](data/vavi-original-website-copy.txt)
 - [Creative and engineering brief](data/vavi-original-creative-and-engineering-brief.txt)
 
-The original phrase **“custom 3D printed tiles”** remains in that archive. The interface uses the brief's concise proposed custom-design wording while manufacturing terminology remains pending owner confirmation. It does not infer additive manufacturing, physical relief, a specific printer or universal application suitability.
+The destination project later supplied images, a poster PDF and `data/Technical datasheet.docx`. The 27 September technical update uses the actual datasheet for attributed product information; the existing imagery remains labelled concept artwork. The original phrase **“custom 3D printed tiles”** remains in the brief archive, while the datasheet describes handmade high-relief tiles. The specifications attribute that description to the datasheet without inferring additive manufacturing, an exact production process or a verified relief depth. The relationship between those descriptions remains a manufacturer question.
 
 Three images were generated for this implementation and are presented as design explorations or concept visualizations. Midnight Garden is flat artwork; painted shading is not verified tile relief. Its interior is an illustrative room. Terra Rhythm is a separate commercial concept. Neither room is presented as a completed VAVI installation. The gallery detail is explicitly a crop of the same botanical artwork, not an additional project.
 
@@ -60,6 +60,7 @@ Three images were generated for this implementation and are presented as design 
 | [Generation prompts](docs/generation-prompts.md) | Recorded prompts and provenance for the generated design studies. |
 | [Enquiry integration](docs/enquiry.md) | Adapter contracts, validation, uploads, privacy boundaries, spam controls and actual HTTP checks. |
 | [Verification](docs/verification.md) | Build/check outcomes, browser QA evidence and testing limitations. |
+| [Technical clarifications](docs/technical-clarifications.md) | Internal publication policy, source discrepancies, manufacturer questions, evidence requests and an unsent email draft. Never publish this file. |
 
 ## Project map
 
@@ -79,16 +80,19 @@ src/components/
   Possibilities.tsx        Residential, professional and commercial entries
   ProjectGallery.tsx       Concept gallery and native detail dialog
   Process.tsx              All six supplied process stages
+  TechnicalSpecifications.tsx  Source-attributed technical groups and download
   FAQ.tsx                  Conditional project guidance
   ProjectEnquiry.tsx       Accessible form and actual submission states
   SiteFooter.tsx           Useful page navigation and brand close
 src/lib/
   content.ts               Application, process and FAQ copy
+  technical-specifications.ts  Shared typed specifications and technical FAQs
   motion.ts                Shared progress model and scene timing
   enquiry-config.ts        Field policy, choices and upload limits
   enquiry.ts               Server validation and delivery/private storage
 public/images/             Three optimized, generated WebP studies
-data/                      Unedited source briefs
+public/downloads/          Genuine source DOCX download
+data/                      Original briefs, supplied assets and technical DOCX
 docs/                      Provenance, integration and verification notes
 tests/enquiry.test.ts       Enquiry contract and integration tests
 ```
@@ -96,6 +100,16 @@ tests/enquiry.test.ts       Enquiry contract and integration tests
 The hero uses a CSS sample fan, not a second WebGL renderer. Only the signature story mounts a canvas, and only on eligible desktop with motion enabled. GSAP controls one shared progress model; R3F reads it into scene transforms. The mural uses nine UV windows into one continuous artwork rather than nine repeated copies. A matching image provides the final room reveal.
 
 Mobile, reduced-motion and disabled-JavaScript visitors get the four-beat static sequence. Eligible desktop visitors can also select **“View without motion.”** Essential copy, headings, navigation and imagery are server-renderable. Scene errors and context loss have image-based fallbacks. The form explains its JavaScript requirement. Consult the verification record for what was actually exercised in browsers.
+
+## Technical specifications and download
+
+The `#specifications` section sits after the process and before the FAQ. Its server-rendered description lists and technical FAQ entries share `src/lib/technical-specifications.ts`. Header, mobile menu and footer navigation link to the section; the project-specific specifications action opens the existing enquiry section, whose availability still depends on delivery configuration.
+
+`public/downloads/technical-datasheet.docx` is a byte-identical copy of the original `data/Technical datasheet.docx` (16,705 bytes; SHA-256 `BBDDCF13F8118CB1132D66BF9285D10450754800C162048E1F873FAA44022847`). It is served at `/downloads/technical-datasheet.docx`. A visible note beside the download identifies the source document and its unresolved exterior conditions and test references. The original remains untouched. No PDF was produced because a reliable bundled LibreOffice converter was unavailable; the genuine DOCX is the download.
+
+Published values are source-attributed, not independently verified. Both absorption values retain their body labels; hardness is labelled Mohs, with no inferred PEI class. Exterior suitability, formats, relief thickness, installation systems and poolside exposure require product-specific confirmation. The active-pool-tank restriction is visible in the section. Absolute UV/frost assurances and affirmative lead/cadmium, fire, environmental and certification claims are withheld from newly authored website copy. The original download still contains those unresolved source statements.
+
+Keep manufacturer questions and the unsent email in `docs/technical-clarifications.md`; they are not public assets. When replacing the source, preserve an archived original, review all affected public values/FAQs and qualifications, and verify that the download is the actual approved artifact. Do not remove qualifications simply because a manufacturer repeats a claim without its relevant evidence and scope.
 
 ## Connect enquiries
 
