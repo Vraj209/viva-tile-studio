@@ -1,0 +1,817 @@
+Act as a senior creative director, editorial web designer, 3D material
+artist, motion designer, and Next.js engineer working as one coordinated
+team.
+
+Design and build a distinctive, production-quality landing page for
+VAVI TILE STUDIO using Next.js, TypeScript, GSAP, and Three.js.
+React Three Fiber is the preferred React integration for the 3D scene.
+
+CREATIVE CONCEPT:
+“From imagination to a space that is yours.”
+
+One recognizable tile design must connect the opening, material
+exploration, assembled wall, and project enquiry.
+
+The website should feel like entering a thoughtfully curated material
+gallery—not a building-supply catalogue, generic SaaS template, or
+disconnected collection of animation demonstrations.
+
+Achieve the visual quality through composition, typography, material
+realism, art direction, and precise motion—not effects everywhere.
+
+The commercial objective is a qualified custom-project enquiry.
+Visitors must understand what VAVI creates, what they can bring to the
+studio, what possibilities apply to their space, how collaboration
+works, and how to begin.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. INSPECT THE SOURCES BEFORE DESIGNING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Read the supplied VAVI website brief completely.
+
+Inspect the actual project structure, including the data folder and
+existing public asset directories. Do not assume filenames or claim
+to have inspected unavailable files.
+
+Inventory:
+• Logo and brand assets.
+• Tile photographs and artwork.
+• Title and typography samples.
+• Interior photographs and project visuals.
+• Videos, 3D models, and technical documents.
+
+Record each usable asset’s actual path, resolution, aspect ratio,
+intended role, and provenance.
+
+Distinguish flat artwork from a photograph of a finished tile.
+Do not mistake printed photographic shading for physical relief.
+
+Use the supplied tile samples as the primary visual content.
+Use the supplied title samples as the primary typography direction.
+
+Preserve the samples’ recognizable artwork, proportions, and details.
+Do not replace them with random stock images or generic procedural
+textures because those are easier to implement.
+
+For typography, study the supplied sample’s letterforms, proportions,
+weight, spacing, line breaks, and overall composition. Recreate the
+relevant design qualities using real HTML text—not a screenshot.
+
+Source hierarchy:
+Owner-approved assets and factual material first.
+Supplied draft copy second.
+External references for design inspiration only.
+
+Where information conflicts or lacks technical support, flag it
+rather than silently resolving it.
+
+The brief uses “custom 3D printed tiles” and dimensional design
+language. Preserve that terminology in the content source and flag
+manufacturing terminology for owner confirmation before publication.
+
+Do not infer additive manufacturing, a specific printer, substantial
+raised relief, or a particular production method from marketing copy.
+Keep physical surface relief visually neutral unless approved
+evidence supports it.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2. STUDY THE TWO DESIGN REFERENCES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Object presentation and motion:
+https://www.awwwards.com/sites/a24
+
+Color direction:
+https://www.idst.ae/services
+
+Follow the Awwwards listing to its live experience where available.
+
+Study the actual object arrangement, depth, navigation, selection
+feedback, camera behavior, pacing, and mobile treatment.
+
+Record what you observe separately from what you propose for VAVI.
+The reference describes a 3D disc-based experience; translating it
+into a tile presentation is a creative adaptation.
+
+Borrow principles such as spatial presentation and tactile object
+interaction. Do not copy the reference’s branding, film imagery,
+content, or entire layout.
+
+For IDST, inspect the actual backgrounds, foregrounds, accents,
+borders, and light/dark relationships. Capture screenshots and sample
+computed styles where possible.
+
+Borrow its color relationships, not its identity, photography,
+illustrations, or copy.
+
+Do not guess exact colors and label them “extracted.”
+
+If a reference or asset folder is inaccessible, identify the
+limitation, continue with clearly labelled reversible assumptions,
+and document what remains unverified.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3. POSITIONING AND CONTENT DISCIPLINE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Recommended design priority:
+Interior designers and architects working on distinctive residential
+and boutique commercial spaces.
+
+Treat this as a proposed audience hierarchy, not a confirmed business
+restriction. Keep clear entry points for homeowners, businesses,
+and artists.
+
+Retain these supplied brand anchors selectively:
+
+“Bring Your Imagination Into Reality.”
+“Tiles. Art. Spaces. Endless Possibilities.”
+“Your Idea. Your Tile. Your Space.”
+“From Imagination to Tile.”
+
+Edit repeated copy into a concise landing-page narrative.
+Keep the complete supplied wording available for review.
+Do not place the entire multi-page website brief on the homepage.
+
+Never fabricate:
+Customer logos, testimonials, completed installations, press coverage,
+project statistics, awards, prices, delivery promises, certifications,
+or manufacturing specifications.
+
+Do not imply universal suitability for showers, exteriors, floors,
+or other demanding applications. Suitability depends on the selected
+substrate, process, finish, installation, and project review.
+
+Launch geography is undecided.
+Do not invent an address, service territory, currency, shipping
+coverage, or installation network.
+Collect project location in the enquiry instead.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4. VISUAL SYSTEM
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Use an architectural editorial grid, generous negative space, large
+artwork, and restrained framing.
+
+Alternate close-up material studies with wider room views.
+
+Allow selected images to break the grid intentionally, while keeping
+headings, captions, and navigation aligned.
+
+Desktop starting points:
+12-column grid.
+Approximately 5–6vw outer gutters.
+Controlled maximum content width around 1600px.
+Generous but varied section spacing.
+
+Mobile:
+A deliberate single-column composition.
+Approximately 20–24px gutters.
+Different image crops and object framing where needed.
+Never simply shrink the desktop experience.
+
+TYPOGRAPHY
+
+Make typography a defining feature.
+
+Pair the display treatment closest to the supplied title samples
+with an understated, readable body face.
+
+Use appropriately licensed fonts.
+
+Tune optical alignment, line breaks, line height, and tracking at
+each breakpoint.
+
+Reserve expressive typography for major statements.
+Keep body text, navigation, captions, and forms straightforward.
+
+Start body text around 16–18px.
+Use fluid headline sizing rather than a fixed desktop size.
+Do not allow decorative typography to obscure the business message.
+
+COLOR
+
+IDST is the primary color reference.
+
+Build semantic CSS tokens from its verified palette and document
+their provenance.
+
+If inspection is blocked, use this explicitly provisional VAVI
+palette—not an alleged IDST extraction:
+
+Chalk:  #F2EFE8
+Ink:    #242822
+Forest: #303C32
+Stone:  #D2C9BA
+Bronze: #92785E
+
+Use bronze decoratively unless the specific text/background pairing
+passes contrast checks.
+
+Replace provisional tokens after reference review.
+
+Let the tile artwork provide much of the visual variety.
+
+Avoid neon gradients, rainbow sections, excessive gold, glass panels,
+thick rounded cards, and ornamental UI competing with the product.
+
+Use hairline rules, quiet chapter numbers, small captions, considered
+button proportions, and subtle edge treatments.
+
+Texture should come primarily from materials and imagery—not a heavy
+grain filter covering the entire website.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+5. THE COMPLETE VISITOR JOURNEY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CHAPTER A — ARRIVAL
+Visitor question: “What does VAVI create?”
+
+Show a readable hero immediately, even before WebGL loads.
+
+No compulsory splash screen.
+No fake loading percentage.
+No sound.
+No “enter experience” gate.
+
+Navigation:
+VAVI wordmark.
+Work.
+Possibilities.
+Process.
+Start your project.
+
+Use working section anchors where appropriate.
+The enquiry must be reachable without completing the story.
+
+Hero headline:
+
+“Bring Your Imagination
+Into Reality.”
+
+Proposed supporting sentence:
+
+“Custom tile designs created around your artwork, your ideas,
+and your space.”
+
+This is concise interface copy, not a replacement for the draft’s
+manufacturing terminology.
+
+Primary CTA:
+“Start your project”
+
+Secondary CTA:
+“Explore the possibilities”
+
+Small category label:
+“VAVI TILE STUDIO / CUSTOM TILE DESIGN”
+
+Pair the text with beautifully lit tile objects using actual samples.
+
+On desktop, explore a shallow fan or ordered stack of approximately
+6–10 tiles with one visually dominant sample.
+
+This is a proposed VAVI adaptation of object-led browsing.
+Keep text unobstructed and artwork legible.
+
+On mobile, prioritize one strong tile image and the CTA.
+
+A restrained entrance may settle the composition over approximately
+0.8–1.2 seconds. It must not delay access to text, links, or scrolling.
+
+
+CHAPTER B — THE SIGNATURE TRANSFORMATION
+Visitor question: “How can my idea become a surface?”
+
+Continue the same recognizable artwork through four visual beats.
+
+Each beat needs one concise explanation and a clear visual purpose.
+
+BEAT 1: YOUR IDEA
+
+Present a supplied artwork, pattern, or logo as the starting point.
+
+Communicate that a photograph, sketch, or unfinished concept can
+begin the conversation.
+
+BEAT 2: YOUR TILE
+
+Carry that artwork onto a believable tile face.
+
+Rotate the tile enough to reveal its edge and surface response.
+
+Use a clean artwork reveal—not a fictional printer simulation.
+
+Show physical relief only where approved evidence supports it.
+
+BEAT 3: YOUR COMPOSITION
+
+Move from individual pieces into a coordinated tiled composition.
+
+Map the artwork continuously across the pieces.
+Do not repeat the entire artwork independently on every tile.
+
+Use approved layouts and dimensions where available.
+Otherwise identify the arrangement as illustrative.
+
+BEAT 4: YOUR SPACE
+
+Pull back or match-cut to the same design inside an interior.
+
+Match the framing, light direction, artwork scale, and tile alignment
+so the transition feels continuous.
+
+Use a completed-project photograph only when verified.
+Label a created room rendering “Concept visualization.”
+
+Suggested desktop choreography:
+
+Opening: hold a clear composition.
+0–25%: introduce the idea.
+25–50%: reveal the tile detail.
+50–75%: assemble the composition.
+75–100%: reveal the space.
+
+These are starting points to tune, not rigid requirements.
+
+Include calm reading holds.
+Avoid one continuous blur of motion.
+
+Keep the pinned visual sequence to roughly 2–2.5 viewport-heights
+of scroll travel beyond its viewport—not an endless cinematic tunnel.
+
+Pin the visual area without trapping navigation or keyboard focus.
+
+Provide a visible way to skip to the gallery or enquiry.
+
+Reverse scrolling must reverse the story predictably.
+
+For mobile and reduced motion, communicate all four beats through a
+short image-and-caption sequence.
+
+Do not require hovering, 3D dragging, or hidden gestures to understand
+the product.
+
+
+CHAPTER C — POSSIBILITIES
+Visitor question: “Could this work for my project?”
+
+Use the heading:
+
+“Your Idea. Your Tile. Your Space.”
+
+Build an editorial sequence around three principal applications:
+
+Personal residential features.
+Architectural and interior concepts.
+Branded commercial spaces.
+
+Integrate patterns, art, and murals into these applications instead
+of creating six identical service cards.
+
+For each application:
+Show a relevant supplied visual.
+Explain the possibility briefly.
+Provide “Discuss a similar idea.”
+
+Carry the selected application into the enquiry form.
+
+Do not imply that every illustrated application is technically
+approved.
+
+Give this source statement a quieter, spacious composition:
+
+“Instead of designing your room around the tile,
+design the tile around your room.”
+
+
+CHAPTER D — SELECTED WORK / INSPIRATION
+Visitor question: “Show me the detail.”
+
+Create an art-directed gallery with uneven visual emphasis:
+one large feature image, a close-up crop, a smaller supporting view,
+then another project.
+
+Maintain a coherent grid beneath the variation.
+
+Do not duplicate assets to imply a larger portfolio.
+
+Use “Selected work” only for verified work.
+
+Otherwise use “Inspiration gallery” or “Design explorations,” with
+clear labels distinguishing photographs, artwork, prototypes, and
+concept visualizations.
+
+Opening an item should reveal the available:
+Concept image.
+Tile detail.
+Room view.
+Short factual caption.
+
+Omit unavailable views rather than inventing them.
+
+Use an accessible dialog or real detail route, with keyboard
+operation, a clear close control, and correct focus restoration.
+
+Avoid decorative filters when there are too few genuine items
+to filter.
+
+
+CHAPTER E — PROCESS
+Visitor question: “What happens when I contact you?”
+
+Use the supplied heading:
+
+“From Imagination to Tile.”
+
+Preserve the brief’s six-stage sequence:
+
+01 — Share Your Idea.
+02 — Design & Consultation.
+03 — Digital Concept, where applicable.
+04 — Approval.
+05 — Production.
+06 — Bring Your Space to Life.
+
+Explain each stage in one or two sentences.
+
+The final stage means preparing tiles for installation.
+Do not turn it into an unconditional promise that VAVI installs them.
+
+Present the process as a calm editorial index with a supporting image
+that changes with the active stage, or a well-designed static sequence.
+
+Do not create a second long pinned experience.
+Every stage must remain available without hover.
+
+Use this reassurance:
+
+“An idea is enough to start the conversation.”
+
+Explain review and approval without inventing turnaround times,
+free services, or unlimited revisions.
+
+
+CHAPTER F — CONFIDENCE
+Visitor question: “What should I know before starting?”
+
+Use factual product imagery and the clear process as the primary
+evidence.
+
+Include a compact FAQ covering:
+Providing artwork.
+Starting without a finished design.
+Working with designers and architects.
+Tile dimensions.
+Wet-area and outdoor applications.
+Timelines.
+Installation arrangements.
+
+Preserve conditional answers from the brief.
+
+Explain that size, finish, application, cost, and timing are reviewed
+for each project.
+
+Do not replace qualified information with unsupported sales claims.
+
+
+CHAPTER G — ENQUIRY AND EXIT
+Visitor question: “I am ready to share an idea.”
+
+Close with:
+
+“Let’s Turn Your Idea Into Tile.”
+
+Echo the opening artwork as a quiet static detail so the page feels
+complete.
+
+Use a simple, accessible project form—not lengthy mandatory onboarding.
+
+Proposed required fields:
+Name.
+Email.
+Description of the idea.
+
+Optional contextual fields:
+Project type.
+Intended application.
+Project location.
+Approximate dimensions.
+Company.
+Phone.
+Desired completion date.
+Inspiration upload.
+
+Keep this hierarchy configurable for owner review.
+
+Allow “Not sure yet” where appropriate.
+
+Explain upload types and limits before selection.
+Preserve entered information after validation or network errors.
+
+Provide clear pending, error, and confirmed-submission states.
+
+Connect the form to a real server-side handler and configured
+delivery/storage integration.
+
+Report success only after that system has accepted or persisted
+the enquiry.
+
+If no transport is configured, show an honest unavailable state.
+Never simulate a successful lead submission.
+
+Validate uploads server-side, enforce type and size limits, prevent
+public exposure of private artwork, and include spam protection.
+
+Never include submitted artwork, emails, or phone numbers in analytics.
+
+Use only verified contact details and real legal/social destinations.
+Omit unavailable links rather than inventing them.
+
+No exit-intent traps, forced newsletter signup, navigation blocking,
+or guilt-based prompts.
+
+Visitors may enquire, continue browsing, or leave normally.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+6. 3D ART DIRECTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Make tiles feel like physical samples—not floating website cards.
+
+Use believable thickness, restrained bevels, correct artwork
+proportions, soft contact shadows, and controlled studio lighting.
+
+Use non-metallic surface behavior unless the sample shows otherwise.
+
+A gentle grazing light may reveal detail, but it must not exaggerate
+unverified surface texture.
+
+Avoid:
+Mirror-like plastic.
+Swollen edges.
+Disconnected hovering shadows.
+Excessive bloom.
+Particles.
+Fast spins.
+Artwork stretched around tile edges.
+
+A tile may move through space as a storytelling device.
+Its shape and surface must still respect the product evidence.
+
+Give the hero tile a constrained, damped pointer response only on
+suitable fine-pointer devices.
+
+Optional sample selection should update a visible HTML caption and
+have keyboard-accessible controls.
+
+Do not make essential information canvas-only.
+
+Prefer one scoped canvas for the opening experience, reused across
+its states.
+
+Use optimized imagery for the gallery, process, and final enquiry,
+rather than mounting a WebGL renderer in every section.
+
+If a complex room transition cannot look convincing within the
+performance budget, use a carefully matched static visualization.
+
+Do not ship an unfinished low-poly room simply to make everything 3D.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+7. MOTION SYSTEM
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Give GSAP ownership of timeline choreography and DOM transitions.
+
+Use Three.js / React Three Fiber for scene objects and rendering.
+
+Use one coordinated progress model.
+Do not let multiple systems compete for the same transform.
+
+Use scoped useGSAP setup and cleanup.
+
+Make breakpoint and reduced-motion behavior explicit through
+media-query variants.
+
+Clean up interaction animations, event listeners, and delayed
+callbacks—not only initial timelines.
+
+Animate references and scene properties without React state updates
+on every frame.
+
+For on-demand rendering, request frames throughout active tweens
+and damping, then stop when settled.
+
+Pause unnecessary rendering offscreen and when the tab is hidden.
+
+Use natural browser scrolling by default.
+
+Do not add a smooth-scroll dependency unless it produces a tested
+improvement without breaking navigation, touch behavior, or pinning.
+
+Most interactions should use small transforms, image crops, opacity,
+and underlines.
+
+Heading reveals should be brief and restrained, with intact
+accessible text.
+
+Avoid character-by-character effects on every sentence.
+
+Starting timing ranges:
+Small interactions: approximately 180–300ms.
+Editorial reveals: approximately 500–900ms.
+
+Tune by observation, not by treating these values as universal rules.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+8. ENGINEERING AND PROGRESSIVE ENHANCEMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Respect the existing repository, package manager, and compatible
+dependency versions.
+
+For a new project, select current stable compatible packages after
+checking official documentation. Do not guess version numbers.
+
+Use Next.js App Router and TypeScript.
+
+Keep meaningful copy, headings, navigation, and static imagery
+server-renderable.
+
+Isolate browser-dependent motion and WebGL in focused Client
+Components.
+
+Place any ssr:false dynamic import behind a Client Component
+boundary, not inside a Server Component.
+
+Show an optimized poster image before the 3D scene.
+
+Match its framing to the initial canvas composition so enhancement
+does not cause a visual jump.
+
+Handle failed textures, disabled JavaScript, unsupported WebGL, and
+context loss with readable static content.
+
+Use semantic CSS tokens and a consistent styling approach.
+
+Separate:
+Content.
+Asset metadata.
+Motion configuration.
+Rendering logic.
+Form handling.
+
+Avoid a giant component containing every scene, field, and animation.
+
+Useful component boundaries:
+
+SiteHeader
+Hero
+TileStory
+TileScene
+Possibilities
+ProjectGallery
+Process
+FAQ
+ProjectEnquiry
+SiteFooter
+
+Use these boundaries where they improve maintainability.
+Do not create architecture for its own sake.
+
+Include page metadata and a social preview using approved assets.
+
+Use structured data only for verified business facts.
+Do not invent an address, rating, or price for SEO.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+9. ACCESSIBILITY AND PERFORMANCE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Use visible focus states, semantic headings, clear form labels,
+sufficient contrast, and touch targets around 44px or larger.
+
+Make content readable at 200% zoom.
+
+Hide decorative canvas content from assistive technology.
+Expose meaningful captions and controls as HTML.
+
+Respect prefers-reduced-motion with a genuinely simplified
+experience:
+
+No camera flights.
+No perpetual rotation.
+No scrubbed spatial movement.
+No prolonged pinning.
+
+Do not merely speed up the same animation.
+Preserve the story through static visuals and normal document flow.
+
+Optimize images and textures for their actual display size.
+
+Lazy-load below-the-fold imagery.
+Defer nonessential 3D code.
+Reuse geometry and materials.
+Use adaptive pixel density.
+
+Do not load 8K textures simply because the visual ambition is high.
+
+Engineering targets to measure—not claims to make before testing:
+
+LCP at or below 2.5 seconds.
+CLS at or below 0.1.
+Responsive interactions around 200ms or better on the agreed profile.
+
+Establish a deferred-scene asset budget, initially around 3MB
+compressed, and adjust through documented profiling.
+
+Reduce complexity when device performance is inadequate.
+
+A beautifully composed static experience is preferable to a
+stuttering animation.
+
+Keep navigation, CTAs, and the form usable while optional media loads.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+10. BUILD SEQUENCE AND ACCEPTANCE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Work in deliberate passes:
+
+Source and asset audit.
+Concise storyboard and visual system.
+Responsive semantic page.
+Signature 3D sequence.
+Enquiry integration.
+Accessibility and performance.
+Visual refinement.
+
+Do not stop at a wireframe or an attractive first viewport.
+
+Implement the complete journey in the actual project files.
+Preserve existing working functionality.
+Do not publish externally without authorization.
+
+Inspect rendered pages at:
+360px, 390px, 768px, 1024px, 1440px, and a wider desktop size.
+
+Review typography, object scale, image crops, header contrast,
+sticky behavior, scene transitions, and form completion.
+
+Make a refinement pass after inspecting screenshots.
+
+Test:
+Keyboard navigation.
+Menu and dialog close behavior.
+Reduced motion.
+JavaScript and WebGL fallbacks.
+Anchor navigation during the story.
+Reverse scrolling.
+Orientation changes.
+Slow asset loading.
+Submission success and real failure states.
+
+Run available lint, type, build, and test checks.
+Report actual results.
+
+Do not claim browser or device testing that was not performed.
+
+Deliver:
+Implemented page and reusable components.
+Content and asset mapping.
+Motion configuration.
+README covering setup, integrations, asset replacement, assumptions,
+and outstanding owner confirmations.
+
+The release checklist must explicitly cover:
+Manufacturing terminology.
+Verified surface relief.
+Approved applications.
+Launch geography.
+Image provenance.
+Font permission.
+Contact details.
+Enquiry delivery configuration.
+
+FINAL QUALITY TEST
+
+A visitor who ignores every animation must still understand VAVI
+and know how to enquire.
+
+A visitor who explores the full experience should remember the
+transformation from an idea, to a tile, to a space that feels
+uniquely theirs.

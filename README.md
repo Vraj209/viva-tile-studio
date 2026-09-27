@@ -1,0 +1,141 @@
+# VAVI Tile Studio
+
+A complete local landing-page implementation built around **“From imagination to a space that is yours.”** It follows one recognizable botanical design from artwork to tile, a continuous composition and an interior concept, then carries that artwork into the project enquiry.
+
+The page includes a readable hero, four-beat transformation, three application narratives, an accessible inspiration gallery, all six supplied process stages, conditional FAQs and a real server-side enquiry handler. This is a reviewable local implementation; it has **not been published externally**.
+
+## Run locally
+
+Use Node.js 20.9 or later; this project was built with Node.js 24.13.0. From the project folder:
+
+```sh
+npm ci
+npm run dev
+```
+
+Open [localhost:3000](http://localhost:3000) or [127.0.0.1:3000](http://127.0.0.1:3000). The development and production start scripts bind to the local loopback interface. Install from the included `package-lock.json`; `npm ci` requires registry access on first setup.
+
+For a local production build:
+
+```sh
+npm run build
+npm run start
+```
+
+Stop the development server first if it is using port 3000. To use another port, append `-- --port 3001` to the dev or start command. None of these commands deploys the site.
+
+Configuration is optional for browsing the page. To configure enquiries, copy `.env.example` to `.env.local`, edit the server-only values and restart the server. The default form clearly reports that online enquiries are unavailable; it never simulates a received lead.
+
+## Stack
+
+Installed versions were checked against the npm registry during setup and are captured in the lockfile:
+
+| Package | Version |
+| --- | --- |
+| Next.js, App Router | 16.3.6 |
+| React / React DOM | 19.3.0 |
+| React Three Fiber | 9.8.1 |
+| Three.js | 0.186.1 |
+| GSAP | 3.15.0 |
+| `@gsap/react` | 2.1.2 |
+
+TypeScript is used throughout. Manrope Variable and Cormorant Garamond are bundled locally through Fontsource. Their SIL OFL notices are retained in [docs/licenses](docs/licenses/).
+
+## Sources and visual assumptions
+
+Only two text briefs were supplied. No logo, title sample, tile artwork, product photograph, interior photograph, video, model or technical document was available. The complete original wording is preserved without edits in:
+
+- [Business copy and commercial references](data/vavi-original-website-copy.txt)
+- [Creative and engineering brief](data/vavi-original-creative-and-engineering-brief.txt)
+
+The original phrase **“custom 3D printed tiles”** remains in that archive. The interface uses the brief's concise proposed custom-design wording while manufacturing terminology remains pending owner confirmation. It does not infer additive manufacturing, physical relief, a specific printer or universal application suitability.
+
+Three images were generated for this implementation and are presented as design explorations or concept visualizations. Midnight Garden is flat artwork; painted shading is not verified tile relief. Its interior is an illustrative room. Terra Rhythm is a separate commercial concept. Neither room is presented as a completed VAVI installation. The gallery detail is explicitly a crop of the same botanical artwork, not an additional project.
+
+| Documentation | Contents |
+| --- | --- |
+| [Source audit](docs/source-audit.md) | Actual initial inventory, source checksums, ten commercial reference observations, content mapping and owner confirmations. |
+| [Visual system](docs/visual-system.md) | Verified IDST values versus VAVI adaptations, A24 desktop/mobile observations, typography, storyboard, contrast calculations and motion boundaries. |
+| [Asset register](docs/assets.md) | Actual paths, resolution, ratios, bytes, provenance, role and replacement instructions. |
+| [Generation prompts](docs/generation-prompts.md) | Recorded prompts and provenance for the generated design studies. |
+| [Enquiry integration](docs/enquiry.md) | Adapter contracts, validation, uploads, privacy boundaries, spam controls and actual HTTP checks. |
+| [Verification](docs/verification.md) | Build/check outcomes, browser QA evidence and testing limitations. |
+
+## Project map
+
+```text
+src/app/
+  page.tsx                 Complete visitor journey
+  layout.tsx               Fonts, metadata and noindex setting
+  globals.css              Semantic tokens and responsive page styling
+  opengraph-image.tsx       Provisional typography-only social preview
+  api/enquiry/route.ts      Dynamic Node.js enquiry endpoint
+src/components/
+  SiteHeader.tsx           Desktop navigation and mobile menu
+  Hero.tsx                 Server-rendered proposition, imagery and CTAs
+  HeroMotion.tsx           Restrained CSS sample-fan enhancement
+  TileStory.tsx            Static story, motion controls and GSAP progress
+  TileScene.tsx            One scoped React Three Fiber renderer
+  Possibilities.tsx        Residential, professional and commercial entries
+  ProjectGallery.tsx       Concept gallery and native detail dialog
+  Process.tsx              All six supplied process stages
+  FAQ.tsx                  Conditional project guidance
+  ProjectEnquiry.tsx       Accessible form and actual submission states
+  SiteFooter.tsx           Useful page navigation and brand close
+src/lib/
+  content.ts               Application, process and FAQ copy
+  motion.ts                Shared progress model and scene timing
+  enquiry-config.ts        Field policy, choices and upload limits
+  enquiry.ts               Server validation and delivery/private storage
+public/images/             Three optimized, generated WebP studies
+data/                      Unedited source briefs
+docs/                      Provenance, integration and verification notes
+tests/enquiry.test.ts       Enquiry contract and integration tests
+```
+
+The hero uses a CSS sample fan, not a second WebGL renderer. Only the signature story mounts a canvas, and only on eligible desktop with motion enabled. GSAP controls one shared progress model; R3F reads it into scene transforms. The mural uses nine UV windows into one continuous artwork rather than nine repeated copies. A matching image provides the final room reveal.
+
+Mobile, reduced-motion and disabled-JavaScript visitors get the four-beat static sequence. Eligible desktop visitors can also select **“View without motion.”** Essential copy, headings, navigation and imagery are server-renderable. Scene errors and context loss have image-based fallbacks. The form explains its JavaScript requirement. Consult the verification record for what was actually exercised in browsers.
+
+## Connect enquiries
+
+The handler accepts multipart form data at `POST /api/enquiry`. Required fields are name, email and the idea; additional context and one file are optional. `GET /api/enquiry` returns configuration availability without exposing integration details. Submission success requires either actual HTTPS receiver acceptance or completed private persistence.
+
+Choose **exactly one** adapter in `.env.local`:
+
+1. **HTTPS webhook:** Set `ENQUIRY_WEBHOOK_URL` to an owner-approved receiver and optionally set `ENQUIRY_WEBHOOK_TOKEN`. The receiver must accept/store the lead before returning 2xx. The payload contains an `enquiry` JSON form field and optional `inspiration` file. Redirects are rejected and delivery has a 12-second timeout.
+2. **Private filesystem:** Set `ENQUIRY_STORAGE_DIR` to an explicit absolute path outside any web-served directory. Use persistent private storage and appropriate permissions. It records enquiries but does **not** send notifications; arrange staff review before using it for visitors. Do not use ephemeral serverless storage or commit enquiry records.
+
+No configured adapter, invalid values or both adapters together leave the form unavailable. Runtime transport errors keep the visitor's entered information and report that receipt could not be confirmed. Configuration availability alone is not a live receiver health check.
+
+Uploads are limited to one JPEG, PNG, WebP or PDF up to 5 MiB. The server checks signature, MIME, extension and size and provides no public attachment endpoint. A honeypot, same-origin POST check and conservative in-process rate limiter are included. Multi-instance production use needs a shared limiter and a suitable ingress configuration; the attachment signature check is not malware scanning. [Integration documentation](docs/enquiry.md) covers these operational limits and the private retention/access decisions required before launch.
+
+Set `ENQUIRY_ALLOWED_ORIGIN` to the exact public origin when deploying behind a reverse proxy. Leave `ENQUIRY_TRUST_PROXY=false` unless the trusted ingress overwrites/sanitizes `X-Forwarded-For`. Do not expose any of these secrets through `NEXT_PUBLIC_` variables. No personal enquiry fields or uploads are included in analytics.
+
+Set `SITE_URL` to the actual approved origin for absolute metadata URLs. `src/app/layout.tsx` intentionally emits **noindex, nofollow** until owner signoff. The social preview uses provisional typography; no approved VAVI logo or imagery was supplied. Setting a domain does not authorize publication or remove the noindex setting automatically.
+
+## Checks
+
+```sh
+npm run lint
+npm run typecheck
+npm test
+npm run build
+```
+
+The enquiry suite recorded **11 passing tests**, covering validation, unconfigured behavior, origin checks, upload restrictions, real temporary private persistence, simulated webhook acceptance/failure and rate limiting. A test receiver is not a configured live business recipient. Actual server/browser checks and their limits are recorded in [docs/verification.md](docs/verification.md) and [docs/enquiry.md](docs/enquiry.md).
+
+The requested LCP ≤2.5s, CLS ≤0.1 and approximately 200ms interactions remain **measurement targets**, not claimed passes. The complete production JavaScript inventory, individually gzip-compressed, plus all three source WebP images and all emitted font/media files totals **1,342,552 bytes** (about 1.34 MB). This conservative file inventory is below the initial 3 MB deferred-scene budget, but is not a measured initial transfer or runtime performance result. See [verification](docs/verification.md) for the breakdown and profile the chosen production host and agreed device/network conditions before launch.
+
+## Owner release checklist
+
+- [ ] Confirm **manufacturing terminology** and approve the public description of the actual process.
+- [ ] Supply evidence for **physical surface relief** before depicting or claiming it.
+- [ ] Confirm **approved applications**, substrates, finishes, sizes and installation requirements.
+- [ ] Decide **launch geography** and handling of enquiries by location; no territory or address was invented.
+- [ ] Approve **image provenance** and concept labels, or replace studies with permitted product/project assets.
+- [ ] Review **font permission and brand treatment**; retain the included font licenses.
+- [ ] Supply verified **contact details** and actual privacy/legal/social destinations where required.
+- [ ] Configure and verify **enquiry delivery**, private retention/access and staff receipt with a real end-to-end enquiry.
+
+Review the completed browser/performance evidence, approve final copy and explicitly authorize external publication before changing indexing or deploying.
