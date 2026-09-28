@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import CountrySelect from "./CountrySelect";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import {
   applications,
@@ -40,6 +41,7 @@ export default function ProjectEnquiry() {
   const [errors, setErrors] = useState<EnquiryErrors>({});
   const [projectType, setProjectType] = useState("Not sure yet");
   const [application, setApplication] = useState("Not sure yet");
+  const [country, setCountry] = useState("");
   const [reference, setReference] = useState("");
 
   useEffect(() => {
@@ -147,7 +149,7 @@ export default function ProjectEnquiry() {
         const firstError = Object.keys(nextErrors)[0];
         requestAnimationFrame(() => {
           const field =
-            firstError && formRef.current?.elements.namedItem(firstError);
+            firstError && document.getElementById(`enquiry-${firstError}`);
           if (field instanceof HTMLElement) field.focus();
           else messageRef.current?.focus();
         });
@@ -184,7 +186,7 @@ export default function ProjectEnquiry() {
       aria-labelledby="enquiry-heading"
     >
       <div className={styles.intro}>
-        <p className={styles.eyebrow}>06 — A conversation begins</p>
+        <p className={styles.eyebrow}>07 — A conversation begins</p>
         <h2 id="enquiry-heading">
           Let’s Turn Your
           <br />
@@ -357,14 +359,16 @@ export default function ProjectEnquiry() {
               </div>
               <div className={styles.pair}>
                 <div className={styles.field}>
-                  <label htmlFor="enquiry-location">Project location</label>
-                  <input
+                  <label htmlFor="enquiry-location">
+                    Project location <span>(country)</span>
+                  </label>
+                  <CountrySelect
                     id="enquiry-location"
                     name="location"
-                    maxLength={200}
-                    placeholder="City / region / country"
-                    aria-invalid={!!errors.location}
-                    aria-describedby={describedBy("location")}
+                    value={country}
+                    onChange={setCountry}
+                    invalid={!!errors.location}
+                    describedBy={describedBy("location")}
                   />
                   {errorFor("location")}
                 </div>
@@ -485,6 +489,7 @@ export default function ProjectEnquiry() {
                   formRef.current?.reset();
                   setProjectType("Not sure yet");
                   setApplication("Not sure yet");
+                  setCountry("");
                   setSubmission("idle");
                   setMessage("");
                   setReference("");

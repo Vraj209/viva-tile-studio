@@ -1,6 +1,5 @@
-import Image from "next/image";
 import Arrow from "./Arrow";
-import HeroMotion from "./HeroMotion";
+import HeroAtelier from "./HeroAtelier";
 
 export default function Hero() {
   return (
@@ -29,36 +28,7 @@ export default function Hero() {
           </a>
         </div>
       </div>
-      <div
-        className="hero-objects"
-        aria-label="Midnight Garden, an illustrative tile design exploration"
-      >
-        <div className="tile-fan" id="tile-fan">
-          <div className="sample sample-6" />
-          <div className="sample sample-5" />
-          <div className="sample sample-4" />
-          <div className="sample sample-3" />
-          <div className="sample sample-2" />
-          <div className="sample sample-main">
-            <Image
-              src="/images/midnight-garden.webp"
-              alt="Ivory magnolias and olive foliage on a forest-green ground"
-              width={1254}
-              height={1254}
-              sizes="(max-width: 768px) 75vw, 38vw"
-              loading="eager"
-              fetchPriority="high"
-            />
-          </div>
-        </div>
-        <div className="sample-caption">
-          <span className="caption-rule" />
-          <p>
-            <span>STUDY Nº 01 — MIDNIGHT GARDEN</span>
-            <small>Illustrative tile concept · flat artwork</small>
-          </p>
-        </div>
-      </div>
+      <HeroAtelier />
       <div className="hero-bottom">
         <p>
           Tiles. Art. Spaces. <em>Endless Possibilities.</em>
@@ -67,7 +37,6 @@ export default function Hero() {
           Discover the transformation <span>↓</span>
         </a>
       </div>
-      <HeroMotion />
     </section>
   );
 }

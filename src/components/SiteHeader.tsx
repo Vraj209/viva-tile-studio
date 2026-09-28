@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Arrow from "./Arrow";
+import BrandLogo from "./BrandLogo";
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -26,12 +27,13 @@ export default function SiteHeader() {
   return (
     <header className="site-header">
       <a className="wordmark" href="#top" aria-label="VAVI Tile Studio home">
-        VAVI<span>TILE STUDIO</span>
+        <BrandLogo eager />
       </a>
       <nav className="desktop-nav" aria-label="Main navigation">
         <a href="#work">Work</a>
         <a href="#possibilities">Possibilities</a>
         <a href="#process">Process</a>
+        <a href="#specifications">Specifications</a>
       </nav>
       <a className="header-cta" href="#enquiry">
         Start your project <Arrow diagonal />
@@ -62,6 +64,9 @@ export default function SiteHeader() {
         </a>
         <a href="#process">
           Process <Arrow />
+        </a>
+        <a href="#specifications">
+          Specifications <Arrow />
         </a>
         <a href="#enquiry">
           Start your project <Arrow />

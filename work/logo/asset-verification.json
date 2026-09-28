@@ -1,0 +1,24 @@
+{
+  "sourceSha256": "ae3646256c462ef6df2fddd43bf7ed68348e62a8849a1a60e6bfbd73dde40a4b",
+  "sourceDimensions": [
+    1254,
+    1254
+  ],
+  "outputDimensions": [
+    891,
+    1015
+  ],
+  "crop": {
+    "left": 194,
+    "top": 24,
+    "width": 863,
+    "height": 987
+  },
+  "transparentMargin": 14,
+  "transparent": 584731,
+  "partial": 25193,
+  "visible": 319634,
+  "visibleRgbMismatches": 0,
+  "visiblePixelsInMargin": 0,
+  "lowestSourceRow": 1010
+}

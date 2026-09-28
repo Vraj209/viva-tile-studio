@@ -14,6 +14,13 @@ const origin = "https://vavi.example";
 const webhookEnv = {
   ENQUIRY_WEBHOOK_URL: "https://receiver.example/enquiries",
 };
+const neonEnv = {
+  DATABASE_URL: "postgresql://test:example@ep-test-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require",
+  AWS_ACCESS_KEY_ID: "test-key",
+  AWS_SECRET_ACCESS_KEY: "test-secret",
+  AWS_ENDPOINT_URL_S3: "https://storage.example.test",
+  AWS_REGION: "ap-southeast-1",
+};
 function form() {
   const data = new FormData();
   data.set("name", "A Designer");
@@ -63,6 +70,20 @@ test("origin checks reject cross-origin and missing-origin submissions", async (
   const missing = request();
   missing.headers.delete("origin");
   assert.equal((await handleEnquiry(missing, services())).status, 403);
+});
+
+test("origin verification uses the actual Host when Next normalizes loopback URLs", async () => {
+  const send = (origin: string, env: Record<string, string> = webhookEnv, host = "127.0.0.1:3000") => handleEnquiry(new Request("http://localhost:3000/api/enquiry", {
+    method: "POST",
+    headers: { host, origin, "x-forwarded-host": "untrusted.example" },
+    body: form(),
+  }), services({ env, fetch: async () => new Response(null, { status: 202 }) }));
+  assert.equal((await send("http://127.0.0.1:3000")).status, 201);
+  assert.equal((await send("http://localhost:3000")).status, 403);
+  assert.equal((await send("https://untrusted.example")).status, 403);
+  assert.equal((await send("https://vavi.example", { ...webhookEnv, ENQUIRY_ALLOWED_ORIGIN: "https://vavi.example" })).status, 201);
+  assert.equal((await send("http://vavi.example", webhookEnv, "vavi.example")).status, 201);
+  assert.equal((await send("http://vavi.example", webhookEnv, "vavi.example:80")).status, 201);
 });
 
 test("validation gives useful field errors and rejects duplicate or unsupported fields", async () => {
@@ -240,4 +261,66 @@ test("invalid calendar dates are rejected", async () => {
   const data = form();
   data.set("desiredDate", "2027-02-30");
   assert.ok((await validateEnquiry(data)).errors.desiredDate);
+  data.set("desiredDate", "0000-01-01");
+  assert.ok((await validateEnquiry(data)).errors.desiredDate);
+});
+
+test("Neon availability requires complete configuration and rejects conflicting adapters", () => {
+  assert.deepEqual(enquiryAvailability(neonEnv), { available: true });
+  assert.deepEqual(enquiryAvailability({ DATABASE_URL: neonEnv.DATABASE_URL }), { available: false });
+  assert.deepEqual(enquiryAvailability({ ...neonEnv, DATABASE_URL: "not-a-url" }), { available: false });
+  assert.deepEqual(enquiryAvailability({ ...neonEnv, ...webhookEnv }), { available: false });
+  assert.deepEqual(enquiryAvailability({ ...neonEnv, ENQUIRY_STORAGE_DIR: path.resolve("private-enquiries") }), { available: false });
+  assert.deepEqual(enquiryAvailability({ ...neonEnv, AWS_ENDPOINT_URL_S3: "http://storage.example.test" }), { available: false });
+});
+
+test("Neon submission passes validated fields and attachment to persistence before confirming receipt", async () => {
+  const data = form();
+  data.set("location", "Canada");
+  data.set("company", "Test studio");
+  data.set("desiredDate", "2027-04-12");
+  data.set("inspiration", new Blob(["%PDF-1.4\nconcept"], { type: "application/pdf" }), "concept.pdf");
+  let saved = false;
+  const result = await handleEnquiry(request(data), services({
+    env: neonEnv,
+    persistNeon: async (config, record, upload) => {
+      assert.equal(config.kind, "neon");
+      assert.equal(config.bucket, "viva-tile-studio");
+      assert.equal(record.name, "A Designer");
+      assert.equal(record.location, "Canada");
+      assert.equal(record.company, "Test studio");
+      assert.equal(record.desiredDate, "2027-04-12");
+      assert.equal(record.inspiration?.originalName, "concept.pdf");
+      assert.equal(upload?.bytes.toString(), "%PDF-1.4\nconcept");
+      saved = true;
+    },
+  }));
+  assert.equal(saved, true);
+  assert.equal(result.status, 201);
+  const body = await result.json();
+  assert.match(body.reference, /^[0-9a-f-]{36}$/);
+  assert.deepEqual(Object.keys(body).sort(), ["message", "reference"]);
+});
+
+test("Neon write failures return an honest error without credentials or false confirmation", async () => {
+  const result = await handleEnquiry(request(), services({
+    env: neonEnv,
+    persistNeon: async () => { throw new Error(`private error: ${neonEnv.DATABASE_URL}`); },
+  }));
+  assert.equal(result.status, 502);
+  const body = await result.json();
+  assert.equal(body.reference, undefined);
+  assert.ok(!JSON.stringify(body).includes("postgresql://"));
+});
+
+test("invalid Neon enquiries never reach database or storage", async () => {
+  let writes = 0;
+  const data = form();
+  data.set("email", "invalid");
+  const result = await handleEnquiry(request(data), services({
+    env: neonEnv,
+    persistNeon: async () => { writes++; },
+  }));
+  assert.equal(result.status, 422);
+  assert.equal(writes, 0);
 });

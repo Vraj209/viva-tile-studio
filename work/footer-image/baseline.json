@@ -1,0 +1,154 @@
+{
+  "390": {
+    "children": [
+      {
+        "class": "wordmark",
+        "height": 150.359375,
+        "tag": "A",
+        "width": 132,
+        "x": 24,
+        "y": 50
+      },
+      {
+        "class": "",
+        "height": 150.359375,
+        "tag": "P",
+        "width": 165.265625,
+        "x": 185.71875,
+        "y": 50
+      },
+      {
+        "class": "",
+        "height": 132,
+        "tag": "NAV",
+        "width": 326.984375,
+        "x": 24,
+        "y": 235.359375
+      },
+      {
+        "class": "footer-bottom",
+        "height": 95.1875,
+        "tag": "DIV",
+        "width": 327,
+        "x": 24,
+        "y": 402.359375
+      }
+    ],
+    "height": 522.546875,
+    "width": 375
+  },
+  "768": {
+    "children": [
+      {
+        "class": "wordmark",
+        "height": 150.359375,
+        "tag": "A",
+        "width": 132,
+        "x": 24,
+        "y": 50
+      },
+      {
+        "class": "",
+        "height": 150.359375,
+        "tag": "P",
+        "width": 371.453125,
+        "x": 357.53125,
+        "y": 50
+      },
+      {
+        "class": "",
+        "height": 132,
+        "tag": "NAV",
+        "width": 704.984375,
+        "x": 24,
+        "y": 235.359375
+      },
+      {
+        "class": "footer-bottom",
+        "height": 95.1875,
+        "tag": "DIV",
+        "width": 705,
+        "x": 24,
+        "y": 402.359375
+      }
+    ],
+    "height": 522.546875,
+    "width": 753
+  },
+  "1024": {
+    "children": [
+      {
+        "class": "wordmark",
+        "height": 182.265625,
+        "tag": "A",
+        "width": 160,
+        "x": 57.34375,
+        "y": 65
+      },
+      {
+        "class": "",
+        "height": 182.265625,
+        "tag": "P",
+        "width": 248.21875,
+        "x": 355.5625,
+        "y": 65
+      },
+      {
+        "class": "",
+        "height": 182.265625,
+        "tag": "NAV",
+        "width": 297.875,
+        "x": 653.78125,
+        "y": 65
+      },
+      {
+        "class": "footer-bottom",
+        "height": 70,
+        "tag": "DIV",
+        "width": 894.3125,
+        "x": 57.34375,
+        "y": 302.265625
+      }
+    ],
+    "height": 397.265625,
+    "width": 1009
+  },
+  "1100": {
+    "children": [
+      {
+        "class": "wordmark",
+        "height": 182.265625,
+        "tag": "A",
+        "width": 160,
+        "x": 61.59375,
+        "y": 65
+      },
+      {
+        "class": "",
+        "height": 182.265625,
+        "tag": "P",
+        "width": 269.3125,
+        "x": 380.90625,
+        "y": 65
+      },
+      {
+        "class": "",
+        "height": 182.265625,
+        "tag": "NAV",
+        "width": 323.1875,
+        "x": 700.21875,
+        "y": 65
+      },
+      {
+        "class": "footer-bottom",
+        "height": 70,
+        "tag": "DIV",
+        "width": 961.8125,
+        "x": 61.59375,
+        "y": 302.265625
+      }
+    ],
+    "height": 397.265625,
+    "width": 1085
+  }
+}

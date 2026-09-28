@@ -1,0 +1,25 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "assets": [
+    {
+      "id": "terracotta-orbit",
+      "prompt": "Use case: stylized-concept\nAsset type: original architectural ceramic art tile face for a luxury interior materials website hero, square 1024 by 1024.\nPrimary request: create one stunning full-bleed warm dusty terracotta sculptural ceramic relief surface. Asymmetrical nested circular arcs meet a broad half-disc and restrained incised straight lines. Sophisticated Bauhaus-adjacent architectural geometry; minimal balanced design with a strong focal sweep and generous calm areas.\nComposition/framing: perfectly front-on orthographic flat square tile face, filling every edge of the entire square image. The ceramic surface must reach all four image edges, no visible perimeter or tile thickness, no perspective.\nLighting/mood: soft upper-left studio light makes shallow relief dimensional, exceptional fine clarity and understated premium elegance.\nColor palette: tonal warm dusty terracotta clay, muted and sophisticated, no bright orange.\nMaterials/textures: sanded matte ceramic with authentic very fine clay grain and carefully sculpted shallow relief, restrained precise grooves.\nConstraints: one unified square art-tile surface, no surrounding background, no border, no mockup, no angled tile, no cast shadow outside, no text, no logo, no watermark, no props, no scenery, no collage or contact sheet. CSS will supply the tile shape, physical edge and shadow; generate only the full-bleed front surface artwork.",
+      "generatedOriginal": "C:/Users/Vraj Panchal/.codex/generated_images/01a0e52f-563e-7c21-8a10-4d1f04c14c8c/exec-a7898ff4-1338-49e5-9a9a-2ebbeb9b8706.png",
+      "workspaceOriginal": "public/images/hero/originals/terracotta-orbit.png",
+      "webAsset": "public/images/hero/terracotta-orbit.webp",
+      "width": 768,
+      "height": 768,
+      "bytes": 120804
+    },
+    {
+      "id": "mineral-strata",
+      "prompt": "Use case: stylized-concept\nAsset type: original architectural ceramic art tile face for a luxury interior materials website hero, square 1024 by 1024.\nPrimary request: create one stunning full-bleed limestone-inspired ceramic surface with softly undulating horizontal strata and compressed fine mineral lines. Shallow carved sediment-like contours create quiet organic movement. The sculptural composition should read beautifully at a small size, with broad restrained undulations and extraordinary mineral detail close-up.\nComposition/framing: perfectly front-on orthographic flat square tile face, filling every edge of the entire square image. The ceramic surface must reach all four image edges, no visible perimeter or tile thickness, no perspective.\nLighting/mood: soft upper-left studio light makes shallow relief dimensional, exceptional fine clarity and understated premium elegance.\nColor palette: warm grey, taupe and greige with subtle natural variation, entirely muted luxury interior palette.\nMaterials/textures: sanded matte limestone-inspired ceramic with delicate stone pores, subtle authentic grain and softly carved shallow sediment contours.\nConstraints: one unified square art-tile surface, no surrounding background, no border, no mockup, no angled tile, no cast shadow outside, no text, no logo, no watermark, no props, no scenery, no collage or contact sheet, no polished marble, no gold veining. CSS will supply the tile shape, physical edge and shadow; generate only the full-bleed front surface artwork.",
+      "generatedOriginal": "C:/Users/Vraj Panchal/.codex/generated_images/01a0e52f-563e-7c21-8a10-4d1f04c14c8c/exec-a2b85347-1e9f-44ed-8316-df211ec4cbd4.png",
+      "workspaceOriginal": "public/images/hero/originals/mineral-strata.png",
+      "webAsset": "public/images/hero/mineral-strata.webp",
+      "width": 768,
+      "height": 768,
+      "bytes": 209864
+    }
+  ]
+}

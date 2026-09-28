@@ -1,5 +1,6 @@
 import { process } from "@/lib/content";
 import Arrow from "./Arrow";
+import BrandLogo from "./BrandLogo";
 export default function Process() {
   return (
     <section className="process section-space" id="process">
@@ -18,9 +19,7 @@ export default function Process() {
         <a className="text-link" href="#enquiry">
           Tell us what you’re imagining <Arrow diagonal />
         </a>
-        <span className="process-mark" aria-hidden="true">
-          V
-        </span>
+        <BrandLogo className="process-mark" />
       </div>
       <ol className="process-list">
         {process.map(([title, copy], i) => (

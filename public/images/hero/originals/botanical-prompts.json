@@ -1,0 +1,19 @@
+{
+  "generator": "Built-in image_gen.imagegen",
+  "assets": [
+    {
+      "id": "celadon-fan",
+      "prompt": "Use case: product-mockup\nAsset type: Original hero tile face artwork for a premium architectural ceramics website.\nPrimary request: Create one stunning square 1024x1024 full-bleed image of a pale celadon green-blue sculptural ceramic tile face with rhythmic Art Deco fan and palmette arches. Large graceful overlapping fan-shaped motifs have precise fine fluted lines and softly curved shallow ceramic relief. Use a disciplined large-scale composition with exceptional surface clarity and collectible artisan craft.\nStyle/medium: Photorealistic luxury matte porcelain with very subtle tactile ceramic grain, sculptural but restrained shallow relief.\nComposition/framing: Perfectly front-on orthographic view, the single tile face fills every edge of the square artwork. No visible tile edge or depth, no border. Consistent square proportions.\nLighting/mood: Broad soft studio light from upper left revealing the fine fluting and graceful relief, calm and luxurious.\nColor palette: Pale celadon, subtle muted green-blue and mineral sage tones, cohesive restrained tonal variation.\nConstraints: One tile face only. No metallic gold, frame, background, room, grout, angled sample, props, objects, text, logos or watermark. Not a contact sheet, not a collage. The ceramic face itself fills the image.",
+      "original": "public/images/hero/originals/celadon-fan.png",
+      "source": "C:/Users/Vraj Panchal/.codex/generated_images/01a0e52f-9557-7061-bc2c-1be474fa6520/exec-9f66438b-ff69-45ad-b22b-247e2abe03d9.png",
+      "output": "public/images/hero/celadon-fan.webp"
+    },
+    {
+      "id": "forest-magnolia",
+      "prompt": "Use case: product-mockup\nAsset type: Original frontmost hero tile face artwork for a premium architectural ceramics website.\nPrimary request: Create one stunning square 1024x1024 full-bleed image of a dramatic original sculptural botanical ceramic tile. A deep muted forest-green matte ceramic ground holds exactly two large exquisite ivory magnolia blossoms, one at upper left-center and one at lower right, with a graceful connecting botanical branch and small olive leaves. Each blossom has beautifully articulated softly sculpted porcelain petals, subtle natural curves, delicate botanical detail and measured shallow ceramic relief. The asymmetrical composition should feel sophisticated, balanced and collectible, with extraordinary material clarity.\nStyle/medium: Photorealistic luxury artisan ceramic art tile, restrained porcelain relief, fine tactile matte ceramic, no thick cartoon sculpture.\nComposition/framing: Perfectly front-on orthographic view. One tile face fills every edge of the square artwork, with no visible tile edge, no border and no perspective.\nLighting/mood: Broad soft studio illumination from upper left, soft natural relief shadows, sophisticated understated drama.\nColor palette: Deep muted forest green, dark mineral greens, warm ivory porcelain and small soft olive leaves.\nConstraints: One tile face only. No frame, background, room, grout, angled sample, props, text, logos or watermark. No independent object against a background. Not a contact sheet or collage. The ceramic ground fills the entire image.",
+      "original": "public/images/hero/originals/forest-magnolia.png",
+      "source": "C:/Users/Vraj Panchal/.codex/generated_images/01a0e52f-9557-7061-bc2c-1be474fa6520/exec-b08b0abc-36b1-42a4-bf0d-f0fe75ed61d6.png",
+      "output": "public/images/hero/forest-magnolia.webp"
+    }
+  ]
+}

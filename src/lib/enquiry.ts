@@ -2,6 +2,12 @@ import { randomUUID } from "node:crypto";
 import { mkdir, realpath, rename, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import {
+  neonEnquiryConfiguration,
+  persistNeonEnquiry,
+  type EnquiryRecord,
+  type NeonEnquiryConfig,
+} from "./enquiry-neon";
+import {
   enquiryFields,
   MAX_UPLOAD_BYTES,
   type EnquiryErrors,
@@ -31,13 +37,14 @@ export type EnquiryData = Record<
   keyof typeof enquiryFields | keyof typeof optionalLimits,
   string
 >;
-type Upload = {
+export type Upload = {
   bytes: Buffer;
   mime: string;
   extension: string;
   originalName: string;
 };
 type DeliveryConfig =
+  | NeonEnquiryConfig
   | { kind: "webhook"; url: string; token?: string }
   | { kind: "filesystem"; directory: string };
 type Environment = Record<string, string | undefined>;
@@ -47,6 +54,7 @@ export type EnquiryServices = {
   fetch?: typeof fetch;
   now?: () => number;
   buckets?: Map<string, Bucket>;
+  persistNeon?: typeof persistNeonEnquiry;
 };
 
 // Per-process safeguard. See docs/enquiry.md for multi-instance limits and proxy setup.
@@ -55,6 +63,10 @@ const processBuckets = new Map<string, Bucket>();
 function configuration(env: Environment): DeliveryConfig | null {
   const webhook = env.ENQUIRY_WEBHOOK_URL?.trim();
   const directory = env.ENQUIRY_STORAGE_DIR?.trim();
+  if (env.DATABASE_URL?.trim()) {
+    if (webhook || directory) return null;
+    return neonEnquiryConfiguration(env);
+  }
   if (webhook && directory) return null;
   if (webhook) {
     try {
@@ -224,6 +236,7 @@ export async function validateEnquiry(
     const date = new Date(`${data.desiredDate}T00:00:00Z`);
     if (
       !/^\d{4}-\d{2}-\d{2}$/.test(data.desiredDate) ||
+      data.desiredDate.startsWith("0000-") ||
       Number.isNaN(date.valueOf()) ||
       date.toISOString().slice(0, 10) !== data.desiredDate
     )
@@ -311,7 +324,17 @@ export async function handleEnquiry(
   const env = services.env ?? process.env;
   let expectedOrigin: string;
   try {
-    expectedOrigin = new URL(env.ENQUIRY_ALLOWED_ORIGIN || request.url).origin;
+    let expected = new URL(env.ENQUIRY_ALLOWED_ORIGIN || request.url);
+    const host = request.headers.get("host");
+    if (!env.ENQUIRY_ALLOWED_ORIGIN && host) {
+      // NextURL normalizes loopback IPs to localhost. Host preserves the actual
+      // destination the browser used; do not trust X-Forwarded-Host here.
+      const destination = new URL(`${expected.protocol}//${host}`);
+      if (destination.username || destination.password || destination.pathname !== "/" || destination.search || destination.hash)
+        throw new Error("invalid host");
+      expected = destination;
+    }
+    expectedOrigin = expected.origin;
   } catch {
     return response(
       503,
@@ -370,7 +393,7 @@ export async function handleEnquiry(
       { errors },
     );
   const reference = randomUUID();
-  const record = {
+  const record: EnquiryRecord = {
     reference,
     receivedAt: new Date((services.now ?? Date.now)()).toISOString(),
     ...data,
@@ -384,7 +407,9 @@ export async function handleEnquiry(
       : null,
   };
   try {
-    if (config.kind === "filesystem")
+    if (config.kind === "neon")
+      await (services.persistNeon ?? persistNeonEnquiry)(config, record, upload);
+    else if (config.kind === "filesystem")
       await persist(config.directory, reference, record, upload);
     else {
       const body = new FormData();

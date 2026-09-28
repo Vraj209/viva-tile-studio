@@ -1,150 +1,142 @@
 "use client";
+
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
+import { galleryAssets } from "@/lib/gallery-assets";
+import { useGalleryMotion } from "@/lib/use-gallery-motion";
 import Arrow from "./Arrow";
-const studies = [
-  {
-    name: "Midnight Garden",
-    type: "Botanical mural",
-    caption:
-      "A single botanical artwork imagined as a continuous tiled feature. This room is a concept visualization, not a completed installation.",
-    image: "/images/garden-room.webp",
-    alt: "Magnolia tiled artwork in an illustrative warm living room",
-    views: [
-      { src: "/images/garden-room.webp", label: "Room concept" },
-      { src: "/images/midnight-garden.webp", label: "Original artwork" },
-    ],
-  },
-  {
-    name: "A closer look",
-    type: "Midnight Garden / Artwork detail",
-    caption:
-      "A closer crop of the same Midnight Garden artwork. Painterly shading belongs to the image and does not represent verified physical relief.",
-    image: "/images/midnight-garden.webp",
-    alt: "Close-up crop of creamy magnolia petals in the Midnight Garden artwork",
-    views: [{ src: "/images/midnight-garden.webp", label: "Original artwork" }],
-  },
-  {
-    name: "Terra Rhythm",
-    type: "Geometric composition",
-    caption:
-      "An exploration of graphic rhythm in a boutique reception. This concept visualization suggests how a custom pattern might shape a commercial interior; specifications require project review.",
-    image: "/images/terra-room.webp",
-    alt: "Illustrative reception interior with ochre and terracotta geometric tiled wall",
-    views: [{ src: "/images/terra-room.webp", label: "Room concept" }],
-  },
-];
+import { GalleryInspection } from "./GalleryInspection";
+import styles from "./ProjectGallery.module.css";
+
+const number = (index: number) => String(index + 1).padStart(2, "0");
+
 export default function ProjectGallery() {
-  const dialog = useRef<HTMLDialogElement>(null);
-  const returnFocus = useRef<HTMLButtonElement | null>(null);
   const [selected, setSelected] = useState(0);
-  const [view, setView] = useState(0);
-  const active = studies[selected];
-  const close = () => dialog.current?.close();
+  const [inspectionIndex, setInspectionIndex] = useState<number | null>(null);
+  const [still, setStill] = useState(false);
+  const track = useRef<HTMLDivElement>(null);
+  const panel = useRef<HTMLDivElement>(null);
+  const stage = useRef<HTMLDivElement>(null);
+  const sampleButtons = useRef<(HTMLButtonElement | null)[]>([]);
+  const returnFocus = useRef<HTMLButtonElement | null>(null);
+  const pendingFocus = useRef<number | null>(null);
+  const active = galleryAssets[selected];
+  const commitSelection = useCallback((index: number) => {
+    setSelected(Math.max(0, Math.min(galleryAssets.length - 1, index)));
+  }, []);
+  const { select, suppressClick } = useGalleryMotion(
+    stage, track, panel, galleryAssets.length, commitSelection, still, inspectionIndex !== null,
+  );
+
+  useEffect(() => {
+    if (pendingFocus.current === null) return;
+    // The motion hook has made the committed selection visible before focusing.
+    sampleButtons.current[pendingFocus.current]?.focus({ preventScroll: true });
+    pendingFocus.current = null;
+  }, [selected]);
+
+  const inspect = () => {
+    returnFocus.current = sampleButtons.current[selected];
+    setInspectionIndex(selected);
+  };
+  const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    let next = selected;
+    if (event.key === "ArrowRight") next++;
+    else if (event.key === "ArrowLeft") next--;
+    else if (event.key === "Home") next = 0;
+    else if (event.key === "End") next = galleryAssets.length - 1;
+    else return;
+    event.preventDefault();
+    next = Math.max(0, Math.min(galleryAssets.length - 1, next));
+    if (next !== selected && (event.target as HTMLElement).hasAttribute("data-gallery-sample")) {
+      pendingFocus.current = next;
+    }
+    select(next);
+  };
+
   return (
-    <section className="gallery section-space" id="work">
-      <div className="gallery-heading">
-        <div>
-          <p className="eyebrow">03 / THE INSPIRATION GALLERY</p>
-          <h2>
-            Ideas, <em>taking shape.</em>
-          </h2>
-        </div>
-        <p>
-          Two original design explorations.
-          <br />A world of possible directions.
-        </p>
-      </div>
-      <div className="gallery-grid">
-        {studies.map((study, i) => (
-          <button
-            className={`gallery-item gallery-item-${i}`}
-            key={study.name}
-            onClick={(e) => {
-              returnFocus.current = e.currentTarget;
-              setSelected(i);
-              setView(0);
-              dialog.current?.showModal();
-            }}
-          >
-            <div className="gallery-image">
-              <Image
-                src={study.image}
-                alt={study.alt}
-                fill
-                sizes={
-                  i === 0
-                    ? "(max-width: 768px) 90vw, 57vw"
-                    : "(max-width: 768px) 90vw, 33vw"
-                }
-              />
-              <span className="gallery-open">
-                <Arrow diagonal />
-              </span>
-            </div>
-            <span className="gallery-caption">
-              <span>
-                <strong>{study.name}</strong>
-                <small>{study.type}</small>
-              </span>
-              <small>
-                {i === 1 ? "Artwork detail" : "Concept visualization"}
-              </small>
-            </span>
-          </button>
-        ))}
-      </div>
-      <dialog
-        ref={dialog}
-        className="gallery-dialog"
-        aria-labelledby="study-title"
-        onClick={(e) => {
-          if (e.target === e.currentTarget) close();
-        }}
-        onClose={() => returnFocus.current?.focus()}
-      >
-        <div className="dialog-inner">
-          <button
-            className="dialog-close"
-            onClick={close}
-            aria-label="Close design exploration"
-          >
-            Close <span>×</span>
-          </button>
-          <div className="dialog-image">
-            <Image
-              src={active.views[view].src}
-              alt={
-                view === 1
-                  ? "Midnight Garden original flat botanical artwork with ivory magnolias and deep green leaves"
-                  : active.alt
-              }
-              fill
-              sizes="(max-width:768px) 95vw, 75vw"
-            />
-          </div>
-          <div className="dialog-info">
+    <section className={`section-space ${styles.gallery}`} id="work" aria-labelledby="gallery-heading">
+      <div ref={track} className={styles.track} data-gallery-track>
+        <div ref={panel} className={styles.panel} data-gallery-panel>
+          <div className={styles.heading}>
             <div>
-              <p className="eyebrow">DESIGN EXPLORATION</p>
-              <h3 id="study-title">{active.name}</h3>
+              <p className="eyebrow">03 / THE INSPIRATION GALLERY</p>
+              <h2 id="gallery-heading">Ideas, <em>taking shape.</em></h2>
             </div>
-            <p>{active.caption}</p>
+            <p>A closer look at pattern, colour and texture.<br />Find a surface that starts something.</p>
           </div>
-          {active.views.length > 1 && (
-            <div className="dialog-tabs" aria-label="Available views">
-              {active.views.map((v, i) => (
-                <button
-                  key={v.label}
-                  aria-pressed={view === i}
-                  onClick={() => setView(i)}
-                >
-                  {v.label}
+          <div className={styles.browser} data-still={still} onKeyDown={onKeyDown} role="group" aria-label="Tile sample browser" aria-describedby="gallery-instructions">
+            <div className={styles.stage} ref={stage} data-gallery-stage>
+              <div className={styles.metadata}>
+                <p className={styles.collectionLabel}>THE SAMPLE EDIT <span>{number(selected)} / {galleryAssets.length}</span></p>
+                <div key={active.id} className={styles.caption}>
+                  <h3>{active.label}</h3>
+                  <p>{active.category}</p>
+                  <p className={styles.description}>{active.description}</p>
+                </div>
+              </div>
+              <div className={styles.rail}>
+                {galleryAssets.map((sample, index) => {
+                  const distance = index - selected;
+                  return (
+                    <button
+                      key={sample.id}
+                      ref={(element) => { sampleButtons.current[index] = element; }}
+                      type="button"
+                      data-gallery-sample
+                      data-offset={distance}
+                      data-active={index === selected}
+                      aria-label={index === selected ? `Inspect ${sample.label}` : `Select ${sample.label}`}
+                      aria-haspopup={index === selected ? "dialog" : undefined}
+                      aria-hidden={Math.abs(distance) > 2 || undefined}
+                      tabIndex={index === selected ? 0 : -1}
+                      className={styles.sample}
+                      style={{ "--ratio": sample.width / sample.height, "--width-factor": Math.min(1, sample.width / sample.height) } as CSSProperties}
+                      onClick={() => {
+                        if (suppressClick.current) return;
+                        if (index === selected) inspect();
+                        else select(index);
+                      }}
+                    >
+                      <span className={styles.face}>
+                        <Image
+                          src={sample.thumbnail}
+                          alt={sample.alt}
+                          width={sample.width}
+                          height={sample.height}
+                          sizes="(max-width: 600px) 62vw, (max-width: 1000px) 38vw, 420px"
+                          draggable={false}
+                          unoptimized
+                        />
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+              <button type="button" className={styles.motionToggle} aria-pressed={still} onClick={() => setStill(!still)}>View without motion</button>
+            </div>
+            <div className={styles.controls}>
+              <p className={styles.instructions} id="gallery-instructions"><span className={styles.scrollHint}>Scroll to explore <span>·</span> </span>Drag or use the arrows <span>·</span> Select to inspect</p>
+              <div className={styles.browseControls}>
+                <button type="button" className={styles.previous} aria-label="Previous sample" disabled={selected === 0} onClick={() => select(selected - 1)}><Arrow /></button>
+                <span className={styles.counter} aria-hidden="true">{number(selected)} <i>/</i> {galleryAssets.length}</span>
+                <button type="button" aria-label="Next sample" disabled={selected === galleryAssets.length - 1} onClick={() => select(selected + 1)}><Arrow /></button>
+              </div>
+              <button type="button" className={styles.inspect} onClick={inspect}>Inspect sample <Arrow diagonal /></button>
+            </div>
+            <div className={styles.index} role="group" aria-label="Choose a sample">
+              {galleryAssets.map((sample, index) => (
+                <button key={sample.id} type="button" aria-label={`Show ${sample.label}`} aria-pressed={selected === index} onClick={() => select(index)}>
+                  <span>{number(index)}</span><i aria-hidden="true" />
                 </button>
               ))}
             </div>
-          )}
+            <p className={styles.srOnly} aria-live="polite" aria-atomic="true">{active.label}, sample {selected + 1} of {galleryAssets.length}.</p>
+          </div>
         </div>
-      </dialog>
+      </div>
+      <noscript><p className={styles.noScript}>Open a sample photograph: {galleryAssets.map((sample) => <a key={sample.id} href={sample.image}>{sample.label}</a>)}</p></noscript>
+      <GalleryInspection sample={inspectionIndex === null ? null : galleryAssets[inspectionIndex]} onClose={() => setInspectionIndex(null)} returnFocus={returnFocus} />
     </section>
   );
 }

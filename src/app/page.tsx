@@ -4,6 +4,7 @@ import TileStory from "@/components/TileStory";
 import Possibilities from "@/components/Possibilities";
 import ProjectGallery from "@/components/ProjectGallery";
 import Process from "@/components/Process";
+import TechnicalSpecifications from "@/components/TechnicalSpecifications";
 import FAQ from "@/components/FAQ";
 import ProjectEnquiry from "@/components/ProjectEnquiry";
 import SiteFooter from "@/components/SiteFooter";
@@ -46,6 +47,7 @@ export default function Page() {
         </section>
         <ProjectGallery />
         <Process />
+        <TechnicalSpecifications />
         <FAQ />
         <ProjectEnquiry />
       </main>

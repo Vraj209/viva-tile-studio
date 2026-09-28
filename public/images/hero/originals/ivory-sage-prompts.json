@@ -1,0 +1,31 @@
+{
+  "tool": "image_gen.imagegen (built-in)",
+  "assets": [
+    {
+      "id": "ivory-tides",
+      "prompt": "Use case: stylized-concept.\nAsset type: original luxury architectural art tile image for a website hero; square 1024x1024.\nCreate \"Ivory Tides\": one perfectly flat square architectural ceramic art-tile face, viewed perfectly front-on in orthographic projection. The entire image is ceramic surface, full bleed to all four edges. Warm ivory plaster-like matte ceramic with sweeping broad folded waves; sculptural sinuous parallel ribs flow diagonally through the square with beautifully balanced calm empty areas. Design a collectible contemporary relief composition, extraordinarily crisp and tactile, with ivory tonal variation and believable shallow sculptural relief.\nLighting: soft upper-left studio illumination, delicate ambient shading within relief, elegant muted organic luxury interior mood.\nConstraints: the tile face fills every edge; no surrounding background, no visible frame or border, no angled tile, no perspective, no outside cast shadow, no props, no scene, no text, no letters, no logo, no watermark. This is one art tile face, not a contact sheet or collage. Output a square image.",
+      "original": "ivory-tides.png",
+      "originalWidth": 1254,
+      "originalHeight": 1254,
+      "originalBytes": 2205703,
+      "output": "../ivory-tides.webp",
+      "width": 768,
+      "height": 768,
+      "bytes": 65586,
+      "optimization": "sharp resize(768,768,{fit:'cover'}).webp({quality:88}); no retouching"
+    },
+    {
+      "id": "sage-ginkgo",
+      "prompt": "Use case: stylized-concept.\nAsset type: original luxury architectural art tile image for a website hero; square 1024x1024.\nCreate \"Sage Ginkgo\": one perfectly flat square architectural ceramic art-tile face, viewed perfectly front-on in orthographic projection. The entire image is ceramic surface, full bleed to all four edges. Pale muted sage green matte ceramic with exactly three beautifully composed oversized ginkgo fan leaves in sculptural shallow relief. Elegant fan silhouettes and extraordinarily crisp, fine incised radiating veins. Arrange the broad leaves in a balanced botanical composition, selective negative space, graceful flowing stems, subtle material texture and tonal sage-green variation. The design feels like collectible contemporary architectural ceramic art.\nLighting: soft upper-left studio illumination, delicate ambient shading within relief, calm soft light, muted organic luxury interior palette.\nConstraints: the tile face fills every edge; no surrounding background, no visible frame or border, no angled tile, no perspective, no outside cast shadow, no props, no scene, no text, no letters, no logo, no watermark. This is one art tile face, not a contact sheet or collage. Output a square image.",
+      "original": "sage-ginkgo.png",
+      "originalWidth": 1254,
+      "originalHeight": 1254,
+      "originalBytes": 2918494,
+      "output": "../sage-ginkgo.webp",
+      "width": 768,
+      "height": 768,
+      "bytes": 143904,
+      "optimization": "sharp resize(768,768,{fit:'cover'}).webp({quality:88}); no retouching"
+    }
+  ]
+}

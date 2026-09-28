@@ -1,3 +1,5 @@
+import { technicalFaqs } from "./technical-specifications";
+
 export const applications = [
   {
     number: "01",
@@ -74,14 +76,7 @@ export const faqs = [
     "Do you work with designers and architects?",
     "Yes. We welcome collaborations with architects, interior designers, builders, developers, artists and other creative professionals.",
   ],
-  [
-    "What tile sizes and finishes are available?",
-    "Sizes, substrates and finishes depend on the design and project requirements. We’ll review suitable options after learning about your idea, dimensions and application.",
-  ],
-  [
-    "Can tiles be used outdoors or in wet areas?",
-    "Suitability depends on the tile substrate, surface treatment, printing process, installation system and exposure. Tell us where you intend to use the tiles so the appropriate specifications can be reviewed.",
-  ],
+  ...technicalFaqs,
   [
     "How long will my project take, and what will it cost?",
     "Each project is quoted individually. Size, quantity, artwork preparation, design complexity and finishing requirements influence cost and timing. An estimate can be provided after your project details are reviewed.",

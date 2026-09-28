@@ -1,0 +1,147 @@
+"use client";
+
+import { useEffect, useRef, type RefObject } from "react";
+import gsap from "gsap";
+
+/** The previous sample settles low/left and the next high/right. CSS supplies
+ * an initial pose; animation never owns the selection or page scrolling. */
+export function useGalleryMotion(
+  stageRef: RefObject<HTMLDivElement | null>,
+  selected: number,
+  count: number,
+  onSelect: (index: number) => void,
+  still = false,
+) {
+  const controller = useRef<{ select: (index: number) => void } | null>(null);
+  const selectedRef = useRef(selected);
+  const suppressClick = useRef(false);
+
+  useEffect(() => {
+    const stage = stageRef.current;
+    if (!stage) return;
+    const samples = [...stage.querySelectorAll<HTMLButtonElement>("[data-gallery-sample]")];
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const isStill = () => still || reduced.matches;
+    const position = { value: selectedRef.current, opacity: 1 };
+    let width = stage.clientWidth;
+    let tween: gsap.core.Tween | undefined;
+    let resetClick: ReturnType<typeof setTimeout> | undefined;
+    let gesture: { id: number; x: number; y: number; origin: number; dragging: boolean } | null = null;
+
+    const paint = () => {
+      const mobile = width < 550;
+      const spacing = width * (mobile ? 0.72 : 0.3);
+      samples.forEach((sample, index) => {
+        const offset = index - position.value;
+        const distance = Math.abs(offset);
+        gsap.set(sample, {
+          xPercent: -50, yPercent: -50,
+          x: isStill() ? 0 : offset * spacing,
+          y: isStill() ? 0 : -offset * (mobile ? -27 : 65),
+          rotationX: isStill() ? 0 : 7,
+          rotationY: isStill() ? 0 : -16 - Math.min(2, Math.max(-2, offset)) * 4,
+          rotationZ: isStill() ? 0 : -8,
+          scale: isStill() ? 1 : Math.max(0.48, 1 - distance * (mobile ? .43 : .28)),
+          opacity: (distance < .05 ? 1 : Math.max(0, 1 - distance * .32)) * position.opacity,
+          visibility: distance > 2.05 || (isStill() && distance > .5) ? "hidden" : "visible",
+          zIndex: Math.round(10 - distance * 2),
+        });
+      });
+    };
+    const settle = (index: number) => {
+      tween?.kill();
+      tween = undefined;
+      if (isStill()) {
+        position.value = index;
+        position.opacity = 1;
+        paint();
+        return;
+      }
+      if (Math.abs(index - position.value) > 1.1) {
+        // Direct choices skip unloaded intermediates and reveal their own neighbors.
+        position.value = index;
+        position.opacity = 0;
+        paint();
+        tween = gsap.to(position, { opacity: 1, duration: .35, ease: "power2.out", onUpdate: paint });
+        return;
+      }
+      position.opacity = 1;
+      paint();
+      tween = gsap.to(position, { value: index, duration: .85, ease: "power3.out", onUpdate: paint });
+    };
+    const context = gsap.context(() => paint(), stage);
+    controller.current = { select: settle };
+    const onResize = () => { width = stage.clientWidth; paint(); };
+    const observer = new ResizeObserver(onResize);
+    observer.observe(stage);
+    const onMotionChange = () => settle(selectedRef.current);
+    reduced.addEventListener("change", onMotionChange);
+
+    const down = (event: PointerEvent) => {
+      if (!event.isPrimary || event.button !== 0) return;
+      if (resetClick) clearTimeout(resetClick);
+      suppressClick.current = false;
+      gesture = { id: event.pointerId, x: event.clientX, y: event.clientY, origin: selectedRef.current, dragging: false };
+    };
+    const move = (event: PointerEvent) => {
+      if (!gesture || event.pointerId !== gesture.id) return;
+      // A press can leave the stage before capture, then be released elsewhere.
+      if (event.buttons === 0) { finish(event, true); return; }
+      const dx = event.clientX - gesture.x;
+      const dy = event.clientY - gesture.y;
+      if (!gesture.dragging) {
+        if (Math.abs(dy) > 9 && Math.abs(dy) > Math.abs(dx)) { gesture = null; return; }
+        if (Math.abs(dx) < 9 || Math.abs(dx) < Math.abs(dy)) return;
+        gesture.dragging = true;
+        suppressClick.current = true;
+        stage.setPointerCapture(event.pointerId);
+        stage.dataset.dragging = "true";
+        tween?.kill();
+        position.opacity = 1;
+      }
+      // Limit each gesture to one neighbor so unseen full assets are never needed.
+      const delta = Math.max(-1, Math.min(1, -dx / Math.max(150, width * .3)));
+      position.value = Math.max(0, Math.min(count - 1, gesture.origin + delta));
+      if (!isStill()) paint();
+    };
+    const finish = (event: PointerEvent, canceled = event.type === "pointercancel") => {
+      if (!gesture || event.pointerId !== gesture.id) return;
+      const wasDragging = gesture.dragging;
+      gesture = null;
+      delete stage.dataset.dragging;
+      if (stage.hasPointerCapture(event.pointerId)) stage.releasePointerCapture(event.pointerId);
+      if (wasDragging) {
+        const next = canceled ? selectedRef.current : Math.round(position.value);
+        onSelect(next);
+        settle(next);
+        resetClick = setTimeout(() => { suppressClick.current = false; }, 0);
+      }
+    };
+    stage.addEventListener("pointerdown", down);
+    stage.addEventListener("pointermove", move);
+    stage.addEventListener("pointerup", finish);
+    stage.addEventListener("pointercancel", finish);
+    return () => {
+      tween?.kill();
+      if (resetClick) clearTimeout(resetClick);
+      observer.disconnect();
+      reduced.removeEventListener("change", onMotionChange);
+      stage.removeEventListener("pointerdown", down);
+      stage.removeEventListener("pointermove", move);
+      stage.removeEventListener("pointerup", finish);
+      stage.removeEventListener("pointercancel", finish);
+      if (gesture && stage.hasPointerCapture(gesture.id)) stage.releasePointerCapture(gesture.id);
+      delete stage.dataset.dragging;
+      controller.current = null;
+      context.revert();
+      gsap.set(samples, { clearProps: "transform,opacity,visibility,zIndex" });
+    };
+  }, [stageRef, count, onSelect, still]);
+
+  useEffect(() => {
+    selectedRef.current = selected;
+    controller.current?.select(selected);
+  }, [selected]);
+
+  return { suppressClick };
+}

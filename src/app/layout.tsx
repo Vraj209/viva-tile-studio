@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { brandLogo } from "@/lib/brand";
 import "@fontsource-variable/manrope/index.css";
 import "@fontsource/cormorant-garamond/latin-400.css";
 import "@fontsource/cormorant-garamond/latin-400-italic.css";
@@ -9,6 +10,9 @@ export const metadata: Metadata = {
   description:
     "Custom tile designs created around your artwork, your ideas, and your space. Explore possibilities for homes, interiors and branded spaces.",
   robots: { index: false, follow: false },
+  icons: {
+    icon: { url: brandLogo.src, type: "image/png" },
+  },
   openGraph: {
     title: "VAVI Tile Studio",
     description: "Bring Your Imagination Into Reality.",

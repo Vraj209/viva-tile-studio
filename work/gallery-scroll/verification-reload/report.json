@@ -1,0 +1,357 @@
+[
+  {
+    "case": "restored-scroll",
+    "viewport": "1440x960",
+    "status": "failed",
+    "beforeReload": {
+      "mode": "pinned",
+      "position": 4.6208,
+      "active": 5,
+      "scrollY": 9087,
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "panelTop": 24,
+      "panelBottom": 883,
+      "headingTop": 65,
+      "headingBottom": 146,
+      "stageTop": 197,
+      "stageBottom": 727,
+      "scrollDistance": 2640,
+      "futureRunway": 1530.625
+    },
+    "afterReload": {
+      "mode": "pinned",
+      "position": 8.4708,
+      "active": 8,
+      "scrollY": 10011,
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "panelTop": 24,
+      "panelBottom": 883,
+      "headingTop": 65,
+      "headingBottom": 146,
+      "stageTop": 197,
+      "stageBottom": 727,
+      "scrollDistance": 2640.375,
+      "futureRunway": 607
+    },
+    "error": "AssertionError [ERR_ASSERTION]: Reload does not restore document scroll location (9087 -> 10011)\n    at restoredScroll (D:\\Agency\\vivatiles\\work\\gallery-scroll\\verify.cjs:474:3)\n    at async main (D:\\Agency\\vivatiles\\work\\gallery-scroll\\verify.cjs:508:55)",
+    "browserErrors": [],
+    "state": {
+      "mode": "pinned",
+      "position": 8.4708,
+      "hasPosition": true,
+      "scrollY": 10011,
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "pageWidth": 1440,
+      "track": {
+        "x": 80.625,
+        "y": -2009.375,
+        "top": -2009.375,
+        "bottom": 1490,
+        "left": 80.625,
+        "right": 1359.375,
+        "width": 1278.75,
+        "height": 3499.375
+      },
+      "panel": {
+        "x": 80.625,
+        "y": 24,
+        "top": 24,
+        "bottom": 883,
+        "left": 80.625,
+        "right": 1359.375,
+        "width": 1278.75,
+        "height": 859
+      },
+      "stage": {
+        "x": 80.625,
+        "y": 197,
+        "top": 197,
+        "bottom": 727,
+        "left": 80.625,
+        "right": 1359.375,
+        "width": 1278.75,
+        "height": 530
+      },
+      "heading": {
+        "x": 80.625,
+        "y": 65,
+        "top": 65,
+        "bottom": 146,
+        "left": 80.625,
+        "right": 611.234375,
+        "width": 530.609375,
+        "height": 81
+      },
+      "stickyTop": 24,
+      "scrollDistance": 2640.375,
+      "exposedStart": 7978,
+      "exposedEnd": 10618,
+      "active": 8,
+      "sampleCount": 12,
+      "samples": [
+        {
+          "index": 0,
+          "active": false,
+          "transform": "matrix3d(0.470703, -0.066153, 0.0668031, 0, 0.0582431, 0.472919, 0.057928, 0, -0.153752, -0.101459, 0.982887, 0, -3447.45, 353.112, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": -2543.86572265625,
+            "y": 911.9783935546875,
+            "top": 911.9783935546875,
+            "bottom": 1123.5792236328125,
+            "left": -2543.86572265625,
+            "right": -2388.59716796875,
+            "width": 155.2685546875,
+            "height": 211.600830078125
+          },
+          "label": "Select Warm curves",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 1,
+          "active": false,
+          "transform": "matrix3d(0.470703, -0.066153, 0.0668031, 0, 0.0627883, 0.47228, 0.0585731, 0, -0.153752, -0.101459, 0.982887, 0, -3059.24, 288.112, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": -2158.41357421875,
+            "y": 847.2178955078125,
+            "top": 847.2178955078125,
+            "bottom": 1058.400390625,
+            "left": -2158.41357421875,
+            "right": -2006.696533203125,
+            "width": 151.717041015625,
+            "height": 211.1824951171875
+          },
+          "label": "Select Angular lines",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 2,
+          "active": false,
+          "transform": "matrix3d(0.470703, -0.066153, 0.0668031, 0, 0.0582431, 0.472919, 0.057928, 0, -0.153752, -0.101459, 0.982887, 0, -2616.79, 223.104, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": -1754.5733642578125,
+            "y": 785.1024780273438,
+            "top": 785.1024780273438,
+            "bottom": 991.0418090820312,
+            "left": -1754.5733642578125,
+            "right": -1643.45361328125,
+            "width": 111.1197509765625,
+            "height": 205.9393310546875
+          },
+          "label": "Select Ochre geometry",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 3,
+          "active": false,
+          "transform": "matrix3d(0.470703, -0.066153, 0.0668031, 0, 0.0582431, 0.472919, 0.057928, 0, -0.153752, -0.101459, 0.982887, 0, -2239.88, 158.104, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": -1372.801513671875,
+            "y": 719.83984375,
+            "top": 719.83984375,
+            "bottom": 926.2428588867188,
+            "left": -1372.801513671875,
+            "right": -1257.7972412109375,
+            "width": 115.0042724609375,
+            "height": 206.40301513671875
+          },
+          "label": "Select Elephant outline",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 4,
+          "active": false,
+          "transform": "matrix3d(0.470703, -0.066153, 0.0668031, 0, 0.0582431, 0.472919, 0.057928, 0, -0.153752, -0.101459, 0.982887, 0, -1912.96, 93.7213, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": -1010.953857421875,
+            "y": 651.9526977539062,
+            "top": 651.9526977539062,
+            "bottom": 863.5968627929688,
+            "left": -1010.953857421875,
+            "right": -851.898681640625,
+            "width": 159.05517578125,
+            "height": 211.6441650390625
+          },
+          "label": "Select Graphic squares",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 5,
+          "active": false,
+          "transform": "matrix3d(0.470703, -0.066153, 0.0668031, 0, 0.0582431, 0.472919, 0.057928, 0, -0.153752, -0.101459, 0.982887, 0, -1528.55, 28.1119, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": -629.8278198242188,
+            "y": 586.6267700195312,
+            "top": 586.6267700195312,
+            "bottom": 798.9337158203125,
+            "left": -629.8278198242188,
+            "right": -463.0811767578125,
+            "width": 166.74664306640625,
+            "height": 212.30694580078125
+          },
+          "label": "Select Diamond lattice",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 6,
+          "active": false,
+          "transform": "matrix3d(0.470703, -0.066153, 0.0668031, 0, 0.0582431, 0.472919, 0.057928, 0, -0.153752, -0.101459, 0.982887, 0, -1090.32, -36.8881, 0, 1)",
+          "opacity": 0.2093,
+          "visibility": "hidden",
+          "bounds": {
+            "x": -229.32989501953125,
+            "y": 525.0111083984375,
+            "top": 525.0111083984375,
+            "bottom": 731.0569458007812,
+            "left": -229.32989501953125,
+            "right": -97.06556701660156,
+            "width": 132.2643280029297,
+            "height": 206.04583740234375
+          },
+          "label": "Select Ivory silhouettes",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 7,
+          "active": false,
+          "transform": "matrix3d(0.573419, -0.0805888, 0.103319, 0, 0.0687825, 0.579886, 0.070569, 0, -0.189608, -0.0964193, 0.977114, 0, -720.945, -101.888, 0, 1)",
+          "opacity": 0.5293,
+          "visibility": "visible",
+          "bounds": {
+            "x": 128.0891571044922,
+            "y": 435.7196044921875,
+            "top": 435.7196044921875,
+            "bottom": 689.7028198242188,
+            "left": 128.0891571044922,
+            "right": 314.8175964355469,
+            "width": 186.7284393310547,
+            "height": 253.98321533203125
+          },
+          "label": "Select Acacia silhouettes",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": true
+        },
+        {
+          "index": 8,
+          "active": true,
+          "transform": "matrix3d(0.833787, -0.117181, 0.211752, 0, 0.0943746, 0.856934, 0.102612, 0, -0.256684, -0.0869924, 0.962572, 0, -378.159, -77.9115, 0, 1)",
+          "opacity": 0.8493,
+          "visibility": "visible",
+          "bounds": {
+            "x": 438.3096008300781,
+            "y": 380.09136962890625,
+            "top": 380.09136962890625,
+            "bottom": 610.987060546875,
+            "left": 438.3096008300781,
+            "right": 780.3226318359375,
+            "width": 342.0130310058594,
+            "height": 230.89569091796875
+          },
+          "label": "Inspect Ochre savannah",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": true
+        },
+        {
+          "index": 9,
+          "active": false,
+          "transform": "matrix3d(0.801694, -0.112671, 0.26487, 0, 0.0856987, 0.841715, 0.098662, 0, -0.322592, -0.0777296, 0.943341, 0, 5.5414, -149.193, 0, 1)",
+          "opacity": 0.8307,
+          "visibility": "visible",
+          "bounds": {
+            "x": 814.7852172851562,
+            "y": 309.8653259277344,
+            "top": 309.8653259277344,
+            "bottom": 549.391845703125,
+            "left": 814.7852172851562,
+            "right": 1174.4306640625,
+            "width": 359.64544677734375,
+            "height": 239.52651977539062
+          },
+          "label": "Select Zebra pair",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": true
+        },
+        {
+          "index": 10,
+          "active": false,
+          "transform": "matrix3d(0.524571, -0.0737237, 0.215279, 0, 0.0530054, 0.565666, 0.0645574, 0, -0.387012, -0.0686761, 0.919514, 0, 389.241, -220.982, 0, 1)",
+          "opacity": 0.5107,
+          "visibility": "visible",
+          "bounds": {
+            "x": 1243.06787109375,
+            "y": 280.36553955078125,
+            "top": 280.36553955078125,
+            "bottom": 451.4815368652344,
+            "left": 1243.06787109375,
+            "right": 1507.1575927734375,
+            "width": 264.0897216796875,
+            "height": 171.11599731445312
+          },
+          "label": "Select Running horses",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": true
+        },
+        {
+          "index": 11,
+          "active": false,
+          "transform": "matrix3d(0.434234, -0.0610277, 0.195234, 0, 0.0427437, 0.475097, 0.0534399, 0, -0.416737, -0.0644985, 0.906736, 0, 861.816, -361.896, 0, 1)",
+          "opacity": 0.1907,
+          "visibility": "hidden",
+          "bounds": {
+            "x": 1678.47314453125,
+            "y": 200.58363342285156,
+            "top": 200.58363342285156,
+            "bottom": 403.7752685546875,
+            "left": 1678.47314453125,
+            "right": 1833.5687255859375,
+            "width": 155.0955810546875,
+            "height": 203.19163513183594
+          },
+          "label": "Select Spotted cat & acacia",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        }
+      ],
+      "overlay": false
+    }
+  }
+]

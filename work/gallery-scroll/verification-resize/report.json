@@ -1,0 +1,99 @@
+[
+  {
+    "case": "desktop-resize",
+    "viewport": "1440x960",
+    "status": "passed",
+    "initial": {
+      "mode": "pinned",
+      "position": 5.5,
+      "active": 6,
+      "scrollY": 9298,
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "panelTop": 24,
+      "panelBottom": 883,
+      "headingTop": 65,
+      "headingBottom": 146,
+      "stageTop": 197,
+      "stageBottom": 727,
+      "scrollDistance": 2640,
+      "futureRunway": 1319.625
+    },
+    "resizes": [
+      {
+        "mode": "pinned",
+        "position": 5.5,
+        "active": 6,
+        "scrollY": 9298,
+        "viewport": {
+          "width": 1280,
+          "height": 900
+        },
+        "panelTop": 24,
+        "panelBottom": 874,
+        "headingTop": 65,
+        "headingBottom": 137,
+        "stageTop": 188,
+        "stageBottom": 718,
+        "scrollDistance": 3105.3125,
+        "futureRunway": 1320
+      },
+      {
+        "mode": "inline",
+        "position": 5.5,
+        "active": 6,
+        "scrollY": 9298,
+        "viewport": {
+          "width": 1440,
+          "height": 600
+        },
+        "panelTop": 24,
+        "panelBottom": 883,
+        "headingTop": 65,
+        "headingBottom": 146,
+        "stageTop": 197,
+        "stageBottom": 727,
+        "scrollDistance": 2621.40625,
+        "futureRunway": 0
+      },
+      {
+        "mode": "pinned",
+        "position": 5.5,
+        "active": 6,
+        "scrollY": 10599,
+        "viewport": {
+          "width": 1440,
+          "height": 960
+        },
+        "panelTop": 24,
+        "panelBottom": 883,
+        "headingTop": 65,
+        "headingBottom": 146,
+        "stageTop": 197,
+        "stageBottom": 727,
+        "scrollDistance": 3941.375,
+        "futureRunway": 1320
+      }
+    ],
+    "afterScroll": {
+      "mode": "pinned",
+      "position": 5.6875,
+      "active": 6,
+      "scrollY": 10644,
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "panelTop": 24,
+      "panelBottom": 883,
+      "headingTop": 65,
+      "headingBottom": 146,
+      "stageTop": 197,
+      "stageBottom": 727,
+      "scrollDistance": 3941.375,
+      "futureRunway": 1275
+    }
+  }
+]
