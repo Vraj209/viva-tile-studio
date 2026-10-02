@@ -5,9 +5,10 @@ import BrandLogo from "./BrandLogo";
 export default function SiteFooter() {
   return (
     <footer className="site-footer">
-      <div className="footer-top">
-        <div className="footer-artwork">
+      <div className="footer-top" data-motion="footer">
+        <div className="footer-artwork" data-motion-frame>
           <Image
+            data-motion-image
             src={footerArtwork}
             alt=""
             loading="lazy"
@@ -15,9 +16,9 @@ export default function SiteFooter() {
           />
         </div>
         <a className="wordmark" href="#top" aria-label="VAVI Tile Studio home">
-          <BrandLogo />
+          <BrandLogo sizes="(max-width: 768px) 132px, 160px" />
         </a>
-        <p>
+        <p data-motion-item>
           Tiles. Art. Spaces.
           <br />
           <em>Endless Possibilities.</em>

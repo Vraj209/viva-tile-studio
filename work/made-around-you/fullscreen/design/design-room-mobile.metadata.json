@@ -1,0 +1,14 @@
+{
+  "created": "2026-09-29",
+  "method": "Built-in image_gen portrait reframe of existing designer salon, with exact product reference.",
+  "editTarget": "public/images/worlds/design-room.webp",
+  "productReference": "data/landscape/L_2.png",
+  "source": "C:\\Users\\Vraj Panchal\\.codex\\generated_images\\01a0ef13-1a75-75c1-b378-aa777e184424\\exec-70f3c37f-7032-44b2-9359-8442aa1d364f.png",
+  "original": "work/made-around-you/fullscreen/design/design-room-mobile.png",
+  "web": "public/images/worlds/design-room-mobile.webp",
+  "prompt": "work/made-around-you/fullscreen/design/design-room-mobile.prompt.txt",
+  "mobileObjectPosition": "50% 50%",
+  "postprocessing": "Sharp PNG-to-WebP format conversion only, quality 87 effort 6. No resize, crop, retouching or compositing.",
+  "inspection": "Portrait 9:16 reframe retains warm plaster doorway sequence, cream upholstered stone bench and generous limestone foreground. Complete reference ivory panel pair appears on far wall at approximately 42% of image width and 24% of image height, leaving room architecture clearly visible on mobile.",
+  "usage": "Fictional concept visualization of same designer salon, responsive version of desktop scene; not an additional distinct room."
+}

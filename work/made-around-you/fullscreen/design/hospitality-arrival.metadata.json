@@ -1,0 +1,15 @@
+{
+  "created": "2026-09-29",
+  "method": "Built-in image_gen with exact supplied tile image as reference.",
+  "reference": "public/images/gallery/warm-curves-inspect.webp",
+  "underlyingSuppliedSource": "data/samples/419539f5-80b8-416a-90b3-4680bd43843a.jpeg",
+  "referenceRole": "Inspected original product pattern before generation; preserve exact complete square composition, actual colors and ridged surface relief.",
+  "source": "C:\\Users\\Vraj Panchal\\.codex\\generated_images\\01a0ef13-1a75-75c1-b378-aa777e184424\\exec-6498908a-2c58-4088-8aa5-321d5d3f4d72.png",
+  "original": "work/made-around-you/fullscreen/design/hospitality-arrival.png",
+  "web": "public/images/worlds/hospitality-arrival.webp",
+  "prompt": "work/made-around-you/fullscreen/design/hospitality-arrival.prompt.txt",
+  "mobileObjectPosition": "50% 50%",
+  "postprocessing": "Sharp PNG-to-WebP format conversion only, quality 87 effort 6. No resize, crop, retouching or compositing.",
+  "inspection": "Distinct hotel reception with travertine arrival desk at left, courtyard glazing at right, empty foreground and faithful supplied warm-curves panel at center. Tile preserves complete square composition with main spiral/circle forms and original orange/ochre/teal ridges.",
+  "usage": "Fictional concept visualization, not a completed project claim or technical product specification."
+}

@@ -72,6 +72,7 @@ export default function HeroAtelier() {
         ref={stageRef}
         className={styles.stage}
         data-atelier-stage
+        data-motion-depth="atelier"
         onPointerLeave={() => {
           if (mode.current === "pointer") setActive(null);
         }}
@@ -98,7 +99,7 @@ export default function HeroAtelier() {
                   alt={sample.alt}
                   width={sample.width}
                   height={sample.height}
-                  unoptimized
+                  sizes="(max-width: 389px) calc(34vw - 13.6px), (max-width: 768px) min(201px, calc(34vw - 16.32px)), min(281px, 16vw, max(116px, calc(36svh - 101px)))"
                   loading={index === 5 ? "eager" : "lazy"}
                   fetchPriority={index === 5 ? "high" : "auto"}
                   draggable={false}

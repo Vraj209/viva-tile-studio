@@ -1,0 +1,55 @@
+{
+  "settled": {
+    "position": 10.5417,
+    "active": 11,
+    "scrollY": 10030,
+    "start": 7500,
+    "end": 14940
+  },
+  "handoffStart": {
+    "position": 11.3405,
+    "active": 12,
+    "scrollY": 10030,
+    "start": 7500,
+    "end": 14940
+  },
+  "handoffEnd": {
+    "position": 11.4769,
+    "active": 11,
+    "scrollY": 10036,
+    "start": 7500,
+    "end": 14940
+  },
+  "refreshed": {
+    "position": 12,
+    "active": 12,
+    "scrollY": 10040,
+    "start": 7500,
+    "end": 14940
+  },
+  "locked": {
+    "position": 12,
+    "active": 12,
+    "scrollY": 10040,
+    "start": 7500,
+    "end": 14940
+  },
+  "unlocked": {
+    "position": 12.3839,
+    "active": 12,
+    "scrollY": 10139,
+    "start": 7500,
+    "end": 14940
+  },
+  "mobileBefore": {
+    "pageY": 6957,
+    "top": 0,
+    "height": 394,
+    "contentHeight": 460
+  },
+  "mobileAfter": {
+    "pageY": 6957,
+    "top": 66
+  },
+  "errors": []
+}

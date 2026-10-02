@@ -208,6 +208,7 @@ export default function CountrySelect({
               : "No countries found. Try another name or code."}
           </p>
           <ul
+            data-lenis-prevent
             ref={listRef}
             id={listId}
             role="listbox"

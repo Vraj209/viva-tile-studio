@@ -2,14 +2,14 @@ import { faqs } from "@/lib/content";
 export default function FAQ() {
   return (
     <section className="faq section-space" id="faq">
-      <div>
-        <p className="eyebrow">06 / BEFORE WE BEGIN</p>
-        <h2>
+      <div data-motion="quiet">
+        <p className="eyebrow" data-motion-item>06 / BEFORE WE BEGIN</p>
+        <h2 data-motion-item>
           A little
           <br />
           <em>clarity.</em>
         </h2>
-        <p>
+        <p data-motion-item>
           Custom means considered.
           <br />
           Here are a few things to know.

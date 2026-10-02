@@ -1,0 +1,44 @@
+[
+  {
+    "name": "wheel",
+    "early": 199,
+    "middle": 460,
+    "end": 600
+  },
+  {
+    "name": "desktop",
+    "passed": true
+  },
+  {
+    "name": "mobile",
+    "passed": true
+  },
+  {
+    "name": "small-mobile",
+    "passed": true
+  },
+  {
+    "name": "tablet",
+    "passed": true
+  },
+  {
+    "name": "reduced",
+    "passed": true
+  },
+  {
+    "name": "direct-#process",
+    "passed": true
+  },
+  {
+    "name": "direct-#work",
+    "passed": true
+  },
+  {
+    "name": "direct-#enquiry",
+    "passed": true
+  },
+  {
+    "name": "no-javascript",
+    "passed": true
+  }
+]

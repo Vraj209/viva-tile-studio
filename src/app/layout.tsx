@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { brandLogo } from "@/lib/brand";
+import SiteMotion from "@/components/SiteMotion";
+import "lenis/dist/lenis.css";
 import "@fontsource-variable/manrope/index.css";
 import "@fontsource/cormorant-garamond/latin-400.css";
 import "@fontsource/cormorant-garamond/latin-400-italic.css";
@@ -27,6 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <SiteMotion />
         <a className="skip-link" href="#main">
           Skip to content
         </a>

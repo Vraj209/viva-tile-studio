@@ -1,0 +1,25 @@
+{
+  "created": "2026-09-29",
+  "tool": "built-in image_gen",
+  "classification": "Concept visualization",
+  "sampleReference": "public/images/gallery/angular-lines-inspect.webp",
+  "sampleOriginal": "data/samples/1c57ee0e-5f93-4d76-97a7-f61eda39e7a8.jpeg",
+  "outputs": [
+    {
+      "path": "public/images/worlds/workspace.webp",
+      "original": "work/made-around-you/workspace-originals/workspace.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 354876,
+      "prompt": "Use case: compositing. Asset type: wide cinematic architectural concept visualization for an interactive luxury tile website. Input image 1 is the exact supplied angular-lines ceramic sample to preserve as the inserted feature-wall artwork, NOT a general style reference. Create a refined contemporary office reception viewed at a believable eye-level from just inside a broad rectangular doorway. Foreground has quiet dark-walnut doorway edges near left and right margins; behind them a generously spacious warm ivory limestone-and-plaster office interior, small minimal oak reception desk at left, an architectural bench and olive-grey upholstered seating, and a glass meeting room visibly receding at the right with a walnut conference table and comfortable work chairs. The central dominant feature wall is tiled with faithfully repeated copies of the input taupe and brown angular maze pattern, preserving its specific original pattern, colors, rectangular proportions, dark border, and subdued matte character. The tile wall must remain mostly unobstructed, frontal enough to inspect, and cover the central 45 percent of the frame; avoid furniture across its main pattern. Soft neutral afternoon side lighting, natural shadow, quiet sophisticated atmosphere. Shoot like high-end architectural editorial photography: 28 mm lens, level verticals, realistic materials, expansive but plausible room depth. Landscape 3:2 composition, no text, no logo, no people, no watermark, no gold décor, no invented embossed relief, no glossy shimmer. This is an illustrative room concept, not a claim of a completed installation."
+    },
+    {
+      "path": "public/images/worlds/workspace-meeting.webp",
+      "original": "work/made-around-you/workspace-originals/workspace-meeting.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 397484,
+      "prompt": "Use case: compositing. Asset type: landscape architectural concept visualization for luxury tile website. Input image 1 is a generated office reception whose architecture, materials, light and atmosphere establish the same office. Input image 2 is the supplied angular-lines tile sample and must be preserved faithfully in the wall pattern, colors, rectangular proportions, dark border and subdued matte character. Create the neighboring meeting and collaboration room seen at the right of input 1, with believable spatial continuity: a calm modern glass-enclosed room, warm ivory limestone floor and plaster walls, walnut conference table with six refined olive-grey work chairs, daylight from broad windows at right, and the SAME repeated taupe-brown angular sample covering one large dominant feature wall straight ahead. Eye-level human viewpoint just inside the open glass doorway. Camera stays level, around 35 mm, no fisheye. The top two thirds of the tiled feature wall must stay unobstructed so the actual pattern carries the composition; table sits in the lower quarter, a restrained plant sits at far right. Natural softly angled daylight, warm but not yellow. Quiet architectural editorial photography with crisp details and balanced exposure. Landscape 3:2. No people, logo, text, watermark, metallic shimmer, invented relief or fantasy lighting. This is explicitly an illustrative adjacent-office room concept, not a documented completed project."
+    }
+  ]
+}

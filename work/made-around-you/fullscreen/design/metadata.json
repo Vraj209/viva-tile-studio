@@ -1,0 +1,37 @@
+{
+  "created": "2026-09-29",
+  "method": "Built-in image_gen: one independent reference-guided image generation per asset.",
+  "reference": "data/landscape/L_2.png",
+  "referenceRole": "Actual ivory geometry product source. Inspected original PNG and matching public/images/gallery/ivory-geometry-inspect.webp before generation.",
+  "postprocessing": "Sharp PNG-to-WebP format conversion only, quality 87 effort 6; no resize, crop, retouching or compositing.",
+  "usage": "Fictional concept visualizations. Retain UI context as concept imagery; these are not technical product photographs or completed project claims.",
+  "assets": [
+    {
+      "name": "design-entrance",
+      "original": "work/made-around-you/fullscreen/design/design-entrance.png",
+      "web": "public/images/worlds/design-entrance.webp",
+      "source": "C:\\Users\\Vraj Panchal\\.codex\\generated_images\\01a0ef13-1a75-75c1-b378-aa777e184424\\exec-5adcb197-314a-404b-95c3-4c277a6d1194.png",
+      "prompt": "work/made-around-you/fullscreen/design/design-entrance.prompt.txt",
+      "mobileObjectPosition": "50% 50%",
+      "inspection": "Distinct limestone entry with curved stair and side glazing. Ivory panel pair centered, shallow relief and original stacked diamond motifs visibly retained."
+    },
+    {
+      "name": "design-library",
+      "original": "work/made-around-you/fullscreen/design/design-library.png",
+      "web": "public/images/worlds/design-library.webp",
+      "source": "C:\\Users\\Vraj Panchal\\.codex\\generated_images\\01a0ef13-1a75-75c1-b378-aa777e184424\\exec-cc87eccb-2bb5-4bcc-b357-a9603dcd8516.png",
+      "prompt": "work/made-around-you/fullscreen/design/design-library.prompt.txt",
+      "mobileObjectPosition": "50% 50%",
+      "inspection": "Distinct walnut-lined double-height reading library. Original ivory panel pair visible unobstructed between shelves."
+    },
+    {
+      "name": "design-atelier",
+      "original": "work/made-around-you/fullscreen/design/design-atelier.png",
+      "web": "public/images/worlds/design-atelier.webp",
+      "source": "C:\\Users\\Vraj Panchal\\.codex\\generated_images\\01a0ef13-1a75-75c1-b378-aa777e184424\\exec-72633604-fa9a-4693-9422-715f7a5fa6ba.png",
+      "prompt": "work/made-around-you/fullscreen/design/design-atelier.prompt.txt",
+      "mobileObjectPosition": "66% 50%",
+      "inspection": "Distinct skylit architecture atelier with worktable, samples and architectural model at left; original ivory panel pair installed at center-right."
+    }
+  ]
+}

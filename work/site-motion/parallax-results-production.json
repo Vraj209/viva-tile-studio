@@ -1,0 +1,522 @@
+{
+  "baseURL": "http://127.0.0.1:3002",
+  "checkedAt": "2026-09-29T22:14:56.912Z",
+  "results": [
+    {
+      "name": "desktop-atelier",
+      "states": [
+        {
+          "y": 3.5635,
+          "x": 0,
+          "scale": 1,
+          "scroll": 186
+        },
+        {
+          "y": 22.0223,
+          "x": 0,
+          "scale": 1,
+          "scroll": 445
+        },
+        {
+          "y": 40.4098,
+          "x": 0,
+          "scale": 1,
+          "scroll": 703
+        }
+      ],
+      "settled": {
+        "y": 40.4098,
+        "x": 0,
+        "scale": 1,
+        "scroll": 703
+      },
+      "reversed": {
+        "y": 22.0223,
+        "x": 0,
+        "scale": 1,
+        "scroll": 445
+      },
+      "passed": true
+    },
+    {
+      "name": "desktop-ornament",
+      "states": [
+        {
+          "y": -5.0528,
+          "x": 0,
+          "scale": 1,
+          "scroll": 6146
+        },
+        {
+          "y": -12.0391,
+          "x": 0,
+          "scale": 1,
+          "scroll": 6529
+        },
+        {
+          "y": -19.0436,
+          "x": 0,
+          "scale": 1,
+          "scroll": 6913
+        }
+      ],
+      "settled": {
+        "y": -19.0436,
+        "x": 0,
+        "scale": 1,
+        "scroll": 6913
+      },
+      "reversed": {
+        "y": -12.0391,
+        "x": 0,
+        "scale": 1,
+        "scroll": 6529
+      },
+      "passed": true
+    },
+    {
+      "name": "desktop-tile",
+      "states": [
+        {
+          "y": 14.08,
+          "x": 0,
+          "scale": 1,
+          "scroll": 20343
+        },
+        {
+          "y": 3.0919,
+          "x": 0,
+          "scale": 1,
+          "scroll": 20805
+        },
+        {
+          "y": -7.92,
+          "x": 0,
+          "scale": 1,
+          "scroll": 21268
+        }
+      ],
+      "settled": {
+        "y": -7.92,
+        "x": 0,
+        "scale": 1,
+        "scroll": 21268
+      },
+      "reversed": {
+        "y": 3.0919,
+        "x": 0,
+        "scale": 1,
+        "scroll": 20805
+      },
+      "passed": true
+    },
+    {
+      "name": "desktop-footer-image",
+      "states": [
+        {
+          "y": 15.0433,
+          "x": 0,
+          "scale": 1.09,
+          "scroll": 21110
+        },
+        {
+          "y": -5.38746,
+          "x": 0,
+          "scale": 1.09,
+          "scroll": 21402
+        },
+        {
+          "y": -25.1885,
+          "x": 0,
+          "scale": 1.09,
+          "scroll": 21694
+        }
+      ],
+      "settled": {
+        "y": -25.1885,
+        "x": 0,
+        "scale": 1.09,
+        "scroll": 21694
+      },
+      "reversed": {
+        "y": -5.38746,
+        "x": 0,
+        "scale": 1.09,
+        "scroll": 21402
+      },
+      "passed": true
+    },
+    {
+      "name": "desktop-portal-1",
+      "states": [
+        {
+          "y": -10.4271,
+          "x": 0,
+          "scale": 1.09,
+          "scroll": 5117
+        },
+        {
+          "y": -2.28675,
+          "x": 0,
+          "scale": 1.09,
+          "scroll": 5473
+        },
+        {
+          "y": 5.87689,
+          "x": 0,
+          "scale": 1.09,
+          "scroll": 5830
+        }
+      ],
+      "settled": {
+        "y": 5.87689,
+        "x": 0,
+        "scale": 1.09,
+        "scroll": 5830
+      },
+      "reversed": {
+        "y": -2.28675,
+        "x": 0,
+        "scale": 1.09,
+        "scroll": 5473
+      },
+      "passed": true
+    },
+    {
+      "name": "desktop-portal-2",
+      "states": [
+        {
+          "y": -12.9695,
+          "x": 0,
+          "scale": 1.09,
+          "scroll": 5049
+        },
+        {
+          "y": -2.83116,
+          "x": 0,
+          "scale": 1.09,
+          "scroll": 5434
+        },
+        {
+          "y": 7.30774,
+          "x": 0,
+          "scale": 1.09,
+          "scroll": 5819
+        }
+      ],
+      "settled": {
+        "y": 7.30774,
+        "x": 0,
+        "scale": 1.09,
+        "scroll": 5819
+      },
+      "reversed": {
+        "y": -2.83116,
+        "x": 0,
+        "scale": 1.09,
+        "scroll": 5434
+      },
+      "passed": true
+    },
+    {
+      "name": "desktop-portal-3",
+      "states": [
+        {
+          "y": -10.4271,
+          "x": 0,
+          "scale": 1.09,
+          "scroll": 5164
+        },
+        {
+          "y": -2.28675,
+          "x": 0,
+          "scale": 1.09,
+          "scroll": 5520
+        },
+        {
+          "y": 5.87689,
+          "x": 0,
+          "scale": 1.09,
+          "scroll": 5877
+        }
+      ],
+      "settled": {
+        "y": 5.87689,
+        "x": 0,
+        "scale": 1.09,
+        "scroll": 5877
+      },
+      "reversed": {
+        "y": -2.28675,
+        "x": 0,
+        "scale": 1.09,
+        "scroll": 5520
+      },
+      "passed": true
+    },
+    {
+      "name": "desktop-native-input",
+      "beforeInput": {
+        "y": -10.4271,
+        "x": 0,
+        "scale": 1.09,
+        "scroll": 5117
+      },
+      "afterInput": {
+        "y": -3.10987,
+        "x": 0,
+        "scale": 1.09,
+        "scroll": 5437
+      },
+      "passed": true
+    },
+    {
+      "name": "desktop-hero-pause",
+      "passed": true
+    },
+    {
+      "name": "desktop-reduced-motion",
+      "passed": true
+    },
+    {
+      "name": "mobile-atelier",
+      "states": [
+        {
+          "y": 1.58,
+          "x": 0,
+          "scale": 1,
+          "scroll": 210
+        },
+        {
+          "y": 7.1869,
+          "x": 0,
+          "scale": 1,
+          "scroll": 501
+        },
+        {
+          "y": 12.8131,
+          "x": 0,
+          "scale": 1,
+          "scroll": 793
+        }
+      ],
+      "settled": {
+        "y": 12.8131,
+        "x": 0,
+        "scale": 1,
+        "scroll": 793
+      },
+      "reversed": {
+        "y": 7.1869,
+        "x": 0,
+        "scale": 1,
+        "scroll": 501
+      },
+      "passed": true
+    },
+    {
+      "name": "mobile-ornament",
+      "states": [
+        {
+          "y": -1.8008,
+          "x": 0,
+          "scale": 1,
+          "scroll": 5374
+        },
+        {
+          "y": -4.2948,
+          "x": 0,
+          "scale": 1,
+          "scroll": 5687
+        },
+        {
+          "y": -6.7968,
+          "x": 0,
+          "scale": 1,
+          "scroll": 6001
+        }
+      ],
+      "settled": {
+        "y": -6.7968,
+        "x": 0,
+        "scale": 1,
+        "scroll": 6001
+      },
+      "reversed": {
+        "y": -4.2948,
+        "x": 0,
+        "scale": 1,
+        "scroll": 5687
+      },
+      "passed": true
+    },
+    {
+      "name": "mobile-tile",
+      "states": [
+        {
+          "y": 5.5591,
+          "x": 0,
+          "scale": 1,
+          "scroll": 17655
+        },
+        {
+          "y": 2.1769,
+          "x": 0,
+          "scale": 1,
+          "scroll": 18097
+        },
+        {
+          "y": -1.2128,
+          "x": 0,
+          "scale": 1,
+          "scroll": 18540
+        }
+      ],
+      "settled": {
+        "y": -1.2128,
+        "x": 0,
+        "scale": 1,
+        "scroll": 18540
+      },
+      "reversed": {
+        "y": 2.1769,
+        "x": 0,
+        "scale": 1,
+        "scroll": 18097
+      },
+      "passed": true
+    },
+    {
+      "name": "mobile-portal-1",
+      "states": [
+        {
+          "y": -2.68393,
+          "x": 0,
+          "scale": 1.04,
+          "scroll": 3592
+        },
+        {
+          "y": -0.586407,
+          "x": 0,
+          "scale": 1.04,
+          "scroll": 3887
+        },
+        {
+          "y": 1.51078,
+          "x": 0,
+          "scale": 1.04,
+          "scroll": 4182
+        }
+      ],
+      "settled": {
+        "y": 1.51078,
+        "x": 0,
+        "scale": 1.04,
+        "scroll": 4182
+      },
+      "reversed": {
+        "y": -0.586407,
+        "x": 0,
+        "scale": 1.04,
+        "scroll": 3887
+      },
+      "passed": true
+    },
+    {
+      "name": "mobile-portal-2",
+      "states": [
+        {
+          "y": -2.68393,
+          "x": 0,
+          "scale": 1.04,
+          "scroll": 4101
+        },
+        {
+          "y": -0.586407,
+          "x": 0,
+          "scale": 1.04,
+          "scroll": 4396
+        },
+        {
+          "y": 1.50374,
+          "x": 0,
+          "scale": 1.04,
+          "scroll": 4690
+        }
+      ],
+      "settled": {
+        "y": 1.50374,
+        "x": 0,
+        "scale": 1.04,
+        "scroll": 4690
+      },
+      "reversed": {
+        "y": -0.586407,
+        "x": 0,
+        "scale": 1.04,
+        "scroll": 4396
+      },
+      "passed": true
+    },
+    {
+      "name": "mobile-portal-3",
+      "states": [
+        {
+          "y": -2.67789,
+          "x": 0,
+          "scale": 1.04,
+          "scroll": 4610
+        },
+        {
+          "y": -0.589424,
+          "x": 0,
+          "scale": 1.04,
+          "scroll": 4904
+        },
+        {
+          "y": 1.50608,
+          "x": 0,
+          "scale": 1.04,
+          "scroll": 5199
+        }
+      ],
+      "settled": {
+        "y": 1.50608,
+        "x": 0,
+        "scale": 1.04,
+        "scroll": 5199
+      },
+      "reversed": {
+        "y": -0.589424,
+        "x": 0,
+        "scale": 1.04,
+        "scroll": 4904
+      },
+      "passed": true
+    },
+    {
+      "name": "mobile-native-input",
+      "beforeInput": {
+        "y": -2.68393,
+        "x": 0,
+        "scale": 1.04,
+        "scroll": 3592
+      },
+      "afterInput": {
+        "y": -0.515327,
+        "x": 0,
+        "scale": 1.04,
+        "scroll": 3897
+      },
+      "passed": true
+    },
+    {
+      "name": "mobile-hero-pause",
+      "passed": true
+    },
+    {
+      "name": "mobile-reduced-motion",
+      "passed": true
+    }
+  ]
+}

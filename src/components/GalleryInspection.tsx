@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useId, useRef, useState, type RefObject } from "react";
 import type { GalleryAsset } from "@/lib/gallery-assets";
+import { lockPageScroll } from "@/lib/scroll";
 import styles from "./GalleryInspection.module.css";
 
 type GalleryInspectionProps = {
@@ -45,43 +46,13 @@ function OpenInspection({
     if (!element) return;
 
     const trigger = returnFocus.current;
-    const rootStyle = document.documentElement.style;
-    const bodyStyle = document.body.style;
-    const properties = [
-      { style: rootStyle, name: "overflow", next: "hidden" },
-      { style: rootStyle, name: "scrollbar-gutter", next: "stable" },
-      { style: bodyStyle, name: "overflow", next: "hidden" },
-    ].map(({ style, name, next }) => ({
-      style,
-      name,
-      next,
-      value: style.getPropertyValue(name),
-      priority: style.getPropertyPriority(name),
-    }));
-
-    // Preserve the viewport width as well as each existing inline style.
-    for (const property of properties) {
-      property.style.setProperty(property.name, property.next);
-    }
-
+    const unlockScroll = lockPageScroll();
     element.showModal();
     closeButton.current?.focus({ preventScroll: true });
 
     return () => {
       if (element.open) element.close();
-
-      for (const property of properties) {
-        if (property.value) {
-          property.style.setProperty(
-            property.name,
-            property.value,
-            property.priority,
-          );
-        } else {
-          property.style.removeProperty(property.name);
-        }
-      }
-
+      unlockScroll();
       if (trigger?.isConnected) trigger.focus({ preventScroll: true });
     };
   }, [returnFocus]);
@@ -90,6 +61,7 @@ function OpenInspection({
     <dialog
       ref={dialog}
       className={styles.dialog}
+      data-lenis-prevent
       aria-labelledby={titleId}
       aria-describedby={descriptionId}
       onCancel={(event) => {

@@ -1,0 +1,1301 @@
+[
+  {
+    "case": "desktop-tall",
+    "viewport": "1440x960",
+    "status": "passed",
+    "mode": "pinned",
+    "range": {
+      "start": 7500,
+      "end": 14940,
+      "distance": 7440
+    },
+    "noAutoplay": true,
+    "slowPositions": [
+      2.1708,
+      2.2083,
+      2.2625,
+      2.3167,
+      2.375,
+      2.4333,
+      2.4917,
+      2.55,
+      2.5792
+    ],
+    "fastAndReverse": [
+      6.2,
+      19.5208,
+      12.725
+    ],
+    "reentry": {
+      "before": 12.7083,
+      "after": 12.7083
+    },
+    "manual": {
+      "arrow": [
+        11,
+        12
+      ],
+      "direct": 4,
+      "resumed": 4.0502,
+      "directFrames": [
+        {
+          "elapsed": 0,
+          "position": 4
+        },
+        {
+          "elapsed": 5.4000000059604645,
+          "position": 4
+        },
+        {
+          "elapsed": 13.599999994039536,
+          "position": 4.0056
+        },
+        {
+          "elapsed": 19.400000005960464,
+          "position": 4.0056
+        },
+        {
+          "elapsed": 27.099999994039536,
+          "position": 4.0112
+        },
+        {
+          "elapsed": 33.400000005960464,
+          "position": 4.0112
+        },
+        {
+          "elapsed": 40.599999994039536,
+          "position": 4.0167
+        },
+        {
+          "elapsed": 47.099999994039536,
+          "position": 4.0167
+        },
+        {
+          "elapsed": 54,
+          "position": 4.0167
+        },
+        {
+          "elapsed": 61.900000005960464,
+          "position": 4.0223
+        },
+        {
+          "elapsed": 68.20000000298023,
+          "position": 4.0223
+        },
+        {
+          "elapsed": 75,
+          "position": 4.0223
+        },
+        {
+          "elapsed": 82.5,
+          "position": 4.0279
+        },
+        {
+          "elapsed": 89,
+          "position": 4.0279
+        },
+        {
+          "elapsed": 95.90000000596046,
+          "position": 4.0279
+        },
+        {
+          "elapsed": 103.40000000596046,
+          "position": 4.0335
+        },
+        {
+          "elapsed": 109.79999999701977,
+          "position": 4.0335
+        },
+        {
+          "elapsed": 116.59999999403954,
+          "position": 4.0335
+        },
+        {
+          "elapsed": 123.59999999403954,
+          "position": 4.0335
+        },
+        {
+          "elapsed": 131.09999999403954,
+          "position": 4.0391
+        },
+        {
+          "elapsed": 137.70000000298023,
+          "position": 4.0391
+        },
+        {
+          "elapsed": 144.40000000596046,
+          "position": 4.0391
+        },
+        {
+          "elapsed": 151.29999999701977,
+          "position": 4.0391
+        },
+        {
+          "elapsed": 158.20000000298023,
+          "position": 4.0391
+        },
+        {
+          "elapsed": 165.09999999403954,
+          "position": 4.0391
+        },
+        {
+          "elapsed": 173,
+          "position": 4.0447
+        },
+        {
+          "elapsed": 179.20000000298023,
+          "position": 4.0447
+        },
+        {
+          "elapsed": 186,
+          "position": 4.0447
+        },
+        {
+          "elapsed": 193,
+          "position": 4.0447
+        },
+        {
+          "elapsed": 199.90000000596046,
+          "position": 4.0447
+        },
+        {
+          "elapsed": 206.79999999701977,
+          "position": 4.0447
+        },
+        {
+          "elapsed": 213.79999999701977,
+          "position": 4.0447
+        },
+        {
+          "elapsed": 220.70000000298023,
+          "position": 4.0447
+        },
+        {
+          "elapsed": 227.79999999701977,
+          "position": 4.0447
+        },
+        {
+          "elapsed": 235.20000000298023,
+          "position": 4.0502
+        },
+        {
+          "elapsed": 241.59999999403954,
+          "position": 4.0502
+        }
+      ],
+      "drag": [
+        4,
+        5
+      ],
+      "dragResume": 4.9828,
+      "dragFrames": [
+        {
+          "elapsed": 0.09999999403953552,
+          "position": 5
+        },
+        {
+          "elapsed": 3,
+          "position": 5
+        },
+        {
+          "elapsed": 11.200000002980232,
+          "position": 4.9981
+        },
+        {
+          "elapsed": 17.099999994039536,
+          "position": 4.9981
+        },
+        {
+          "elapsed": 24.299999997019768,
+          "position": 4.9962
+        },
+        {
+          "elapsed": 31,
+          "position": 4.9962
+        },
+        {
+          "elapsed": 38.5,
+          "position": 4.9943
+        },
+        {
+          "elapsed": 44.900000005960464,
+          "position": 4.9943
+        },
+        {
+          "elapsed": 51.70000000298023,
+          "position": 4.9943
+        },
+        {
+          "elapsed": 59.599999994039536,
+          "position": 4.9923
+        },
+        {
+          "elapsed": 65.79999999701977,
+          "position": 4.9923
+        },
+        {
+          "elapsed": 74.5,
+          "position": 4.9923
+        },
+        {
+          "elapsed": 80,
+          "position": 4.9904
+        },
+        {
+          "elapsed": 86.70000000298023,
+          "position": 4.9904
+        },
+        {
+          "elapsed": 95.29999999701977,
+          "position": 4.9904
+        },
+        {
+          "elapsed": 101.20000000298023,
+          "position": 4.9885
+        },
+        {
+          "elapsed": 107.40000000596046,
+          "position": 4.9885
+        },
+        {
+          "elapsed": 114.29999999701977,
+          "position": 4.9885
+        },
+        {
+          "elapsed": 121.20000000298023,
+          "position": 4.9885
+        },
+        {
+          "elapsed": 129,
+          "position": 4.9866
+        },
+        {
+          "elapsed": 135.09999999403954,
+          "position": 4.9866
+        },
+        {
+          "elapsed": 142,
+          "position": 4.9866
+        },
+        {
+          "elapsed": 149.09999999403954,
+          "position": 4.9866
+        },
+        {
+          "elapsed": 157.79999999701977,
+          "position": 4.9866
+        },
+        {
+          "elapsed": 162.90000000596046,
+          "position": 4.9866
+        },
+        {
+          "elapsed": 170.59999999403954,
+          "position": 4.9847
+        },
+        {
+          "elapsed": 176.90000000596046,
+          "position": 4.9847
+        },
+        {
+          "elapsed": 183.70000000298023,
+          "position": 4.9847
+        },
+        {
+          "elapsed": 190.70000000298023,
+          "position": 4.9847
+        },
+        {
+          "elapsed": 197.5,
+          "position": 4.9847
+        },
+        {
+          "elapsed": 204.59999999403954,
+          "position": 4.9847
+        },
+        {
+          "elapsed": 211.40000000596046,
+          "position": 4.9847
+        },
+        {
+          "elapsed": 218.40000000596046,
+          "position": 4.9847
+        },
+        {
+          "elapsed": 225.29999999701977,
+          "position": 4.9847
+        },
+        {
+          "elapsed": 232.90000000596046,
+          "position": 4.9828
+        },
+        {
+          "elapsed": 239.40000000596046,
+          "position": 4.9828
+        },
+        {
+          "elapsed": 246.20000000298023,
+          "position": 4.9828
+        }
+      ]
+    },
+    "inspection": "Diamond lattice",
+    "keyboard": true,
+    "runtimeReduced": {
+      "beforeY": 11622,
+      "afterY": 11515,
+      "beforePanelTop": 24,
+      "afterPanelTop": 24,
+      "sample": 10
+    }
+  },
+  {
+    "case": "orientation",
+    "viewport": "390x844",
+    "status": "failed",
+    "portrait": {
+      "mode": "pinned",
+      "position": 14.8833,
+      "active": 15,
+      "scrollY": 8240,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "panelTop": 24,
+      "panelBottom": 1123.421875,
+      "headingTop": 62,
+      "headingBottom": 108.546875,
+      "stageTop": 211.421875,
+      "stageBottom": 686.421875,
+      "scrollDistance": 3720.234375,
+      "futureRunway": 1933.578125
+    },
+    "landscape": {
+      "mode": "inline",
+      "position": 14.8583,
+      "active": 15,
+      "scrollY": 0,
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "panelTop": 4534.140625,
+      "panelBottom": 5426.578125,
+      "headingTop": 4575.140625,
+      "headingBottom": 4625.578125,
+      "stageTop": 4676.578125,
+      "stageBottom": 5166.578125,
+      "scrollDistance": 0,
+      "futureRunway": 0
+    },
+    "error": "AssertionError [ERR_ASSERTION]: Portrait-to-landscape handoff: heading leaves viewport (4575.140625px)\n    at assertGalleryStayedVisible (D:\\Agency\\vivatiles\\work\\gallery-scroll\\verify.cjs:371:3)\n    at orientation (D:\\Agency\\vivatiles\\work\\gallery-scroll\\verify.cjs:384:3)\n    at async main (D:\\Agency\\vivatiles\\work\\gallery-scroll\\verify.cjs:535:46)",
+    "browserErrors": [],
+    "state": {
+      "mode": "inline",
+      "position": 14.8583,
+      "hasPosition": true,
+      "scrollY": 0,
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "pageWidth": 844,
+      "track": {
+        "x": 47.25,
+        "y": 4534.140625,
+        "top": 4534.140625,
+        "bottom": 5426.140625,
+        "left": 47.25,
+        "right": 796.75,
+        "width": 749.5,
+        "height": 892
+      },
+      "panel": {
+        "x": 47.25,
+        "y": 4534.140625,
+        "top": 4534.140625,
+        "bottom": 5426.578125,
+        "left": 47.25,
+        "right": 796.75,
+        "width": 749.5,
+        "height": 892.4375
+      },
+      "stage": {
+        "x": 47.25,
+        "y": 4676.578125,
+        "top": 4676.578125,
+        "bottom": 5166.578125,
+        "left": 47.25,
+        "right": 796.75,
+        "width": 749.5,
+        "height": 490
+      },
+      "heading": {
+        "x": 47.25,
+        "y": 4575.140625,
+        "top": 4575.140625,
+        "bottom": 4625.578125,
+        "left": 47.25,
+        "right": 377.625,
+        "width": 330.375,
+        "height": 50.4375
+      },
+      "stickyTop": 24,
+      "scrollDistance": 0,
+      "exposedStart": 4512,
+      "exposedEnd": 4632,
+      "active": 15,
+      "sampleCount": 32,
+      "samples": [
+        {
+          "index": 0,
+          "active": false,
+          "transform": "matrix3d(0.470703, -0.066153, 0.0668031, 0, 0.0582431, 0.472919, 0.057928, 0, -0.153752, -0.101459, 0.982887, 0, -3512.86, 795.792, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": -2950.29736328125,
+            "y": 5801.5107421875,
+            "top": 5801.5107421875,
+            "bottom": 5982.830078125,
+            "left": -2950.29736328125,
+            "right": -2816.882568359375,
+            "width": 133.414794921875,
+            "height": 181.3193359375
+          },
+          "label": "Select Warm curves",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 1,
+          "active": false,
+          "transform": "matrix3d(0.470703, -0.066153, 0.0668031, 0, 0.0627883, 0.47228, 0.0585731, 0, -0.153752, -0.101459, 0.982887, 0, -3283.98, 730.799, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": -2723.695556640625,
+            "y": 5736.61474609375,
+            "top": 5736.61474609375,
+            "bottom": 5917.7705078125,
+            "left": -2723.695556640625,
+            "right": -2593.51953125,
+            "width": 130.176025390625,
+            "height": 181.15576171875
+          },
+          "label": "Select Angular lines",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 2,
+          "active": false,
+          "transform": "matrix3d(0.470703, -0.066153, 0.0668031, 0, 0.0582431, 0.472919, 0.057928, 0, -0.153752, -0.101459, 0.982887, 0, -3008.41, 665.792, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": -2482.17431640625,
+            "y": 5673.16259765625,
+            "top": 5673.16259765625,
+            "bottom": 5851.61376953125,
+            "left": -2482.17431640625,
+            "right": -2385.27685546875,
+            "width": 96.8974609375,
+            "height": 178.451171875
+          },
+          "label": "Select Ochre geometry",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 3,
+          "active": false,
+          "transform": "matrix3d(0.470703, -0.066153, 0.0668031, 0, 0.0582431, 0.472919, 0.057928, 0, -0.153752, -0.101459, 0.982887, 0, -2789.25, 600.792, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": -2258.90771484375,
+            "y": 5608.0478515625,
+            "top": 5608.0478515625,
+            "bottom": 5786.68212890625,
+            "left": -2258.90771484375,
+            "right": -2158.5224609375,
+            "width": 100.38525390625,
+            "height": 178.63427734375
+          },
+          "label": "Select Elephant outline",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 4,
+          "active": false,
+          "transform": "matrix3d(0.470703, -0.066153, 0.0668031, 0, 0.0582431, 0.472919, 0.057928, 0, -0.153752, -0.101459, 0.982887, 0, -2613.12, 536.323, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": -2051.266845703125,
+            "y": 5541.505859375,
+            "top": 5541.505859375,
+            "bottom": 5722.8291015625,
+            "left": -2051.266845703125,
+            "right": -1915.90673828125,
+            "width": 135.360107421875,
+            "height": 181.3232421875
+          },
+          "label": "Select Graphic squares",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 5,
+          "active": false,
+          "transform": "matrix3d(0.470703, -0.066153, 0.0668031, 0, 0.0582431, 0.472919, 0.057928, 0, -0.153752, -0.101459, 0.982887, 0, -2387.52, 470.799, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": -1826.286865234375,
+            "y": 5476.205078125,
+            "top": 5476.205078125,
+            "bottom": 5658.1376953125,
+            "left": -1826.286865234375,
+            "right": -1690.89306640625,
+            "width": 135.393798828125,
+            "height": 181.9326171875
+          },
+          "label": "Select Diamond lattice",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 6,
+          "active": false,
+          "transform": "matrix3d(0.470703, -0.066153, 0.0668031, 0, 0.0582431, 0.472919, 0.057928, 0, -0.153752, -0.101459, 0.982887, 0, -2115.58, 405.792, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": -1583.62353515625,
+            "y": 5413.21728515625,
+            "top": 5413.21728515625,
+            "bottom": 5591.501953125,
+            "left": -1583.62353515625,
+            "right": -1483.7999267578125,
+            "width": 99.8236083984375,
+            "height": 178.28466796875
+          },
+          "label": "Select Ivory silhouettes",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 7,
+          "active": false,
+          "transform": "matrix3d(0.470703, -0.066153, 0.0668031, 0, 0.0582431, 0.472919, 0.057928, 0, -0.153752, -0.101459, 0.982887, 0, -1902.91, 340.799, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": -1363.201171875,
+            "y": 5347.7119140625,
+            "top": 5347.7119140625,
+            "bottom": 5526.90966796875,
+            "left": -1363.201171875,
+            "right": -1254.172607421875,
+            "width": 109.028564453125,
+            "height": 179.19775390625
+          },
+          "label": "Select Acacia silhouettes",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 8,
+          "active": false,
+          "transform": "matrix3d(0.470703, -0.066153, 0.0668031, 0, 0.0582431, 0.472919, 0.057928, 0, -0.153752, -0.101459, 0.982887, 0, -1713.12, 352.385, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": -1151.9964599609375,
+            "y": 5318.4140625,
+            "top": 5318.4140625,
+            "bottom": 5425.681640625,
+            "left": -1151.9964599609375,
+            "right": -1014.251220703125,
+            "width": 137.7452392578125,
+            "height": 107.267578125
+          },
+          "label": "Select Ochre savannah",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 9,
+          "active": false,
+          "transform": "matrix3d(0.470703, -0.066153, 0.0668031, 0, 0.0582431, 0.472919, 0.057928, 0, -0.153752, -0.101459, 0.982887, 0, -1488.12, 281.979, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": -929.0464477539062,
+            "y": 5250.51953125,
+            "top": 5250.51953125,
+            "bottom": 5363.5771484375,
+            "left": -929.0464477539062,
+            "right": -786.6444702148438,
+            "width": 142.4019775390625,
+            "height": 113.0576171875
+          },
+          "label": "Select Zebra pair",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 10,
+          "active": false,
+          "transform": "matrix3d(0.470703, -0.066153, 0.0668031, 0, 0.0582431, 0.472919, 0.057928, 0, -0.153752, -0.101459, 0.982887, 0, -1263.12, 211.135, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": -706.6643676757812,
+            "y": 5182.44140625,
+            "top": 5182.44140625,
+            "bottom": 5301.65869140625,
+            "left": -706.6643676757812,
+            "right": -558.9325561523438,
+            "width": 147.7318115234375,
+            "height": 119.21728515625
+          },
+          "label": "Select Running horses",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 11,
+          "active": false,
+          "transform": "matrix3d(0.470703, -0.066153, 0.0668031, 0, 0.0582431, 0.472919, 0.057928, 0, -0.153752, -0.101459, 0.982887, 0, -961.625, 80.7917, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": -453.1783142089844,
+            "y": 5090.27392578125,
+            "top": 5090.27392578125,
+            "bottom": 5264.66552734375,
+            "left": -453.1783142089844,
+            "right": -363.16845703125,
+            "width": 90.00985717773438,
+            "height": 174.3916015625
+          },
+          "label": "Select Spotted cat & acacia",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 12,
+          "active": false,
+          "transform": "matrix3d(0.470703, -0.066153, 0.0668031, 0, 0.0582431, 0.472919, 0.057928, 0, -0.153752, -0.101459, 0.982887, 0, -779.125, 15.7917, 0, 1)",
+          "opacity": 0.0853,
+          "visibility": "hidden",
+          "bounds": {
+            "x": -249.10250854492188,
+            "y": 5022.81591796875,
+            "top": 5022.81591796875,
+            "bottom": 5201.7958984375,
+            "left": -249.10250854492188,
+            "right": -116.5367431640625,
+            "width": 132.56576538085938,
+            "height": 178.97998046875
+          },
+          "label": "Select Amber butterfly",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 13,
+          "active": false,
+          "transform": "matrix3d(0.470026, -0.0660578, 0.0715008, 0, 0.0576762, 0.472998, 0.0578446, 0, -0.163372, -0.100107, 0.981473, 0, -588.125, -49.2083, 0, 1)",
+          "opacity": 0.4053,
+          "visibility": "visible",
+          "bounds": {
+            "x": -41.56999969482422,
+            "y": 4955.673828125,
+            "top": 4955.673828125,
+            "bottom": 5138.56396484375,
+            "left": -41.56999969482422,
+            "right": 126.72455596923828,
+            "width": 168.2945556640625,
+            "height": 182.89013671875
+          },
+          "label": "Select Ivory geometry",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 14,
+          "active": false,
+          "transform": "matrix3d(0.734284, -0.103197, 0.165292, 0, 0.0849937, 0.749503, 0.0903661, 0, -0.230813, -0.0906284, 0.968768, 0, -329.125, -114.208, 0, 1)",
+          "opacity": 0.7253,
+          "visibility": "visible",
+          "bounds": {
+            "x": 158.6753387451172,
+            "y": 4840.42529296875,
+            "top": 4840.42529296875,
+            "bottom": 5122.755859375,
+            "left": 158.6753387451172,
+            "right": 379.58526611328125,
+            "width": 220.90992736816406,
+            "height": 282.33056640625
+          },
+          "label": "Select Courtyard fountain",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 15,
+          "active": true,
+          "transform": "matrix3d(0.911479, -0.1281, 0.273811, 0, 0.0996073, 0.94851, 0.112173, 0, -0.297212, -0.0812966, 0.951344, 0, -138.125, -136.708, 0, 1)",
+          "opacity": 0.9547,
+          "visibility": "visible",
+          "bounds": {
+            "x": 327.5249328613281,
+            "y": 4771.318359375,
+            "top": 4771.318359375,
+            "bottom": 5057.06005859375,
+            "left": 327.5249328613281,
+            "right": 669.0156860351562,
+            "width": 341.4907531738281,
+            "height": 285.74169921875
+          },
+          "label": "Inspect Coastal window",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 16,
+          "active": false,
+          "transform": "matrix3d(0.630742, -0.088645, 0.238987, 0, 0.0651319, 0.672711, 0.0776235, 0, -0.362246, -0.0721567, 0.929285, 0, 86.875, -201.708, 0, 1)",
+          "opacity": 0.6347,
+          "visibility": "visible",
+          "bounds": {
+            "x": 594.986572265625,
+            "y": 4747.861328125,
+            "top": 4747.861328125,
+            "bottom": 4952.4677734375,
+            "left": 594.986572265625,
+            "right": 846.1613159179688,
+            "width": 251.17474365234375,
+            "height": 204.6064453125
+          },
+          "label": "Select White tiger",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 17,
+          "active": false,
+          "transform": "matrix3d(0.434234, -0.0610277, 0.195234, 0, 0.0427437, 0.475097, 0.0534399, 0, -0.416737, -0.0644985, 0.906736, 0, 311.875, -266.708, 0, 1)",
+          "opacity": 0.3147,
+          "visibility": "hidden",
+          "bounds": {
+            "x": 850.6427001953125,
+            "y": 4712.63671875,
+            "top": 4712.63671875,
+            "bottom": 4859.30517578125,
+            "left": 850.6427001953125,
+            "right": 1037.01513671875,
+            "width": 186.3724365234375,
+            "height": 146.66845703125
+          },
+          "label": "Select Floral elephant",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 18,
+          "active": false,
+          "transform": "matrix3d(0.434234, -0.0610277, 0.195234, 0, 0.0427437, 0.475097, 0.0534399, 0, -0.416737, -0.0644985, 0.906736, 0, 570.875, -374.208, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": 1084.2869873046875,
+            "y": 4629.79638671875,
+            "top": 4629.79638671875,
+            "bottom": 4812.595703125,
+            "left": 1084.2869873046875,
+            "right": 1252.394287109375,
+            "width": 168.1072998046875,
+            "height": 182.79931640625
+          },
+          "label": "Select Liquid gold",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 19,
+          "active": false,
+          "transform": "matrix3d(0.434234, -0.0610277, 0.195234, 0, 0.0427437, 0.475097, 0.0534399, 0, -0.416737, -0.0644985, 0.906736, 0, 795.875, -439.208, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": 1304.0655517578125,
+            "y": 4564.03076171875,
+            "top": 4564.03076171875,
+            "bottom": 4748.34375,
+            "left": 1304.0655517578125,
+            "right": 1482.869873046875,
+            "width": 178.8043212890625,
+            "height": 184.31298828125
+          },
+          "label": "Select Sunshine owl",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 20,
+          "active": false,
+          "transform": "matrix3d(0.434234, -0.0610277, 0.195234, 0, 0.0427437, 0.475097, 0.0534399, 0, -0.416737, -0.0644985, 0.906736, 0, 1020.88, -504.208, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": 1523.8441162109375,
+            "y": 4498.2646484375,
+            "top": 4498.2646484375,
+            "bottom": 4684.09228515625,
+            "left": 1523.8441162109375,
+            "right": 1713.345458984375,
+            "width": 189.5013427734375,
+            "height": 185.82763671875
+          },
+          "label": "Select Woodland muse",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 21,
+          "active": false,
+          "transform": "matrix3d(0.434234, -0.0610277, 0.195234, 0, 0.0427437, 0.475097, 0.0534399, 0, -0.416737, -0.0644985, 0.906736, 0, 1245.88, -569.208, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": 1743.6226806640625,
+            "y": 4432.4990234375,
+            "top": 4432.4990234375,
+            "bottom": 4619.84033203125,
+            "left": 1743.6226806640625,
+            "right": 1943.821044921875,
+            "width": 200.1983642578125,
+            "height": 187.34130859375
+          },
+          "label": "Select Island footprint",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 22,
+          "active": false,
+          "transform": "matrix3d(0.434234, -0.0610277, 0.195234, 0, 0.0427437, 0.475097, 0.0534399, 0, -0.416737, -0.0644985, 0.906736, 0, 1470.88, -634.208, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": 1963.4012451171875,
+            "y": 4366.7333984375,
+            "top": 4366.7333984375,
+            "bottom": 4555.58837890625,
+            "left": 1963.4012451171875,
+            "right": 2174.296630859375,
+            "width": 210.8953857421875,
+            "height": 188.85498046875
+          },
+          "label": "Select Savannah elephant",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 23,
+          "active": false,
+          "transform": "matrix3d(0.434234, -0.0610277, 0.195234, 0, 0.0427437, 0.475097, 0.0534399, 0, -0.416737, -0.0644985, 0.906736, 0, 1695.88, -699.208, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": 2183.179931640625,
+            "y": 4300.96728515625,
+            "top": 4300.96728515625,
+            "bottom": 4491.3369140625,
+            "left": 2183.179931640625,
+            "right": 2404.772216796875,
+            "width": 221.59228515625,
+            "height": 190.36962890625
+          },
+          "label": "Select Opal lotus",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 24,
+          "active": false,
+          "transform": "matrix3d(0.434234, -0.0610277, 0.195234, 0, 0.0427437, 0.475097, 0.0534399, 0, -0.416737, -0.0644985, 0.906736, 0, 1920.88, -764.208, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": 2402.95849609375,
+            "y": 4235.20166015625,
+            "top": 4235.20166015625,
+            "bottom": 4427.0849609375,
+            "left": 2402.95849609375,
+            "right": 2635.247802734375,
+            "width": 232.289306640625,
+            "height": 191.88330078125
+          },
+          "label": "Select Golden Krishna",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 25,
+          "active": false,
+          "transform": "matrix3d(0.434234, -0.0610277, 0.195234, 0, 0.0427437, 0.475097, 0.0534399, 0, -0.416737, -0.0644985, 0.906736, 0, 2145.88, -829.208, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": 2622.737060546875,
+            "y": 4169.435546875,
+            "top": 4169.435546875,
+            "bottom": 4362.8330078125,
+            "left": 2622.737060546875,
+            "right": 2865.723388671875,
+            "width": 242.986328125,
+            "height": 193.3974609375
+          },
+          "label": "Select Ocean dolphins",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 26,
+          "active": false,
+          "transform": "matrix3d(0.434234, -0.0610277, 0.195234, 0, 0.0427437, 0.475097, 0.0534399, 0, -0.416737, -0.0644985, 0.906736, 0, 2370.88, -894.208, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": 2842.515625,
+            "y": 4103.669921875,
+            "top": 4103.669921875,
+            "bottom": 4298.5810546875,
+            "left": 2842.515625,
+            "right": 3096.198974609375,
+            "width": 253.683349609375,
+            "height": 194.9111328125
+          },
+          "label": "Select Sunset retreat",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 27,
+          "active": false,
+          "transform": "matrix3d(0.434234, -0.0610277, 0.195234, 0, 0.0427437, 0.475097, 0.0534399, 0, -0.416737, -0.0644985, 0.906736, 0, 2595.88, -959.208, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": 3062.294189453125,
+            "y": 4037.904052734375,
+            "top": 4037.904052734375,
+            "bottom": 4234.32958984375,
+            "left": 3062.294189453125,
+            "right": 3326.674560546875,
+            "width": 264.38037109375,
+            "height": 196.425537109375
+          },
+          "label": "Select Coconut hideaway",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 28,
+          "active": false,
+          "transform": "matrix3d(0.434234, -0.0610277, 0.195234, 0, 0.0427437, 0.475097, 0.0534399, 0, -0.416737, -0.0644985, 0.906736, 0, 2854.88, -1024.21, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": 3308.973388671875,
+            "y": 3978.46044921875,
+            "top": 3978.46044921875,
+            "bottom": 4164.7158203125,
+            "left": 3308.973388671875,
+            "right": 3527.947509765625,
+            "width": 218.97412109375,
+            "height": 186.25537109375
+          },
+          "label": "Select Peacock scrolls",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 29,
+          "active": false,
+          "transform": "matrix3d(0.434234, -0.0610277, 0.195234, 0, 0.0427437, 0.475097, 0.0534399, 0, -0.416737, -0.0644985, 0.906736, 0, 3085.72, -1089.21, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": 3534.517822265625,
+            "y": 3914.118896484375,
+            "top": 3914.118896484375,
+            "bottom": 4099.20654296875,
+            "left": 3534.517822265625,
+            "right": 3752.212646484375,
+            "width": 217.69482421875,
+            "height": 185.087646484375
+          },
+          "label": "Select Shoreline sunset",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 30,
+          "active": false,
+          "transform": "matrix3d(0.434234, -0.0610277, 0.195234, 0, 0.0427437, 0.475097, 0.0534399, 0, -0.416737, -0.0644985, 0.906736, 0, 3304.88, -1154.21, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": 3750.438720703125,
+            "y": 3847.51513671875,
+            "top": 3847.51513671875,
+            "bottom": 4035.6474609375,
+            "left": 3750.438720703125,
+            "right": 3986.818603515625,
+            "width": 236.3798828125,
+            "height": 188.13232421875
+          },
+          "label": "Select Luminous lotus",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        },
+        {
+          "index": 31,
+          "active": false,
+          "transform": "matrix3d(0.434234, -0.0610277, 0.195234, 0, 0.0427437, 0.475097, 0.0534399, 0, -0.416737, -0.0644985, 0.906736, 0, 3518.45, -1219.21, 0, 1)",
+          "opacity": 0,
+          "visibility": "hidden",
+          "bounds": {
+            "x": 3961.14404296875,
+            "y": 3779.63037109375,
+            "top": 3779.63037109375,
+            "bottom": 3973.205322265625,
+            "left": 3961.14404296875,
+            "right": 4227.080078125,
+            "width": 265.93603515625,
+            "height": 193.574951171875
+          },
+          "label": "Select Acacia watch",
+          "hasImage": true,
+          "loaded": true,
+          "onscreen": false
+        }
+      ],
+      "overlay": false
+    }
+  },
+  {
+    "case": "manual-motion",
+    "viewport": "1440x960",
+    "status": "passed",
+    "before": {
+      "mode": "pinned",
+      "position": 13.95,
+      "active": 14,
+      "scrollY": 10848,
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "panelTop": 24,
+      "panelBottom": 935,
+      "headingTop": 65,
+      "headingBottom": 146,
+      "stageTop": 197,
+      "stageBottom": 727,
+      "scrollDistance": 7440,
+      "futureRunway": 4092.09375
+    },
+    "stable": {
+      "mode": "still",
+      "position": 14,
+      "active": 14,
+      "scrollY": 10848,
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "panelTop": 24,
+      "panelBottom": 935,
+      "headingTop": 65,
+      "headingBottom": 146,
+      "stageTop": 197,
+      "stageBottom": 727,
+      "scrollDistance": 3347.90625,
+      "futureRunway": 0
+    },
+    "afterScroll": {
+      "mode": "still",
+      "position": 14,
+      "active": 14,
+      "scrollY": 11007,
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "panelTop": -135,
+      "panelBottom": 776,
+      "headingTop": -94,
+      "headingBottom": -13,
+      "stageTop": 38,
+      "stageBottom": 568,
+      "scrollDistance": 3347.90625,
+      "futureRunway": 0
+    },
+    "resumed": {
+      "mode": "pinned",
+      "position": 1,
+      "active": 1,
+      "scrollY": 11007,
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "panelTop": 24,
+      "panelBottom": 935,
+      "headingTop": 65,
+      "headingBottom": 146,
+      "stageTop": 197,
+      "stageBottom": 727,
+      "scrollDistance": 10706.90625,
+      "futureRunway": 7200
+    }
+  },
+  {
+    "case": "desktop-resize",
+    "viewport": "1440x960",
+    "status": "passed",
+    "initial": {
+      "mode": "pinned",
+      "position": 15.5,
+      "active": 16,
+      "scrollY": 11220,
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "panelTop": 24,
+      "panelBottom": 935,
+      "headingTop": 65,
+      "headingBottom": 146,
+      "stageTop": 197,
+      "stageBottom": 727,
+      "scrollDistance": 7440,
+      "futureRunway": 3720.09375
+    },
+    "resizes": [
+      {
+        "mode": "pinned",
+        "position": 15.5,
+        "active": 16,
+        "scrollY": 11220,
+        "viewport": {
+          "width": 1280,
+          "height": 900
+        },
+        "panelTop": 24,
+        "panelBottom": 926,
+        "headingTop": 65,
+        "headingBottom": 137,
+        "stageTop": 188,
+        "stageBottom": 718,
+        "scrollDistance": 7864.109375,
+        "futureRunway": 3720
+      },
+      {
+        "mode": "inline",
+        "position": 15.5,
+        "active": 16,
+        "scrollY": 11220,
+        "viewport": {
+          "width": 1440,
+          "height": 600
+        },
+        "panelTop": 24,
+        "panelBottom": 935,
+        "headingTop": 65,
+        "headingBottom": 146,
+        "stageTop": 197,
+        "stageBottom": 727,
+        "scrollDistance": 5020.9375,
+        "futureRunway": 0
+      },
+      {
+        "mode": "pinned",
+        "position": 15.5,
+        "active": 16,
+        "scrollY": 12521,
+        "viewport": {
+          "width": 1440,
+          "height": 960
+        },
+        "panelTop": 24,
+        "panelBottom": 935,
+        "headingTop": 65,
+        "headingBottom": 146,
+        "stageTop": 197,
+        "stageBottom": 727,
+        "scrollDistance": 8740.90625,
+        "futureRunway": 3720
+      }
+    ],
+    "afterScroll": {
+      "mode": "pinned",
+      "position": 15.6833,
+      "active": 16,
+      "scrollY": 12565,
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "panelTop": 24,
+      "panelBottom": 935,
+      "headingTop": 65,
+      "headingBottom": 146,
+      "stageTop": 197,
+      "stageBottom": 727,
+      "scrollDistance": 8740.90625,
+      "futureRunway": 3676
+    }
+  }
+]

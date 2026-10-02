@@ -37,6 +37,10 @@
   align-items: center;
   margin-top: 46px;
 }
+.artworkTile {
+  display: block;
+  flex: 0 0 auto;
+}
 .artwork img {
   width: 132px;
   height: 132px;

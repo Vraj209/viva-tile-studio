@@ -6,6 +6,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { requestScrollRefresh } from "@/lib/scroll";
 import {
   roomReveal,
   segment,
@@ -171,6 +172,7 @@ export default function TileStory() {
 
   useGSAP(
     () => {
+      requestScrollRefresh();
       if (!enhanced || !trackRef.current || !stageRef.current) return;
       const stage = stageRef.current;
       const captions = Array.from(
@@ -223,7 +225,7 @@ export default function TileStory() {
           trigger: trackRef.current,
           start: "top top",
           end: "bottom bottom",
-          scrub: 0.45,
+          scrub: true,
           invalidateOnRefresh: true,
         },
       });
@@ -280,14 +282,14 @@ export default function TileStory() {
       data-story-webgl={webglSupport}
       data-story-motion-off={manualOff}
     >
-      <header className={styles.intro}>
-        <p className={styles.eyebrow}>AN IDEA, GIVEN FORM</p>
-        <h2 id="story-title">
+      <header className={styles.intro} data-motion="editorial">
+        <p className={styles.eyebrow} data-motion-item>AN IDEA, GIVEN FORM</p>
+        <h2 id="story-title" data-motion-item>
           From imagination
           <br />
           to a space that is <em>yours.</em>
         </h2>
-        <p className={styles.introNote}>
+        <p className={styles.introNote} data-motion-item>
           Follow one design, from a first thought
           <br className={styles.desktopBreak} /> to a new point of view.
         </p>

@@ -15,7 +15,8 @@
   box-sizing: border-box;
 }
 html {
-  scroll-behavior: smooth;
+  /* Lenis owns interpolation; anchors still work natively without JavaScript. */
+  scroll-behavior: auto;
   scroll-padding-top: 100px;
 }
 body {
@@ -740,12 +741,13 @@ h3 {
 }
 .footer-artwork {
   display: none;
+  overflow: hidden;
+  border-radius: 20px;
 }
 .footer-artwork img {
   width: 100%;
   height: auto;
   object-fit: contain;
-  border-radius: 20px;
 }
 .footer-top .wordmark {
   align-self: start;
@@ -875,6 +877,9 @@ h3 {
   }
   .mobile-nav {
     display: flex;
+    max-height: calc(100dvh - 128px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
     flex-direction: column;
     position: absolute;
     top: calc(100% - 1px);

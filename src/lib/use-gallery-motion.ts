@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, type RefObject } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { requestScrollRefresh } from "@/lib/scroll";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,7 +13,8 @@ type Controller = {
 };
 
 /** Scroll, buttons and dragging share the original GSAP position and renderer.
- * Only this section supplies a sticky runway; native page scrolling is untouched. */
+ * Page interpolation belongs to the global Lenis clock; this section only paints
+ * its progress and supplies the existing sticky runway. */
 export function useGalleryMotion(
   stageRef: RefObject<HTMLDivElement | null>,
   trackRef: RefObject<HTMLDivElement | null>,
@@ -41,11 +43,11 @@ export function useGalleryMotion(
     let tween: gsap.core.Tween | undefined;
     let trigger: ScrollTrigger | undefined;
     let resetClick: ReturnType<typeof setTimeout> | undefined;
-    let refreshFrame = 0;
     let readyFrame = 0;
     let disposed = false;
     let layoutReady = false;
     let measured = false;
+    let refreshing = false;
     let pinned = false;
     let distance = 0;
     let trackStart = 0;
@@ -80,12 +82,7 @@ export function useGalleryMotion(
       stage.dataset.galleryPosition = position.value.toFixed(4);
     };
     const context = gsap.context(() => paint(), stage);
-    // Retarget the same scalar, with a short settle and no snapping to samples.
-    const scrub = gsap.quickTo(position, "value", {
-      duration: .22, ease: "power2.out",
-      onUpdate: () => { commit(Math.round(position.value)); paint(); },
-    });
-    const stop = () => { tween?.kill(); tween = undefined; scrub.tween.pause(); };
+    const stop = () => { tween?.kill(); tween = undefined; };
     const rebase = () => {
       anchor = { progress: trigger?.progress ?? 0, value: position.value };
     };
@@ -101,11 +98,20 @@ export function useGalleryMotion(
       return anchor.value;
     };
     const followScroll = (self: ScrollTrigger) => {
-      if (isStill() || suspended || gesture?.dragging) return;
+      if (isStill() || suspended || refreshing || gesture?.dragging) return;
+      if (tween) {
+        // A wheel gesture can interrupt a manual choice before it settles. Use
+        // the currently painted pose, rather than jumping to its destination.
+        anchor = { progress: anchor?.progress ?? self.progress, value: position.value };
+      }
       tween?.kill();
       tween = undefined;
       position.opacity = 1;
-      scrub(scrollValue(self.progress), position.value);
+      // Lenis has already eased the document position. A second scrub tween here
+      // would trail the page and continue moving after the visitor has stopped.
+      position.value = scrollValue(self.progress);
+      commit(Math.round(position.value));
+      paint();
     };
     const settle = (index: number) => {
       layoutReady = true;
@@ -149,7 +155,7 @@ export function useGalleryMotion(
         pinned = canPin;
         const step = mobile ? 120 : 240;
         const bounds = panel.getBoundingClientRect();
-        const viewing = layoutReady && measured && bounds.top <= 25 && bounds.bottom > 0;
+        const viewing = layoutReady && measured && bounds.top >= -2 && bounds.top <= 25 && bounds.bottom > 0;
         // A resize can reflow earlier sections and shift native scroll anchoring.
         // Keep enough remaining travel so a restored pin never rushes to its end.
         distance = Math.max((count - 1) * step, viewing
@@ -170,16 +176,16 @@ export function useGalleryMotion(
       start: () => pinned ? "top 24px" : `${distance + stage.offsetTop} 42%`,
       end: () => `+=${Math.max(distance, window.innerHeight * .3, 120)}`,
       onUpdate: followScroll,
-      onRefreshInit: () => { stop(); measure(); },
+      onRefreshInit: () => { refreshing = true; measure(); },
       onRefresh: (self) => {
-        // Refresh can call onUpdate with new bounds; discard its pending scrub.
-        stop();
+        // Hold the current pose while refreshed bounds update scroll progress.
         // A local refresh can still expose the old self.progress until its next
         // update. Anchor to the new bounds and the actual document position.
         const progress = gsap.utils.clamp(0, 1, (window.scrollY - self.start) / (self.end - self.start));
         if (measured && layoutReady) {
           // Font, viewport and upstream section changes must not restart a pose.
-          anchor = { progress, value: position.value };
+          // Image loads elsewhere should not interrupt a manual selection tween.
+          anchor = { progress, value: tween ? selectedRef.current : position.value };
         } else if (!isStill()) {
           anchor = null;
           position.value = progress * scrollEnd;
@@ -187,18 +193,14 @@ export function useGalleryMotion(
           paint();
         }
         measured = true;
+        refreshing = false;
         track.dataset.galleryScrollStart = String(self.start);
         track.dataset.galleryScrollEnd = String(self.end);
       },
     });
-    const scheduleRefresh = () => {
-      cancelAnimationFrame(refreshFrame);
-      refreshFrame = requestAnimationFrame(() => trigger?.refresh());
-    };
-    const observer = new ResizeObserver(scheduleRefresh);
+    const observer = new ResizeObserver(requestScrollRefresh);
     observer.observe(panel);
-    // Includes the existing story's delayed enhancement above the gallery.
-    observer.observe(document.body);
+    // Global scroll infrastructure observes upstream layout and image changes.
     // Warm the small browse faces before fast scrubbing can reveal distant tiles.
     // Full inspection photographs remain lazy and unmounted until requested.
     const nearby = new IntersectionObserver((entries) => {
@@ -232,7 +234,7 @@ export function useGalleryMotion(
       position.opacity = 1;
       rebase();
       paint();
-      if (changed) scheduleRefresh();
+      if (changed) requestScrollRefresh();
     };
     controller.current = { select: settle, configure };
     const onMotionChange = () => {
@@ -241,7 +243,7 @@ export function useGalleryMotion(
       position.opacity = 1;
       rebase();
       paint();
-      scheduleRefresh();
+      requestScrollRefresh();
     };
     reduced.addEventListener("change", onMotionChange);
 
@@ -288,10 +290,8 @@ export function useGalleryMotion(
     return () => {
       disposed = true;
       stop();
-      scrub.tween.kill();
       trigger?.kill();
       trigger = undefined;
-      cancelAnimationFrame(refreshFrame);
       cancelAnimationFrame(readyFrame);
       window.removeEventListener("load", ready);
       if (resetClick) clearTimeout(resetClick);

@@ -1,0 +1,23 @@
+[
+  {
+    "path": "public/images/worlds/home-bathroom.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 273430,
+    "format": "webp"
+  },
+  {
+    "path": "public/images/worlds/home-dining.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 329068,
+    "format": "webp"
+  },
+  {
+    "path": "public/images/worlds/home-bedroom.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 286616,
+    "format": "webp"
+  }
+]

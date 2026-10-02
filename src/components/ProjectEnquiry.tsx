@@ -185,18 +185,19 @@ export default function ProjectEnquiry() {
       className={styles.section}
       aria-labelledby="enquiry-heading"
     >
-      <div className={styles.intro}>
-        <p className={styles.eyebrow}>07 — A conversation begins</p>
-        <h2 id="enquiry-heading">
+      <div className={styles.intro} data-motion="quiet">
+        <p className={styles.eyebrow} data-motion-item>07 — A conversation begins</p>
+        <h2 id="enquiry-heading" data-motion-item>
           Let’s Turn Your
           <br />
           Idea Into Tile.
         </h2>
-        <p className={styles.invitation}>
+        <p className={styles.invitation} data-motion-item>
           A sketch. A photograph. A thought you keep coming back to. An idea is
           enough to start the conversation.
         </p>
         <div className={styles.artwork}>
+          <span className={styles.artworkTile} data-motion-depth="tile">
           <Image
             src="/images/midnight-garden.webp"
             alt="Midnight Garden botanical tile design"
@@ -204,6 +205,7 @@ export default function ProjectEnquiry() {
             height={184}
             sizes="(max-width: 700px) 96px, 132px"
           />
+          </span>
           <p>
             Your idea.
             <br />

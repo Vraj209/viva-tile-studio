@@ -2,10 +2,14 @@
 import { useEffect, useRef, useState } from "react";
 import Arrow from "./Arrow";
 import BrandLogo from "./BrandLogo";
+import { lockPageScroll } from "@/lib/scroll";
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
   const menu = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (open) return lockPageScroll();
+  }, [open]);
   useEffect(() => {
     const close = (e: KeyboardEvent) => {
       if (e.key === "Escape" && open) {
@@ -25,7 +29,9 @@ export default function SiteHeader() {
     };
   }, [open]);
   return (
-    <header className="site-header">
+    <header className="site-header" onBlur={(event) => {
+      if (open && !event.currentTarget.contains(event.relatedTarget)) setOpen(false);
+    }}>
       <a className="wordmark" href="#top" aria-label="VAVI Tile Studio home">
         <BrandLogo eager />
       </a>
@@ -52,6 +58,7 @@ export default function SiteHeader() {
       <nav
         id="mobile-nav"
         className="mobile-nav"
+        data-lenis-prevent
         hidden={!open}
         aria-label="Mobile navigation"
         onClick={() => setOpen(false)}

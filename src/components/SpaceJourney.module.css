@@ -1,0 +1,84 @@
+/* Body-level journey uses the document scrollbar. Local layer order:
+   photographs 0/1, tonal scrim within each scene, interface 2, entry 3/4. */
+.journey {
+  --edge: clamp(24px, 4vw, 72px);
+  position: relative;
+  width: 100%;
+  height: calc(100dvh + 1760svh);
+  color: #faf9f6;
+  background: #252a25;
+  isolation: isolate;
+  overscroll-behavior: none;
+}
+.journey[data-phase="entering"] { position: fixed; inset: 0; height: 100dvh; z-index: 100; background: transparent; }
+.stage { position: sticky; top: 0; height: 100dvh; min-height: 320px; width: 100%; overflow: hidden; opacity: 0; }
+.scenes, .scene, .artwork, .shade { position: absolute; inset: 0; }
+.scene { visibility: hidden; opacity: 0; }
+.scene:first-child { visibility: visible; opacity: 1; }
+.artwork { overflow: hidden; background: #303930; }
+.artwork > picture { position: absolute; inset: 0; display: block; }
+.photograph { object-fit: cover; object-position: var(--position); opacity: 0; }
+.photograph[data-ready="true"] { opacity: 1; }
+.shade { pointer-events: none; background: linear-gradient(180deg, rgb(12 18 14 / 52%) 0%, transparent 23%, transparent 49%, rgb(12 18 14 / 22%) 66%, rgb(12 18 14 / 74%) 100%); }
+.imageStatus { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; font-size: 13px; }
+.imageStatus button { min-height: 44px; border: 0; border-bottom: 1px solid currentColor; background: transparent; color: inherit; }
+.toolbar { position: absolute; top: 0; left: 0; right: 0; z-index: 2; display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; padding: max(21px, env(safe-area-inset-top)) var(--edge) 16px; }
+.back, .entryBack { display: inline-flex; gap: 17px; align-items: center; justify-self: start; min-height: 48px; border: 0; background: transparent; color: inherit; padding: 0 8px 0 0; font-size: 11px; }
+.back > span, .entryBack > span { font-size: 20px; }
+.signature { justify-self: center; font: italic 400 23px/1.2 var(--serif); }
+.location { justify-self: end; display: flex; gap: 28px; align-items: center; font-size: 11px; }
+.location > span { font-size: 10px; font-variant-numeric: tabular-nums; letter-spacing: 0.05em; }
+.copy { position: absolute; bottom: clamp(120px, 18vh, 185px); left: var(--edge); right: var(--edge); max-width: 640px; pointer-events: none; }
+.room { font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 18px; }
+.copy h2 { font: 400 clamp(40px, 4.3vw, 68px)/1.05 var(--serif); letter-spacing: -0.035em; text-wrap: balance; }
+.chapterCopy h2 { font-size: clamp(58px, 6.5vw, 104px); max-width: 620px; }
+.enquiry { display: inline-flex; align-items: center; gap: 40px; min-height: 44px; margin-top: 21px; padding: 5px 0; border: 0; border-bottom: 1px solid rgb(250 249 246 / 65%); color: inherit; background: transparent; font-size: 12px; pointer-events: auto; }
+.enquiry span { font-size: 20px; }
+.footer { position: absolute; z-index: 2; left: var(--edge); right: var(--edge); bottom: max(25px, env(safe-area-inset-bottom)); display: flex; justify-content: space-between; align-items: end; gap: 40px; }
+.chapters { display: grid; grid-template-columns: repeat(4, 1fr); gap: 23px; width: min(570px, 70%); }
+.chapters button { position: relative; min-height: 48px; padding: 13px 0 0; color: inherit; border: 0; background: transparent; text-align: left; font-size: 10px; }
+.chapters button > span:last-child { opacity: 0.65; }
+.chapters button[aria-current] > span:last-child { opacity: 1; }
+.progress { position: absolute; top: 3px; left: 0; right: 0; height: 1px; background: rgb(250 249 246 / 30%); }
+.progress > span { display: block; height: 100%; width: 100%; transform: scaleX(0); transform-origin: left; background: #faf9f6; }
+.disclosure { padding-bottom: 11px; font-size: 9px; color: rgb(250 249 246 / 75%); white-space: nowrap; }
+.entry { position: fixed; inset: 0; height: 100dvh; overflow: hidden; pointer-events: none; z-index: 3; }
+.entryBack { position: fixed; top: max(21px, env(safe-area-inset-top)); left: var(--edge); z-index: 4; visibility: hidden; }
+.journey[data-phase="entering"] .entryBack { visibility: visible; }
+.journey button:focus-visible { outline: 2px solid #faf9f6; outline-offset: 6px; }
+.srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+@media (hover: hover) {
+  .back:hover, .enquiry:hover { opacity: 0.75; }
+  .chapters button:hover > span:last-child { opacity: 1; }
+}
+@media (max-width: 767px) {
+  .journey { --edge: 24px; height: calc(100dvh + 1440svh); }
+  .photograph { object-position: var(--mobile-position); }
+  .toolbar { grid-template-columns: 1fr auto; padding-top: max(12px, env(safe-area-inset-top)); }
+  .signature { display: none; }
+  .back, .entryBack { font-size: 10px; gap: 10px; }
+  .entryBack { top: max(12px, env(safe-area-inset-top)); }
+  .location { flex-direction: column; align-items: end; gap: 1px; font-size: 10px; }
+  .location > span { font-size: 9px; }
+  .copy { bottom: 150px; max-width: 340px; }
+  .copy h2 { font-size: clamp(36px, 9vw, 56px); }
+  .chapterCopy h2 { font-size: clamp(48px, 12.5vw, 76px); }
+  .room { font-size: 9px; margin-bottom: 13px; }
+  .footer { flex-direction: column; align-items: stretch; gap: 11px; bottom: max(18px, env(safe-area-inset-bottom)); }
+  .chapters { width: 100%; gap: 15px; }
+  .chapters button { font-size: 9px; }
+  .disclosure { padding: 0; font-size: 8px; }
+  .enquiry { font-size: 11px; margin-top: 15px; gap: 30px; }
+}
+@media (max-height: 560px) and (min-width: 768px) {
+  .toolbar { padding-top: 8px; }
+  .copy { bottom: 104px; }
+  .copy h2, .chapterCopy h2 { font-size: 48px; }
+  .room { margin-bottom: 8px; }
+  .enquiry { margin-top: 6px; }
+  .footer { bottom: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .artwork { transform: none !important; }
+  .copy { transform: none !important; }
+}

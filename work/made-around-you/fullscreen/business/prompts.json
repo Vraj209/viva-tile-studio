@@ -1,0 +1,157 @@
+{
+  "assets": [
+    {
+      "name": "hospitality-restaurant",
+      "description": "Restaurant with Warm Curves tile wall",
+      "classification": "Concept visualization",
+      "generatedBy": "Built-in image_gen tool",
+      "generatedDate": "2026-09-29",
+      "sourceReference": "public/images/gallery/warm-curves-inspect.webp",
+      "generatedSource": "C:\\Users\\Vraj Panchal\\.codex\\generated_images\\01a0ef13-31fe-7f60-a279-0e02bdb8e084\\exec-97b851f1-927e-4af6-897a-46e13ff54a24.png",
+      "original": "work/made-around-you/fullscreen/business/hospitality-restaurant.png",
+      "publicPath": "public/images/worlds/hospitality-restaurant.webp",
+      "recommendedObjectPosition": "50% 47%",
+      "recommendedMobileObjectPosition": "53% 47%",
+      "prompt": "Use case: compositing. Asset type: one ultra-photorealistic, full-viewport architectural editorial photograph, horizontal 16:9. Create a distinct luxurious boutique hotel restaurant. Input image is the actual owner-supplied Warm Curves square tile artwork and must be integrated faithfully, not used as loose inspiration. The reference is ONE COMPLETE SQUARE TILE. Preserve its entire original composition and proportions including the top-right large split concentric circle, lower-right orange-centred teal concentric circle, upper-left sweeping curves, red hourglass at left, striped left rectangular area, and the slim ochre vertical divider. Preserve exact charcoal, rust orange, ochre yellow and muted teal colours and fine existing ribbed surface character. Put TWO COMPLETE IDENTICAL SQUARE COPIES side by side on the rear feature wall, with one thin vertical tile joint between them. Each copy must remain approximately 1:1 square in the image because the wall is seen nearly straight-on. Do not stretch one design across the wide wall, add continuation motifs, change motif positions, crop away parts, or invent replacement linework. The rear wall installation should therefore be twice as wide as tall with two equal complete source designs, integrated flush into plaster without picture-frame borders. Place this tile installation above a low taupe linen banquette so both full squares are visible. Architecture: intimate restaurant with dark walnut circular tables, three or four elegant caramel leather dining chairs in the low foreground, pale limestone flooring and warm plaster walls. One tall glazed opening at far left admits soft afternoon courtyard daylight. Two restrained bronze pendant lights stay toward the side edges and do not obscure the tile faces. Eye-level architectural magazine photography, natural 28mm perspective with corrected verticals, one coherent complete luxurious room, beautiful material detail, soft realistic shadows, modest decorative table settings. Calm high-end editorial composition, tile wall central and dominant, central portrait crop still shows restaurant and substantial tile. No people, text, watermark, logo, collage, inset photos, gallery UI, exaggerated relief, plastic CGI finish or extreme wide angle. This is a fictional architectural concept visualization based on the actual supplied pattern.",
+      "preparation": "Sharp WebP quality 86, effort 6. No cropping, colour adjustment, sharpening or content edits.",
+      "review": "Two complete square Warm Curves panels retain recognizable original motif arrangement, colours and approximately square proportions. Small generated linework/relief differences remain; not a pixel-exact product reproduction.",
+      "originalPixels": {
+        "width": 1672,
+        "height": 941
+      },
+      "runtimePixels": {
+        "width": 1672,
+        "height": 941
+      },
+      "runtimeBytes": 359012,
+      "supersededGenerations": [
+        {
+          "name": "hospitality-restaurant",
+          "description": "Restaurant with Warm Curves tile wall",
+          "classification": "Concept visualization",
+          "generatedBy": "Built-in image_gen tool",
+          "generatedDate": "2026-09-29",
+          "sourceReference": "public/images/gallery/warm-curves-inspect.webp",
+          "generatedSource": "C:\\Users\\Vraj Panchal\\.codex\\generated_images\\01a0ef13-31fe-7f60-a279-0e02bdb8e084\\exec-f9cc1c09-e076-4968-9588-becba937d407.png",
+          "original": "work/made-around-you/fullscreen/business/hospitality-restaurant-v1.png",
+          "publicPath": "public/images/worlds/hospitality-restaurant.webp",
+          "recommendedObjectPosition": "50% 47%",
+          "recommendedMobileObjectPosition": "53% 47%",
+          "prompt": "Use case: photorealistic-natural. Asset type: full-viewport cinematic architectural editorial concept image for a tile studio website. Create ONE new luxurious boutique-hotel restaurant interior, horizontal 16:9 composition, approximately 2048 x 1152. Input image is a PRODUCT PATTERN REFERENCE ONLY, not the room composition. Accurately install the supplied Warm Curves tile design as a broad real tiled feature wall behind a low curved banquette: preserve the reference's dark charcoal base, warm rust, ochre, muted teal colours, thin concentric ribbed curves, spirals and small geometric motifs, exact dense pattern character and restrained relief; do not invent a different large geometric pattern. Reproduce the reference design faithfully in proportion as contiguous tile panels, with subtle believable joints and softly grazing light. Scene: a sophisticated intimate restaurant with three well-spaced round dark timber tables, caramel leather sculptural chairs, taupe linen banquette, honed limestone floor, sheer window light from the left, and discreet warm pendants high above. A quiet courtyard is visible beyond one narrow opening. Broad tiled wall occupies central half of the frame and remains substantially unobscured. Eye-height architectural photography, 28mm lens, straight verticals, expensive tactile materials, gentle natural imperfection, exceptionally convincing daylight and reflections, soft late-afternoon atmosphere, balanced depth and visual stillness. Make it a believable complete restaurant distinct from a reception, bedroom, spa or office. Full-bleed photograph, no framing, no collage, no inset photos, no typography, no logos, no people, no watermark, no excessive decor, no extreme wide-angle distortion. Keep main tile and spatial subject around centre so a portrait crop still reads as a luxurious room.",
+          "preparation": "Sharp WebP quality 86, effort 6. No cropping, colour adjustment, sharpening or content edits.",
+          "review": "One distinct full architectural scene. Recognizable supplied motif, colours and proportions. Fine generated linework and relief can vary; retain supplied sample for exact inspection. Not a photographed completed project or production proof.",
+          "originalPixels": {
+            "width": 1672,
+            "height": 941
+          },
+          "runtimePixels": {
+            "width": 1672,
+            "height": 941
+          },
+          "runtimeBytes": 366764
+        }
+      ],
+      "revisionReason": "Initial generated restaurant spread/recomposed the square reference across a wider wall. Regenerated to retain two complete square reference compositions."
+    },
+    {
+      "name": "hospitality-suite",
+      "description": "Hotel suite with Ivory Geometry tile wall",
+      "classification": "Concept visualization",
+      "generatedBy": "Built-in image_gen tool",
+      "generatedDate": "2026-09-29",
+      "sourceReference": "public/images/gallery/ivory-geometry-inspect.webp",
+      "generatedSource": "C:\\Users\\Vraj Panchal\\.codex\\generated_images\\01a0ef13-31fe-7f60-a279-0e02bdb8e084\\exec-89b135c7-dbab-481e-9a61-a3b19e4fc55c.png",
+      "original": "work/made-around-you/fullscreen/business/hospitality-suite.png",
+      "publicPath": "public/images/worlds/hospitality-suite.webp",
+      "recommendedObjectPosition": "50% 49%",
+      "recommendedMobileObjectPosition": "53% 47%",
+      "prompt": "Use case: photorealistic-natural. Asset type: full-screen architectural editorial concept for a luxury tile studio. Create ONE entirely new luxury boutique-hotel suite photographed horizontally at 16:9, approximately 2048 x 1152. Input is the actual supplied Ivory Geometry tile PRODUCT REFERENCE, not an image to crop. Install this exact ivory design in its correct tall rectangular proportions as three or four adjoining vertical panels on the principal wall behind a very low upholstered bed. Preserve the reference's ivory colour, mirrored diamond insets in muted bronze and teal, repeated linked centre-diamond medallions, delicate dotted relief, thin decorative borders, hourglass side motifs, geometric surface relief and relative proportions; do not replace with generic triangles or new decoration. The panels should read as believable architectural tiles with natural grazing shadows, not prints or a picture frame. Room: quiet expansive hotel suite with a low ivory linen bed and rumpled duvet, a rounded dark walnut bedside table, a low bench in soft woven fabric, pale limestone floor, subtle bronze accents and a deep floor-to-ceiling window on the left opening to a planted terrace. Broad calm suite, mostly uncluttered, tiled wall dominant and substantially visible above the low headboard. Eye-height photography with straight verticals, about a 28mm lens, natural morning light crossing the floor, convincing woven textiles and wood grain, editorial richness but subtle colour. The bed and tile subject sit centrally for meaningful mobile cropping. Distinct spatial layout from a reception, restaurant or spa. Full bleed photograph, no frame, no collage, no typography, no watermarks, no people, no excessive decorative objects, no computer-render plastic materials or extreme perspective.",
+      "preparation": "Sharp WebP quality 86, effort 6. No cropping, colour adjustment, sharpening or content edits.",
+      "review": "One distinct full architectural scene. Recognizable supplied motif, colours and proportions. Fine generated linework and relief can vary; retain supplied sample for exact inspection. Not a photographed completed project or production proof.",
+      "originalPixels": {
+        "width": 1672,
+        "height": 941
+      },
+      "runtimePixels": {
+        "width": 1672,
+        "height": 941
+      },
+      "runtimeBytes": 311094
+    },
+    {
+      "name": "hospitality-spa",
+      "description": "Spa relaxation sanctuary with Diamond Lattice tile wall",
+      "classification": "Concept visualization",
+      "generatedBy": "Built-in image_gen tool",
+      "generatedDate": "2026-09-29",
+      "sourceReference": "public/images/gallery/diamond-lattice-inspect.webp",
+      "generatedSource": "C:\\Users\\Vraj Panchal\\.codex\\generated_images\\01a0ef13-31fe-7f60-a279-0e02bdb8e084\\exec-970ce030-215d-4b91-89cf-2f3a0590ff13.png",
+      "original": "work/made-around-you/fullscreen/business/hospitality-spa.png",
+      "publicPath": "public/images/worlds/hospitality-spa.webp",
+      "recommendedObjectPosition": "50% 47%",
+      "recommendedMobileObjectPosition": "52% 46%",
+      "prompt": "Use case: photorealistic-natural. Asset type: immersive full-viewport architectural editorial concept for a tile studio. Create ONE distinct ultra-luxurious hotel spa relaxation sanctuary, a complete interior, horizontal 16:9 approximately 2048 x 1152. Input image is the actual supplied Diamond Lattice PRODUCT PATTERN REFERENCE. Faithfully repeat this same square taupe-and-dark-brown tile on a broad dry feature wall: retain the reference's exact nested angular diamond lattice, alternating small bar-and-diamond shapes, taupe background, dark brown recessed linework, fine shallow surface texture, square panel proportions and delicate original border. Keep pattern scale plausible, recognizably identical to reference, no unrelated ornament and no exaggerated relief. Architecture: exceptionally serene spa with an elongated central stone relaxation platform topped by a neatly folded pale linen mattress, one low sculptural wooden lounge chair to the right, a tall plain earthenware vessel, warm beige plaster side walls, naturally veined limestone flooring, and a narrow view into a planted enclosed courtyard through the far left. The main tile feature wall fills the centre of frame; no water touches the featured tiles. Beautiful skylight sends a broad soft shaft of afternoon daylight along one side; calm dim ambient fill keeps every material tactile. Editorial architectural photograph, level eye-height, straight verticals, balanced asymmetric composition and deep atmosphere, no sterile showroom feeling. Central platform low enough that principal tile wall remains largely unobscured. Compose for both full wide view and central portrait crop. One clear architectural scene, no collage, no text, no people, no logo, no border, no framed inset images, no excessive steam or fog, no impossible architecture, no plastic CGI finish, no extreme wide-angle perspective.",
+      "preparation": "Sharp WebP quality 86, effort 6. No cropping, colour adjustment, sharpening or content edits.",
+      "review": "One distinct full architectural scene. Recognizable supplied motif, colours and proportions. Fine generated linework and relief can vary; retain supplied sample for exact inspection. Not a photographed completed project or production proof.",
+      "originalPixels": {
+        "width": 1672,
+        "height": 941
+      },
+      "runtimePixels": {
+        "width": 1672,
+        "height": 941
+      },
+      "runtimeBytes": 357148
+    },
+    {
+      "name": "workspace-executive",
+      "description": "Executive office with Angular Lines tile wall",
+      "classification": "Concept visualization",
+      "generatedBy": "Built-in image_gen tool",
+      "generatedDate": "2026-09-29",
+      "sourceReference": "public/images/gallery/angular-lines-inspect.webp",
+      "generatedSource": "C:\\Users\\Vraj Panchal\\.codex\\generated_images\\01a0ef13-31fe-7f60-a279-0e02bdb8e084\\exec-a4eb1153-4b29-4b6a-9f50-ec0f3f5b82a3.png",
+      "original": "work/made-around-you/fullscreen/business/workspace-executive.png",
+      "publicPath": "public/images/worlds/workspace-executive.webp",
+      "recommendedObjectPosition": "50% 49%",
+      "recommendedMobileObjectPosition": "49% 47%",
+      "prompt": "Use case: photorealistic-natural. Asset type: full-viewport architectural editorial concept for a luxury tile studio website. Create ONE new premium private executive office, horizontal 16:9 approximately 2048 x 1152. Input image is the supplied Angular Lines PRODUCT PATTERN REFERENCE, use its exact design prominently on a real full-height feature wall behind the desk. Preserve its warm pale taupe background, dark brown angular maze linework, diagonally arranged compact right-angle spirals and rectangles, square tile proportions, restrained fine relief and original narrow border. Repeat the complete supplied square motif consistently in a subtle grid, without inventing new graphic shapes or changing the design to generic zigzags. Office architecture: sophisticated top-floor corner office with a sculptural dark walnut executive desk running diagonally across the lower central frame, one refined saddle-leather office chair behind it, two low stone-coloured visitor chairs, a thin brass task lamp and a closed dark notebook. No monitor is required. Rich dark smoked oak side wall and floor, full-height glazing on the right with a quiet out-of-focus city beyond, a long concealed bronze-lit shelf. The warm taupe patterned tile wall fills the central and left middle of the frame and remains dominant above the low desk; retain substantial unobstructed wall for tile detail. Eye-height 28mm editorial architectural photography, distinct three-quarter composition rather than straight-on reception or meeting room, natural late afternoon light from the right, deep soft shadows, convincing leather, stone and walnut grain. Central desk and tile wall still readable in portrait crop. Quiet authority and expensive material restraint. Exactly one complete scene, no collage, no inset images, no frames, no text, no logos, no watermark, no people, no excessive objects, no warped furniture, no plastic CGI effect, no aggressive wide-angle.",
+      "preparation": "Sharp WebP quality 86, effort 6. No cropping, colour adjustment, sharpening or content edits.",
+      "review": "One distinct full architectural scene. Recognizable supplied motif, colours and proportions. Fine generated linework and relief can vary; retain supplied sample for exact inspection. Not a photographed completed project or production proof.",
+      "originalPixels": {
+        "width": 1672,
+        "height": 941
+      },
+      "runtimePixels": {
+        "width": 1672,
+        "height": 941
+      },
+      "runtimeBytes": 401250
+    },
+    {
+      "name": "workspace-lounge",
+      "description": "Workplace lounge with Angular Lines tile wall",
+      "classification": "Concept visualization",
+      "generatedBy": "Built-in image_gen tool",
+      "generatedDate": "2026-09-29",
+      "sourceReference": "public/images/gallery/angular-lines-inspect.webp",
+      "generatedSource": "C:\\Users\\Vraj Panchal\\.codex\\generated_images\\01a0ef13-31fe-7f60-a279-0e02bdb8e084\\exec-bbc8b415-7abc-4f52-9636-fa67e4478e11.png",
+      "original": "work/made-around-you/fullscreen/business/workspace-lounge.png",
+      "publicPath": "public/images/worlds/workspace-lounge.webp",
+      "recommendedObjectPosition": "50% 49%",
+      "recommendedMobileObjectPosition": "54% 47%",
+      "prompt": "Use case: photorealistic-natural. Asset type: immersive full-screen architectural editorial concept for a tile studio. Create ONE new refined workplace lounge and informal conversation space, horizontal 16:9 approximately 2048 x 1152, highly photorealistic architectural photography. The input image is the actual supplied Angular Lines PRODUCT PATTERN REFERENCE. Integrate its exact warm pale taupe and dark brown angular maze motif as a continuous tiled wall in a recessed architectural bay. Faithfully preserve compact diagonal right-angle spirals and rectangles, fine shallow relief, complete square motif proportions, narrow dark edge and restrained colours; repeat complete supplied square tiles consistently with subtle joints. Do not invent generic chevrons or oversized geometric shapes. Scene: a generous executive lounge with a low olive-grey curved sofa wrapping around a dark honed stone oval coffee table, two cognac leather sling chairs, soft natural wool rug, smoked oak joinery framing the tiled bay, a quiet bronze reading lamp and one sculptural branch in a ceramic vessel. A tall sheer-curtained window at far left casts gentle morning light deep into the space. Layout is relaxed and open, unlike an office desk, reception, restaurant or boardroom. Foreground has generous calm floor and rug; the tile wall fills the middle-to-upper centre and remains unobscured above low seating. Slightly oblique 28mm eye-height editorial framing, straight verticals, long soft shadows, natural upholstery folds, believable wood grain and stone. Intimate architectural luxury, clean but lived-in, not sterile CGI. Central tile/seating arrangement should hold together in a portrait crop. One complete room filling the image; no gallery frames, no collage, no inset picture, no text, no logo, no watermark, no people, no dense decor, no extreme lens distortion.",
+      "preparation": "Sharp WebP quality 86, effort 6. No cropping, colour adjustment, sharpening or content edits.",
+      "review": "One distinct full architectural scene. Recognizable supplied motif, colours and proportions. Fine generated linework and relief can vary; retain supplied sample for exact inspection. Not a photographed completed project or production proof.",
+      "originalPixels": {
+        "width": 1672,
+        "height": 941
+      },
+      "runtimePixels": {
+        "width": 1672,
+        "height": 941
+      },
+      "runtimeBytes": 417916
+    }
+  ]
+}

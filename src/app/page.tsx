@@ -14,14 +14,14 @@ export default function Page() {
       <SiteHeader />
       <main id="main">
         <Hero />
-        <div className="intro">
-          <p className="eyebrow">A DIFFERENT WAY TO THINK ABOUT TILE</p>
-          <p>
+        <div className="intro" data-motion="editorial">
+          <p className="eyebrow" data-motion-item>A DIFFERENT WAY TO THINK ABOUT TILE</p>
+          <p data-motion-item>
             Some spaces deserve
             <br />
             something <em>only you could imagine.</em>
           </p>
-          <span>
+          <span data-motion-item>
             Bring a photograph, a pattern, a sketch.
             <br />
             We’ll explore what it could become.
@@ -29,9 +29,9 @@ export default function Page() {
         </div>
         <TileStory />
         <Possibilities />
-        <section className="manifesto">
-          <span className="eyebrow">THE VAVI PHILOSOPHY</span>
-          <p>
+        <section className="manifesto" data-motion="editorial">
+          <span className="eyebrow" data-motion-item>THE VAVI PHILOSOPHY</span>
+          <p data-motion-item>
             Instead of designing your room
             <br />
             around the tile,{" "}
@@ -41,7 +41,7 @@ export default function Page() {
               around your room.
             </em>
           </p>
-          <span className="manifesto-symbol" aria-hidden="true">
+          <span className="manifesto-symbol" aria-hidden="true" data-motion-depth="ornament">
             ✳
           </span>
         </section>

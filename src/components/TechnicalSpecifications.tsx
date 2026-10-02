@@ -12,14 +12,14 @@ export default function TechnicalSpecifications() {
       className={`section-space ${styles.section}`}
       aria-labelledby="specifications-heading"
     >
-      <div className={styles.heading}>
-        <div>
+      <div className={styles.heading} data-motion="quiet">
+        <div data-motion-item>
           <p className="eyebrow">05 / THE DETAILS BEHIND THE DESIGN</p>
           <h2 id="specifications-heading">
             Technical <em>Specifications</em>
           </h2>
         </div>
-        <p className={styles.introduction}>
+        <p className={styles.introduction} data-motion-item>
           Explore material, format, installation and care information. Confirm
           the selected product’s specifications and suitability for your project
           before ordering.
