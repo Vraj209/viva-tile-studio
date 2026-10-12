@@ -1,10 +1,10 @@
 # Inspiration gallery asset preparation
 
-Prepared 27 September 2026 from owner-supplied imagery in `data/samples/`, `data/landscape/` and `data/potraite/`. The original twelve selected sample faces remain, followed by all six PNGs in `landscape/` and all fourteen PNGs in `potraite/`: **32 gallery images from 31 distinct source files**.
+Prepared exclusively from owner-supplied imagery in `data/landscape/` and `data/potraite/`: all six landscape-folder PNGs, followed by all fourteen portrait-folder PNGs, in numeric filename order. **20 gallery images from 20 distinct source files**. The gallery selection was updated at the owner's request on 12 October 2026. Images from `data/samples/` are excluded from the loop; their original and prepared files are retained.
 
-The earlier JPEG sources now live in `data/samples/`. The four-sample source still contributes two different faces, with its complete photograph available in inspection. The retained elephant file ending in `_1.jpeg` is byte-identical to the previously selected original and is used once. The twenty added images were visually reviewed, have no byte-identical duplicates, and are included in full. Folder names do not determine display orientation: each image uses its actual dimensions.
+The selected images were visually reviewed, have no byte-identical duplicates, and are included in full. Folder names do not determine display orientation: each image uses its actual dimensions.
 
-Labels describe visible content, not verified product names, materials, collections, finishes or dimensions. Depicted depth, gold colouring, wood-like forms and stone-like backgrounds do not establish physical manufacture or measured relief. New images remain **Sample image**; the two existing framed-panel photographs remain **Sample photograph**. No matching installed view is fabricated or associated merely by theme.
+Labels describe visible content, not verified product names, materials, collections, finishes or dimensions. Depicted depth, gold colouring, wood-like forms and stone-like backgrounds do not establish physical manufacture or measured relief. All selected images are labelled **Sample image**. No matching installed view is fabricated or associated merely by theme.
 
 ## Preparation
 
@@ -12,14 +12,11 @@ Run `node scripts/prepare-gallery-assets.mjs` from the repository root. Existing
 
 - Browse images fit within 640 × 640 px at WebP quality 84.
 - Inspection images fit within 1600 × 1600 px at quality 92. Smaller originals are never enlarged.
-- Original aspect ratios are retained, including mixed orientations within the supplied folders. No new PNG is cropped.
-- Earlier extracted square faces preserve their photographed proportions. No perspective warping is applied.
-- Existing framed-panel crops retain their photographic presentation, with the complete original photograph available in the expanded view.
+- Original aspect ratios are retained, including mixed orientations within the supplied folders. No image is cropped or perspective-warped.
 - No colour, exposure, white-balance or sharpening correction is applied. No generated detail, inferred relief, transparency isolation or surface retouching is used.
-- Supporting details are labelled crops of supplied images, not additional products or microscopic material evidence.
-- Full inspection, source and detail assets load only when the inspection view is opened.
+- Full inspection images load only when the inspection view is opened.
 
-Total browse payload for all 32 images: **2,030,436 bytes**. All 70 prepared assets combined: **12,075,766 bytes**. Actual page transfer depends on lazy-loading and browser cache.
+Total browse payload for all 20 images: **1,351,976 bytes**. All 70 prepared assets on disk, including retained assets excluded from the loop: **12,075,766 bytes**. Actual page transfer depends on lazy-loading and browser cache.
 
 ## Selected images
 
@@ -27,18 +24,6 @@ Crop coordinates are `left, top, width, height` in original source pixels. Brows
 
 | Descriptive label | Source in data/ | Source px | Crop | Browse px / bytes | Inspection px / bytes |
 | --- | --- | --- | --- | --- | --- |
-| Warm curves | `samples/419539f5-80b8-416a-90b3-4680bd43843a.jpeg` | 682 × 683 | Full image | 639 × 640 / 92,088 | 682 × 683 / 138,878 |
-| Angular lines | `samples/1c57ee0e-5f93-4d76-97a7-f61eda39e7a8.jpeg` | 1144 × 1161 | 0, 0, 560, 574 | 560 × 574 / 62,334 | 560 × 574 / 93,994 |
-| Ochre geometry | `samples/5948f80d-9d17-4b54-a19b-2a9484011b90.jpeg` | 545 × 803 | Full image | 434 × 640 / 66,764 | 545 × 803 / 135,346 |
-| Elephant outline | `samples/3f5c15d1-556e-41ea-b285-b62bffebab49.jpeg` | 604 × 848 | Full image | 456 × 640 / 19,934 | 604 × 848 / 48,630 |
-| Graphic squares | `samples/02b074e8-c458-42a6-ac10-13c82ee85e27.jpeg` | 1179 × 1175 | Full image | 640 × 638 / 108,668 | 1179 × 1175 / 363,134 |
-| Diamond lattice | `samples/1c57ee0e-5f93-4d76-97a7-f61eda39e7a8.jpeg` | 1144 × 1161 | 588, 603, 556, 558 | 556 × 558 / 61,592 | 556 × 558 / 92,848 |
-| Ivory silhouettes | `samples/abedabf6-02fd-45c1-89a0-4faf352626f8_1.jpeg` | 551 × 765 | Full image | 461 × 640 / 65,670 | 551 × 765 / 130,300 |
-| Acacia silhouettes | `samples/926cfa82-fb29-4558-bf30-6b8e24302dab.jpeg` | 421 × 531 | Full image | 421 × 531 / 36,246 | 421 × 531 / 54,180 |
-| Ochre savannah | `samples/dbed1847-8dbb-43c7-88a5-c46af035129f.jpeg` | 546 × 300 | Full image | 546 × 300 / 36,448 | 546 × 300 / 52,314 |
-| Zebra pair | `samples/ea875b0e-d3bc-4339-8fdb-f2893ea9c6c9.jpeg` | 761 × 442 | Full image | 640 × 372 / 27,464 | 761 × 442 / 55,352 |
-| Running horses | `samples/56afcdae-6c3e-4c1f-9dcc-1ab988ebbb76.jpeg` | 1599 × 899 | 119, 0, 1459, 899 | 640 × 394 / 33,348 | 1459 × 899 / 171,376 |
-| Spotted cat & acacia | `samples/308a53ee-b45f-4b7d-9ffe-11154282bc82.jpeg` | 900 × 1600 | 26, 66, 814, 1479 | 352 × 640 / 67,904 | 814 × 1479 / 411,340 |
 | Amber butterfly | `landscape/L_1.png` | 1122 × 1402 | Full image | 512 × 640 / 64,822 | 1122 × 1402 / 393,144 |
 | Ivory geometry | `landscape/L_2.png` | 1254 × 1254 | Full image | 640 × 640 / 92,832 | 1254 × 1254 / 352,980 |
 | Courtyard fountain | `landscape/L_3.png` | 1122 × 1402 | Full image | 512 × 640 / 88,622 | 1122 × 1402 / 442,362 |
@@ -62,25 +47,10 @@ Crop coordinates are `left, top, width, height` in original source pixels. Brows
 
 ## Source inventory
 
-The first fifteen entries refer to JPEG filenames in `data/samples/`; the remaining twenty entries list their full path relative to `data/`.
+Each entry lists its full path relative to `data/`. Every image currently in the two selected folders is included once.
 
 | Source | Classification | Selection |
 | --- | --- | --- |
-| 02b074e8 | Full-face geometric sample image | Selected |
-| 1c57ee0e | Photograph of four separate square samples | Two visually distinct faces selected; original grouping available in inspection |
-| 308a53ee | Photograph of a framed tall sample/panel | Selected with photographic perspective retained |
-| 3ec421bb | Three framed landscape images | Excluded: triptych framing and weaker image resolution |
-| 3f5c15d1 | Full-face portrait sample image | Selected; source detail available |
-| 419539f5 | Full-face square sample image | Selected |
-| 56afcdae | Photograph of a framed wide sample/panel | Selected; source photo and detail available |
-| 5948f80d | Full-face portrait sample image | Selected |
-| 5efec184 | Framed landscape image with large mount | Excluded: large mount and weaker sample-face relevance |
-| 5f370bac | Interior scene with blue elephant wall artwork | Excluded from sample faces; no matching selected sample |
-| 926cfa82 | Full-face portrait sample image | Selected |
-| abedabf6…_1 | Full-face portrait sample image | Selected once; retained file is identical to the previously selected original |
-| dbed1847 | Wide landscape sample image | Selected |
-| ea875b0e | Wide figurative sample image | Selected |
-| fff21619 | Interior scene with spotted-cat wall artwork | Excluded from sample faces; no matching selected sample |
 | landscape/L_1.png | Supplied sample image | Selected in full, without cropping |
 | landscape/L_2.png | Supplied sample image | Selected in full, without cropping |
 | landscape/L_3.png | Supplied sample image | Selected in full, without cropping |

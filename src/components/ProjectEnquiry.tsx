@@ -43,6 +43,7 @@ export default function ProjectEnquiry() {
   const [application, setApplication] = useState("Not sure yet");
   const [country, setCountry] = useState("");
   const [reference, setReference] = useState("");
+  const [idea, setIdea] = useState("");
 
   useEffect(() => {
     const controller = new AbortController();
@@ -78,6 +79,15 @@ export default function ProjectEnquiry() {
           projectType: params.get("projectType"),
           application: params.get("application"),
         });
+      const productId = params.get("product");
+      if (productId) {
+        // Resolve a known catalogue identity rather than trusting arbitrary URL copy.
+        void import("@/lib/brochure-products").then(({ brochureProducts }) => {
+          if (controller.signal.aborted) return;
+          const product = brochureProducts.find((item) => item.id === productId);
+          if (product) setIdea((current) => current || `I’m interested in ${product.name} from ${product.collection} (brochure page ${product.sourcePage}). I’d like to discuss this tile for my space.`);
+        });
+      }
     });
     return () => {
       controller.abort();
@@ -303,6 +313,8 @@ export default function ProjectEnquiry() {
             <textarea
               id="enquiry-idea"
               name="idea"
+              value={idea}
+              onChange={(event) => setIdea(event.target.value)}
               rows={3}
               required={enquiryFields.idea.required}
               maxLength={enquiryFields.idea.maxLength}

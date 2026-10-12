@@ -8,8 +8,6 @@ import Arrow from "./Arrow";
 import { GalleryInspection } from "./GalleryInspection";
 import styles from "./ProjectGallery.module.css";
 
-const number = (index: number) => String(index + 1).padStart(2, "0");
-
 export default function ProjectGallery() {
   const [selected, setSelected] = useState(0);
   const [inspectionIndex, setInspectionIndex] = useState<number | null>(null);
@@ -68,7 +66,7 @@ export default function ProjectGallery() {
           <div className={styles.browser} data-still={still} onKeyDown={onKeyDown} role="group" aria-label="Tile sample browser" aria-describedby="gallery-instructions">
             <div className={styles.stage} ref={stage} data-gallery-stage>
               <div className={styles.metadata}>
-                <p className={styles.collectionLabel}>THE SAMPLE EDIT <span>{number(selected)} / {galleryAssets.length}</span></p>
+                <p className={styles.collectionLabel}>THE SAMPLE EDIT</p>
                 <div key={active.id} className={styles.caption}>
                   <h3>{active.label}</h3>
                   <p>{active.category}</p>
@@ -119,17 +117,9 @@ export default function ProjectGallery() {
               <p className={styles.instructions} id="gallery-instructions"><span className={styles.scrollHint}>Scroll to explore <span>·</span> </span>Drag or use the arrows <span>·</span> Select to inspect</p>
               <div className={styles.browseControls}>
                 <button type="button" className={styles.previous} aria-label="Previous sample" disabled={selected === 0} onClick={() => select(selected - 1)}><Arrow /></button>
-                <span className={styles.counter} aria-hidden="true">{number(selected)} <i>/</i> {galleryAssets.length}</span>
                 <button type="button" aria-label="Next sample" disabled={selected === galleryAssets.length - 1} onClick={() => select(selected + 1)}><Arrow /></button>
               </div>
               <button type="button" className={styles.inspect} onClick={inspect}>Inspect sample <Arrow diagonal /></button>
-            </div>
-            <div className={styles.index} role="group" aria-label="Choose a sample">
-              {galleryAssets.map((sample, index) => (
-                <button key={sample.id} type="button" aria-label={`Show ${sample.label}`} aria-pressed={selected === index} onClick={() => select(index)}>
-                  <span>{number(index)}</span><i aria-hidden="true" />
-                </button>
-              ))}
             </div>
             <p className={styles.srOnly} aria-live="polite" aria-atomic="true">{active.label}, sample {selected + 1} of {galleryAssets.length}.</p>
           </div>

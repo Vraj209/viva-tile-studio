@@ -1,0 +1,77 @@
+.library {
+  padding: 67px var(--gutter) 0;
+  overflow: clip;
+  background: radial-gradient(ellipse at 50% 41%, #f3eee5 0%, transparent 62%), var(--paper);
+}
+.intro { text-align: center; max-width: 900px; margin: 0 auto; }
+.eyebrow { font-size: 10px; font-weight: 600; letter-spacing: .19em; }
+.intro h1 { font: 400 clamp(64px, 7.2vw, 112px)/1.1 var(--serif); letter-spacing: -.045em; margin: 17px 0 19px; }
+.intro em { color: var(--forest); }
+.description { font-size: 13px; line-height: 1.85; color: var(--muted); max-width: 400px; margin: auto; }
+.shelf { display: grid; grid-template-columns: 1fr 1.14fr 1fr; gap: clamp(30px, 5.2vw, 90px); max-width: 1390px; margin: 33px auto 75px; align-items: start; }
+.edition { position: relative; min-width: 0; }
+.edition:nth-child(2) { padding-top: 42px; }
+.edition:nth-child(3) { padding-top: 12px; }
+.bookButton { border: 0; padding: 0; background: none; width: 100%; display: block; text-align: left; }
+.bookStage { position: relative; height: clamp(305px, 31vw, 455px); display: flex; align-items: center; justify-content: center; perspective: 1600px; }
+.bookPlacement { display: block; position: relative; width: calc(clamp(265px, 27.4vw, 400px) * var(--book-ratio)); aspect-ratio: var(--book-ratio); max-width: 93%; transform: rotateZ(-5deg); transition: transform .7s cubic-bezier(.2,.75,.25,1), opacity .5s; }
+.edition:nth-child(2) .bookPlacement { transform: rotateZ(3deg); }
+.edition:nth-child(3) .bookPlacement { transform: rotateZ(-3deg); }
+.bookObject { position: absolute; display: block; inset: 0; transform: rotateY(-13deg) rotateX(7deg); transform-style: preserve-3d; transition: transform .7s cubic-bezier(.2,.75,.25,1); }
+.bookCover { display: block; position: absolute; inset: 0; background: #d7d0c2; transform: translateZ(9px); box-shadow: 1px 0 1px #f4f0e080, 0 2px 2px #29241c55; backface-visibility: hidden; }
+.bookCover img { object-fit: fill; }
+.coverLight { position: absolute; inset: 0; background: linear-gradient(90deg, #00000024, #ffffff17 1.6%, #0000000d 3%, transparent 7%, #ffffff09 70%, #ffffff22); pointer-events: none; }
+.bookBack { position: absolute; inset: -1px -2px -2px 0; background: #b0a596; transform: translateZ(-8px); box-shadow: 11px 20px 23px #3f382729, 27px 36px 46px #3f38271c; }
+.pageEdges { position: absolute; inset: 3px -1px 3px 2px; background: repeating-linear-gradient(to bottom, #ddd7cb 0 1px, #f7f2e7 1px 3px); transform: translateZ(-2px); box-shadow: 5px 4px 0 #d8d0c1, 7px 6px 0 #b6ac9c; }
+.bookSpine { position: absolute; inset: 0 auto 0 0; width: 18px; transform: translateX(-9px) rotateY(-90deg); background: linear-gradient(90deg, #4b4a3c, #888172 40%, #4b4a3c); }
+.bookGround { position: absolute; height: 18px; width: 65%; bottom: 18px; left: 19%; background: #4b413425; border-radius: 50%; filter: blur(16px); transform: rotate(-3deg); transition: opacity .7s, transform .7s; }
+.caption { display: block; position: relative; margin-top: 22px; border-top: 1px solid var(--line); padding-top: 17px; }
+.editionDetails { display: flex; justify-content: space-between; gap: 10px; font-size: 10px; color: var(--muted); letter-spacing: .035em; }
+.title { display: block; font: 400 clamp(31px, 3vw, 46px)/1.12 var(--serif); letter-spacing: -.025em; margin-top: 14px; }
+.subtitle { display: block; font-size: 12px; color: var(--muted); margin-top: 8px; }
+.explore { display: inline-flex; align-items: center; gap: 24px; font-size: 12px; margin-top: 21px; min-height: 44px; }
+.explore svg { transition: transform .3s; }
+.download { display: inline-flex; font-size: 10px; min-height: 44px; align-items: center; color: var(--muted); border-bottom: 1px solid transparent; }
+.download:hover { border-color: currentColor; }
+.libraryNote { display: flex; align-items: center; justify-content: space-between; gap: 30px; max-width: 1390px; margin: 0 auto; padding: 35px 0 43px; border-top: 1px solid var(--line); }
+.libraryNote p { font: 400 30px/1.16 var(--serif); letter-spacing: -.02em; }
+.libraryNote span { color: var(--muted); font-size: 11px; }
+.library .intro, .library .shelf, .library .libraryNote { transition: opacity .55s, transform .8s cubic-bezier(.2,.75,.25,1); }
+.library[data-reader-open="true"] .intro, .library[data-reader-open="true"] .shelf, .library[data-reader-open="true"] .libraryNote { opacity: .2; transform: scale(.97); }
+.bookButton[data-selected="true"] .bookPlacement { opacity: 0; }
+.unavailableCover { display: flex; height: 100%; flex-direction: column; align-items: center; justify-content: space-between; padding: 28px 16px; background: repeating-linear-gradient(0deg, transparent 0 2px, #fff1 2px 3px), #7b7d70; color: #f5efe2; text-align: center; }
+.unavailableCover > span:first-child { font-size: 18px; letter-spacing: .2em; }
+.unavailableCover strong { font: 400 38px/1.05 var(--serif); }
+.unavailableCover > span:last-child { font-size: 9px; letter-spacing: .04em; }
+.flyingBook { transform: none; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .bookButton:hover .bookPlacement, .bookButton:focus-visible .bookPlacement { transform: translateY(-15px) rotateZ(0deg); }
+  .bookButton:hover .bookObject, .bookButton:focus-visible .bookObject { transform: rotateY(-5deg) rotateX(3deg); }
+  .bookButton:hover .bookGround { opacity: .6; transform: scale(.85); }
+  .bookButton:hover .explore svg { transform: translateX(5px); }
+}
+@media (max-width: 1023px) {
+  .library { padding-top: 48px; }
+  .shelf { gap: 30px; }
+  .bookStage { height: 300px; }
+  .bookPlacement { width: calc(260px * var(--book-ratio)); }
+  .title { font-size: 31px; }
+}
+@media (max-width: 700px) {
+  .library { padding: 40px 24px 0; }
+  .intro h1 { font-size: clamp(54px, 11vw, 76px); margin: 17px 0; }
+  .description { font-size: 12px; max-width: 305px; }
+  .shelf { display: block; margin: 27px auto 45px; max-width: 430px; }
+  .edition, .edition:nth-child(2), .edition:nth-child(3) { padding: 0; margin-bottom: 46px; }
+  .bookStage { height: 435px; }
+  .bookPlacement { width: calc(377px * var(--book-ratio)); }
+  .caption { margin-top: 10px; }
+  .title { font-size: 40px; }
+  .editionDetails { font-size: 11px; }
+  .explore { margin-top: 14px; font-size: 13px; }
+  .libraryNote { display: block; padding: 26px 0 35px; }
+  .libraryNote span { display: block; margin-top: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .library[data-reader-open="true"] .intro, .library[data-reader-open="true"] .shelf, .library[data-reader-open="true"] .libraryNote { transform: none; }
+}

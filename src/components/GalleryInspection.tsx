@@ -114,12 +114,6 @@ function OpenInspection({
             </div>
             <figcaption className={styles.caption}>
               <span aria-live="polite">{view.label}</span>
-              {views.length > 1 ? (
-                <span aria-hidden="true">
-                  {String(viewIndex + 1).padStart(2, "0")} /{" "}
-                  {String(views.length).padStart(2, "0")}
-                </span>
-              ) : null}
             </figcaption>
           </figure>
 

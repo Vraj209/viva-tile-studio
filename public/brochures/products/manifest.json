@@ -1,0 +1,762 @@
+{
+  "generator": "scripts/prepare-brochure-products.py",
+  "products": [
+    {
+      "id": "evoke-10465",
+      "source": "data/brouchers/Eton__1200x2400mm_Evoke_Collection.pdf",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 3,
+      "embeddedImage": "Im4.jp2",
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/evoke-10465.webp",
+      "textureSha256": "a6888cbcdebd26dadf0ad4c8fa720d62fb444aa75778abd99c3047addb7f271d",
+      "textureBytes": 345696
+    },
+    {
+      "id": "evoke-10466",
+      "source": "data/brouchers/Eton__1200x2400mm_Evoke_Collection.pdf",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 5,
+      "embeddedImage": "Im6.jp2",
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/evoke-10466.webp",
+      "textureSha256": "0311bdeef1a9f5cfbc49729e108d442526cbe0d7e6ae47933b6ebe63d529d810",
+      "textureBytes": 402994
+    },
+    {
+      "id": "evoke-10467",
+      "source": "data/brouchers/Eton__1200x2400mm_Evoke_Collection.pdf",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 6,
+      "embeddedImage": "Im7.jp2",
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/evoke-10467.webp",
+      "textureSha256": "862f2d3155eef3d50f1f0a7e3b9303f4f88dc83d8dc17ab6b33e1f9e5f057ffb",
+      "textureBytes": 416558
+    },
+    {
+      "id": "evoke-10468",
+      "source": "data/brouchers/Eton__1200x2400mm_Evoke_Collection.pdf",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 7,
+      "embeddedImage": "Im8.jp2",
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/evoke-10468.webp",
+      "textureSha256": "2140dbbc592d3af9b74ec75e8288dc8135cb90bc9fe1bc240484d5fc69383f42",
+      "textureBytes": 390218
+    },
+    {
+      "id": "evoke-10469",
+      "source": "data/brouchers/Eton__1200x2400mm_Evoke_Collection.pdf",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 8,
+      "embeddedImage": "Im9.jp2",
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/evoke-10469.webp",
+      "textureSha256": "d4aa4e87fa75ffae1e6636375a8c54f9832efa8181d34d4f3b9b29606dae7976",
+      "textureBytes": 454650
+    },
+    {
+      "id": "evoke-10470",
+      "source": "data/brouchers/Eton__1200x2400mm_Evoke_Collection.pdf",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 9,
+      "embeddedImage": "Im10.jp2",
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/evoke-10470.webp",
+      "textureSha256": "924fd73353d568ad693ef2dfe28b3b54659edd924ec0555f18823b08efce71bf",
+      "textureBytes": 208644
+    },
+    {
+      "id": "evoke-10471",
+      "source": "data/brouchers/Eton__1200x2400mm_Evoke_Collection.pdf",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 10,
+      "embeddedImage": "Im11.jp2",
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/evoke-10471.webp",
+      "textureSha256": "f908aa2732042cfd0017448580474cdf9998c7c869a1fbb3a3218ed939aa62a9",
+      "textureBytes": 273132
+    },
+    {
+      "id": "evoke-10472",
+      "source": "data/brouchers/Eton__1200x2400mm_Evoke_Collection.pdf",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 11,
+      "embeddedImage": "Im12.jp2",
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/evoke-10472.webp",
+      "textureSha256": "1a027d572e3fff064bdcfe7d67635639dedb2b9143efdc500af8e6c0e1167971",
+      "textureBytes": 374392
+    },
+    {
+      "id": "evoke-10473",
+      "source": "data/brouchers/Eton__1200x2400mm_Evoke_Collection.pdf",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 12,
+      "embeddedImage": "Im13.jp2",
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/evoke-10473.webp",
+      "textureSha256": "6fb71958520288842a876df09c1163f40d43c905a9c4b11294a27fe5e816daea",
+      "textureBytes": 398292
+    },
+    {
+      "id": "evoke-10474",
+      "source": "data/brouchers/Eton__1200x2400mm_Evoke_Collection.pdf",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 13,
+      "embeddedImage": "Im14.jp2",
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/evoke-10474.webp",
+      "textureSha256": "956831a0ab7efa29284dd91434ca37b53cdb2a0569cd7d0ee037a26845fed902",
+      "textureBytes": 355978
+    },
+    {
+      "id": "evoke-10475",
+      "source": "data/brouchers/Eton__1200x2400mm_Evoke_Collection.pdf",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 14,
+      "embeddedImage": "Im15.jp2",
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/evoke-10475.webp",
+      "textureSha256": "0fa5e520e2b8c4bc68151d27a919a22cb74b0a83a186c8b1fe7c20098641e6f4",
+      "textureBytes": 322658
+    },
+    {
+      "id": "evoke-10476",
+      "source": "data/brouchers/Eton__1200x2400mm_Evoke_Collection.pdf",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 15,
+      "embeddedImage": "Im16.jp2",
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/evoke-10476.webp",
+      "textureSha256": "14464d1d8fe364ecbf8889d2f15c659a4a1a797bdb9172c1773f54530f1e7553",
+      "textureBytes": 459992
+    },
+    {
+      "id": "evoke-10477",
+      "source": "data/brouchers/Eton__1200x2400mm_Evoke_Collection.pdf",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 16,
+      "embeddedImage": "Im17.jp2",
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/evoke-10477.webp",
+      "textureSha256": "aceb74bd47106f0a6a5481f8d884039aec822ceb5cf93eff3b08a0532b193740",
+      "textureBytes": 387488
+    },
+    {
+      "id": "evoke-10478",
+      "source": "data/brouchers/Eton__1200x2400mm_Evoke_Collection.pdf",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 17,
+      "embeddedImage": "Im18.jp2",
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/evoke-10478.webp",
+      "textureSha256": "c1e5d38e36da01b9fa8c8a7c42985e409931c23fce3524aba77ced45232a1964",
+      "textureBytes": 344854
+    },
+    {
+      "id": "evoke-10479",
+      "source": "data/brouchers/Eton__1200x2400mm_Evoke_Collection.pdf",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 18,
+      "embeddedImage": "Im19.jp2",
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/evoke-10479.webp",
+      "textureSha256": "39d1ab95b7838f0668b85ba1d09c9ea0620dd3f8b1f3c3cd21fe53f3e76cedbe",
+      "textureBytes": 412724
+    },
+    {
+      "id": "evoke-10480",
+      "source": "data/brouchers/Eton__1200x2400mm_Evoke_Collection.pdf",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 19,
+      "embeddedImage": "Im20.jp2",
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/evoke-10480.webp",
+      "textureSha256": "75d4021cb18da56556770df67840e466012f136ed6b37586ec240b548444ae0c",
+      "textureBytes": 424150
+    },
+    {
+      "id": "evoke-10481",
+      "source": "data/brouchers/Eton__1200x2400mm_Evoke_Collection.pdf",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 20,
+      "embeddedImage": "Im21.jp2",
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/evoke-10481.webp",
+      "textureSha256": "bbff1cf76732db966d9f81a1f273dde599fe14d7abbcf12ab24662de39f2327d",
+      "textureBytes": 219220
+    },
+    {
+      "id": "evoke-10482",
+      "source": "data/brouchers/Eton__1200x2400mm_Evoke_Collection.pdf",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 21,
+      "embeddedImage": "Im22.jp2",
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/evoke-10482.webp",
+      "textureSha256": "8c1a2fbd50c5c959cdc0bdb6ebc34203033a3ac05ed310cc1ffb151b88f8541f",
+      "textureBytes": 350680
+    },
+    {
+      "id": "evoke-10483",
+      "source": "data/brouchers/Eton__1200x2400mm_Evoke_Collection.pdf",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 22,
+      "embeddedImage": "Im23.jp2",
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/evoke-10483.webp",
+      "textureSha256": "698272984268fc79a7b59273ae223b036df09546fb40fc2ba91d9dbbbfd8ed42",
+      "textureBytes": 389826
+    },
+    {
+      "id": "evoke-10484",
+      "source": "data/brouchers/Eton__1200x2400mm_Evoke_Collection.pdf",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 23,
+      "embeddedImage": "Im24.jp2",
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/evoke-10484.webp",
+      "textureSha256": "7792994f878743a65268da2e2e3aefc919ee7f48552cfc512a3b59aeed20a564",
+      "textureBytes": 254376
+    },
+    {
+      "id": "evoke-10485",
+      "source": "data/brouchers/Eton__1200x2400mm_Evoke_Collection.pdf",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 24,
+      "embeddedImage": "Im25.jp2",
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/evoke-10485.webp",
+      "textureSha256": "43250d0b59ba802a539e588934473dda6cafaf27f523c187b4c193f5698e1d2d",
+      "textureBytes": 365392
+    },
+    {
+      "id": "evoke-10486",
+      "source": "data/brouchers/Eton__1200x2400mm_Evoke_Collection.pdf",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 25,
+      "embeddedImage": "Im26.jp2",
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/evoke-10486.webp",
+      "textureSha256": "f826c3e56850f463154a120d0850d78c8656ca354b09f7fc6b740274c77cdcc7",
+      "textureBytes": 213210
+    },
+    {
+      "id": "evoke-10487",
+      "source": "data/brouchers/Eton__1200x2400mm_Evoke_Collection.pdf",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 26,
+      "embeddedImage": "Im27.jp2",
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/evoke-10487.webp",
+      "textureSha256": "971b24553b41393aca8f5c5970a60502799130765161b7dddadb618bd0e1a419",
+      "textureBytes": 317944
+    },
+    {
+      "id": "evoke-10488",
+      "source": "data/brouchers/Eton__1200x2400mm_Evoke_Collection.pdf",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 27,
+      "embeddedImage": "Im28.jp2",
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/evoke-10488.webp",
+      "textureSha256": "dc74d54ba461ef83e4029ad90522335a60143837ef8f1c96fb2c36c70c91136f",
+      "textureBytes": 358036
+    },
+    {
+      "id": "artful-surfaces-01",
+      "source": "data/brouchers/f304a1b2-c8b1-48aa-b347-d8a0e969b56f.pdf",
+      "sourceSha256": "0f6736e2161b2cf8d2248c640ba8675b74d4c5fe6c4969b2a6c2552ab160a993",
+      "sourcePage": 1,
+      "embeddedImage": "Im1.jpg",
+      "nativeWidth": 1770,
+      "nativeHeight": 3542,
+      "pixelCrop": null,
+      "texture": "/brochures/products/artful-surfaces-01.jpg",
+      "textureSha256": "81cbb3aa25ba52ba2d61502813c0d16cb2887297c4568571a4eea7fcbe33fe88",
+      "textureBytes": 2446905
+    },
+    {
+      "id": "artful-surfaces-02",
+      "source": "data/brouchers/f304a1b2-c8b1-48aa-b347-d8a0e969b56f.pdf",
+      "sourceSha256": "0f6736e2161b2cf8d2248c640ba8675b74d4c5fe6c4969b2a6c2552ab160a993",
+      "sourcePage": 2,
+      "embeddedImage": "Im2.jpg",
+      "nativeWidth": 1771,
+      "nativeHeight": 3542,
+      "pixelCrop": null,
+      "texture": "/brochures/products/artful-surfaces-02.jpg",
+      "textureSha256": "2d87aae5fc1f80418d9b9102f5a0521336acc81f6e7c43d55f96869f49be5cf3",
+      "textureBytes": 1584256
+    },
+    {
+      "id": "artful-surfaces-03",
+      "source": "data/brouchers/f304a1b2-c8b1-48aa-b347-d8a0e969b56f.pdf",
+      "sourceSha256": "0f6736e2161b2cf8d2248c640ba8675b74d4c5fe6c4969b2a6c2552ab160a993",
+      "sourcePage": 3,
+      "embeddedImage": "Im3.jpg",
+      "nativeWidth": 1771,
+      "nativeHeight": 3542,
+      "pixelCrop": null,
+      "texture": "/brochures/products/artful-surfaces-03.jpg",
+      "textureSha256": "4c6f7c5225bff4c8c7f75426099cd4dc1e5bffd26254ec3d4927a76def92e5a1",
+      "textureBytes": 1635011
+    },
+    {
+      "id": "artful-surfaces-04",
+      "source": "data/brouchers/f304a1b2-c8b1-48aa-b347-d8a0e969b56f.pdf",
+      "sourceSha256": "0f6736e2161b2cf8d2248c640ba8675b74d4c5fe6c4969b2a6c2552ab160a993",
+      "sourcePage": 4,
+      "embeddedImage": "Im4.jpg",
+      "nativeWidth": 1771,
+      "nativeHeight": 3542,
+      "pixelCrop": null,
+      "texture": "/brochures/products/artful-surfaces-04.jpg",
+      "textureSha256": "2b7656a8dd9565a9fc095463b59f087dbb2386f1f65c35284c1c8a6ddd1779ba",
+      "textureBytes": 2256298
+    },
+    {
+      "id": "artful-surfaces-05",
+      "source": "data/brouchers/f304a1b2-c8b1-48aa-b347-d8a0e969b56f.pdf",
+      "sourceSha256": "0f6736e2161b2cf8d2248c640ba8675b74d4c5fe6c4969b2a6c2552ab160a993",
+      "sourcePage": 5,
+      "embeddedImage": "Im5.jpg",
+      "nativeWidth": 1771,
+      "nativeHeight": 3542,
+      "pixelCrop": null,
+      "texture": "/brochures/products/artful-surfaces-05.jpg",
+      "textureSha256": "26a9162b1b297d19d7453732be659681d3415b91ed5da18646e3e883db4c6a6d",
+      "textureBytes": 2044659
+    },
+    {
+      "id": "artful-surfaces-06",
+      "source": "data/brouchers/f304a1b2-c8b1-48aa-b347-d8a0e969b56f.pdf",
+      "sourceSha256": "0f6736e2161b2cf8d2248c640ba8675b74d4c5fe6c4969b2a6c2552ab160a993",
+      "sourcePage": 6,
+      "embeddedImage": "Im6.jpg",
+      "nativeWidth": 1771,
+      "nativeHeight": 3542,
+      "pixelCrop": null,
+      "texture": "/brochures/products/artful-surfaces-06.jpg",
+      "textureSha256": "199939e935a9ca18c56a658d14d3e6d5ea563ed5bd10038ef1a865c5c408da88",
+      "textureBytes": 2020634
+    },
+    {
+      "id": "artful-surfaces-07",
+      "source": "data/brouchers/f304a1b2-c8b1-48aa-b347-d8a0e969b56f.pdf",
+      "sourceSha256": "0f6736e2161b2cf8d2248c640ba8675b74d4c5fe6c4969b2a6c2552ab160a993",
+      "sourcePage": 7,
+      "embeddedImage": "Im7.jpg",
+      "nativeWidth": 1771,
+      "nativeHeight": 3542,
+      "pixelCrop": null,
+      "texture": "/brochures/products/artful-surfaces-07.jpg",
+      "textureSha256": "d9a616acacef68ff8fd57ecd96bf2bbc53376a09f98b99597e2446ff4b0f5e5a",
+      "textureBytes": 2366190
+    },
+    {
+      "id": "artful-surfaces-08",
+      "source": "data/brouchers/f304a1b2-c8b1-48aa-b347-d8a0e969b56f.pdf",
+      "sourceSha256": "0f6736e2161b2cf8d2248c640ba8675b74d4c5fe6c4969b2a6c2552ab160a993",
+      "sourcePage": 8,
+      "embeddedImage": "Im8.jpg",
+      "nativeWidth": 1771,
+      "nativeHeight": 3542,
+      "pixelCrop": null,
+      "texture": "/brochures/products/artful-surfaces-08.jpg",
+      "textureSha256": "04684f21de61f574b9c0b159e155ca145a3c28ffccc8d22f6b7a5fa46c148d63",
+      "textureBytes": 2139627
+    },
+    {
+      "id": "artful-surfaces-09",
+      "source": "data/brouchers/f304a1b2-c8b1-48aa-b347-d8a0e969b56f.pdf",
+      "sourceSha256": "0f6736e2161b2cf8d2248c640ba8675b74d4c5fe6c4969b2a6c2552ab160a993",
+      "sourcePage": 9,
+      "embeddedImage": "Im9.jpg",
+      "nativeWidth": 1771,
+      "nativeHeight": 3542,
+      "pixelCrop": null,
+      "texture": "/brochures/products/artful-surfaces-09.jpg",
+      "textureSha256": "dd1004451f9ebed54ca924fff864fb408122232bd3cebe4e8d55f8ba104a1dc7",
+      "textureBytes": 1477332
+    },
+    {
+      "id": "artful-surfaces-10",
+      "source": "data/brouchers/f304a1b2-c8b1-48aa-b347-d8a0e969b56f.pdf",
+      "sourceSha256": "0f6736e2161b2cf8d2248c640ba8675b74d4c5fe6c4969b2a6c2552ab160a993",
+      "sourcePage": 10,
+      "embeddedImage": "Im10.jpg",
+      "nativeWidth": 1771,
+      "nativeHeight": 3542,
+      "pixelCrop": null,
+      "texture": "/brochures/products/artful-surfaces-10.jpg",
+      "textureSha256": "5b3e0c8aa4204ed5918a548179c0f2f4a8c6984841422e467bf48361b4e49c5f",
+      "textureBytes": 2058393
+    },
+    {
+      "id": "artful-surfaces-11",
+      "source": "data/brouchers/f304a1b2-c8b1-48aa-b347-d8a0e969b56f.pdf",
+      "sourceSha256": "0f6736e2161b2cf8d2248c640ba8675b74d4c5fe6c4969b2a6c2552ab160a993",
+      "sourcePage": 11,
+      "embeddedImage": "Im11.jpg",
+      "nativeWidth": 1771,
+      "nativeHeight": 3542,
+      "pixelCrop": null,
+      "texture": "/brochures/products/artful-surfaces-11.jpg",
+      "textureSha256": "90a48af89f535b3548705abee4ef5c80bd33faede547b6c031c153dc46e9a327",
+      "textureBytes": 2274236
+    },
+    {
+      "id": "artful-surfaces-12",
+      "source": "data/brouchers/f304a1b2-c8b1-48aa-b347-d8a0e969b56f.pdf",
+      "sourceSha256": "0f6736e2161b2cf8d2248c640ba8675b74d4c5fe6c4969b2a6c2552ab160a993",
+      "sourcePage": 12,
+      "embeddedImage": "Im12.jpg",
+      "nativeWidth": 1771,
+      "nativeHeight": 3542,
+      "pixelCrop": null,
+      "texture": "/brochures/products/artful-surfaces-12.jpg",
+      "textureSha256": "1e28372b0ba2b2beab96db5a89cc370fbbafed56994dd4b64c5b6e21941cc0d5",
+      "textureBytes": 2517366
+    },
+    {
+      "id": "artful-surfaces-13",
+      "source": "data/brouchers/f304a1b2-c8b1-48aa-b347-d8a0e969b56f.pdf",
+      "sourceSha256": "0f6736e2161b2cf8d2248c640ba8675b74d4c5fe6c4969b2a6c2552ab160a993",
+      "sourcePage": 13,
+      "embeddedImage": "Im13.jpg",
+      "nativeWidth": 1771,
+      "nativeHeight": 3542,
+      "pixelCrop": null,
+      "texture": "/brochures/products/artful-surfaces-13.jpg",
+      "textureSha256": "b5e6ab2a5bb5552ba83db5a3b7f10881dead4c729810120a677a24ed836be062",
+      "textureBytes": 2274484
+    },
+    {
+      "id": "artful-surfaces-14",
+      "source": "data/brouchers/f304a1b2-c8b1-48aa-b347-d8a0e969b56f.pdf",
+      "sourceSha256": "0f6736e2161b2cf8d2248c640ba8675b74d4c5fe6c4969b2a6c2552ab160a993",
+      "sourcePage": 14,
+      "embeddedImage": "Im14.jpg",
+      "nativeWidth": 1771,
+      "nativeHeight": 3542,
+      "pixelCrop": null,
+      "texture": "/brochures/products/artful-surfaces-14.jpg",
+      "textureSha256": "bb348e014fd5af87258208f673c4113d9cc4aa0b49dd03797a40f3b8ce92b729",
+      "textureBytes": 1239411
+    },
+    {
+      "id": "artful-surfaces-15",
+      "source": "data/brouchers/f304a1b2-c8b1-48aa-b347-d8a0e969b56f.pdf",
+      "sourceSha256": "0f6736e2161b2cf8d2248c640ba8675b74d4c5fe6c4969b2a6c2552ab160a993",
+      "sourcePage": 15,
+      "embeddedImage": "Im15.jpg",
+      "nativeWidth": 1771,
+      "nativeHeight": 3542,
+      "pixelCrop": null,
+      "texture": "/brochures/products/artful-surfaces-15.jpg",
+      "textureSha256": "f82aad0d03c63fda168edecc0b95069ecdf9c2dc407230d047bda8f28adea0f8",
+      "textureBytes": 1393677
+    },
+    {
+      "id": "new-poster-01",
+      "source": "data/brouchers/Eton_NEW-POSTER-2X4.pdf",
+      "sourceSha256": "f3ac6521b48b50f45a5a9dd6b84a2fa1b9e96c8495253fb1680859b9d66617f3",
+      "sourcePage": 1,
+      "embeddedImage": "Im0.jpg",
+      "nativeWidth": 1770,
+      "nativeHeight": 3542,
+      "pixelCrop": null,
+      "texture": "/brochures/products/new-poster-01.jpg",
+      "textureSha256": "309526c2353a7e05d7a1cb070737adb92bc56f3cfa64e5370bb54261f799dc05",
+      "textureBytes": 1140461
+    },
+    {
+      "id": "new-poster-02",
+      "source": "data/brouchers/Eton_NEW-POSTER-2X4.pdf",
+      "sourceSha256": "f3ac6521b48b50f45a5a9dd6b84a2fa1b9e96c8495253fb1680859b9d66617f3",
+      "sourcePage": 2,
+      "embeddedImage": "Im0.jpg",
+      "nativeWidth": 1770,
+      "nativeHeight": 3542,
+      "pixelCrop": null,
+      "texture": "/brochures/products/new-poster-02.jpg",
+      "textureSha256": "a1d57af39835f9a001546c7b9e43088074ecfee9665498f51df5aa129ca36f29",
+      "textureBytes": 1904712
+    },
+    {
+      "id": "new-poster-03",
+      "source": "data/brouchers/Eton_NEW-POSTER-2X4.pdf",
+      "sourceSha256": "f3ac6521b48b50f45a5a9dd6b84a2fa1b9e96c8495253fb1680859b9d66617f3",
+      "sourcePage": 3,
+      "embeddedImage": "Im0.jpg",
+      "nativeWidth": 1770,
+      "nativeHeight": 3542,
+      "pixelCrop": null,
+      "texture": "/brochures/products/new-poster-03.jpg",
+      "textureSha256": "10c7b7f4ea8fba5792acf43c7f8b9440f93beac3b9f85bda5ce1afa21510319a",
+      "textureBytes": 1669405
+    },
+    {
+      "id": "new-poster-04",
+      "source": "data/brouchers/Eton_NEW-POSTER-2X4.pdf",
+      "sourceSha256": "f3ac6521b48b50f45a5a9dd6b84a2fa1b9e96c8495253fb1680859b9d66617f3",
+      "sourcePage": 4,
+      "embeddedImage": "Im0.jpg",
+      "nativeWidth": 1770,
+      "nativeHeight": 3542,
+      "pixelCrop": null,
+      "texture": "/brochures/products/new-poster-04.jpg",
+      "textureSha256": "20470211a70d5578a973efbd4a6edbcc37ba745a5db07c37658b1e1b3c957abf",
+      "textureBytes": 1654201
+    },
+    {
+      "id": "new-poster-05",
+      "source": "data/brouchers/Eton_NEW-POSTER-2X4.pdf",
+      "sourceSha256": "f3ac6521b48b50f45a5a9dd6b84a2fa1b9e96c8495253fb1680859b9d66617f3",
+      "sourcePage": 5,
+      "embeddedImage": "Im0.jpg",
+      "nativeWidth": 1770,
+      "nativeHeight": 3542,
+      "pixelCrop": null,
+      "texture": "/brochures/products/new-poster-05.jpg",
+      "textureSha256": "4f1d4998ccd7da2a463c2fed35d279e8ffb5aa6f57b3d61d768f0131a640e82a",
+      "textureBytes": 3311465
+    },
+    {
+      "id": "new-poster-06",
+      "source": "data/brouchers/Eton_NEW-POSTER-2X4.pdf",
+      "sourceSha256": "f3ac6521b48b50f45a5a9dd6b84a2fa1b9e96c8495253fb1680859b9d66617f3",
+      "sourcePage": 6,
+      "embeddedImage": "Im0.jpg",
+      "nativeWidth": 1770,
+      "nativeHeight": 3542,
+      "pixelCrop": null,
+      "texture": "/brochures/products/new-poster-06.jpg",
+      "textureSha256": "854c8921cade6da2ecaa9cf1468002824c812d39519d8a5f8fd219675a2c4a99",
+      "textureBytes": 2989374
+    },
+    {
+      "id": "new-poster-07",
+      "source": "data/brouchers/Eton_NEW-POSTER-2X4.pdf",
+      "sourceSha256": "f3ac6521b48b50f45a5a9dd6b84a2fa1b9e96c8495253fb1680859b9d66617f3",
+      "sourcePage": 7,
+      "embeddedImage": "Im0.jpg",
+      "nativeWidth": 1770,
+      "nativeHeight": 3542,
+      "pixelCrop": null,
+      "texture": "/brochures/products/new-poster-07.jpg",
+      "textureSha256": "e5b0282e88dbb89ddbc6abe51ebf65cc1e8487628ffe21a8bdadb0635e95ba29",
+      "textureBytes": 1955098
+    },
+    {
+      "id": "new-poster-08",
+      "source": "data/brouchers/Eton_NEW-POSTER-2X4.pdf",
+      "sourceSha256": "f3ac6521b48b50f45a5a9dd6b84a2fa1b9e96c8495253fb1680859b9d66617f3",
+      "sourcePage": 8,
+      "embeddedImage": "Im0.jpg",
+      "nativeWidth": 1770,
+      "nativeHeight": 3542,
+      "pixelCrop": null,
+      "texture": "/brochures/products/new-poster-08.jpg",
+      "textureSha256": "2103b815cee08fae5233539236dd5f0435b15083221d9bc1a4f58531497b062b",
+      "textureBytes": 2089229
+    },
+    {
+      "id": "new-poster-09",
+      "source": "data/brouchers/Eton_NEW-POSTER-2X4.pdf",
+      "sourceSha256": "f3ac6521b48b50f45a5a9dd6b84a2fa1b9e96c8495253fb1680859b9d66617f3",
+      "sourcePage": 9,
+      "embeddedImage": "Im0.jpg",
+      "nativeWidth": 1770,
+      "nativeHeight": 3542,
+      "pixelCrop": null,
+      "texture": "/brochures/products/new-poster-09.jpg",
+      "textureSha256": "bd7e6ff636f424212273a94b2a37b793b81d26e5da9fecff766e11f44e2f87fb",
+      "textureBytes": 1880534
+    },
+    {
+      "id": "new-poster-10",
+      "source": "data/brouchers/Eton_NEW-POSTER-2X4.pdf",
+      "sourceSha256": "f3ac6521b48b50f45a5a9dd6b84a2fa1b9e96c8495253fb1680859b9d66617f3",
+      "sourcePage": 10,
+      "embeddedImage": "Im0.jpg",
+      "nativeWidth": 1770,
+      "nativeHeight": 3542,
+      "pixelCrop": null,
+      "texture": "/brochures/products/new-poster-10.jpg",
+      "textureSha256": "077ae7b9021c01123f2bc7d237736e9f1c838da5f1b5d29c8250f7eb403f9c4a",
+      "textureBytes": 1456517
+    }
+  ]
+}

@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Arrow from "./Arrow";
 import BrandLogo from "./BrandLogo";
 import { lockPageScroll } from "@/lib/scroll";
@@ -13,6 +15,10 @@ const navigation = [
 ] as const;
 
 export default function SiteHeader() {
+  const pathname = usePathname();
+  const homePage = pathname === "/";
+  const SectionLink = homePage ? "a" : Link;
+  const sectionHref = (id: string) => `${homePage ? "" : "/"}#${id}`;
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
@@ -64,10 +70,10 @@ export default function SiteHeader() {
     });
     if (sentinel.current) topObserver.observe(sentinel.current);
 
-    const sections = navigation.flatMap(({ id }) => {
+    const sections = homePage ? navigation.flatMap(({ id }) => {
       const section = document.getElementById(id);
       return section ? [section] : [];
-    });
+    }) : [];
     let sectionObserver: IntersectionObserver;
     const observeSections = () => {
       sectionObserver?.disconnect();
@@ -96,7 +102,7 @@ export default function SiteHeader() {
       resizeObserver.disconnect();
       window.removeEventListener("resize", observeSections);
     };
-  }, []);
+  }, [homePage]);
 
   return (
     <>
@@ -111,19 +117,22 @@ export default function SiteHeader() {
         }}
       >
         <div className="header-inner">
-          <a className="wordmark" href="#top" aria-label="VAVI Tile Studio home" onClick={() => setOpen(false)}>
+          <SectionLink className="wordmark" href={sectionHref("top")} aria-label="VAVI Tile Studio home" onClick={() => setOpen(false)}>
             <BrandLogo eager sizes="(max-width: 1023px) 53px, 67px" />
-          </a>
+          </SectionLink>
           <nav className="desktop-nav" aria-label="Main navigation">
             {navigation.map(({ id, label }) => (
-              <a key={id} href={`#${id}`} aria-current={activeSection === id ? "location" : undefined}>
+              <SectionLink key={id} href={sectionHref(id)} aria-current={homePage && activeSection === id ? "location" : undefined}>
                 <span className="nav-label">{label}</span>
-              </a>
+              </SectionLink>
             ))}
+            <Link href="/brochures" aria-current={pathname === "/brochures" ? "page" : undefined}>
+              <span className="nav-label">Brochures</span>
+            </Link>
           </nav>
-          <a className="header-cta desktop-cta" href="#enquiry">
+          <SectionLink className="header-cta desktop-cta" href={sectionHref("enquiry")}>
             Start your project <span className="header-cta-arrow"><Arrow diagonal /></span>
-          </a>
+          </SectionLink>
           <button
             ref={menu}
             type="button"
@@ -145,19 +154,27 @@ export default function SiteHeader() {
           aria-label="Mobile navigation"
         >
           {navigation.map(({ id, label }) => (
-            <a
+            <SectionLink
               key={id}
               className="mobile-nav-link"
-              href={`#${id}`}
-              aria-current={activeSection === id ? "location" : undefined}
+              href={sectionHref(id)}
+              aria-current={homePage && activeSection === id ? "location" : undefined}
               onClick={() => setOpen(false)}
             >
               <span className="nav-label">{label}</span><Arrow />
-            </a>
+            </SectionLink>
           ))}
-          <a className="header-cta" href="#enquiry" onClick={() => setOpen(false)}>
+          <Link
+            className="mobile-nav-link"
+            href="/brochures"
+            aria-current={pathname === "/brochures" ? "page" : undefined}
+            onClick={() => setOpen(false)}
+          >
+            <span className="nav-label">Brochures</span><Arrow />
+          </Link>
+          <SectionLink className="header-cta" href={sectionHref("enquiry")} onClick={() => setOpen(false)}>
             Start your project <span className="header-cta-arrow"><Arrow diagonal /></span>
-          </a>
+          </SectionLink>
         </nav>
       </header>
     </>

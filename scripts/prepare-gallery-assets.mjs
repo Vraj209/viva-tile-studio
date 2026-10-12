@@ -11,75 +11,6 @@ const outputDirectory = path.join(root, "public/images/gallery");
 // colour grading, sharpening, or upscaling is applied. Uncertain edges stay photographic.
 const samples = [
   {
-    id: "warm-curves", label: "Warm curves", source: "samples/419539f5-80b8-416a-90b3-4680bd43843a.jpeg",
-    description: "Bands, spirals and fine lines in warm colour.",
-    alt: "Square sample image of tightly curved orange, ochre and muted teal lines on a dark ground.",
-  },
-  {
-    id: "angular-lines", label: "Angular lines", source: "samples/1c57ee0e-5f93-4d76-97a7-f61eda39e7a8.jpeg",
-    crop: { left: 0, top: 0, width: 560, height: 574 }, sourceView: true,
-    description: "Interlocking lines with a quiet, tonal palette.",
-    alt: "Near-square brown and pale taupe sample with closely spaced angular maze-like lines.",
-  },
-  {
-    id: "ochre-geometry", label: "Ochre geometry", source: "samples/5948f80d-9d17-4b54-a19b-2a9484011b90.jpeg",
-    description: "Diamonds, stripes and an earthy colour contrast.",
-    alt: "Portrait sample image of ochre, cream and deep green triangles and diamonds on black.",
-  },
-  {
-    id: "elephant-outline", label: "Elephant outline", source: "samples/3f5c15d1-556e-41ea-b285-b62bffebab49.jpeg",
-    description: "A simple line against soft, textured shapes.",
-    alt: "Portrait cream and tan sample image with a continuous black outline of an elephant.",
-    detail: { left: 4, top: 215, width: 282, height: 400 },
-  },
-  {
-    id: "graphic-squares", label: "Graphic squares", source: "samples/02b074e8-c458-42a6-ac10-13c82ee85e27.jpeg",
-    description: "A vivid repeat of framed squares and sharp lines.",
-    alt: "Square sample image with repeating red, yellow, green, black and ivory geometric bands.",
-  },
-  {
-    id: "diamond-lattice", label: "Diamond lattice", source: "samples/1c57ee0e-5f93-4d76-97a7-f61eda39e7a8.jpeg",
-    crop: { left: 588, top: 603, width: 556, height: 558 }, sourceView: true,
-    description: "Nested diamonds and small geometric motifs.",
-    alt: "Near-square taupe and brown sample with outlined diamonds and small angular motifs.",
-  },
-  {
-    id: "ivory-silhouettes", label: "Ivory silhouettes", source: "samples/abedabf6-02fd-45c1-89a0-4faf352626f8_1.jpeg",
-    description: "Two elephant silhouettes on a speckled dark ground.",
-    alt: "Portrait black sample image with a large cropped ivory elephant and a smaller elephant silhouette.",
-  },
-  {
-    id: "acacia-silhouettes", label: "Acacia silhouettes", source: "samples/926cfa82-fb29-4558-bf30-6b8e24302dab.jpeg",
-    description: "Dark tree canopies with soft sun-coloured shapes.",
-    alt: "Portrait sample image of dark acacia trees and a small lion against cream, ochre and clay shapes.",
-  },
-  {
-    id: "ochre-savannah", label: "Ochre savannah", source: "samples/dbed1847-8dbb-43c7-88a5-c46af035129f.jpeg",
-    description: "Layered grasses and trees in an ochre landscape.",
-    alt: "Wide sample image of dark acacia trees and tall grasses against layered golden and burnt-orange shapes.",
-  },
-  {
-    id: "zebra-pair", label: "Zebra pair", source: "samples/ea875b0e-d3bc-4339-8fdb-f2893ea9c6c9.jpeg",
-    description: "Contrasting stripes within a softly shaded scene.",
-    alt: "Landscape sample image of two zebras standing together against a softly shaded brown and olive background.",
-  },
-  {
-    id: "running-horses", label: "Running horses", source: "samples/56afcdae-6c3e-4c1f-9dcc-1ab988ebbb76.jpeg",
-    category: "Sample photograph", sourceView: true,
-    crop: { left: 119, top: 0, width: 1459, height: 899 },
-    description: "A photographed panel of pale horses in motion.",
-    alt: "Landscape photograph of a framed panel with pale horses, flowing manes and a light blue ground.",
-    detail: { left: 495, top: 150, width: 530, height: 530 },
-  },
-  {
-    id: "spotted-cat-acacia", label: "Spotted cat & acacia", source: "samples/308a53ee-b45f-4b7d-9ffe-11154282bc82.jpeg",
-    category: "Sample photograph", sourceView: true,
-    crop: { left: 26, top: 66, width: 814, height: 1479 },
-    description: "A photographed panel with a tree and spotted cat.",
-    alt: "Tall photograph of a framed cream and sand-coloured panel showing a spotted cat perched beside an acacia tree.",
-    detail: { left: 81, top: 410, width: 626, height: 735 },
-  },
-  {
     id: "amber-butterfly", label: "Amber butterfly", source: "landscape/L_1.png",
     description: "An orange butterfly against a dark blue, textured ground.",
     alt: "Portrait sample image of an amber-orange butterfly with spread wings against a dark blue textured background.",
@@ -270,31 +201,16 @@ const rows = records.map(({ sample, meta, thumbnail, inspection }) => {
   const crop = sample.crop ? `${sample.crop.left}, ${sample.crop.top}, ${sample.crop.width}, ${sample.crop.height}` : "Full image";
   return `| ${sample.label} | \`${sample.source}\` | ${meta.width} × ${meta.height} | ${crop} | ${thumbnail.width} × ${thumbnail.height} / ${thumbnail.bytes.toLocaleString("en-US")} | ${inspection.width} × ${inspection.height} / ${inspection.bytes.toLocaleString("en-US")} |`;
 }).join("\n");
-const inventory = `| Source | Classification | Selection |\n| --- | --- | --- |\n` + [
-  ["02b074e8", "Full-face geometric sample image", "Selected"],
-  ["1c57ee0e", "Photograph of four separate square samples", "Two visually distinct faces selected; original grouping available in inspection"],
-  ["308a53ee", "Photograph of a framed tall sample/panel", "Selected with photographic perspective retained"],
-  ["3ec421bb", "Three framed landscape images", "Excluded: triptych framing and weaker image resolution"],
-  ["3f5c15d1", "Full-face portrait sample image", "Selected; source detail available"],
-  ["419539f5", "Full-face square sample image", "Selected"],
-  ["56afcdae", "Photograph of a framed wide sample/panel", "Selected; source photo and detail available"],
-  ["5948f80d", "Full-face portrait sample image", "Selected"],
-  ["5efec184", "Framed landscape image with large mount", "Excluded: large mount and weaker sample-face relevance"],
-  ["5f370bac", "Interior scene with blue elephant wall artwork", "Excluded from sample faces; no matching selected sample"],
-  ["926cfa82", "Full-face portrait sample image", "Selected"],
-  ["abedabf6…_1", "Full-face portrait sample image", "Selected once; retained file is identical to the previously selected original"],
-  ["dbed1847", "Wide landscape sample image", "Selected"],
-  ["ea875b0e", "Wide figurative sample image", "Selected"],
-  ["fff21619", "Interior scene with spotted-cat wall artwork", "Excluded from sample faces; no matching selected sample"],
-  ...samples.slice(12).map((sample) => [sample.source, "Supplied sample image", "Selected in full, without cropping"]),
-].map((row) => `| ${row.join(" | ")} |`).join("\n");
+const inventory = `| Source | Classification | Selection |\n| --- | --- | --- |\n` + samples
+  .map((sample) => `| ${sample.source} | Supplied sample image | Selected in full, without cropping |`)
+  .join("\n");
 const doc = `# Inspiration gallery asset preparation
 
-Prepared 27 September 2026 from owner-supplied imagery in \`data/samples/\`, \`data/landscape/\` and \`data/potraite/\`. The original twelve selected sample faces remain, followed by all six PNGs in \`landscape/\` and all fourteen PNGs in \`potraite/\`: **${assets.length} gallery images from ${originals.size} distinct source files**.
+Prepared exclusively from owner-supplied imagery in \`data/landscape/\` and \`data/potraite/\`: all six landscape-folder PNGs, followed by all fourteen portrait-folder PNGs, in numeric filename order. **${assets.length} gallery images from ${originals.size} distinct source files**. The gallery selection was updated at the owner's request on 12 October 2026. Images from \`data/samples/\` are excluded from the loop; their original and prepared files are retained.
 
-The earlier JPEG sources now live in \`data/samples/\`. The four-sample source still contributes two different faces, with its complete photograph available in inspection. The retained elephant file ending in \`_1.jpeg\` is byte-identical to the previously selected original and is used once. The twenty added images were visually reviewed, have no byte-identical duplicates, and are included in full. Folder names do not determine display orientation: each image uses its actual dimensions.
+The selected images were visually reviewed, have no byte-identical duplicates, and are included in full. Folder names do not determine display orientation: each image uses its actual dimensions.
 
-Labels describe visible content, not verified product names, materials, collections, finishes or dimensions. Depicted depth, gold colouring, wood-like forms and stone-like backgrounds do not establish physical manufacture or measured relief. New images remain **Sample image**; the two existing framed-panel photographs remain **Sample photograph**. No matching installed view is fabricated or associated merely by theme.
+Labels describe visible content, not verified product names, materials, collections, finishes or dimensions. Depicted depth, gold colouring, wood-like forms and stone-like backgrounds do not establish physical manufacture or measured relief. All selected images are labelled **Sample image**. No matching installed view is fabricated or associated merely by theme.
 
 ## Preparation
 
@@ -302,14 +218,11 @@ Run \`node scripts/prepare-gallery-assets.mjs\` from the repository root. Existi
 
 - Browse images fit within 640 × 640 px at WebP quality 84.
 - Inspection images fit within 1600 × 1600 px at quality 92. Smaller originals are never enlarged.
-- Original aspect ratios are retained, including mixed orientations within the supplied folders. No new PNG is cropped.
-- Earlier extracted square faces preserve their photographed proportions. No perspective warping is applied.
-- Existing framed-panel crops retain their photographic presentation, with the complete original photograph available in the expanded view.
+- Original aspect ratios are retained, including mixed orientations within the supplied folders. No image is cropped or perspective-warped.
 - No colour, exposure, white-balance or sharpening correction is applied. No generated detail, inferred relief, transparency isolation or surface retouching is used.
-- Supporting details are labelled crops of supplied images, not additional products or microscopic material evidence.
-- Full inspection, source and detail assets load only when the inspection view is opened.
+- Full inspection images load only when the inspection view is opened.
 
-Total browse payload for all ${assets.length} images: **${browseBytes.toLocaleString("en-US")} bytes**. All ${delivered.length} prepared assets combined: **${totalBytes.toLocaleString("en-US")} bytes**. Actual page transfer depends on lazy-loading and browser cache.
+Total browse payload for all ${assets.length} images: **${browseBytes.toLocaleString("en-US")} bytes**. All ${delivered.length} prepared assets on disk, including retained assets excluded from the loop: **${totalBytes.toLocaleString("en-US")} bytes**. Actual page transfer depends on lazy-loading and browser cache.
 
 ## Selected images
 
@@ -321,7 +234,7 @@ ${rows}
 
 ## Source inventory
 
-The first fifteen entries refer to JPEG filenames in \`data/samples/\`; the remaining twenty entries list their full path relative to \`data/\`.
+Each entry lists its full path relative to \`data/\`. Every image currently in the two selected folders is included once.
 
 ${inventory}
 
