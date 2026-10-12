@@ -1,6 +1,6 @@
 .gallery { overflow: clip; }
 .track { position: relative; height: calc(var(--gallery-panel-height) + var(--gallery-scroll-distance, 0px)); }
-.panel { position: sticky; top: 24px; }
+.panel { position: sticky; top: calc(var(--header-height) + 24px); }
 .track[data-scroll-mode="still"] .scrollHint, .browser[data-still="true"] .scrollHint { display: none; }
 .heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 36px; margin-bottom: 50px; }
 .heading h2 { margin-top: 25px; }

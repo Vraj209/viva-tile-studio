@@ -51,6 +51,7 @@ export function useGalleryMotion(
     let pinned = false;
     let distance = 0;
     let trackStart = 0;
+    let stickyTop = 0;
     let scrollEnd = count - 1;
     let anchor: { progress: number; value: number } | null = null;
     let gesture: { id: number; x: number; y: number; origin: number; dragging: boolean } | null = null;
@@ -139,11 +140,13 @@ export function useGalleryMotion(
 
     const measure = () => {
       width = stage.clientWidth;
+      // Share the CSS offset so the gallery remains below the sticky header.
+      stickyTop = parseFloat(getComputedStyle(panel).top) || 0;
       const panelHeight = panel.offsetHeight;
       const compositionHeight = stage.getBoundingClientRect().bottom - panel.getBoundingClientRect().top;
-      const canPin = compositionHeight <= window.innerHeight - 48;
+      const canPin = compositionHeight <= window.innerHeight - stickyTop - 24;
       const mobile = window.innerWidth <= 768;
-      const start = track.getBoundingClientRect().top + window.scrollY - 24;
+      const start = track.getBoundingClientRect().top + window.scrollY - stickyTop;
       if (isStill() || !canPin) {
         // Retain only already-travelled space when motion is disabled mid-pin.
         // Collapsing that space would jump the content underneath the visitor.
@@ -155,7 +158,7 @@ export function useGalleryMotion(
         pinned = canPin;
         const step = mobile ? 120 : 240;
         const bounds = panel.getBoundingClientRect();
-        const viewing = layoutReady && measured && bounds.top >= -2 && bounds.top <= 25 && bounds.bottom > 0;
+        const viewing = layoutReady && measured && bounds.top >= stickyTop - 2 && bounds.top <= stickyTop + 1 && bounds.bottom > stickyTop;
         // A resize can reflow earlier sections and shift native scroll anchoring.
         // Keep enough remaining travel so a restored pin never rushes to its end.
         distance = Math.max((count - 1) * step, viewing
@@ -173,7 +176,7 @@ export function useGalleryMotion(
     trigger = ScrollTrigger.create({
       id: "inspiration-gallery",
       trigger: track,
-      start: () => pinned ? "top 24px" : `${distance + stage.offsetTop} 42%`,
+      start: () => pinned ? `top ${stickyTop}px` : `${distance + stage.offsetTop} 42%`,
       end: () => `+=${Math.max(distance, window.innerHeight * .3, 120)}`,
       onUpdate: followScroll,
       onRefreshInit: () => { refreshing = true; measure(); },

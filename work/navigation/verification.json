@@ -1,0 +1,309 @@
+[
+  {
+    "name": "wide",
+    "header": {
+      "left": 0,
+      "right": 1920,
+      "top": 0,
+      "bottom": 96,
+      "width": 1920,
+      "height": 96
+    },
+    "nav": {
+      "left": 743.59375,
+      "right": 1176.390625,
+      "top": 23.5,
+      "bottom": 71.5,
+      "width": 432.796875,
+      "height": 48
+    },
+    "cta": {
+      "left": 1556.625,
+      "right": 1752.484375,
+      "top": 23.5,
+      "bottom": 71.5,
+      "width": 195.859375,
+      "height": 48
+    },
+    "logo": {
+      "left": 167.515625,
+      "right": 234.515625,
+      "top": 9.46875,
+      "bottom": 85.53125,
+      "width": 67,
+      "height": 76.0625
+    },
+    "naturalRatio": 0.881578947368421,
+    "overflow": false,
+    "menu": "none",
+    "active": null
+  },
+  {
+    "name": "desktop",
+    "header": {
+      "left": 0,
+      "right": 1440,
+      "top": 0,
+      "bottom": 96,
+      "width": 1440,
+      "height": 96
+    },
+    "nav": {
+      "left": 510.84375,
+      "right": 929.140625,
+      "top": 23.5,
+      "bottom": 71.5,
+      "width": 418.296875,
+      "height": 48
+    },
+    "cta": {
+      "left": 1163.515625,
+      "right": 1359.375,
+      "top": 23.5,
+      "bottom": 71.5,
+      "width": 195.859375,
+      "height": 48
+    },
+    "logo": {
+      "left": 80.625,
+      "right": 147.625,
+      "top": 9.46875,
+      "bottom": 85.53125,
+      "width": 67,
+      "height": 76.0625
+    },
+    "naturalRatio": 0.881578947368421,
+    "overflow": false,
+    "menu": "none",
+    "active": null
+  },
+  {
+    "name": "laptop",
+    "header": {
+      "left": 0,
+      "right": 1280,
+      "top": 0,
+      "bottom": 96,
+      "width": 1280,
+      "height": 96
+    },
+    "nav": {
+      "left": 442,
+      "right": 837.984375,
+      "top": 23.5,
+      "bottom": 71.5,
+      "width": 395.984375,
+      "height": 48
+    },
+    "cta": {
+      "left": 1012.46875,
+      "right": 1208.328125,
+      "top": 23.5,
+      "bottom": 71.5,
+      "width": 195.859375,
+      "height": 48
+    },
+    "logo": {
+      "left": 71.671875,
+      "right": 138.671875,
+      "top": 9.46875,
+      "bottom": 85.53125,
+      "width": 67,
+      "height": 76.0625
+    },
+    "naturalRatio": 0.881578947368421,
+    "overflow": false,
+    "menu": "none",
+    "active": null
+  },
+  {
+    "name": "boundary-desktop",
+    "header": {
+      "left": 0,
+      "right": 1024,
+      "top": 0,
+      "bottom": 96,
+      "width": 1024,
+      "height": 96
+    },
+    "nav": {
+      "left": 319.375,
+      "right": 704.625,
+      "top": 23.5,
+      "bottom": 71.5,
+      "width": 385.25,
+      "height": 48
+    },
+    "cta": {
+      "left": 770.796875,
+      "right": 966.65625,
+      "top": 23.5,
+      "bottom": 71.5,
+      "width": 195.859375,
+      "height": 48
+    },
+    "logo": {
+      "left": 57.34375,
+      "right": 124.34375,
+      "top": 9.46875,
+      "bottom": 85.53125,
+      "width": 67,
+      "height": 76.0625
+    },
+    "naturalRatio": 0.881578947368421,
+    "overflow": false,
+    "menu": "none",
+    "active": null
+  },
+  {
+    "name": "tablet",
+    "header": {
+      "left": 0,
+      "right": 820,
+      "top": 0,
+      "bottom": 80,
+      "width": 820,
+      "height": 80
+    },
+    "nav": {
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0,
+      "width": 0,
+      "height": 0
+    },
+    "cta": {
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0,
+      "width": 0,
+      "height": 0
+    },
+    "logo": {
+      "left": 45.90625,
+      "right": 98.90625,
+      "top": 9.265625,
+      "bottom": 69.71875,
+      "width": 53,
+      "height": 60.453125
+    },
+    "naturalRatio": 0.8833333333333333,
+    "overflow": false,
+    "menu": "flex",
+    "active": null
+  },
+  {
+    "name": "mobile",
+    "header": {
+      "left": 0,
+      "right": 390,
+      "top": 0,
+      "bottom": 80,
+      "width": 390,
+      "height": 80
+    },
+    "nav": {
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0,
+      "width": 0,
+      "height": 0
+    },
+    "cta": {
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0,
+      "width": 0,
+      "height": 0
+    },
+    "logo": {
+      "left": 24,
+      "right": 77,
+      "top": 9.265625,
+      "bottom": 69.71875,
+      "width": 53,
+      "height": 60.453125
+    },
+    "naturalRatio": 0.8833333333333333,
+    "overflow": false,
+    "menu": "flex",
+    "active": null
+  },
+  {
+    "name": "small-mobile",
+    "header": {
+      "left": 0,
+      "right": 320,
+      "top": 0,
+      "bottom": 80,
+      "width": 320,
+      "height": 80
+    },
+    "nav": {
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0,
+      "width": 0,
+      "height": 0
+    },
+    "cta": {
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0,
+      "width": 0,
+      "height": 0
+    },
+    "logo": {
+      "left": 20,
+      "right": 73,
+      "top": 9.265625,
+      "bottom": 69.71875,
+      "width": 53,
+      "height": 60.453125
+    },
+    "naturalRatio": 0.8833333333333333,
+    "overflow": false,
+    "menu": "flex",
+    "active": null
+  },
+  {
+    "anchor": "possibilities",
+    "offset": 112.3125
+  },
+  {
+    "anchor": "work",
+    "offset": 112.09375
+  },
+  {
+    "anchor": "process",
+    "offset": 112.09375
+  },
+  {
+    "anchor": "specifications",
+    "offset": 112.46875
+  },
+  {
+    "galleryMode": "pinned",
+    "stickyTop": 120
+  },
+  {
+    "mobileNavigation": "passed",
+    "resizeFocus": "passed",
+    "reducedMotion": "passed",
+    "deepLink": "passed",
+    "errors": []
+  },
+  {
+    "desktopToMobileFocus": "passed",
+    "tabExit": "passed",
+    "landscapeCtaReachable": "passed",
+    "lighthouseAccessibilityScore": 100,
+    "lighthouseAdvisory": "Existing hero sample controls have a label-content-name-mismatch advisory; navigation has none."
+  }
+]
