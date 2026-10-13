@@ -1,0 +1,14 @@
+{
+  "started": "2026-10-13T23:51:55.299Z",
+  "tests": [
+    {
+      "name": "mobile touch swipes, hotspot swipe suppression, click hotspot, backward",
+      "passed": false,
+      "ms": 48616,
+      "error": "locator.waitFor: Timeout 45000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Close interior preview' }) to be visible\u001b[22m\n\n    at D:\\Agency\\vivatiles\\work\\brochure-turns\\verify.cjs:183:76\n    at async check (D:\\Agency\\vivatiles\\work\\brochure-turns\\verify.cjs:17:20)\n    at async D:\\Agency\\vivatiles\\work\\brochure-turns\\verify.cjs:147:5"
+    }
+  ],
+  "console": [],
+  "finished": "2026-10-13T23:52:44.358Z",
+  "artifactDirectory": "D:\\Agency\\vivatiles\\work\\brochure-turns\\run-1791935515299"
+}

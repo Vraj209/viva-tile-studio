@@ -131,7 +131,7 @@ export default function ProjectEnquiry() {
     }
     setSubmission("pending");
     setErrors({});
-    setMessage("Sending your idea…");
+    setMessage("Sending your project enquiry…");
     try {
       const result = await fetch("/api/enquiry", {
         method: "POST",
@@ -166,7 +166,9 @@ export default function ProjectEnquiry() {
         return;
       }
       setSubmission("success");
-      setMessage(data.message);
+      setMessage(
+        data.message || "Thank you. Your project enquiry has been received.",
+      );
       setReference(data.reference ?? "");
       requestAnimationFrame(() => messageRef.current?.focus());
     } catch {
@@ -195,337 +197,391 @@ export default function ProjectEnquiry() {
       className={styles.section}
       aria-labelledby="enquiry-heading"
     >
-      <div className={styles.intro} data-motion="quiet">
-        <p className={styles.eyebrow} data-motion-item>07 — A conversation begins</p>
-        <h2 id="enquiry-heading" data-motion-item>
-          Let’s Turn Your
-          <br />
-          Idea Into Tile.
-        </h2>
-        <p className={styles.invitation} data-motion-item>
-          A sketch. A photograph. A thought you keep coming back to. An idea is
-          enough to start the conversation.
-        </p>
-        <div className={styles.artwork}>
-          <span className={styles.artworkTile} data-motion-depth="tile">
-          <Image
-            src="/images/midnight-garden.webp"
-            alt="Midnight Garden botanical tile design"
-            width={184}
-            height={184}
-            sizes="(max-width: 700px) 96px, 132px"
-          />
-          </span>
-          <p>
-            Your idea.
-            <br />
-            Your tile.
-            <br />
-            Your space.
-          </p>
-        </div>
-      </div>
-      <div className={styles.formColumn}>
-        <div aria-live="polite" className={styles.availability}>
-          {availability === "checking" && <p>Checking enquiry availability…</p>}
-          {availability === "unavailable" && (
-            <p>
-              Online enquiries are currently unavailable. Your idea has not been
-              sent.{" "}
-              <button
-                type="button"
-                className={styles.check}
-                onClick={() => {
-                  setAvailability("checking");
-                  void fetchAvailability().then(
-                    (value) => value && setAvailability(value),
-                  );
-                }}
-              >
-                Check availability
-              </button>
+      <div className={styles.surface}>
+        <div className={styles.intro}>
+          <div className={styles.introCopy} data-motion="quiet">
+            <p className={styles.eyebrow} data-motion-item>
+              Your next project
             </p>
-          )}
-          {availability === "available" && (
-            <p>Begin with three details. Everything else can follow.</p>
-          )}
+            <h2 id="enquiry-heading" data-motion-item>
+              Let’s shape <span>your space.</span>
+            </h2>
+            <p className={styles.invitation} data-motion-item>
+              Tell us about your space and the tile you have in mind.
+            </p>
+          </div>
+          <div className={styles.relief} aria-hidden="true">
+            <Image
+              src="/images/enquiry/forest-relief.webp"
+              alt=""
+              fill
+              sizes="(max-width: 1620px) 38.2vw, 620px"
+              className={styles.reliefImage}
+            />
+          </div>
         </div>
-        <noscript>
-          <p className={styles.notice}>
-            JavaScript is needed to check availability and send this form.
-            Enable it and reload to continue.
-          </p>
-        </noscript>
-        <form
-          ref={formRef}
-          onSubmit={submit}
-          className={styles.form}
-          aria-busy={submission === "pending"}
-        >
-          <div className={styles.pair}>
-            <div className={styles.field}>
-              <label htmlFor="enquiry-name">
-                {enquiryFields.name.label}{" "}
-                <span>
-                  ({enquiryFields.name.required ? "required" : "optional"})
-                </span>
-              </label>
-              <input
-                id="enquiry-name"
-                name="name"
-                autoComplete="name"
-                required={enquiryFields.name.required}
-                maxLength={enquiryFields.name.maxLength}
-                aria-invalid={!!errors.name}
-                aria-describedby={describedBy("name")}
-                placeholder="Name"
-              />
-              {errorFor("name")}
-            </div>
-            <div className={styles.field}>
-              <label htmlFor="enquiry-email">
-                {enquiryFields.email.label}{" "}
-                <span>
-                  ({enquiryFields.email.required ? "required" : "optional"})
-                </span>
-              </label>
-              <input
-                id="enquiry-email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required={enquiryFields.email.required}
-                maxLength={enquiryFields.email.maxLength}
-                aria-invalid={!!errors.email}
-                aria-describedby={describedBy("email")}
-                placeholder="you@example.com"
-              />
-              {errorFor("email")}
-            </div>
+        <div className={styles.formColumn} data-motion="quiet">
+          <div className={styles.formHeading} data-motion-item>
+            <p>Project enquiry</p>
+            <span>Begin with three details.</span>
           </div>
-          <div className={styles.field}>
-            <label htmlFor="enquiry-idea">
-              {enquiryFields.idea.label}{" "}
-              <span>
-                ({enquiryFields.idea.required ? "required" : "optional"})
-              </span>
-            </label>
-            <textarea
-              id="enquiry-idea"
-              name="idea"
-              value={idea}
-              onChange={(event) => setIdea(event.target.value)}
-              rows={3}
-              required={enquiryFields.idea.required}
-              maxLength={enquiryFields.idea.maxLength}
-              aria-invalid={!!errors.idea}
-              aria-describedby={describedBy("idea")}
-              placeholder="The space, the feeling, the possibility…"
-            />
-            {errorFor("idea")}
-          </div>
-          <details ref={detailsRef} className={styles.details}>
-            <summary>
-              <span>
-                A little more about your project{" "}
-                <span className={styles.optional}>(optional)</span>
-              </span>
-              <span className={styles.plus} aria-hidden="true">
-                +
-              </span>
-            </summary>
-            <div className={styles.optionalFields}>
-              <div className={styles.pair}>
-                <div className={styles.field}>
-                  <label htmlFor="enquiry-projectType">Project type</label>
-                  <select
-                    id="enquiry-projectType"
-                    name="projectType"
-                    value={projectType}
-                    onChange={(event) => setProjectType(event.target.value)}
-                    aria-invalid={!!errors.projectType}
-                    aria-describedby={describedBy("projectType")}
-                  >
-                    {extendedProjects.map((option) => (
-                      <option key={option}>{option}</option>
-                    ))}
-                  </select>
-                  {errorFor("projectType")}
-                </div>
-                <div className={styles.field}>
-                  <label htmlFor="enquiry-application">
-                    Intended application
-                  </label>
-                  <select
-                    id="enquiry-application"
-                    name="application"
-                    value={application}
-                    onChange={(event) => setApplication(event.target.value)}
-                    aria-invalid={!!errors.application}
-                    aria-describedby={describedBy("application")}
-                  >
-                    {extendedApplications.map((option) => (
-                      <option key={option}>{option}</option>
-                    ))}
-                  </select>
-                  {errorFor("application")}
-                </div>
-              </div>
-              <div className={styles.pair}>
-                <div className={styles.field}>
-                  <label htmlFor="enquiry-location">
-                    Project location <span>(country)</span>
-                  </label>
-                  <CountrySelect
-                    id="enquiry-location"
-                    name="location"
-                    value={country}
-                    onChange={setCountry}
-                    invalid={!!errors.location}
-                    describedBy={describedBy("location")}
-                  />
-                  {errorFor("location")}
-                </div>
-                <div className={styles.field}>
-                  <label htmlFor="enquiry-dimensions">
-                    Approximate dimensions
-                  </label>
-                  <input
-                    id="enquiry-dimensions"
-                    name="dimensions"
-                    maxLength={160}
-                    placeholder="Include units, or leave for later"
-                    aria-invalid={!!errors.dimensions}
-                    aria-describedby={describedBy("dimensions")}
-                  />
-                  {errorFor("dimensions")}
-                </div>
-              </div>
-              <div className={styles.pair}>
-                <div className={styles.field}>
-                  <label htmlFor="enquiry-company">Company</label>
-                  <input
-                    id="enquiry-company"
-                    name="company"
-                    autoComplete="organization"
-                    maxLength={160}
-                    aria-invalid={!!errors.company}
-                    aria-describedby={describedBy("company")}
-                  />
-                  {errorFor("company")}
-                </div>
-                <div className={styles.field}>
-                  <label htmlFor="enquiry-phone">Phone</label>
-                  <input
-                    id="enquiry-phone"
-                    name="phone"
-                    type="tel"
-                    autoComplete="tel"
-                    maxLength={50}
-                    aria-invalid={!!errors.phone}
-                    aria-describedby={describedBy("phone")}
-                  />
-                  {errorFor("phone")}
-                </div>
-              </div>
-              <div className={styles.field}>
-                <label htmlFor="enquiry-desiredDate">
-                  Desired completion date
-                </label>
-                <input
-                  id="enquiry-desiredDate"
-                  name="desiredDate"
-                  type="date"
-                  aria-invalid={!!errors.desiredDate}
-                  aria-describedby={describedBy("desiredDate", "date-help")}
-                />
-                <span id="date-help" className={styles.help}>
-                  A starting point for discussion; timing is reviewed for each
-                  project.
-                </span>
-                {errorFor("desiredDate")}
-              </div>
-              <div className={styles.field}>
-                <label htmlFor="enquiry-inspiration">
-                  Share some inspiration
-                </label>
-                <p id="upload-help" className={styles.help}>
-                  {UPLOAD_HELP}
-                </p>
-                <input
-                  id="enquiry-inspiration"
-                  name="inspiration"
-                  type="file"
-                  accept={UPLOAD_ACCEPT}
-                  aria-invalid={!!errors.inspiration}
-                  aria-describedby={describedBy("inspiration", "upload-help")}
-                />
-                {errorFor("inspiration")}
-              </div>
-            </div>
-          </details>
-          <div className={styles.honeypot} aria-hidden="true">
-            <label htmlFor="enquiry-website">Leave this field empty</label>
-            <input
-              id="enquiry-website"
-              name="website"
-              type="text"
-              tabIndex={-1}
-              autoComplete="off"
-            />
-          </div>
-          <p className={styles.privacy}>
-            Share only the details needed to discuss your project. Submitted
-            artwork is kept out of the public gallery.
-          </p>
-          <div className={styles.actions}>
-            <button
-              className={styles.submit}
-              type="submit"
-              disabled={
-                availability !== "available" ||
-                submission === "pending" ||
-                submission === "success"
-              }
-            >
-              {submission === "pending"
-                ? "Sending your idea…"
-                : submission === "success"
-                  ? "Enquiry received"
-                  : "Share your idea"}
-              <span aria-hidden="true">↗</span>
-            </button>
-            {submission === "success" && (
-              <button
-                className={styles.check}
-                type="button"
-                onClick={() => {
-                  formRef.current?.reset();
-                  setProjectType("Not sure yet");
-                  setApplication("Not sure yet");
-                  setCountry("");
-                  setSubmission("idle");
-                  setMessage("");
-                  setReference("");
-                }}
-              >
-                Start another enquiry
-              </button>
-            )}
-          </div>
-          <p
-            ref={messageRef}
-            tabIndex={-1}
-            role="status"
+          <div
             aria-live="polite"
-            className={`${styles.status} ${submission === "error" ? styles.error : ""}`}
+            className={styles.availability}
+            data-unavailable={availability === "unavailable" || undefined}
           >
-            {message}
-            {reference && (
-              <span className={styles.reference}>Reference: {reference}</span>
+            {availability === "checking" && <p>Checking enquiry availability…</p>}
+            {availability === "unavailable" && (
+              <p>
+                Online enquiries are currently unavailable. Your idea has not been
+                sent.{" "}
+                <button
+                  type="button"
+                  className={styles.check}
+                  onClick={() => {
+                    setAvailability("checking");
+                    void fetchAvailability().then(
+                      (value) => value && setAvailability(value),
+                    );
+                  }}
+                >
+                  Check availability
+                </button>
+              </p>
             )}
-          </p>
-        </form>
+          </div>
+          <noscript>
+            <p className={styles.notice}>
+              JavaScript is needed to check availability and send this form.
+              Enable it and reload to continue.
+            </p>
+          </noscript>
+          <form
+            ref={formRef}
+            onSubmit={submit}
+            onInvalidCapture={(event) => {
+              const field = event.target;
+              if (
+                field instanceof HTMLInputElement ||
+                field instanceof HTMLTextAreaElement
+              ) {
+                setErrors((current) => ({
+                  ...current,
+                  [field.name]: field.validationMessage,
+                }));
+                setSubmission("error");
+                setMessage(
+                  "Please check the highlighted fields. Your enquiry has not been sent.",
+                );
+                if (
+                  !["name", "email", "idea"].includes(field.name) &&
+                  detailsRef.current
+                )
+                  detailsRef.current.open = true;
+              }
+            }}
+            onChange={(event) => {
+              const field = event.target;
+              if (
+                field instanceof HTMLInputElement ||
+                field instanceof HTMLTextAreaElement ||
+                field instanceof HTMLSelectElement
+              ) {
+                const name = field.name as EnquiryField;
+                if (errors[name])
+                  setErrors((current) => ({ ...current, [name]: undefined }));
+              }
+            }}
+            className={styles.form}
+            data-motion-item
+            aria-busy={submission === "pending"}
+          >
+            <div className={styles.pair}>
+              <div className={styles.field}>
+                <label htmlFor="enquiry-name">
+                  {enquiryFields.name.label}{" "}
+                  <span>
+                    ({enquiryFields.name.required ? "required" : "optional"})
+                  </span>
+                </label>
+                <input
+                  id="enquiry-name"
+                  name="name"
+                  autoComplete="name"
+                  required={enquiryFields.name.required}
+                  maxLength={enquiryFields.name.maxLength}
+                  aria-invalid={!!errors.name}
+                  aria-describedby={describedBy("name")}
+                  placeholder="Name"
+                />
+                {errorFor("name")}
+              </div>
+              <div className={styles.field}>
+                <label htmlFor="enquiry-email">
+                  {enquiryFields.email.label}{" "}
+                  <span>
+                    ({enquiryFields.email.required ? "required" : "optional"})
+                  </span>
+                </label>
+                <input
+                  id="enquiry-email"
+                  name="email"
+                  type="email"
+                  inputMode="email"
+                  autoComplete="email"
+                  required={enquiryFields.email.required}
+                  maxLength={enquiryFields.email.maxLength}
+                  aria-invalid={!!errors.email}
+                  aria-describedby={describedBy("email")}
+                  placeholder="you@example.com"
+                />
+                {errorFor("email")}
+              </div>
+            </div>
+            <div className={styles.field}>
+              <label htmlFor="enquiry-idea">
+                {enquiryFields.idea.label}{" "}
+                <span>
+                  ({enquiryFields.idea.required ? "required" : "optional"})
+                </span>
+              </label>
+              <textarea
+                id="enquiry-idea"
+                name="idea"
+                value={idea}
+                onChange={(event) => setIdea(event.target.value)}
+                rows={3}
+                required={enquiryFields.idea.required}
+                maxLength={enquiryFields.idea.maxLength}
+                aria-invalid={!!errors.idea}
+                aria-describedby={describedBy("idea")}
+                placeholder="A room, a pattern, an idea…"
+              />
+              {errorFor("idea")}
+            </div>
+            <details ref={detailsRef} className={styles.details}>
+              <summary>
+                <span>
+                  Add project details{" "}
+                  <span className={styles.optional}>(optional)</span>
+                </span>
+                <span className={styles.plus} aria-hidden="true">
+                  +
+                </span>
+              </summary>
+              <div className={styles.optionalFields}>
+                <div className={styles.pair}>
+                  <div className={styles.field}>
+                    <label htmlFor="enquiry-projectType">Project type</label>
+                    <select
+                      id="enquiry-projectType"
+                      name="projectType"
+                      value={projectType}
+                      onChange={(event) => setProjectType(event.target.value)}
+                      aria-invalid={!!errors.projectType}
+                      aria-describedby={describedBy("projectType")}
+                    >
+                      {extendedProjects.map((option) => (
+                        <option key={option}>{option}</option>
+                      ))}
+                    </select>
+                    {errorFor("projectType")}
+                  </div>
+                  <div className={styles.field}>
+                    <label htmlFor="enquiry-application">
+                      Intended application
+                    </label>
+                    <select
+                      id="enquiry-application"
+                      name="application"
+                      value={application}
+                      onChange={(event) => setApplication(event.target.value)}
+                      aria-invalid={!!errors.application}
+                      aria-describedby={describedBy("application")}
+                    >
+                      {extendedApplications.map((option) => (
+                        <option key={option}>{option}</option>
+                      ))}
+                    </select>
+                    {errorFor("application")}
+                  </div>
+                </div>
+                <div className={styles.pair}>
+                  <div className={styles.field}>
+                    <label htmlFor="enquiry-location">
+                      Project location <span>(country)</span>
+                    </label>
+                    <CountrySelect
+                      id="enquiry-location"
+                      name="location"
+                      value={country}
+                      onChange={(value) => {
+                        setCountry(value);
+                        if (errors.location)
+                          setErrors((current) => ({
+                            ...current,
+                            location: undefined,
+                          }));
+                      }}
+                      invalid={!!errors.location}
+                      describedBy={describedBy("location")}
+                    />
+                    {errorFor("location")}
+                  </div>
+                  <div className={styles.field}>
+                    <label htmlFor="enquiry-dimensions">
+                      Approximate dimensions
+                    </label>
+                    <input
+                      id="enquiry-dimensions"
+                      name="dimensions"
+                      maxLength={160}
+                      placeholder="Include units, or leave for later"
+                      aria-invalid={!!errors.dimensions}
+                      aria-describedby={describedBy("dimensions")}
+                    />
+                    {errorFor("dimensions")}
+                  </div>
+                </div>
+                <div className={styles.pair}>
+                  <div className={styles.field}>
+                    <label htmlFor="enquiry-company">Company</label>
+                    <input
+                      id="enquiry-company"
+                      name="company"
+                      autoComplete="organization"
+                      maxLength={160}
+                      aria-invalid={!!errors.company}
+                      aria-describedby={describedBy("company")}
+                    />
+                    {errorFor("company")}
+                  </div>
+                  <div className={styles.field}>
+                    <label htmlFor="enquiry-phone">Phone</label>
+                    <input
+                      id="enquiry-phone"
+                      name="phone"
+                      type="tel"
+                      autoComplete="tel"
+                      maxLength={50}
+                      aria-invalid={!!errors.phone}
+                      aria-describedby={describedBy("phone")}
+                    />
+                    {errorFor("phone")}
+                  </div>
+                </div>
+                <div className={styles.field}>
+                  <label htmlFor="enquiry-desiredDate">
+                    Desired completion date
+                  </label>
+                  <input
+                    id="enquiry-desiredDate"
+                    name="desiredDate"
+                    type="date"
+                    aria-invalid={!!errors.desiredDate}
+                    aria-describedby={describedBy("desiredDate", "date-help")}
+                  />
+                  <span id="date-help" className={styles.help}>
+                    A starting point for discussion; timing is reviewed for each
+                    project.
+                  </span>
+                  {errorFor("desiredDate")}
+                </div>
+                <div className={styles.field}>
+                  <label htmlFor="enquiry-inspiration">
+                    Share some inspiration
+                  </label>
+                  <p id="upload-help" className={styles.help}>
+                    {UPLOAD_HELP}
+                  </p>
+                  <input
+                    id="enquiry-inspiration"
+                    name="inspiration"
+                    type="file"
+                    accept={UPLOAD_ACCEPT}
+                    aria-invalid={!!errors.inspiration}
+                    aria-describedby={describedBy("inspiration", "upload-help")}
+                  />
+                  {errorFor("inspiration")}
+                </div>
+              </div>
+            </details>
+            <div className={styles.honeypot} aria-hidden="true">
+              <label htmlFor="enquiry-website">Leave this field empty</label>
+              <input
+                id="enquiry-website"
+                name="website"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </div>
+            <p className={styles.privacy}>
+              Share only the details needed to discuss your project. Submitted
+              artwork is kept out of the public gallery.
+            </p>
+            <div className={styles.actions}>
+              <button
+                className={styles.submit}
+                type="submit"
+                data-submission={submission}
+                disabled={
+                  availability !== "available" ||
+                  submission === "pending" ||
+                  submission === "success"
+                }
+              >
+                {submission === "pending"
+                  ? "Sending enquiry…"
+                  : submission === "success"
+                    ? "Enquiry received"
+                    : "Send project enquiry"}
+                <span
+                  aria-hidden="true"
+                  className={submission === "pending" ? styles.spinner : undefined}
+                >
+                  {submission === "pending" ? "" : submission === "success" ? "✓" : "↗"}
+                </span>
+              </button>
+              {submission === "success" && (
+                <button
+                  className={styles.check}
+                  type="button"
+                  onClick={() => {
+                    formRef.current?.reset();
+                    setProjectType("Not sure yet");
+                    setApplication("Not sure yet");
+                    setCountry("");
+                    setIdea("");
+                    setErrors({});
+                    setSubmission("idle");
+                    setMessage("");
+                    setReference("");
+                    if (detailsRef.current) detailsRef.current.open = false;
+                    formRef.current
+                      ?.querySelector<HTMLInputElement>('[name="name"]')
+                      ?.focus();
+                  }}
+                >
+                  Start another enquiry
+                </button>
+              )}
+            </div>
+            <p
+              ref={messageRef}
+              tabIndex={-1}
+              role="status"
+              aria-live="polite"
+              aria-atomic="true"
+              className={`${styles.status} ${submission === "error" ? styles.error : ""} ${submission === "success" ? styles.success : ""}`}
+            >
+              {message}
+              {reference && (
+                <span className={styles.reference}>Reference: {reference}</span>
+              )}
+            </p>
+          </form>
+        </div>
       </div>
     </section>
   );

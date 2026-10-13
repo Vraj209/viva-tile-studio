@@ -7,18 +7,19 @@ import gsap from "gsap";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore, type CSSProperties, type RefObject } from "react";
 import type { Brochure } from "@/lib/brochures";
 import { getBrochureProduct, getBrochureProductHotspot, type BrochureProduct } from "@/lib/brochure-products";
-import { getPageStrips, getSpread, getTurnPages, getMaxSpread, type BrochureSpread } from "@/lib/brochure-reader";
+import { getSpread, getMaxSpread } from "@/lib/brochure-reader";
 import { lockPageScroll } from "@/lib/scroll";
 import { BookObject, type BookOrigin } from "./BrochureLibrary";
 import Arrow from "./Arrow";
 import styles from "./BrochureReader.module.css";
+import TurningLeaf from "./BrochureTurningLeaf";
+import { useBrochureNavigation } from "./useBrochureNavigation";
 
 const BrochureInteriorViewer = dynamic(() => import("./BrochureInteriorViewer"), {
   loading: () => <p className={styles.interiorLoading} role="status">Preparing your space…</p>,
 });
 
 type Props = { brochure: Brochure; origin: BookOrigin; onClose: () => void; returnFocus: RefObject<HTMLButtonElement | null> };
-type Turn = { from: BrochureSpread; to: BrochureSpread; front: number | null; back: number | null; destination: number; direction: 1 | -1; rigid: boolean };
 const COMPACT = "(max-width: 700px)";
 const REDUCED = "(prefers-reduced-motion: reduce)";
 function subscribeCompact(callback: () => void) { const media = matchMedia(COMPACT); media.addEventListener("change", callback); return () => media.removeEventListener("change", callback); }
@@ -52,11 +53,9 @@ function UnavailableReader({ brochure, onClose, returnFocus }: Props) {
 
 type OpenProduct = (product: BrochureProduct, trigger: HTMLButtonElement) => void;
 
-function PageImage({ brochure, index, side, onPreview, onSwipe }: { brochure: Brochure; index: number | null; side?: string; onPreview?: OpenProduct; onSwipe?: (direction: 1 | -1) => void }) {
+function PageImage({ brochure, index, side, onPreview }: { brochure: Brochure; index: number | null; side?: string; onPreview?: OpenProduct }) {
   const [failed, setFailed] = useState(false);
   const [loaded, setLoaded] = useState(false);
-  const gesture = useRef<{ x: number; y: number; id: number } | null>(null);
-  const suppressClick = useRef(false);
   const page = index === null ? null : brochure.pages[index];
   const product = index === null ? undefined : getBrochureProduct(brochure.id, index);
   const hotspot = product ? getBrochureProductHotspot(product, index!) : null;
@@ -64,7 +63,7 @@ function PageImage({ brochure, index, side, onPreview, onSwipe }: { brochure: Br
     <div className={`${styles.paperPage} ${side === "left" ? styles.leftPaper : styles.rightPaper}`} data-page={index === null ? "endpaper" : index + 1}>
       {page ? failed ? (
         <div className={styles.pageError}><p>This page couldn’t load.</p><a href={`${brochure.pdf}#page=${index! + 1}`} target="_blank" rel="noreferrer">View the original PDF <Arrow /></a></div>
-      ) : <>{!loaded && <span className={styles.pageLoading}>Loading page {index! + 1}…</span>}<Image key={page.src} src={page.src} alt={page.alt} fill unoptimized sizes="(max-width: 700px) 90vw, 45vw" loading="eager" draggable={false} onLoad={() => setLoaded(true)} onError={() => setFailed(true)} /></> : (
+      ) : <>{!loaded && <span className={styles.pageLoading}>Loading page {index! + 1}…</span>}<Image key={page.src} src={page.src} alt={page.alt} fill unoptimized sizes="(max-width: 700px) 90vw, 45vw" loading="eager" decoding="sync" draggable={false} onLoad={() => setLoaded(true)} onError={() => setFailed(true)} /></> : (
         <div className={styles.endpaper}><span>VAVI</span><small>{side === "left" ? "The collection library" : "A new possibility awaits."}</small></div>
       )}
       <span className={styles.paperShade} />
@@ -76,84 +75,9 @@ function PageImage({ brochure, index, side, onPreview, onSwipe }: { brochure: Br
           aria-label={`View ${product.name} in a space`}
           data-brochure-product={product.id}
           aria-haspopup="dialog"
-          onPointerDown={(event) => {
-            suppressClick.current = false;
-            if (!onSwipe || !event.isPrimary || event.button !== 0) return;
-            gesture.current = { x: event.clientX, y: event.clientY, id: event.pointerId };
-            event.currentTarget.setPointerCapture(event.pointerId);
-          }}
-          onPointerCancel={() => { gesture.current = null; suppressClick.current = true; }}
-          onPointerUp={(event) => {
-            if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
-            const start = gesture.current;
-            gesture.current = null;
-            if (!start || start.id !== event.pointerId) return;
-            const x = start.x - event.clientX; const y = start.y - event.clientY;
-            const delta = Math.abs(x) > Math.abs(y) ? x : y;
-            if (Math.abs(delta) > 40) { suppressClick.current = true; onSwipe?.(delta > 0 ? 1 : -1); }
-          }}
-          onClick={(event) => {
-            if (suppressClick.current && event.detail !== 0) { suppressClick.current = false; return; }
-            onPreview(product, event.currentTarget);
-          }}
+          onClick={(event) => onPreview(product, event.currentTarget)}
         ><span>View in a space <span aria-hidden="true">↗</span></span></button>
       ) : null}
-    </div>
-  );
-}
-
-function TurningLeaf({ brochure, turn, compact, reduced, onComplete }: { brochure: Brochure; turn: Turn; compact: boolean; reduced: boolean; onComplete: () => void }) {
-  const layer = useRef<HTMLDivElement>(null);
-  const complete = useRef(onComplete);
-  useLayoutEffect(() => { complete.current = onComplete; });
-
-  useLayoutEffect(() => {
-    const root = layer.current!;
-    const bookOffset = root.closest<HTMLElement>("[data-book-offset]");
-    const strips = Array.from(root.querySelectorAll<HTMLElement>("[data-strip]"));
-    const shadow = root.querySelector<HTMLElement>("[data-turn-shadow]")!;
-    const model = { progress: 0 };
-    const render = () => {
-      const width = root.clientWidth;
-      const height = root.clientHeight;
-      const geometry = getPageStrips(model.progress, width, strips.length, turn.rigid, turn.direction);
-      geometry.forEach((strip, i) => {
-        const element = strips[i];
-        element.style.width = `${strip.width + .65}px`;
-        element.style.transform = `translate3d(${strip.x}px,0,${strip.z + 2}px) rotateY(${strip.angle}deg)`;
-        const front = element.children[0] as HTMLElement;
-        const back = element.children[1] as HTMLElement;
-        front.style.backgroundSize = back.style.backgroundSize = `${width}px ${height}px`;
-        front.style.backgroundPosition = `${-i * strip.width}px 0`;
-        back.style.backgroundPosition = `${-(width - (i + 1) * strip.width)}px 0`;
-        const light = Math.sin(model.progress * Math.PI);
-        element.style.setProperty("--leaf-shade", `${light * (.025 + i / strips.length * .095)}`);
-      });
-      const lift = Math.sin(Math.PI * model.progress);
-      shadow.style.opacity = `${lift * .28}`;
-      shadow.style.transform = `scaleX(${.15 + lift * .85})`;
-      if (bookOffset && !compact) {
-        const start = turn.from.left === null ? -25 : 0;
-        const end = turn.to.left === null ? -25 : 0;
-        bookOffset.style.transform = `translateX(${start + (end - start) * model.progress}%)`;
-      }
-    };
-    render();
-    const tween = gsap.to(model, { progress: 1, duration: reduced ? .01 : turn.rigid ? .82 : .76, ease: "power2.inOut", onUpdate: render, onComplete: () => complete.current() });
-    const observer = new ResizeObserver(render);
-    observer.observe(root);
-    return () => { tween.kill(); observer.disconnect(); };
-  }, [turn, compact, reduced]);
-
-  return (
-    <div ref={layer} className={styles.turnLayer} aria-hidden="true" data-rigid={turn.rigid}>
-      <div className={styles.turnShadow} data-turn-shadow />
-      {Array.from({ length: turn.rigid ? 1 : 14 }, (_, index) => (
-        <div key={index} className={styles.strip} data-strip>
-          <div className={styles.stripFront} style={{ backgroundImage: turn.front === null ? undefined : `url("${brochure.pages[turn.front].src}")` }} />
-          <div className={styles.stripBack} style={{ backgroundImage: turn.back === null ? undefined : `url("${brochure.pages[turn.back].src}")` }} />
-        </div>
-      ))}
     </div>
   );
 }
@@ -177,37 +101,29 @@ function Reader({ brochure, origin, returnFocus, onClose }: Props) {
   const closeTween = useRef<gsap.core.Tween | null>(null);
   const closing = useRef(false);
   const gesture = useRef({ time: 0, amount: 0, locked: false });
-  const pointer = useRef<{ x: number; y: number; id: number } | null>(null);
-  const [position, setPosition] = useState(0);
-  const [turn, setTurn] = useState<Turn | null>(null);
   const [opening, setOpening] = useState(true);
+  const [openingError, setOpeningError] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
   const [overview, setOverview] = useState(false);
   const [zoom, setZoom] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<BrochureProduct | null>(null);
-  const compact = useSyncExternalStore(subscribeCompact, compactSnapshot, serverSnapshot);
+  const desiredCompact = useSyncExternalStore(subscribeCompact, compactSnapshot, serverSnapshot);
   const reduced = useSyncExternalStore(subscribeReduced, reducedSnapshot, serverSnapshot);
+  const navigation = useBrochureNavigation(brochure, desiredCompact, reduced, arena, !opening && !selectedProduct && !isClosing);
+  const { compact, position, transaction, request, finish, getCache } = navigation;
+  const turn = transaction?.ready && !reduced ? transaction : null;
   const spreadIndex = Math.ceil(position / 2);
   const spread = compact ? { left: null, right: position } : getSpread(brochure.pageCount, spreadIndex);
-  const busy = opening || Boolean(turn);
+  const busy = opening || Boolean(transaction);
   const atStart = position === 0;
   const atEnd = compact ? position >= brochure.pageCount - 1 : spreadIndex >= getMaxSpread(brochure.pageCount);
 
-  const navigate = useCallback((direction: 1 | -1) => {
-    if (opening || turn || selectedProduct || closing.current) return;
-    if (compact) {
-      const destination = position + direction;
-      if (destination < 0 || destination >= brochure.pageCount) return;
-      setTurn({ from: { left: null, right: position }, to: { left: null, right: destination }, front: direction === 1 ? position : destination, back: null, direction, destination, rigid: Math.min(position, destination) === 0 });
-    } else {
-      const next = getTurnPages(brochure.pageCount, Math.ceil(position / 2), direction);
-      if (!next) return;
-      setTurn({ ...next, from: getSpread(brochure.pageCount, Math.ceil(position / 2)), to: getSpread(brochure.pageCount, next.destination), destination: next.destination === 0 ? 0 : next.destination * 2 - 1, direction, rigid: position === 0 || next.destination === 0 });
-    }
-  }, [brochure.pageCount, compact, opening, position, turn, selectedProduct]);
+  const navigate = useCallback((direction: 1 | -1) => request(direction), [request]);
 
   const close = useCallback(() => {
     if (closing.current) return;
     closing.current = true;
+    setIsClosing(true);
     entry.current?.kill();
     closeTween.current = gsap.to(dialog.current, { opacity: 0, duration: reduced ? 0 : .2, onComplete: onClose });
   }, [onClose, reduced]);
@@ -220,72 +136,57 @@ function Reader({ brochure, origin, returnFocus, onClose }: Props) {
     closeButton.current?.focus({ preventScroll: true });
     const token = ++openingToken.current;
     let disposed = false;
-    // Keep the cover visible until the first spread decodes. A bounded wait
-    // still exposes the per-page loading/error state on a stalled connection.
-    let readinessTimeout: ReturnType<typeof setTimeout>;
-    const decoded = Promise.allSettled(brochure.pages.slice(0, 3).map((page) => {
-      const image = new window.Image(); image.src = page.src; return image.decode();
-    }));
-    const pagesReady = Promise.race([decoded, new Promise<void>((resolve) => { readinessTimeout = setTimeout(resolve, 5000); })]);
-    void pagesReady.then(() => clearTimeout(readinessTimeout));
+    let started = false;
+    let resizeObserver: ResizeObserver | undefined;
+    // The cover remains visible for as long as decoding takes. Never trade
+    // visual continuity for a timeout that exposes an empty page.
+    const pagesReady = getCache().ensure([0]);
+    void pagesReady.catch(() => { /* Handled by startReading after the flight. */ });
     entryFrame.current = requestAnimationFrame(() => {
       entryFrame.current = null;
-      const isCompact = matchMedia(COMPACT).matches;
       const isReduced = matchMedia(REDUCED).matches;
       const target = rightPage.current!.getBoundingClientRect();
       const object = flight.current!;
       gsap.set(object, { left: target.left, top: target.top, width: target.width, height: target.height, x: origin.left - target.left, y: origin.top - target.top, scaleX: origin.width / target.width, scaleY: origin.height / target.height, opacity: 1 });
       gsap.set(chrome.current, { opacity: isReduced ? 1 : 0 });
       const startReading = async () => {
-        await pagesReady;
-        if (disposed || openingToken.current !== token || closing.current) return;
+        try {
+          await pagesReady;
+          await rightPage.current?.querySelector<HTMLImageElement>("img")?.decode();
+        } catch {
+          if (!disposed) setOpeningError(true);
+          return;
+        }
+        if (disposed || started || openingToken.current !== token || closing.current) return;
+        started = true;
         object.style.visibility = "hidden";
         arena.current!.style.visibility = "visible";
         setOpening(false);
-        if (isReduced) { setPosition(1); return; }
-        const initial = getTurnPages(brochure.pageCount, 0, 1)!;
-        setTurn(isCompact
-          ? { from: { left: null, right: 0 }, to: { left: null, right: 1 }, front: 0, back: null, destination: 1, direction: 1, rigid: true }
-          : { ...initial, from: getSpread(brochure.pageCount, 0), to: getSpread(brochure.pageCount, 1), destination: 1, direction: 1, rigid: true });
+        request(1, false, true);
       };
       entry.current = gsap.timeline().to(object, { x: 0, y: 0, scaleX: 1, scaleY: 1, duration: isReduced ? 0 : .58, ease: "power3.inOut", onComplete: () => { void startReading(); } }).to(chrome.current, { opacity: 1, duration: isReduced ? 0 : .35 }, isReduced ? 0 : .3);
-    });
-    return () => { disposed = true; clearTimeout(readinessTimeout); if (entryFrame.current !== null) cancelAnimationFrame(entryFrame.current); entry.current?.kill(); closeTween.current?.kill(); element.close(); unlock(); if (trigger?.isConnected) trigger.focus({ preventScroll: true }); };
-    // The opening is a single transaction; live media changes affect the reader below.
-  }, [brochure, origin, returnFocus]);
-
-  useEffect(() => {
-    const media = matchMedia(COMPACT);
-    const settleLayout = () => {
-      if (closing.current) return;
-      const destination = opening ? Math.min(1, brochure.pageCount - 1) : turn?.destination ?? position;
-      if (opening || turn) {
-        openingToken.current++;
-        if (entryFrame.current !== null) {
-          cancelAnimationFrame(entryFrame.current);
-          entryFrame.current = null;
-        }
+      let previousTarget = target;
+      resizeObserver = new ResizeObserver(() => {
+        if (disposed || started || closing.current || !rightPage.current) return;
+        const nextTarget = rightPage.current.getBoundingClientRect();
+        if (nextTarget.width === previousTarget.width && nextTarget.height === previousTarget.height && nextTarget.left === previousTarget.left && nextTarget.top === previousTarget.top) return;
+        previousTarget = nextTarget;
+        const currentBounds = object.getBoundingClientRect();
         entry.current?.kill();
-        if (flight.current) flight.current.style.visibility = "hidden";
-        if (arena.current) arena.current.style.visibility = "visible";
-        if (chrome.current) chrome.current.style.opacity = "1";
-        setPosition(destination);
-        setOpening(false);
-        setTurn(null);
-      }
-      // A breakpoint change can interrupt an imperative spine-centering tween.
-      if (offset.current) offset.current.style.transform = !media.matches && destination === 0 ? "translateX(-25%)" : "translateX(0)";
-      gesture.current = { time: 0, amount: 0, locked: false };
-      pointer.current = null;
-    };
-    media.addEventListener("change", settleLayout);
-    return () => media.removeEventListener("change", settleLayout);
-  }, [brochure.pageCount, opening, position, turn]);
+        gsap.set(object, { left: nextTarget.left, top: nextTarget.top, width: nextTarget.width, height: nextTarget.height, x: currentBounds.left - nextTarget.left, y: currentBounds.top - nextTarget.top, scaleX: currentBounds.width / nextTarget.width, scaleY: currentBounds.height / nextTarget.height });
+        gsap.set(chrome.current, { opacity: 1 });
+        entry.current = gsap.timeline().to(object, { x: 0, y: 0, scaleX: 1, scaleY: 1, duration: matchMedia(REDUCED).matches ? 0 : .24, ease: "power2.out", onComplete: () => { void startReading(); } });
+      });
+      resizeObserver.observe(arena.current!);
+    });
+    return () => { disposed = true; resizeObserver?.disconnect(); if (entryFrame.current !== null) cancelAnimationFrame(entryFrame.current); entry.current?.kill(); closeTween.current?.kill(); element.close(); unlock(); if (trigger?.isConnected) trigger.focus({ preventScroll: true }); };
+    // The opening is a single transaction; live media changes affect the reader below.
+  }, [brochure, origin, returnFocus, getCache, request]);
 
-  useEffect(() => {
-    const first = Math.max(0, position - 2);
-    brochure.pages.slice(first, position + 5).forEach((page) => { const image = new window.Image(); image.src = page.src; });
-  }, [brochure, position]);
+  useLayoutEffect(() => {
+    // Reset any imperative spine transform after an interrupted turn/resize.
+    if (!turn && offset.current) offset.current.style.transform = !compact && position === 0 ? "translateX(-25%)" : "translateX(0)";
+  }, [compact, position, turn]);
 
   useEffect(() => {
     const element = arena.current!;
@@ -321,19 +222,26 @@ function Reader({ brochure, origin, returnFocus, onClose }: Props) {
 
   function jump(index: number) {
     if (busy) return;
-    setPosition(Math.max(0, Math.min(brochure.pageCount - 1, index)));
+    navigation.jump(index);
     setOverview(false);
     setZoom(false);
     if (overview) overviewButton.current?.focus({ preventScroll: true });
   }
 
-  const base = turn ? compact ? { left: null, right: turn.direction === 1 ? turn.to.right : turn.from.right } : { left: turn.direction === 1 ? turn.from.left : turn.to.left, right: turn.direction === 1 ? turn.to.right : turn.from.right } : spread;
+  const base = turn ? compact ? { left: null, right: turn.to.right } : { left: turn.direction === 1 ? turn.from.left : turn.to.left, right: turn.direction === 1 ? turn.to.right : turn.from.right } : spread;
+  // Stable page keys preserve the same image nodes through preparation,
+  // animation, and landing. Hidden destination surfaces decode in place.
+  const surfaces = new Map<string, { index: number | null; side: "left" | "right" }>();
+  for (const pages of [...(transaction ? [transaction.to, transaction.from] : []), spread]) {
+    if (!compact || pages.left !== null) surfaces.set(pages.left === null ? "end-left" : `page-${pages.left}`, { index: pages.left, side: "left" });
+    surfaces.set(pages.right === null ? "end-right" : `page-${pages.right}`, { index: pages.right, side: "right" });
+  }
   const pageLabel = spread.left === null ? `Page ${(spread.right ?? 0) + 1}` : spread.right === null ? `Page ${spread.left + 1}` : `Pages ${spread.left + 1}–${spread.right + 1}`;
   const readingIndex = compact ? position : spread.left ?? spread.right ?? 0;
 
   return (
     <dialog
-      ref={dialog} className={styles.reader} data-compact={compact} data-lenis-prevent aria-labelledby="reader-title" aria-describedby="reader-instructions"
+      ref={dialog} className={styles.reader} data-compact={compact} data-turn-state={transaction ? transaction.ready ? "turning" : "preparing" : "idle"} data-lenis-prevent aria-labelledby="reader-title" aria-describedby="reader-instructions"
       onCancel={(event) => { event.preventDefault(); if (selectedProduct) setSelectedProduct(null); else if (overview) { setOverview(false); overviewButton.current?.focus(); } else if (zoom) closeZoom(); else close(); }}
       onKeyDown={(event) => {
         if (selectedProduct || event.defaultPrevented) return;
@@ -359,46 +267,34 @@ function Reader({ brochure, origin, returnFocus, onClose }: Props) {
             <button ref={zoomButton} type="button" onClick={() => { if (zoom) closeZoom(); else setZoom(true); setOverview(false); }} aria-pressed={zoom} disabled={busy}>{zoom ? "Fit to screen" : "Zoom"}<span aria-hidden="true">{zoom ? "−" : "+"}</span></button>
           </div>
           <div className={styles.pagination}>
-            <button className={styles.previous} type="button" aria-label="Previous page" disabled={atStart || busy} onClick={() => { setZoom(false); navigate(-1); }}><Arrow /></button>
+            <button className={styles.previous} type="button" aria-label="Previous page" disabled={opening || (atStart && !transaction)} onClick={() => { setZoom(false); navigate(-1); }}><Arrow /></button>
             <label className={styles.pageSelect}><span className={styles.srOnly}>Go to page</span><select value={position} aria-label="Go to page" onChange={(event) => jump(Number(event.target.value))} disabled={busy}>{brochure.pages.map((_, index) => <option key={index} value={index}>Page {index + 1}</option>)}</select><span aria-hidden="true">{pageLabel} <span className={styles.totalPages}>/ {brochure.pageCount}</span></span></label>
-            <button type="button" aria-label="Next page" disabled={atEnd || busy} onClick={() => { setZoom(false); navigate(1); }}><Arrow /></button>
+            <button type="button" aria-label="Next page" disabled={opening || (atEnd && !transaction)} onClick={() => { setZoom(false); navigate(1); }}><Arrow /></button>
           </div>
           <p id="reader-instructions" className={styles.instructions}>{zoom ? "Scroll to inspect" : compact ? "Swipe to turn a page" : "Scroll or use ← → to turn the pages"}</p>
         </footer>
       </div>
 
       <div ref={arena} className={styles.arena} inert={zoom || overview} style={{ "--page-ratio": brochure.width / brochure.height } as CSSProperties}
-        onPointerDown={(event) => {
-          if (zoom || overview || !event.isPrimary || event.button !== 0) return;
-          if (event.target instanceof Element && event.target.closest("a, button, input, select, textarea")) return;
-          pointer.current = { x: event.clientX, y: event.clientY, id: event.pointerId };
-          event.currentTarget.setPointerCapture(event.pointerId);
-        }}
-        onPointerCancel={(event) => { if (pointer.current?.id === event.pointerId) pointer.current = null; }}
-        onPointerUp={(event) => {
-          if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
-          const start = pointer.current;
-          if (start?.id !== event.pointerId) return;
-          pointer.current = null;
-          if (!start || zoom || overview) return;
-          const x = start.x - event.clientX; const y = start.y - event.clientY;
-          const delta = Math.abs(x) > Math.abs(y) ? x : y;
-          if (Math.abs(delta) > 40) navigate(delta > 0 ? 1 : -1);
-        }}
+        {...navigation.pointerHandlers}
       >
         <div className={styles.bookViewport}>
           <div ref={offset} data-book-offset className={styles.bookOffset} style={{ transform: !compact && position === 0 ? "translateX(-25%)" : "translateX(0)" }}>
             <div className={styles.openBook} data-cover={atStart && !turn}>
-              {!compact && <div className={styles.leftPage}><PageImage key={`left-${base.left}`} brochure={brochure} index={base.left} side="left" onPreview={busy ? undefined : openProduct} onSwipe={navigate} /></div>}
-              <div className={styles.rightPage} ref={rightPage}><PageImage key={`right-${base.right}`} brochure={brochure} index={base.right} side="right" onPreview={busy ? undefined : openProduct} onSwipe={navigate} /></div>
+              {Array.from(surfaces, ([key, page]) => {
+                const visible = page.index === base[page.side];
+                return <div key={key} className={page.side === "left" ? styles.leftPage : styles.rightPage} ref={page.side === "right" && page.index === spread.right ? rightPage : undefined} data-page-surface={page.index === null ? "endpaper" : page.index + 1} data-visible={visible} aria-hidden={!visible} inert={!visible || busy} style={{ visibility: visible ? undefined : "hidden" }}>
+                  <PageImage brochure={brochure} index={page.index} side={page.side} onPreview={busy ? undefined : openProduct} />
+                </div>;
+              })}
               {!compact && <div className={styles.binding} />}
-              {turn && <TurningLeaf brochure={brochure} turn={turn} compact={compact} reduced={reduced} onComplete={() => { setPosition(turn.destination); setTurn(null); }} />}
+              {turn && <TurningLeaf brochure={brochure} turn={turn} compact={compact} reduced={reduced} motion={turn.motion} onComplete={finish} />}
             </div>
           </div>
         </div>
       </div>
       <div ref={flight} className={styles.flyingCover} style={{ width: origin.width, height: origin.height }} aria-hidden="true"><BookObject brochure={brochure} flying /></div>
-      {opening && <p className={styles.openingStatus}>Preparing your brochure…</p>}
+      {(opening || (transaction && !transaction.ready) || navigation.error) && <p className={styles.openingStatus} role="status">{openingError || navigation.error ? <>This page couldn’t load. {openingError ? <a href={brochure.pdf} target="_blank" rel="noreferrer">View the original PDF</a> : "Try turning again, or download the PDF."}</> : opening ? "Preparing your brochure…" : "Preparing your next page…"}</p>}
 
       {overview && <aside id="brochure-pages" className={styles.overview} aria-label="All brochure pages" data-lenis-prevent>
         <div className={styles.overviewHeader}><h3>Find your page.</h3><button ref={overviewClose} type="button" aria-label="Close page overview" onClick={() => { setOverview(false); overviewButton.current?.focus(); }}>×</button></div>

@@ -1,94 +1,147 @@
 .section {
+  --enquiry-muted: #c2c8bb;
+  --enquiry-border: #899582;
+  --enquiry-error: #ffbdac;
+  --control-surface: #39473b;
+  --control-hover: #435044;
+  --control-text: var(--paper);
+  --control-border: var(--enquiry-border);
+  --control-focus: var(--paper);
+  --control-error: var(--enquiry-error);
+  padding: clamp(40px, 4.5vw, 72px) var(--gutter);
+  background: var(--stone);
+}
+.surface {
+  --panel-padding: clamp(36px, 4.2vw, 64px);
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(40px, 7vw, 112px);
-  padding: clamp(80px, 9vw, 150px) clamp(22px, 5.5vw, 96px);
-  background: var(--paper, #f2efe8);
-  color: var(--ink, #242822);
+  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+  max-width: 1440px;
+  margin-inline: auto;
+  border: 1px solid #65705e;
+  background: var(--forest);
+  color: var(--paper);
+  box-shadow:
+    0 4px 0 #253027,
+    0 5px 0 #8b9180,
+    0 20px 36px -24px rgb(25 34 26 / 42%);
 }
 .intro {
-  max-width: 640px;
+  min-width: 0;
+  align-self: start;
+}
+.introCopy {
+  padding: var(--panel-padding);
+}
+.relief {
+  position: relative;
+  height: clamp(280px, 26vw, 390px);
+  overflow: hidden;
+  background: #263328;
+}
+/* A recessed tile joint and a fine glazed edge make the artwork part of the slab. */
+.relief::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow:
+    inset 0 2px 4px rgb(13 25 16 / 55%),
+    inset 0 -1px 0 rgb(200 209 176 / 22%);
+}
+.reliefImage {
+  object-fit: cover;
+  object-position: 50% 49%;
 }
 .eyebrow {
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  margin: 0 0 36px;
+  margin: 0 0 32px;
+  color: var(--enquiry-muted);
 }
 .intro h2 {
   font-family: var(--font-display, Georgia, serif);
-  font-size: clamp(42px, 5.3vw, 84px);
+  font-size: clamp(56px, 5.3vw, 82px);
   font-weight: 400;
-  line-height: 1.03;
-  letter-spacing: -0.047em;
-  margin: 0 0 28px;
+  line-height: 1.06;
+  letter-spacing: -0.04em;
+  margin: 0 0 24px;
+}
+.intro h2 span {
+  display: block;
+  font-style: italic;
+  padding-bottom: 0.06em;
 }
 .invitation {
-  max-width: 350px;
+  max-width: 310px;
   font-size: 16px;
   line-height: 1.7;
-  color: var(--muted, #5d645b);
-}
-.artwork {
-  display: flex;
-  gap: 26px;
-  align-items: center;
-  margin-top: 46px;
-}
-.artworkTile {
-  display: block;
-  flex: 0 0 auto;
-}
-.artwork img {
-  width: 132px;
-  height: 132px;
-  object-fit: cover;
-  transform: rotate(-5deg);
-}
-.artwork p {
-  font-size: 12px;
-  line-height: 1.8;
-  letter-spacing: 0.03em;
+  color: var(--enquiry-muted);
 }
 .formColumn {
-  padding-top: 42px;
   min-width: 0;
+  padding: var(--panel-padding);
+  border-left: 1px solid #1c2b20;
+  box-shadow: inset 1px 0 0 rgb(190 204 165 / 18%);
+}
+.formHeading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px 24px;
+  padding-bottom: 22px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--enquiry-border);
+}
+.formHeading p {
+  font-size: 17px;
+  font-weight: 500;
+}
+.formHeading span {
+  color: var(--enquiry-muted);
+  font-size: 12px;
 }
 .availability {
   font-size: 13px;
   line-height: 1.6;
-  min-height: 48px;
+  color: var(--enquiry-muted);
+}
+.availability:not(:empty) {
   margin-bottom: 24px;
-  color: var(--muted, #5d645b);
+}
+.availability[data-unavailable] {
+  padding: 16px 18px;
+  border: 1px solid var(--enquiry-border);
 }
 .availability p {
   margin: 0;
 }
 .form {
   display: grid;
-  gap: 26px;
+  gap: 24px;
 }
 .pair {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  gap: 20px;
 }
 .field {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 9px;
   min-width: 0;
 }
 .field label {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
   line-height: 1.5;
 }
 .field label span,
 .optional {
-  font-size: 11px;
-  color: var(--muted, #5d645b);
+  font-size: 12px;
+  color: var(--enquiry-muted);
   font-weight: 400;
 }
 .field input,
@@ -98,38 +151,42 @@
   max-width: 100%;
   min-width: 0;
   width: 100%;
-  min-height: 48px;
-  padding: 9px 0 12px;
+  min-height: 56px;
+  padding: 14px 16px;
   font: inherit;
-  font-size: 15px;
-  color: var(--ink, #242822);
-  background: transparent;
-  border: 0;
-  border-bottom: 1px solid var(--line, #bfbfb2);
+  font-size: 16px;
+  color: var(--paper);
+  background: var(--control-surface);
+  border: 1px solid var(--enquiry-border);
   border-radius: 0;
   outline-offset: 4px;
   box-sizing: border-box;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+.field :is(input, textarea):hover {
+  border-color: var(--paper);
+}
+.field :is(input, textarea):focus {
+  background: var(--control-hover);
+  border-color: var(--paper);
+}
+.field :is(input, textarea)[placeholder]:not(:placeholder-shown),
+.field input:autofill {
+  border-color: #b0b9a8;
 }
 .field textarea {
   resize: vertical;
-  min-height: 108px;
+  min-height: 132px;
   line-height: 1.6;
 }
 .field input::placeholder,
 .field textarea::placeholder {
-  color: var(--muted, #5d645b);
+  color: var(--enquiry-muted);
   opacity: 1;
 }
 .field select {
-  appearance: none;
-  min-height: 52px;
-  padding: 12px 42px 12px 15px;
-  border: 1px solid var(--line);
-  background-color: var(--paper);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='m4 6 4 4 4-4' stroke='%23303c32' stroke-width='1.5'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 15px center;
-  color: var(--ink);
+  color-scheme: dark;
+  padding-right: 36px;
   cursor: pointer;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -139,11 +196,11 @@
     background-color 0.2s;
 }
 .field select:hover {
-  border-color: var(--forest);
-  background-color: color-mix(in srgb, var(--stone) 25%, var(--paper));
+  border-color: var(--paper);
+  background-color: var(--control-hover);
 }
 .field select:focus-visible {
-  border-color: var(--forest);
+  border-color: var(--paper);
 }
 .field option {
   color: var(--ink);
@@ -165,8 +222,8 @@
     line-height: 1.5;
   }
   .field select:open {
-    border-color: var(--forest);
-    background-color: var(--paper);
+    border-color: var(--paper);
+    background-color: var(--control-hover);
   }
   .field select::picker-icon {
     content: "";
@@ -175,8 +232,8 @@
     right: 17px;
     width: 8px;
     height: 8px;
-    border-right: 1.5px solid var(--forest);
-    border-bottom: 1.5px solid var(--forest);
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
     transform: translateY(-75%) rotate(45deg);
     transition: transform 0.2s;
   }
@@ -241,8 +298,8 @@
   }
 }
 .field input[type="date"] {
-  color-scheme: light;
-  accent-color: var(--forest);
+  color-scheme: dark;
+  accent-color: var(--paper);
 }
 .field input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
@@ -250,8 +307,8 @@
   opacity: 0.7;
 }
 .field input[type="file"] {
-  font-size: 12px;
-  padding: 9px 0;
+  font-size: 13px;
+  padding: 8px;
   overflow: hidden;
 }
 .field input[type="file"]::file-selector-button {
@@ -260,28 +317,28 @@
   min-height: 44px;
   background: transparent;
   color: inherit;
-  border: 1px solid var(--line, #bfbfb2);
+  border: 1px solid var(--enquiry-border);
   padding: 8px 14px;
   margin-right: 12px;
   cursor: pointer;
 }
-.field [aria-invalid="true"] {
-  border-bottom-color: #9c3c26;
+.field :is(input, textarea, select)[aria-invalid="true"] {
+  border-color: var(--enquiry-error);
 }
 .fieldError {
   font-size: 12px;
   line-height: 1.5;
-  color: #873422;
+  color: var(--enquiry-error);
 }
 .help {
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.6;
-  color: var(--muted, #5d645b);
+  color: var(--enquiry-muted);
   margin: 0;
 }
 .details {
-  border-top: 1px solid var(--line, #bfbfb2);
-  border-bottom: 1px solid var(--line, #bfbfb2);
+  border-top: 1px solid var(--enquiry-border);
+  border-bottom: 1px solid var(--enquiry-border);
   transition: background-color 0.2s;
 }
 .details summary {
@@ -290,17 +347,17 @@
   justify-content: space-between;
   gap: 12px;
   list-style: none;
-  min-height: 64px;
-  padding: 9px 16px;
+  min-height: 60px;
+  padding: 10px 0;
   font-size: 13px;
   line-height: 1.5;
   cursor: pointer;
-  color: var(--forest);
+  color: var(--paper);
   transition: background-color 0.2s;
 }
 .details summary:hover,
 .details[open] > summary {
-  background: color-mix(in srgb, var(--stone) 40%, var(--paper));
+  background: var(--control-surface);
 }
 .details summary:focus-visible {
   outline-offset: -2px;
@@ -317,8 +374,6 @@
   height: 26px;
   display: grid;
   place-items: center;
-  border: 1px solid var(--line);
-  border-radius: 50%;
   line-height: 1;
 }
 .details[open] .plus {
@@ -327,7 +382,7 @@
 .optionalFields {
   display: grid;
   gap: 25px;
-  padding: 24px 16px 27px;
+  padding: 24px 0 28px;
 }
 .honeypot {
   position: absolute;
@@ -342,10 +397,10 @@
   border: 0;
 }
 .privacy {
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.7;
-  color: var(--muted, #5d645b);
-  max-width: 390px;
+  color: var(--enquiry-muted);
+  max-width: 480px;
   margin: 0;
 }
 .actions {
@@ -358,29 +413,57 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 48px;
-  min-height: 54px;
-  padding: 15px 23px;
-  border: 1px solid var(--forest, #303c32);
-  background: var(--forest, #303c32);
-  color: #f2efe8;
+  gap: 20px;
+  width: 100%;
+  min-height: 62px;
+  padding: 17px 24px;
+  border: 1px solid var(--paper);
+  background: var(--paper);
+  color: var(--forest);
   font: inherit;
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background-color 0.2s, border-color 0.2s;
 }
 .submit span {
   font-size: 22px;
   line-height: 1;
+  transition: transform 0.2s;
 }
 .submit:hover:enabled {
-  background: var(--ink, #242822);
+  background: #fffaf2;
+  border-color: #fffaf2;
+}
+.submit:hover:enabled span {
+  transform: translate(2px, -2px);
+}
+.submit:active:enabled span {
+  transform: none;
 }
 .submit:disabled {
   cursor: not-allowed;
-  background: #d6d7ca;
-  border-color: #d6d7ca;
-  color: #4b5147;
+  background: #b4bcad;
+  border-color: #b4bcad;
+  color: var(--forest);
+}
+.submit[data-submission="pending"] {
+  cursor: progress;
+}
+.submit[data-submission="success"] {
+  background: var(--paper);
+  border-color: var(--paper);
+}
+.submit .spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: sending 0.8s linear infinite;
+}
+@keyframes sending {
+  to { transform: rotate(360deg); }
 }
 .check {
   display: inline-block;
@@ -399,16 +482,31 @@
   font-size: 13px;
   line-height: 1.7;
   margin: 0;
-  min-height: 24px;
+  overflow-wrap: anywhere;
+}
+.status:empty {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
 }
 .error {
-  color: #873422;
+  color: var(--enquiry-error);
+  padding: 14px 18px;
+  border-left: 2px solid currentColor;
+  background: var(--control-surface);
+}
+.success {
+  padding: 18px;
+  border: 1px solid var(--enquiry-border);
+  background: var(--control-surface);
 }
 .reference {
   display: block;
   overflow-wrap: anywhere;
-  font-size: 10px;
-  color: var(--muted, #5d645b);
+  font-size: 12px;
+  color: var(--enquiry-muted);
   margin-top: 5px;
 }
 .notice {
@@ -416,87 +514,87 @@
   line-height: 1.6;
 }
 .section :is(input, textarea, select, button, summary):focus-visible {
-  outline: 2px solid var(--forest, #303c32);
-  outline-offset: 5px;
+  outline: 2px solid var(--paper);
+  outline-offset: 4px;
 }
-@media (min-width: 1800px) {
-  .section {
-    padding-inline: max(6vw, calc((100vw - 1600px) / 2));
-  }
+.section :is(input, textarea, select, summary) {
+  scroll-margin-block: calc(var(--header-height) + 24px) 24px;
 }
-@media (max-width: 900px) {
-  .section {
+@media (max-width: 1023px) {
+  .surface {
     grid-template-columns: 1fr;
-    gap: 25px;
   }
-  .intro {
-    max-width: 680px;
+  .introCopy {
+    padding-bottom: 0;
+  }
+  .relief {
+    display: none;
   }
   .intro h2 {
-    font-size: clamp(44px, 8.6vw, 78px);
-  }
-  .artwork {
-    margin-top: 30px;
-  }
-  .formColumn {
-    padding-top: 24px;
+    font-size: clamp(48px, 7vw, 64px);
   }
   .formColumn,
   .form {
-    max-width: 720px;
+    width: 100%;
+  }
+  .formColumn {
+    border-left: 0;
+    box-shadow: none;
+  }
+  .invitation {
+    max-width: 420px;
   }
 }
 @media (max-width: 540px) {
   .section {
-    padding-top: 78px;
-    padding-bottom: 76px;
+    padding: 24px 16px;
+  }
+  .surface {
+    --panel-padding: 32px 24px;
   }
   .eyebrow {
-    margin-bottom: 26px;
-    font-size: 10px;
+    margin-bottom: 20px;
   }
   .intro h2 {
-    font-size: 46px;
-  }
-  .artwork img {
-    width: 96px;
-    height: 96px;
-  }
-  .artwork {
-    gap: 23px;
+    font-size: clamp(44px, 12vw, 58px);
+    margin-bottom: 16px;
   }
   .pair {
     grid-template-columns: 1fr;
-    gap: 25px;
+    gap: 20px;
   }
-  .field input,
-  .field textarea,
-  .field select {
-    font-size: 16px;
-  }
-  .optional {
-    display: block;
+  .formHeading {
+    padding-bottom: 18px;
+    margin-bottom: 24px;
   }
   .submit {
-    width: 100%;
+    padding-inline: 18px;
   }
   .invitation {
     font-size: 15px;
   }
-  .availability {
-    margin-bottom: 20px;
+}
+@media (max-width: 360px) {
+  .section {
+    padding-inline: 12px;
   }
-  .formColumn {
-    padding-top: 16px;
+  .surface {
+    --panel-padding: 32px 20px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
   .plus,
   .submit,
+  .submit span,
   .details,
   .details summary,
   .field select,
+  .field input,
+  .field textarea,
   .field select::picker-icon {
     transition: none;
+  }
+  .submit .spinner {
+    animation: none;
   }
 }

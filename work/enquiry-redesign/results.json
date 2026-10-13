@@ -1,0 +1,127 @@
+[
+  {
+    "name": "responsive 320px",
+    "passed": true,
+    "durationMs": 1252,
+    "closed": {
+      "viewport": 320,
+      "document": 320,
+      "section": {
+        "width": 320,
+        "left": 0,
+        "right": 320
+      },
+      "bad": []
+    },
+    "expanded": {
+      "viewport": 320,
+      "document": 320,
+      "section": {
+        "width": 320,
+        "left": 0,
+        "right": 320
+      },
+      "bad": []
+    }
+  },
+  {
+    "name": "responsive 390px",
+    "passed": true,
+    "durationMs": 1280,
+    "closed": {
+      "viewport": 390,
+      "document": 390,
+      "section": {
+        "width": 390,
+        "left": 0,
+        "right": 390
+      },
+      "bad": []
+    },
+    "expanded": {
+      "viewport": 390,
+      "document": 390,
+      "section": {
+        "width": 390,
+        "left": 0,
+        "right": 390
+      },
+      "bad": []
+    }
+  },
+  {
+    "name": "responsive 768px",
+    "passed": true,
+    "durationMs": 1433,
+    "closed": {
+      "viewport": 768,
+      "document": 768,
+      "section": {
+        "width": 768,
+        "left": 0,
+        "right": 768
+      },
+      "bad": []
+    },
+    "expanded": {
+      "viewport": 768,
+      "document": 768,
+      "section": {
+        "width": 768,
+        "left": 0,
+        "right": 768
+      },
+      "bad": []
+    }
+  },
+  {
+    "name": "responsive 1024px",
+    "passed": true,
+    "durationMs": 1402,
+    "closed": {
+      "viewport": 1024,
+      "document": 1024,
+      "section": {
+        "width": 1024,
+        "left": 0,
+        "right": 1024
+      },
+      "bad": []
+    },
+    "expanded": {
+      "viewport": 1024,
+      "document": 1024,
+      "section": {
+        "width": 1024,
+        "left": 0,
+        "right": 1024
+      },
+      "bad": []
+    }
+  },
+  {
+    "name": "responsive 1440px",
+    "passed": true,
+    "durationMs": 1463,
+    "closed": {
+      "viewport": 1440,
+      "document": 1440,
+      "section": {
+        "width": 1440,
+        "left": 0,
+        "right": 1440
+      },
+      "bad": []
+    },
+    "expanded": {
+      "viewport": 1440,
+      "document": 1440,
+      "section": {
+        "width": 1440,
+        "left": 0,
+        "right": 1440
+      },
+      "bad": []
+    }
+  }
+]

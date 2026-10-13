@@ -1,0 +1,23 @@
+{
+  "started": "2026-10-13T23:54:07.497Z",
+  "tests": [
+    {
+      "name": "mobile touch swipes, hotspot swipe suppression, click hotspot, backward",
+      "passed": true,
+      "ms": 6298,
+      "detail": {
+        "frames": 800,
+        "issues": [],
+        "states": {
+          "idle": 438,
+          "turning": 359,
+          "preparing": 3
+        },
+        "maxLayers": 1
+      }
+    }
+  ],
+  "console": [],
+  "finished": "2026-10-13T23:54:14.292Z",
+  "artifactDirectory": "D:\\Agency\\vivatiles\\work\\brochure-turns\\run-1791935647497"
+}

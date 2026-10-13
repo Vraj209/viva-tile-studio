@@ -1,0 +1,271 @@
+[
+  {
+    "name": "transition 320px",
+    "passed": true,
+    "geometry": {
+      "viewport": 320,
+      "document": 320,
+      "section": {
+        "left": 0,
+        "right": 320,
+        "top": 96.171875,
+        "bottom": 1383.484375,
+        "width": 320,
+        "height": 1287.3125
+      },
+      "surface": {
+        "left": 12,
+        "right": 308,
+        "top": 120.171875,
+        "bottom": 1359.484375,
+        "width": 296,
+        "height": 1239.3125
+      },
+      "footer": {
+        "left": 0,
+        "right": 320,
+        "top": 1383.484375,
+        "bottom": 1893.390625,
+        "width": 320,
+        "height": 509.90625
+      },
+      "bad": []
+    },
+    "closed": {
+      "submitTop": 336.484375,
+      "submitBottom": 398.484375,
+      "footerTop": 455.484375,
+      "height": 844
+    },
+    "expanded": {
+      "submitTop": 336.40625,
+      "submitBottom": 398.40625,
+      "footerTop": 455.40625,
+      "height": 844
+    }
+  },
+  {
+    "name": "transition 390px",
+    "passed": true,
+    "geometry": {
+      "viewport": 390,
+      "document": 390,
+      "section": {
+        "left": 0,
+        "right": 390,
+        "top": 96.078125,
+        "bottom": 1343.3125,
+        "width": 390,
+        "height": 1247.234375
+      },
+      "surface": {
+        "left": 16,
+        "right": 374,
+        "top": 120.078125,
+        "bottom": 1319.3125,
+        "width": 358,
+        "height": 1199.234375
+      },
+      "footer": {
+        "left": 0,
+        "right": 390,
+        "top": 1343.3125,
+        "bottom": 1853.21875,
+        "width": 390,
+        "height": 509.90625
+      },
+      "bad": []
+    },
+    "closed": {
+      "submitTop": 336.3125,
+      "submitBottom": 398.3125,
+      "footerTop": 455.3125,
+      "height": 844
+    },
+    "expanded": {
+      "submitTop": 337.234375,
+      "submitBottom": 399.234375,
+      "footerTop": 456.234375,
+      "height": 844
+    }
+  },
+  {
+    "name": "transition 768px",
+    "passed": true,
+    "geometry": {
+      "viewport": 768,
+      "document": 768,
+      "section": {
+        "left": 0,
+        "right": 768,
+        "top": 95.578125,
+        "bottom": 1374.75,
+        "width": 768,
+        "height": 1279.171875
+      },
+      "surface": {
+        "left": 24,
+        "right": 744,
+        "top": 135.578125,
+        "bottom": 1334.75,
+        "width": 720,
+        "height": 1199.171875
+      },
+      "footer": {
+        "left": 0,
+        "right": 768,
+        "top": 1374.75,
+        "bottom": 1884.65625,
+        "width": 768,
+        "height": 509.90625
+      },
+      "bad": []
+    },
+    "closed": {
+      "submitTop": 379.75,
+      "submitBottom": 441.75,
+      "footerTop": 518.75,
+      "height": 960
+    },
+    "expanded": {
+      "submitTop": 379.40625,
+      "submitBottom": 441.40625,
+      "footerTop": 518.40625,
+      "height": 960
+    }
+  },
+  {
+    "name": "transition 1024px",
+    "passed": true,
+    "geometry": {
+      "viewport": 1024,
+      "document": 1024,
+      "section": {
+        "left": 0,
+        "right": 1024,
+        "top": 111.671875,
+        "bottom": 877.046875,
+        "width": 1024,
+        "height": 765.375
+      },
+      "surface": {
+        "left": 57.34375,
+        "right": 966.65625,
+        "top": 157.75,
+        "bottom": 830.96875,
+        "width": 909.3125,
+        "height": 673.21875
+      },
+      "footer": {
+        "left": 0,
+        "right": 1024,
+        "top": 877.046875,
+        "bottom": 1278.546875,
+        "width": 1024,
+        "height": 401.5
+      },
+      "bad": []
+    },
+    "closed": {
+      "submitTop": 405.96875,
+      "submitBottom": 467.96875,
+      "footerTop": 558.046875,
+      "height": 960
+    },
+    "expanded": {
+      "submitTop": 406.8125,
+      "submitBottom": 468.8125,
+      "footerTop": 558.890625,
+      "height": 960
+    }
+  },
+  {
+    "name": "transition 1440px",
+    "passed": true,
+    "geometry": {
+      "viewport": 1440,
+      "document": 1440,
+      "section": {
+        "left": 0,
+        "right": 1440,
+        "top": 111.59375,
+        "bottom": 1033.390625,
+        "width": 1440,
+        "height": 921.796875
+      },
+      "surface": {
+        "left": 80.625,
+        "right": 1359.375,
+        "top": 176.390625,
+        "bottom": 968.59375,
+        "width": 1278.75,
+        "height": 792.203125
+      },
+      "footer": {
+        "left": 0,
+        "right": 1440,
+        "top": 1033.390625,
+        "bottom": 1434.890625,
+        "width": 1440,
+        "height": 401.5
+      },
+      "bad": []
+    },
+    "closed": {
+      "submitTop": 286.078125,
+      "submitBottom": 348.078125,
+      "footerTop": 558.390625,
+      "height": 960
+    },
+    "expanded": {
+      "submitTop": 369.734375,
+      "submitBottom": 431.734375,
+      "footerTop": 558,
+      "height": 960
+    }
+  },
+  {
+    "name": "homepage footer anchors and keyboard focus",
+    "passed": true
+  },
+  {
+    "name": "brochures footer 390px",
+    "passed": true,
+    "geometry": {
+      "viewport": 390,
+      "document": 390,
+      "section": null,
+      "footer": {
+        "left": 0,
+        "right": 390,
+        "top": 2677.59375,
+        "bottom": 3187.828125,
+        "width": 390,
+        "height": 510.234375
+      },
+      "bad": []
+    }
+  },
+  {
+    "name": "brochures footer 1440px",
+    "passed": true,
+    "geometry": {
+      "viewport": 1440,
+      "document": 1440,
+      "section": null,
+      "footer": {
+        "left": 0,
+        "right": 1440,
+        "top": 1378.296875,
+        "bottom": 1779.796875,
+        "width": 1440,
+        "height": 401.5
+      },
+      "bad": []
+    }
+  },
+  {
+    "name": "normal-motion transition remains steady",
+    "passed": true
+  }
+]

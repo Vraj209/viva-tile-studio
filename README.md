@@ -6,6 +6,8 @@ The page includes a readable hero, four-beat transformation, three application n
 
 ## Run locally
 
+The separate owner application is in [`owner-app/`](owner-app/README.md). It has its own login, password reset, inquiry inbox, and deployment. Run `cd owner-app` then `npm run dev` to open it on port 3001. Owner email approval and first-account activation are described in its README.
+
 Use Node.js 20.9 or later; this project was built with Node.js 24.13.0. From the project folder:
 
 ```sh

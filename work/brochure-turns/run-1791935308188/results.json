@@ -1,0 +1,170 @@
+{
+  "started": "2026-10-13T23:48:28.188Z",
+  "tests": [
+    {
+      "name": "desktop first open, repeated forward/back, rapid clicks, tactile drag, product controls",
+      "passed": true,
+      "ms": 9664,
+      "detail": {
+        "firstRequests": 6,
+        "frames": 1269,
+        "issues": [],
+        "states": {
+          "idle": 336,
+          "turning": 918,
+          "preparing": 15
+        },
+        "maxLayers": 1
+      }
+    },
+    {
+      "name": "mobile touch swipes, hotspot swipe suppression, click hotspot, backward",
+      "passed": true,
+      "ms": 5485,
+      "detail": {
+        "frames": 691,
+        "issues": [],
+        "states": {
+          "idle": 319,
+          "turning": 369,
+          "preparing": 3
+        },
+        "maxLayers": 1
+      }
+    },
+    {
+      "name": "delayed jump beyond five seconds retains the same decoded current page nodes",
+      "passed": true,
+      "ms": 8700,
+      "detail": {
+        "frames": 1154,
+        "issues": [],
+        "states": {
+          "idle": 130,
+          "turning": 83,
+          "preparing": 941
+        },
+        "maxLayers": 1
+      }
+    },
+    {
+      "name": "first opening keeps the decoded cover when first spread takes over five seconds",
+      "passed": true,
+      "ms": 8494,
+      "detail": {
+        "frames": 1122,
+        "issues": [],
+        "states": {
+          "idle": 113,
+          "preparing": 927,
+          "turning": 82
+        },
+        "maxLayers": 1
+      }
+    },
+    {
+      "name": "failed destination preserves current pages and succeeds on retry",
+      "passed": true,
+      "ms": 2391,
+      "detail": {
+        "frames": 245,
+        "issues": [],
+        "states": {
+          "idle": 159,
+          "turning": 83,
+          "preparing": 3
+        },
+        "maxLayers": 1
+      }
+    },
+    {
+      "name": "reduced motion keeps image readiness while using stable immediate transitions",
+      "passed": true,
+      "ms": 1166,
+      "detail": {
+        "frames": 70,
+        "issues": [],
+        "states": {
+          "idle": 63,
+          "preparing": 7
+        },
+        "maxLayers": 0
+      }
+    },
+    {
+      "name": "live reduced motion toggle and resize interrupt an active turn cleanly",
+      "passed": true,
+      "ms": 2765,
+      "detail": {
+        "frames": 294,
+        "issues": [],
+        "states": {
+          "idle": 128,
+          "preparing": 6,
+          "turning": 160
+        },
+        "maxLayers": 1
+      }
+    },
+    {
+      "name": "mobile to desktop layout retains its current surface while the facing page loads",
+      "passed": true,
+      "ms": 2782,
+      "detail": {
+        "frames": 302,
+        "issues": [],
+        "states": {
+          "idle": 121,
+          "turning": 82,
+          "preparing": 99
+        },
+        "maxLayers": 1
+      }
+    },
+    {
+      "name": "other collections open, navigate and keep correct final page bounds and endpaper",
+      "passed": true,
+      "ms": 9211,
+      "detail": [
+        {
+          "title": "Artful Surfaces",
+          "frames": 578,
+          "issues": [],
+          "states": {
+            "idle": 163,
+            "turning": 386,
+            "preparing": 29
+          },
+          "maxLayers": 1
+        },
+        {
+          "title": "New Poster Collection",
+          "frames": 548,
+          "issues": [],
+          "states": {
+            "idle": 153,
+            "turning": 386,
+            "preparing": 9
+          },
+          "maxLayers": 1
+        }
+      ]
+    }
+  ],
+  "console": [
+    {
+      "scenario": "failure",
+      "kind": "console",
+      "message": "Failed to load resource: net::ERR_FAILED",
+      "location": {
+        "url": "http://127.0.0.1:3000/brochures/evoke/page-026.webp",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    }
+  ],
+  "finished": "2026-10-13T23:49:19.331Z",
+  "artifactDirectory": "D:\\Agency\\vivatiles\\work\\brochure-turns\\run-1791935308188"
+}

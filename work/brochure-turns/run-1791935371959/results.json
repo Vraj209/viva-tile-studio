@@ -1,0 +1,14 @@
+{
+  "started": "2026-10-13T23:49:31.959Z",
+  "tests": [
+    {
+      "name": "mobile touch swipes, hotspot swipe suppression, click hotspot, backward",
+      "passed": false,
+      "ms": 15398,
+      "error": "page.waitForFunction: Timeout 12000ms exceeded.\n    at settled (D:\\Agency\\vivatiles\\work\\brochure-turns\\verify.cjs:71:14)\n    at D:\\Agency\\vivatiles\\work\\brochure-turns\\verify.cjs:177:15\n    at async check (D:\\Agency\\vivatiles\\work\\brochure-turns\\verify.cjs:17:20)\n    at async D:\\Agency\\vivatiles\\work\\brochure-turns\\verify.cjs:147:5"
+    }
+  ],
+  "console": [],
+  "finished": "2026-10-13T23:49:47.833Z",
+  "artifactDirectory": "D:\\Agency\\vivatiles\\work\\brochure-turns\\run-1791935371959"
+}

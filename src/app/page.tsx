@@ -32,11 +32,11 @@ export default function Page() {
         <section className="manifesto" data-motion="editorial">
           <span className="eyebrow" data-motion-item>THE VAVI PHILOSOPHY</span>
           <p data-motion-item>
-            Instead of designing your room
+            Instead of designing your room{" "}
             <br />
             around the tile,{" "}
             <em>
-              design the tile
+              design the tile{" "}
               <br />
               around your room.
             </em>

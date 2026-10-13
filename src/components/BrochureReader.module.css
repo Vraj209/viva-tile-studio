@@ -26,7 +26,7 @@
 .pageSelect:focus-within { outline: 2px solid var(--forest); outline-offset: 3px; }
 .totalPages { color: var(--muted); margin-left: 7px; }
 .instructions { font-size: 10px; color: var(--muted); }
-.arena { position: absolute; inset: 100px 0 88px; display: grid; place-items: center; perspective: 2200px; visibility: hidden; touch-action: pinch-zoom; user-select: none; cursor: grab; --page-height: min(calc(100dvh - 252px), calc((100vw - 180px) / (2 * var(--page-ratio)))); --page-width: calc(var(--page-height) * var(--page-ratio)); }
+.arena { position: absolute; inset: 100px 0 88px; display: grid; place-items: center; perspective: 2200px; visibility: hidden; touch-action: pinch-zoom; user-select: none; cursor: grab; --page-columns: 2; --page-height: min(calc(100dvh - 252px), calc((100vw - 180px) / (var(--page-columns) * var(--page-ratio)))); --page-width: calc(var(--page-height) * var(--page-ratio)); }
 .arena:active { cursor: grabbing; }
 .bookViewport { width: calc(2 * var(--page-width)); height: var(--page-height); perspective: 2200px; }
 .bookOffset { width: 100%; height: 100%; transform-style: preserve-3d; }
@@ -34,6 +34,10 @@
 .leftPage, .rightPage { position: absolute; top: 0; height: 100%; width: 50%; background: #e0d8c9; outline: 1px solid #766c5c50; box-shadow: 0 3px 0 #d0c5b4, 0 5px 0 #f0e9df, 0 7px 0 #b0a18d, 0 20px 30px #50453425, 0 35px 55px #50453417; }
 .leftPage { left: 0; }
 .rightPage { right: 0; }
+.reader[data-compact="true"] .arena { --page-columns: 1; }
+.reader[data-compact="true"] .bookViewport { width: var(--page-width); overflow: visible; }
+.reader[data-compact="true"] .rightPage { width: 100%; }
+.reader[data-compact="true"] .turnLayer { left: 0; width: 100%; }
 .openBook[data-cover="true"] .leftPage, .openBook[data-cover="true"] .binding { visibility: hidden; }
 .paperPage { width: 100%; height: 100%; position: relative; background: #ece5d9; overflow: hidden; }
 .paperPage img { object-fit: fill; }
@@ -45,6 +49,8 @@
 .endpaper > span { font: 400 38px/1 var(--serif); letter-spacing: .1em; }
 .endpaper small { font-size: 9px; }
 .turnLayer { position: absolute; z-index: 5; inset: 0 0 0 50%; width: 50%; height: 100%; transform-style: preserve-3d; pointer-events: none; }
+.turnLayer[data-compact-turn="true"] { overflow: hidden; transform-style: flat; perspective: 1600px; }
+.compactLeaf { position: absolute; inset: 0; background-size: 100% 100%; background-repeat: no-repeat; backface-visibility: hidden; will-change: transform; }
 .strip { position: absolute; top: 0; left: 0; height: 100%; transform-style: preserve-3d; transform-origin: left center; will-change: transform; }
 .stripFront, .stripBack { position: absolute; inset: 0; backface-visibility: hidden; background-color: #e6dfd3; background-repeat: no-repeat; }
 .stripFront::after, .stripBack::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, #fff4, #18130bb3); opacity: var(--leaf-shade, 0); }
@@ -105,11 +111,8 @@
   .pagination { gap: 18px; }
   .pagination button { width: 42px; height: 42px; }
   .pageSelect { min-width: 128px; }
-  .arena { inset: 85px 0 128px; --page-height: min(calc(100dvh - 265px), calc((100vw - 60px) / var(--page-ratio))); }
+  .arena { inset: 85px 0 128px; --page-height: min(calc(100dvh - 265px), calc((100vw - 60px) / (var(--page-columns) * var(--page-ratio)))); }
   .openingStatus { bottom: 140px; }
-  .bookViewport { width: var(--page-width); overflow: visible; }
-  .rightPage { width: 100%; }
-  .turnLayer { left: 0; width: 100%; }
   .overview { top: 86px; bottom: 129px; padding: 22px; }
   .zoomPane { top: 86px; bottom: 129px; }
   .thumbnailGrid { gap: 17px 10px; }
@@ -122,4 +125,10 @@
   .arena { inset-block: 65px; --page-height: calc(100dvh - 155px); }
   .overview, .zoomPane { inset-block: 66px; }
 }
-@media (prefers-reduced-motion: reduce) { .reader::backdrop, .reader::before { animation: none; } .productHotspot > span, .productHotspot::before { transition: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .reader::backdrop, .reader::before { animation: none; }
+  /* The global .01ms rule otherwise transitions inherited visibility through
+     each nested surface, producing blank frames even with decoded images. */
+  .arena, .arena * { transition-property: none !important; }
+  .productHotspot > span, .productHotspot::before { transition: none; }
+}
