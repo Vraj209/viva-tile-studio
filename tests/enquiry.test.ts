@@ -40,16 +40,16 @@ function services(extra: Parameters<typeof handleEnquiry>[1] = {}) {
 }
 
 test("unconfigured and unsafe configurations are honestly unavailable", async () => {
-  assert.deepEqual(enquiryAvailability({}), { available: false });
+  assert.deepEqual(enquiryAvailability({}), { available: false, uploadsAvailable: false });
   assert.deepEqual(
     enquiryAvailability({ ENQUIRY_WEBHOOK_URL: "http://receiver.example" }),
-    { available: false },
+    { available: false, uploadsAvailable: false },
   );
   assert.deepEqual(
     enquiryAvailability({
       ENQUIRY_STORAGE_DIR: path.resolve("public", "uploads"),
     }),
-    { available: false },
+    { available: false, uploadsAvailable: false },
   );
   assert.equal(
     (await handleEnquiry(request(), services({ env: {} }))).status,
@@ -265,13 +265,58 @@ test("invalid calendar dates are rejected", async () => {
   assert.ok((await validateEnquiry(data)).errors.desiredDate);
 });
 
-test("Neon availability requires complete configuration and rejects conflicting adapters", () => {
-  assert.deepEqual(enquiryAvailability(neonEnv), { available: true });
-  assert.deepEqual(enquiryAvailability({ DATABASE_URL: neonEnv.DATABASE_URL }), { available: false });
-  assert.deepEqual(enquiryAvailability({ ...neonEnv, DATABASE_URL: "not-a-url" }), { available: false });
-  assert.deepEqual(enquiryAvailability({ ...neonEnv, ...webhookEnv }), { available: false });
-  assert.deepEqual(enquiryAvailability({ ...neonEnv, ENQUIRY_STORAGE_DIR: path.resolve("private-enquiries") }), { available: false });
-  assert.deepEqual(enquiryAvailability({ ...neonEnv, AWS_ENDPOINT_URL_S3: "http://storage.example.test" }), { available: false });
+test("availability separates enquiry storage from attachment storage and rejects conflicting adapters", () => {
+  const available = { available: true, uploadsAvailable: true };
+  const databaseOnly = { available: true, uploadsAvailable: false };
+  const unavailable = { available: false, uploadsAvailable: false };
+  assert.deepEqual(enquiryAvailability(neonEnv), available);
+  assert.deepEqual(enquiryAvailability(webhookEnv), available);
+  assert.deepEqual(enquiryAvailability({ ENQUIRY_STORAGE_DIR: path.resolve("private-enquiries") }), available);
+  assert.deepEqual(enquiryAvailability({ DATABASE_URL: neonEnv.DATABASE_URL }), databaseOnly);
+  assert.deepEqual(enquiryAvailability({ ...neonEnv, DATABASE_URL: "not-a-url" }), unavailable);
+  assert.deepEqual(enquiryAvailability({ ...neonEnv, ...webhookEnv }), unavailable);
+  assert.deepEqual(enquiryAvailability({ ...neonEnv, ENQUIRY_STORAGE_DIR: path.resolve("private-enquiries") }), unavailable);
+  assert.deepEqual(enquiryAvailability({ ...neonEnv, AWS_ENDPOINT_URL_S3: "http://storage.example.test" }), databaseOnly);
+  assert.deepEqual(enquiryAvailability({ ...neonEnv, AWS_SECRET_ACCESS_KEY: "" }), databaseOnly);
+});
+
+test("database-only enquiries are accepted after persistence without uploading", async () => {
+  let saved = false;
+  const result = await handleEnquiry(request(), services({
+    env: { DATABASE_URL: neonEnv.DATABASE_URL },
+    persistNeon: async (config, record, upload) => {
+      assert.equal(config.storage, null);
+      assert.equal(record.name, "A Designer");
+      assert.equal(record.email, "designer@example.com");
+      assert.equal(record.idea, "A botanical wall for a reading room.");
+      assert.equal(record.inspiration, null);
+      assert.equal(upload, undefined);
+      saved = true;
+    },
+  }));
+  assert.equal(saved, true);
+  assert.equal(result.status, 201);
+  assert.match((await result.json()).reference, /^[0-9a-f-]{36}$/);
+});
+
+test("attachments without usable storage get a field error without persisting the enquiry", async () => {
+  for (const env of [
+    { DATABASE_URL: neonEnv.DATABASE_URL },
+    { ...neonEnv, AWS_ENDPOINT_URL_S3: "http://storage.example.test" },
+  ]) {
+    const data = form();
+    data.set("inspiration", new Blob(["%PDF-1.4\nconcept"], { type: "application/pdf" }), "concept.pdf");
+    const result = await handleEnquiry(request(data), services({
+      env,
+      persistNeon: async () => assert.fail("No persistence when attachment storage is unavailable"),
+    }));
+    assert.equal(result.status, 422);
+    const body = await result.json();
+    assert.deepEqual(body.errors, {
+      inspiration: "Attachments are currently unavailable. Remove the file to send your enquiry.",
+    });
+    assert.equal(body.reference, undefined);
+  }
 });
 
 test("Neon submission passes validated fields and attachment to persistence before confirming receipt", async () => {

@@ -93,7 +93,12 @@ function configuration(env: Environment): DeliveryConfig | null {
 }
 
 export function enquiryAvailability(env: Environment = process.env) {
-  return { available: configuration(env) !== null };
+  const config = configuration(env);
+  return {
+    available: config !== null,
+    uploadsAvailable: config !== null &&
+      (config.kind !== "neon" || config.storage !== null),
+  };
 }
 
 function response(status: number, message: string, extra: object = {}) {
@@ -386,6 +391,9 @@ export async function handleEnquiry(
       400,
       "The form contains unsupported or repeated fields. Please reload the page and try again.",
     );
+  if (upload && config.kind === "neon" && !config.storage)
+    errors.inspiration =
+      "Attachments are currently unavailable. Remove the file to send your enquiry.";
   if (Object.keys(errors).length)
     return response(
       422,

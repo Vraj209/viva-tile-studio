@@ -1,25 +1,27 @@
 # Project enquiry integration
 
-The form is intentionally unavailable until a real delivery or private storage adapter is configured. `GET /api/enquiry` exposes only `{ "available": boolean }`. `POST /api/enquiry` accepts multipart form data and returns success only after completed Neon persistence, upstream HTTP 2xx acceptance or completed private filesystem persistence. Neon uses the existing server-side Next.js handler: the browser receives no database or bucket credentials, and enquiries do not use the AI Gateway.
+Submissions require a real delivery or private storage adapter. `GET /api/enquiry` exposes `{ "available": boolean, "uploadsAvailable": boolean }`, reflecting configured enquiry and attachment capabilities without exposing credentials. `POST /api/enquiry` accepts multipart form data and returns success only after completed Neon persistence, upstream HTTP 2xx acceptance or completed private filesystem persistence. Neon uses the server-side Next.js handler; enquiries do not use the AI Gateway.
 
 ## Configure one adapter
 
 Set server-only environment variables in `.env.local` or the deployment's secret settings. Never prefix these variables with `NEXT_PUBLIC_`.
 
-### Neon database and private object storage
+### Neon database and optional private object storage
 
-Use the Postgres connection and storage credentials for the same Neon branch. `.env.example` lists the variables with empty credentials:
+Use the same Postgres database in the public deployment and owner dashboard. Add storage credentials for that Neon branch when attachments are needed. `.env.example` lists the variables with empty credentials:
 
 | Variable | Purpose |
 | --- | --- |
 | `DATABASE_URL` | Application connection, using a valid `postgresql://` or `postgres://` URL; a pooled connection is appropriate. |
 | `DATABASE_URL_UNPOOLED` | Direct connection for migrations; hosts containing `-pooler` are rejected by the migration runner. |
-| `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY` | Server-only storage credentials. |
-| `AWS_ENDPOINT_URL_S3` | HTTPS S3 endpoint for the selected branch. |
-| `AWS_REGION` | Storage region. |
+| `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY` | Optional server-only attachment storage credentials. |
+| `AWS_ENDPOINT_URL_S3` | Optional HTTPS S3 endpoint for the selected branch. |
+| `AWS_REGION` | Optional storage region. |
 | `ENQUIRY_STORAGE_BUCKET` | Optional private bucket name, defaulting to `viva-tile-studio`. |
 
-When `DATABASE_URL` is set, the app selects Neon and requires all four storage settings even for enquiries without attachments. Invalid Neon settings leave the form unavailable. Leave `ENQUIRY_WEBHOOK_URL` and `ENQUIRY_STORAGE_DIR` empty; a database connection combined with either legacy adapter is a configuration conflict, not a fallback.
+When a valid `DATABASE_URL` is set, the app accepts enquiries without attachments. All four storage settings and a valid bucket name are required to enable uploads. Missing, incomplete or invalid storage settings disable attachments only: availability returns `{ "available": true, "uploadsAvailable": false }`, and a submitted file receives an HTTP 422 `inspiration` field error before any enquiry is saved. Remove the file to submit the remaining details. Invalid database settings prevent all submissions.
+
+Leave `ENQUIRY_WEBHOOK_URL` and `ENQUIRY_STORAGE_DIR` empty when using Neon; a database connection combined with either legacy adapter is a configuration conflict. Configure these server-only values on the public deployment as well as the dashboard; setting up an owner account alone does not configure the public application's database connection.
 
 Create the table before enabling submissions:
 
@@ -35,7 +37,7 @@ For enquiries with an attachment, the handler uploads it first, then inserts the
 
 ### Staff review and attachments
 
-Neon persistence does not send email or staff notifications. Authorized staff can review recent enquiries in a restricted SQL session:
+Neon persistence does not send email or staff notifications. Authorized staff can review enquiries in the separate [owner dashboard](../owner-app/README.md), connected to the same database, or in a restricted SQL session:
 
 ```sql
 SELECT reference, received_at, name, email, idea,
@@ -48,7 +50,7 @@ ORDER BY received_at DESC
 LIMIT 100;
 ```
 
-Retrieve attachments using authenticated bucket access on the same branch and the stored bucket/key. Keep `viva-tile-studio` private; this app provides no public attachment endpoint or staff inbox. Review database rows and objects together when reconciling an uncertain write. Do not copy personal enquiry data into application logs, analytics or public issue trackers. Agree staff access and a retention process covering both rows and objects before launch.
+Retrieve attachments through the authenticated owner dashboard or authenticated bucket access on the same branch and the stored bucket/key. Keep `viva-tile-studio` private; the public application provides no public attachment endpoint. Review database rows and objects together when reconciling an uncertain write. Do not copy personal enquiry data into application logs, analytics or public issue trackers. Agree staff access and a retention process covering both rows and objects before launch.
 
 ### HTTPS webhook
 
@@ -68,7 +70,7 @@ ENQUIRY_STORAGE_DIR=C:\absolute\private\vavi-enquiries
 
 Leave `DATABASE_URL` and `ENQUIRY_WEBHOOK_URL` unset. Use an absolute path **outside any web-served directory**, with a persistent writable volume in production. Paths with a `public` segment are rejected; runtime realpath checks also reject a link into this project's public folder. This adapter is suitable for self-hosting or local verification. Do not use an ephemeral serverless filesystem for real leads. Its presence is explicit opt-in: the app never selects it automatically. It persists enquiries without sending notifications; arrange a real operational process to review that directory before enabling it for visitors. Each accepted UUID directory contains `enquiry.json` and an optional `inspiration.jpg`, `.png`, `.webp` or `.pdf`. Writes use a private staging directory and atomic rename before success. Files request mode `0600`, directories `0700`; configure equivalent restricted ACLs on Windows. Do not expose the directory in a static server or publish it to source control.
 
-Set exactly one adapter. Missing, malformed, or conflicting configuration reports unavailable. Configuration availability does not imply database, bucket or receiver health; runtime failures return an honest error and keep the entered information. Restart the app after changing environment values. Required field policy and project/application choices live in `src/lib/enquiry-config.ts` for owner review.
+Set exactly one adapter. A missing or invalid adapter, or conflicting adapters, reports `available: false`; missing or invalid Neon attachment storage reports only `uploadsAvailable: false`. Configuration availability does not imply database, bucket or receiver health; runtime failures return an honest error and keep the entered information. Restart the app after changing environment values. Required field policy and project/application choices live in `src/lib/enquiry-config.ts` for owner review.
 
 ## Validation and protection
 
@@ -81,7 +83,7 @@ Set exactly one adapter. Missing, malformed, or conflicting configuration report
 
 ## Frontend behavior
 
-The initial unavailable state and availability retry are explicit. Native labels, required fields, keyboard navigation, visible focus, pending/error/success announcements and a native optional-details accordion keep the form usable. Native HTML validation covers missing/invalid required fields before sending. Server errors focus the first affected field and open optional details if necessary. Network and validation errors preserve all field values and the selected file. Confirmed submission shows the returned reference. “Start another enquiry” is the only automatic reset action.
+The form submits directly without an availability banner or preflight gate. A background capability request controls whether the optional upload field appears; its failure does not prevent submitting the project details. Native labels, required fields, keyboard navigation, visible focus, pending/error/success announcements and a native optional-details accordion keep the form usable. Native HTML validation covers missing/invalid required fields before sending. Server errors focus the first affected field and open optional details if necessary. Network and validation errors preserve all field values and the selected file. Confirmed submission shows the returned reference. “Start another enquiry” is the only automatic reset action.
 
 Application links can dispatch this event and then navigate to `#enquiry`:
 
@@ -95,13 +97,15 @@ An incoming `?projectType=Residential&application=Feature%20wall#enquiry` URL al
 
 ## Verification
 
-Run `npx tsx --test tests/enquiry.test.ts` (or the project's test script). Tests exercise unconfigured states, origin checks, field validation, duplicate/unknown fields, honeypot, content-type/signature/extension/size limits, streamed size limits, successful and failed webhooks, actual private filesystem persistence, rate-limit expiry, untrusted proxy headers and invalid dates. Webhook tests use a local test double to verify acceptance behavior; they do not prove a real deployment receiver is configured. Before launch, run one actual enquiry through the selected integration, verify receipt and staff visibility, and verify an upstream failure retains entered information in the browser. Remove local verification records afterward.
+Run `npx tsx --test tests/enquiry.test.ts tests/enquiry-neon.test.ts` (or the project's test script). Tests exercise database-only submissions, optional attachment capability, rejection of files without storage, unconfigured states, origin checks, field validation, duplicate/unknown fields, honeypot, content-type/signature/extension/size limits, streamed size limits, successful and failed webhooks, actual private filesystem persistence, rate-limit expiry, untrusted proxy headers and invalid dates. Webhook tests use a local test double to verify acceptance behavior; they do not prove a real deployment receiver is configured. Before launch, run one actual enquiry through the selected integration, verify receipt and staff visibility, and verify an upstream failure retains entered information in the browser. Remove local verification records afterward.
 
 For Neon integration verification, use an isolated branch with matching database and bucket credentials. Apply the migration, submit an enquiry without a file and one with a valid file, then verify each database row and the attachment bytes through authenticated storage access. Verify that anonymous attachment access fails, and that invalid credentials or a failed write do not return a success reference. Test the failure path with a test double or the isolated branch. Check that database-plus-legacy adapter settings leave availability false. These steps are a verification procedure, not a claim that a deployed site has passed them; record executed checks and their target separately.
 
 Owner confirmations: form hierarchy, actual delivery recipient, private retention/access policy, a reviewed privacy notice and desired spam-control policy. No placeholder privacy/legal link is shown to visitors.
 
-### Neon integration checks — 27 September 2026
+### Historical Neon integration checks — 27 September 2026
+
+These results describe the implementation on that date, before separate attachment capability and direct form submission were added. They do not verify the current deployed application.
 
 Applied `001_project_enquiries.sql` twice on a temporary branch of `damp-tree-75169454` to verify repeatable setup, then applied it to `production`. Live checks first exercised the handler on that branch, then `GET/POST /api/enquiry` through the locally running production build at `http://127.0.0.1:3101` using the production Neon credentials:
 
@@ -112,7 +116,7 @@ Applied `001_project_enquiries.sql` twice on a temporary branch of `damp-tree-75
 - Removed all four synthetic records and their two attachments across the test and production branches.
 - All 33 automated tests, TypeScript checking, ESLint, and the production build passed. This verifies real HTTP/database/storage behavior; it is not a new browser UI test or a hosted app deployment.
 
-The opt-in live check creates two synthetic records and cleans them up. Prefer a temporary branch and load its environment file explicitly:
+The opt-in live check requires database and storage configuration, creates two synthetic records and cleans them up. Prefer a temporary branch and load its environment file explicitly:
 
 ```sh
 node --env-file=.env.neon-enquiry-test --import tsx scripts/verify-enquiries.mts
@@ -120,7 +124,9 @@ node --env-file=.env.neon-enquiry-test --import tsx scripts/verify-enquiries.mts
 
 Set `ENQUIRY_TEST_BASE_URL` to a running local app's origin to exercise its HTTP endpoint; otherwise the script calls the same handler directly. The app server and script must use credentials for the same Neon branch. The temporary file is gitignored; do not commit credentials.
 
-### Earlier unconfigured-server HTTP checks — 24 September 2026
+### Historical unconfigured-server HTTP checks — 24 September 2026
+
+These results preserve the earlier API response shape and form rendering; current behavior is described above.
 
 Verified against the running production build at `http://localhost:3001`, with no enquiry transport configured:
 

@@ -10,11 +10,13 @@ import { neonEnquiryConfiguration } from "../src/lib/enquiry-neon";
 async function verify() {
   const config = neonEnquiryConfiguration(process.env);
   assert.ok(config, "Neon database and storage configuration are required");
+  const storageConfig = config.storage;
+  assert.ok(storageConfig, "Private storage configuration is required for attachment verification");
   const sql = neon(config.databaseUrl);
   const storage = new S3Client({
-    endpoint: config.storage.endpoint,
-    region: config.storage.region,
-    credentials: config.storage,
+    endpoint: storageConfig.endpoint,
+    region: storageConfig.region,
+    credentials: storageConfig,
     forcePathStyle: true,
   });
   const base = process.env.ENQUIRY_TEST_BASE_URL;
@@ -28,7 +30,7 @@ async function verify() {
     const availability = base
       ? await (await fetch(`${origin}/api/enquiry`)).json()
       : enquiryAvailability();
-    assert.deepEqual(availability, { available: true });
+    assert.deepEqual(availability, { available: true, uploadsAvailable: true });
 
     for (const withFile of [false, true]) {
       const form = new FormData();
@@ -70,7 +72,7 @@ async function verify() {
         const object = await storage.send(new GetObjectCommand({ Bucket: config.bucket, Key: row.inspiration_key }));
         assert.equal(await object.Body?.transformToString(), fileBytes);
         assert.match(object.ContentDisposition ?? "", /^attachment;/);
-        const anonymousUrl = `${config.storage.endpoint.replace(/\/$/, "")}/${config.bucket}/${row.inspiration_key}`;
+        const anonymousUrl = `${storageConfig.endpoint.replace(/\/$/, "")}/${config.bucket}/${row.inspiration_key}`;
         const anonymous = await fetch(anonymousUrl);
         assert.ok([401, 403, 404].includes(anonymous.status), "Private attachment must reject anonymous reads");
         await anonymous.body?.cancel();

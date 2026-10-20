@@ -1,13 +1,15 @@
 /* Safe browser checks: all /api/enquiry GET and POST requests are mocked.
- * ENQUIRY_BASE_URL=http://127.0.0.1:3000 node work/enquiry-redesign/verify.cjs
+ * ENQUIRY_BASE_URL=http://127.0.0.1:3000 ENQUIRY_OUTPUT_DIR=/tmp/enquiry-checks node work/enquiry-redesign/verify.cjs
  * Uses the bundled Playwright runtime without changing application dependencies. */
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
+const os = require('node:os');
 const path = require('node:path');
-const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'C:/Users/Vraj Panchal/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const { chromium } = require(process.env.PLAYWRIGHT_MODULE || path.join(os.homedir(), '.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright'));
 
 const baseURL = process.env.ENQUIRY_BASE_URL || 'http://127.0.0.1:3000';
-const output = __dirname;
+const output = process.env.ENQUIRY_OUTPUT_DIR || __dirname;
+fs.mkdirSync(output, { recursive: true });
 const results = [];
 const reference = 'cb6d2e8a-a4bb-4db7-a875-bdd987bd98f7';
 const success = { status: 201, body: { message: 'Your enquiry has been received. Thank you for sharing your idea.', reference } };
@@ -19,15 +21,16 @@ function deferred() {
   return { promise, resolve };
 }
 
-async function harness(browser, options = {}, availabilityGate) {
+async function harness(browser, options = {}, capabilities = {}) {
   const context = await browser.newContext({ viewport: { width: 1440, height: 960 }, reducedMotion: 'reduce', ...options });
-  const state = { available: true, posts: [], gets: 0, next: success, availabilityGate, errors: [] };
+  const state = { available: true, uploadsAvailable: true, posts: [], gets: 0, next: success, errors: [], ...capabilities };
   await context.route('**/api/enquiry', async route => {
     const request = route.request();
     if (request.method() === 'GET') {
       state.gets++;
       if (state.availabilityGate) await state.availabilityGate.promise;
-      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ available: state.available }) });
+      if (state.capabilityAbort) return route.abort('failed');
+      return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ available: state.available, uploadsAvailable: state.uploadsAvailable }) });
     }
     if (request.method() === 'POST') {
       state.posts.push(request.postData() || '');
@@ -74,6 +77,12 @@ async function checkValues(page) {
   assert.equal(await page.locator('#enquiry-idea').inputValue(), 'A quiet botanical tile wall for a reading room.');
 }
 
+async function checkNoAvailabilityBanner(page) {
+  assert.equal(await page.locator('#enquiry').getByText('Checking enquiry availability…', { exact: true }).count(), 0);
+  assert.equal(await page.locator('#enquiry').getByText(/Online enquiries are currently unavailable/).count(), 0);
+  assert.equal(await page.locator('#enquiry').getByRole('button', { name: /Check availability/i }).count(), 0);
+}
+
 async function checkLayout(page) {
   const geometry = await page.locator('#enquiry').evaluate(section => {
     const rect = section.getBoundingClientRect();
@@ -116,16 +125,14 @@ async function scenario(name, task) {
 (async () => {
   const browser = await chromium.launch({ channel: 'chrome', headless: true });
   try {
-    await scenario('availability, pending, success and reset', async () => {
+    await scenario('capability check, pending, success and reset', async () => {
       const checking = deferred();
-      const h = await harness(browser, {}, checking);
+      const h = await harness(browser, {}, { availabilityGate: checking });
       try {
         const { page, state } = h;
         await open(page);
-        assert(await page.locator('#enquiry button[type="submit"]').isDisabled(), 'Submit disabled while checking');
-        checking.resolve();
-        state.availabilityGate = null;
         await ready(page);
+        await checkNoAvailabilityBanner(page);
         await submit(page);
         assert.equal(state.posts.length, 0, 'Native required validation prevents empty submission');
         await fillRequired(page);
@@ -146,6 +153,7 @@ async function scenario(name, task) {
         await page.locator('#enquiry form').evaluate(form => form.requestSubmit());
         await tick(page);
         assert.equal(state.posts.length, 1, 'Pending state prevents duplicate requests');
+        assert(state.gets > 0, 'Upload capability is checked in the background');
         await checkValues(page);
         pending.resolve();
         await waitText(page, reference);
@@ -162,6 +170,32 @@ async function scenario(name, task) {
         return { mockedPosts: state.posts.length };
       } finally { checking.resolve(); await h.context.close(); }
     });
+
+    for (const [name, capabilities] of [
+      ['unavailable capability', { available: false }],
+      ['database-only capability', { uploadsAvailable: false }],
+      ['failed capability request', { capabilityAbort: true }],
+    ]) {
+      await scenario(`${name} permits text submission without upload`, async () => {
+        const h = await harness(browser, {}, capabilities);
+        try {
+          const { page, state } = h;
+          await open(page); await ready(page); await fillRequired(page);
+          await page.locator('#enquiry details summary').click();
+          await tick(page);
+          assert(state.gets > 0, 'Upload capability was requested');
+          await checkNoAvailabilityBanner(page);
+          assert.equal(await page.locator('#enquiry-inspiration').count(), 0, 'Unsupported uploads are not offered');
+          await submit(page);
+          await waitText(page, reference);
+          assert.equal(state.posts.length, 1, 'Capability response never blocks a text enquiry');
+          assert(!state.posts[0].includes('name="inspiration"'), 'Text enquiry has no attachment field');
+          await checkValues(page);
+          assert.deepEqual(state.errors, []);
+          return { mockedPosts: state.posts.length };
+        } finally { await h.context.close(); }
+      });
+    }
 
     await scenario('failure preservation and optional error focus', async () => {
       const h = await harness(browser);
@@ -186,21 +220,27 @@ async function scenario(name, task) {
       } finally { await h.context.close(); }
     });
 
-    await scenario('503 availability retry', async () => {
+    await scenario('503 preserves values and permits direct retry', async () => {
       const h = await harness(browser);
       try {
         const { page, state } = h;
         await open(page); await ready(page); await fillRequired(page);
         state.next = { status: 503, body: { message: 'Online enquiries are not connected yet. Your idea has not been sent.' } };
         await submit(page); await waitText(page, 'not connected yet');
-        assert(await page.locator('#enquiry button[type="submit"]').isDisabled());
-        await checkValues(page);
-        const before = state.gets;
-        await page.getByRole('button', { name: /Check availability/i }).click();
         await ready(page);
-        assert(state.gets > before, 'Retry rechecks availability');
+        await checkValues(page);
+        await checkNoAvailabilityBanner(page);
+        assert.equal(await page.locator('#enquiry').getByText(reference).count(), 0, '503 never shows success');
+        const before = state.gets;
+        assert.equal(state.posts.length, 1, 'Failed submissions are not retried automatically');
+        state.next = success;
+        await submit(page);
+        await waitText(page, reference);
+        assert.equal(state.posts.length, 2, 'Manual retry reaches the submission endpoint directly');
+        assert.equal(state.gets, before, 'Manual retry does not depend on another availability check');
         await checkValues(page);
         assert.deepEqual(state.errors, []);
+        return { mockedPosts: state.posts.length };
       } finally { await h.context.close(); }
     });
 
@@ -223,9 +263,9 @@ async function scenario(name, task) {
       const h = await harness(browser);
       try {
         const { page, state } = h;
-        await open(page, '?projectType=Hospitality&application=Custom%20mural&product=evoke-10465');
+        await open(page, '?projectType=Hospitality&application=Custom%20mural&product=artful-surfaces-01');
         await ready(page);
-        await page.waitForFunction(() => document.querySelector('#enquiry-idea')?.value.includes('Design 10465'));
+        await page.waitForFunction(() => document.querySelector('#enquiry-idea')?.value.includes('Golden cranes'));
         assert.equal(await page.locator('#enquiry-projectType').inputValue(), 'Hospitality');
         assert.equal(await page.locator('#enquiry-application').inputValue(), 'Custom mural');
         assert(await page.locator('#enquiry details').evaluate(el => el.open));

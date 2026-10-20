@@ -122,21 +122,6 @@
   color: var(--enquiry-muted);
   font-size: 12px;
 }
-.availability {
-  font-size: 13px;
-  line-height: 1.6;
-  color: var(--enquiry-muted);
-}
-.availability:not(:empty) {
-  margin-bottom: 24px;
-}
-.availability[data-unavailable] {
-  padding: 16px 18px;
-  border: 1px solid var(--enquiry-border);
-}
-.availability p {
-  margin: 0;
-}
 .form {
   display: grid;
   gap: 24px;

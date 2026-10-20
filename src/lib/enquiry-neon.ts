@@ -15,7 +15,7 @@ export type NeonEnquiryConfig = {
     secretAccessKey: string;
     endpoint: string;
     region: string;
-  };
+  } | null;
 };
 
 export type EnquiryRecord = EnquiryData & {
@@ -40,26 +40,19 @@ export type EnquiryNeonServices = {
   ) => Promise<unknown>;
 };
 
-export function neonEnquiryConfiguration(
+function storageConfiguration(
   env: Record<string, string | undefined>,
-): NeonEnquiryConfig | null {
-  const databaseUrl = env.DATABASE_URL?.trim();
+  bucket: string,
+): NeonEnquiryConfig["storage"] {
   const accessKeyId = env.AWS_ACCESS_KEY_ID?.trim();
   const secretAccessKey = env.AWS_SECRET_ACCESS_KEY?.trim();
   const endpoint = env.AWS_ENDPOINT_URL_S3?.trim();
   const region = env.AWS_REGION?.trim();
-  const bucket = env.ENQUIRY_STORAGE_BUCKET?.trim() || "viva-tile-studio";
-  if (!databaseUrl || !accessKeyId || !secretAccessKey || !endpoint || !region)
+  if (!accessKeyId || !secretAccessKey || !endpoint || !region)
     return null;
   try {
-    const database = new URL(databaseUrl);
     const storage = new URL(endpoint);
     if (
-      !["postgres:", "postgresql:"].includes(database.protocol) ||
-      !database.hostname ||
-      !database.username ||
-      !database.password ||
-      database.pathname.length < 2 ||
       storage.protocol !== "https:" ||
       storage.username ||
       storage.password ||
@@ -72,25 +65,47 @@ export function neonEnquiryConfiguration(
   } catch {
     return null;
   }
+  return { accessKeyId, secretAccessKey, endpoint, region };
+}
+
+export function neonEnquiryConfiguration(
+  env: Record<string, string | undefined>,
+): NeonEnquiryConfig | null {
+  const databaseUrl = env.DATABASE_URL?.trim();
+  if (!databaseUrl) return null;
+  try {
+    const database = new URL(databaseUrl);
+    if (
+      !["postgres:", "postgresql:"].includes(database.protocol) ||
+      !database.hostname ||
+      !database.username ||
+      !database.password ||
+      database.pathname.length < 2
+    )
+      return null;
+  } catch {
+    return null;
+  }
+  const bucket = env.ENQUIRY_STORAGE_BUCKET?.trim() || "viva-tile-studio";
   return {
     kind: "neon",
     databaseUrl,
     bucket,
-    storage: { accessKeyId, secretAccessKey, endpoint, region },
+    storage: storageConfiguration(env, bucket),
   };
 }
 
 async function putObject(
-  config: NeonEnquiryConfig,
+  storage: NonNullable<NeonEnquiryConfig["storage"]>,
   input: PutObjectCommandInput,
   signal: AbortSignal,
 ) {
   const client = new S3Client({
-    endpoint: config.storage.endpoint,
-    region: config.storage.region,
+    endpoint: storage.endpoint,
+    region: storage.region,
     credentials: {
-      accessKeyId: config.storage.accessKeyId,
-      secretAccessKey: config.storage.secretAccessKey,
+      accessKeyId: storage.accessKeyId,
+      secretAccessKey: storage.secretAccessKey,
     },
     // Neon requires path-style addressing for its branch-specific endpoint.
     forcePathStyle: true,
@@ -124,6 +139,8 @@ export async function persistNeonEnquiry(
     ? `enquiries/${record.reference}/inspiration.${upload.extension}`
     : null;
   if (upload) {
+    // Never accept an attachment unless it can be stored, including direct callers.
+    if (!config.storage) throw new Error("Enquiry attachments are not configured");
     const input: PutObjectCommandInput = {
       Bucket: config.bucket,
       Key: key!,
@@ -135,7 +152,7 @@ export async function persistNeonEnquiry(
       CacheControl: "private, no-store",
     };
     if (services.putObject) await services.putObject(input, signal);
-    else await putObject(config, input, signal);
+    else await putObject(config.storage, input, signal);
   }
 
   const sql =

@@ -16,19 +16,18 @@ import {
 } from "../lib/enquiry-config";
 import styles from "./ProjectEnquiry.module.css";
 
-type Availability = "checking" | "available" | "unavailable";
 type Submission = "idle" | "pending" | "error" | "success";
 
-async function fetchAvailability(
+async function fetchUploadCapability(
   signal?: AbortSignal,
-): Promise<Availability | null> {
+): Promise<boolean | null> {
   try {
     const result = await fetch("/api/enquiry", { cache: "no-store", signal });
-    if (!result.ok) return "unavailable";
+    if (!result.ok) return false;
     const data = await result.json();
-    return data.available === true ? "available" : "unavailable";
+    return data.available === true && data.uploadsAvailable !== false;
   } catch {
-    return signal?.aborted ? null : "unavailable";
+    return signal?.aborted ? null : false;
   }
 }
 
@@ -36,7 +35,7 @@ export default function ProjectEnquiry() {
   const formRef = useRef<HTMLFormElement>(null);
   const detailsRef = useRef<HTMLDetailsElement>(null);
   const messageRef = useRef<HTMLParagraphElement>(null);
-  const [availability, setAvailability] = useState<Availability>("checking");
+  const [uploadsAvailable, setUploadsAvailable] = useState(false);
   const [submission, setSubmission] = useState<Submission>("idle");
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<EnquiryErrors>({});
@@ -48,8 +47,8 @@ export default function ProjectEnquiry() {
 
   useEffect(() => {
     const controller = new AbortController();
-    void fetchAvailability(controller.signal).then((value) => {
-      if (value && !controller.signal.aborted) setAvailability(value);
+    void fetchUploadCapability(controller.signal).then((value) => {
+      if (value !== null && !controller.signal.aborted) setUploadsAvailable(value);
     });
     const applyContext = (detail: {
       projectType?: unknown;
@@ -110,11 +109,7 @@ export default function ProjectEnquiry() {
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (
-      submission === "pending" ||
-      submission === "success" ||
-      availability !== "available"
-    )
+    if (submission === "pending" || submission === "success")
       return;
     const body = new FormData(event.currentTarget);
     const file = body.get("inspiration");
@@ -149,7 +144,6 @@ export default function ProjectEnquiry() {
             ? data.message
             : "We could not confirm receipt. Please try again later.",
         );
-        if (result.status === 503) setAvailability("unavailable");
         if (
           Object.keys(nextErrors).some(
             (key) => !["name", "email", "idea"].includes(key),
@@ -230,34 +224,9 @@ export default function ProjectEnquiry() {
             <p>Project enquiry</p>
             <span>Begin with three details.</span>
           </div>
-          <div
-            aria-live="polite"
-            className={styles.availability}
-            data-unavailable={availability === "unavailable" || undefined}
-          >
-            {availability === "checking" && <p>Checking enquiry availability…</p>}
-            {availability === "unavailable" && (
-              <p>
-                Online enquiries are currently unavailable. Your idea has not been
-                sent.{" "}
-                <button
-                  type="button"
-                  className={styles.check}
-                  onClick={() => {
-                    setAvailability("checking");
-                    void fetchAvailability().then(
-                      (value) => value && setAvailability(value),
-                    );
-                  }}
-                >
-                  Check availability
-                </button>
-              </p>
-            )}
-          </div>
           <noscript>
             <p className={styles.notice}>
-              JavaScript is needed to check availability and send this form.
+              JavaScript is needed to send this form.
               Enable it and reload to continue.
             </p>
           </noscript>
@@ -492,23 +461,25 @@ export default function ProjectEnquiry() {
                   </span>
                   {errorFor("desiredDate")}
                 </div>
-                <div className={styles.field}>
-                  <label htmlFor="enquiry-inspiration">
-                    Share some inspiration
-                  </label>
-                  <p id="upload-help" className={styles.help}>
-                    {UPLOAD_HELP}
-                  </p>
-                  <input
-                    id="enquiry-inspiration"
-                    name="inspiration"
-                    type="file"
-                    accept={UPLOAD_ACCEPT}
-                    aria-invalid={!!errors.inspiration}
-                    aria-describedby={describedBy("inspiration", "upload-help")}
-                  />
-                  {errorFor("inspiration")}
-                </div>
+                {uploadsAvailable && (
+                  <div className={styles.field}>
+                    <label htmlFor="enquiry-inspiration">
+                      Share some inspiration
+                    </label>
+                    <p id="upload-help" className={styles.help}>
+                      {UPLOAD_HELP}
+                    </p>
+                    <input
+                      id="enquiry-inspiration"
+                      name="inspiration"
+                      type="file"
+                      accept={UPLOAD_ACCEPT}
+                      aria-invalid={!!errors.inspiration}
+                      aria-describedby={describedBy("inspiration", "upload-help")}
+                    />
+                    {errorFor("inspiration")}
+                  </div>
+                )}
               </div>
             </details>
             <div className={styles.honeypot} aria-hidden="true">
@@ -531,7 +502,6 @@ export default function ProjectEnquiry() {
                 type="submit"
                 data-submission={submission}
                 disabled={
-                  availability !== "available" ||
                   submission === "pending" ||
                   submission === "success"
                 }

@@ -47,32 +47,43 @@ const withUpload: EnquiryRecord = {
   },
 };
 
-test("Neon configuration requires database and private upload credentials", () => {
+test("Neon configuration requires a valid database independently of optional uploads", () => {
   assert.equal(neonEnquiryConfiguration({}), null);
-  for (const key of Object.keys(env))
-    assert.equal(neonEnquiryConfiguration({ ...env, [key]: "" }), null);
-  for (const database of ["invalid", "https://db.example", "postgres://host/db"])
+  for (const database of ["", "invalid", "https://db.example", "postgres://host/db"])
     assert.equal(
       neonEnquiryConfiguration({ ...env, DATABASE_URL: database }),
       null,
     );
-  for (const endpoint of [
-    "http://storage.example.test",
-    "https://user:password@storage.example.test",
-    "https://storage.example.test?secret=example",
-  ])
-    assert.equal(
-      neonEnquiryConfiguration({ ...env, AWS_ENDPOINT_URL_S3: endpoint }),
-      null,
-    );
+  const databaseOnly = neonEnquiryConfiguration({ DATABASE_URL: env.DATABASE_URL });
+  assert.equal(databaseOnly?.databaseUrl, env.DATABASE_URL);
+  assert.equal(databaseOnly?.storage, null);
   assert.equal(config.bucket, "viva-tile-studio");
+  assert.ok(config.storage);
   assert.equal(
     neonEnquiryConfiguration({ ...env, ENQUIRY_STORAGE_BUCKET: "other-private-bucket" })
       ?.bucket,
     "other-private-bucket",
   );
+});
+
+test("missing or unsafe storage settings disable only uploads", () => {
+  for (const key of Object.keys(env).filter((key) => key !== "DATABASE_URL")) {
+    const partial = neonEnquiryConfiguration({ ...env, [key]: "" });
+    assert.equal(partial?.databaseUrl, env.DATABASE_URL);
+    assert.equal(partial?.storage, null);
+  }
+  for (const endpoint of [
+    "invalid",
+    "http://storage.example.test",
+    "https://user:password@storage.example.test",
+    "https://storage.example.test?secret=example",
+  ])
+    assert.equal(
+      neonEnquiryConfiguration({ ...env, AWS_ENDPOINT_URL_S3: endpoint })?.storage,
+      null,
+    );
   assert.equal(
-    neonEnquiryConfiguration({ ...env, ENQUIRY_STORAGE_BUCKET: "../../public" }),
+    neonEnquiryConfiguration({ ...env, ENQUIRY_STORAGE_BUCKET: "../../public" })?.storage,
     null,
   );
 });
@@ -115,6 +126,32 @@ test("optional empty date becomes SQL NULL", async () => {
   await persistNeonEnquiry(config, { ...record, desiredDate: "" }, undefined, {
     sql: async (_strings, ...parameters) => assert.equal(parameters[11], null),
   });
+});
+
+test("database-only configuration persists an enquiry with no attachment", async () => {
+  const databaseOnly = neonEnquiryConfiguration({ DATABASE_URL: env.DATABASE_URL })!;
+  let inserts = 0;
+  await persistNeonEnquiry(databaseOnly, record, undefined, {
+    sql: async (_strings, ...parameters) => {
+      inserts++;
+      assert.equal(parameters[0], record.reference);
+      assert.equal(parameters[3], record.email);
+      assert.deepEqual(parameters.slice(12), [null, null, null, null, null]);
+    },
+    putObject: async () => assert.fail("No upload without storage configuration"),
+  });
+  assert.equal(inserts, 1);
+});
+
+test("database-only persistence rejects attachments before any transport", async () => {
+  const databaseOnly = neonEnquiryConfiguration({ DATABASE_URL: env.DATABASE_URL })!;
+  await assert.rejects(
+    persistNeonEnquiry(databaseOnly, withUpload, upload, {
+      sql: async () => assert.fail("No INSERT when an attachment cannot be stored"),
+      putObject: async () => assert.fail("No upload without storage configuration"),
+    }),
+    /attachments are not configured/,
+  );
 });
 
 test("uploads remain private and are confirmed before their database record is inserted", async () => {

@@ -26,7 +26,7 @@ npm run start
 
 Stop the development server first if it is using port 3000. To use another port, append `-- --port 3001` to the dev or start command. None of these commands deploys the site.
 
-Configuration is optional for browsing the page. To configure enquiries, copy `.env.example` to `.env.local`, edit the server-only values and restart the server. The default form clearly reports that online enquiries are unavailable; it never simulates a received lead.
+Configuration is optional for browsing the page. To configure enquiries, copy `.env.example` to `.env.local`, edit the server-only values and restart the server. A valid `DATABASE_URL` enables enquiries once the table has been migrated; use the same database in the public deployment and owner dashboard. Private S3 storage is optional and enables inspiration attachments. Successful submissions appear in the dashboard after the database write completes; this integration does not send email notifications. Configure the public deployment's server environment as well as local settings.
 
 ## Stack
 
@@ -105,7 +105,7 @@ Mobile, reduced-motion and disabled-JavaScript visitors get the four-beat static
 
 ## Technical specifications and download
 
-The `#specifications` section sits after the process and before the FAQ. Its server-rendered description lists and technical FAQ entries share `src/lib/technical-specifications.ts`. Header, mobile menu and footer navigation link to the section; the project-specific specifications action opens the existing enquiry section, whose availability still depends on delivery configuration.
+The `#specifications` section sits after the process and before the FAQ. Its server-rendered description lists and technical FAQ entries share `src/lib/technical-specifications.ts`. Header, mobile menu and footer navigation link to the section; the project-specific specifications action opens the existing enquiry section. Successful delivery requires a configured enquiry adapter.
 
 `public/downloads/technical-datasheet.docx` is a byte-identical copy of the original `data/Technical datasheet.docx` (16,705 bytes; SHA-256 `BBDDCF13F8118CB1132D66BF9285D10450754800C162048E1F873FAA44022847`). It is served at `/downloads/technical-datasheet.docx`. A visible note beside the download identifies the source document and its unresolved exterior conditions and test references. The original remains untouched. No PDF was produced because a reliable bundled LibreOffice converter was unavailable; the genuine DOCX is the download.
 
@@ -115,15 +115,15 @@ Keep manufacturer questions and the unsent email in `docs/technical-clarificatio
 
 ## Connect enquiries
 
-The handler accepts multipart form data at `POST /api/enquiry`. Required fields are name, email and the idea; additional context and one file are optional. `GET /api/enquiry` returns configuration availability without exposing integration details. Submission success requires actual receiver acceptance or completed private persistence.
+The handler accepts multipart form data at `POST /api/enquiry`. Required fields are name, email and the idea; additional context and one file are optional. The form submits directly without an availability banner or preflight gate. `GET /api/enquiry` returns `available` and `uploadsAvailable` booleans; the frontend uses this response to show the optional upload field. Submission success requires actual receiver acceptance or completed private persistence.
 
 Choose **exactly one** adapter in `.env.local`:
 
-1. **Neon database and private storage:** Set `DATABASE_URL` to the branch's Postgres connection string, plus `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3` (HTTPS) and `AWS_REGION` for that same branch. `ENQUIRY_STORAGE_BUCKET` defaults to `viva-tile-studio`. Set the direct, unpooled connection in `DATABASE_URL_UNPOOLED`, then run `npm run db:migrate` to create `public.project_enquiries`. The server stores validated form fields in the database and any attachment in the private bucket. It returns HTTP 201 only after both writes succeed. No AI Gateway is needed for enquiries.
+1. **Neon database with optional private storage:** Set `DATABASE_URL` to the branch's Postgres connection string, using the same database as the owner dashboard. Set the direct connection in `DATABASE_URL_UNPOOLED`, then run `npm run db:migrate` to create `public.project_enquiries`. These database settings are enough for enquiries without files. To enable attachments, also set `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3` (HTTPS) and `AWS_REGION` for that branch. `ENQUIRY_STORAGE_BUCKET` defaults to `viva-tile-studio`. The server returns HTTP 201 after inserting the enquiry and, when supplied, storing its attachment in the private bucket. No AI Gateway is needed for enquiries.
 2. **HTTPS webhook:** Leave `DATABASE_URL` unset. Set `ENQUIRY_WEBHOOK_URL` to an owner-approved receiver and optionally set `ENQUIRY_WEBHOOK_TOKEN`. The receiver must accept/store the lead before returning 2xx. The payload contains an `enquiry` JSON form field and optional `inspiration` file. Redirects are rejected and delivery has a 12-second timeout.
 3. **Private filesystem:** Leave `DATABASE_URL` unset. Set `ENQUIRY_STORAGE_DIR` to an explicit absolute path outside any web-served directory. Use persistent private storage and appropriate permissions. Do not use ephemeral serverless storage or commit enquiry records.
 
-No configured adapter, invalid values or conflicting adapters leave the form unavailable. Setting `DATABASE_URL` selects Neon; missing Neon storage settings do not fall back to another adapter. Clear both legacy adapter variables when using Neon. Neither private persistence adapter sends staff notifications; arrange staff review. Runtime transport errors keep the visitor's entered information and report that receipt could not be confirmed. Configuration availability alone is not a database, bucket or receiver health check.
+Without a valid adapter, or with conflicting adapters, the server rejects submissions. Setting a valid `DATABASE_URL` selects Neon; missing or invalid storage settings disable attachments only. A file submitted without usable storage receives HTTP 422 with an `inspiration` field error before anything is saved. Clear both legacy adapter variables when using Neon. Neither private persistence adapter sends staff notifications; use the owner dashboard to review Neon enquiries. Runtime transport errors keep the visitor's entered information and report that receipt could not be confirmed. Configuration availability alone is not a database, bucket or receiver health check.
 
 For deployment, configure the same server-only secrets for the intended branch and run the migration against its direct connection before accepting enquiries. The migration command loads `.env.local`; it does not deploy the app. [Integration documentation](docs/enquiry.md) includes staff queries, authenticated attachment access and reconciliation of uncertain database writes.
 
