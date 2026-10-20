@@ -914,6 +914,26 @@ h3 {
   color: var(--forest);
   padding: 64px var(--gutter) 24px;
 }
+.site-footer[data-tone="forest"] {
+  --muted: #c7c7b8;
+  --line: rgb(234 228 218 / 25%);
+  background: var(--forest);
+  color: var(--paper);
+}
+.site-footer[data-tone="forest"] ::selection {
+  background: var(--paper);
+  color: var(--forest);
+}
+.site-footer[data-tone="forest"] .brand-logo {
+  /* Light catches the upper-left edge; tight relief and a softer lower-right
+     shadow follow the transparent emblem and lettering, with no backing plate. */
+  filter:
+    brightness(1.12)
+    drop-shadow(-0.4px -0.6px 0.25px rgb(236 220 183 / 58%))
+    drop-shadow(0.7px 1.2px 0.25px rgb(14 23 16 / 85%))
+    drop-shadow(1.5px 2.5px 0.4px rgb(14 23 16 / 60%))
+    drop-shadow(4px 8px 5px rgb(9 16 11 / 48%));
+}
 .footer-top {
   display: grid;
   grid-template-columns: 1fr 1.4fr;
@@ -938,6 +958,20 @@ h3 {
 .footer-brand p {
   font: 400 24px/1.25 var(--serif);
 }
+.footer-contact {
+  width: 100%;
+  min-width: 0;
+  font-size: 13px;
+  font-style: normal;
+}
+.footer-contact a {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 44px;
+  overflow-wrap: anywhere;
+}
 .footer-top nav {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -960,6 +994,7 @@ h3 {
   width: fit-content;
 }
 .footer-top nav a:hover,
+.footer-contact a:hover,
 .footer-bottom a:hover {
   text-decoration: underline;
   text-underline-offset: 5px;
@@ -1295,6 +1330,7 @@ h3 {
   }
   .footer-brand {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 24px;
   }

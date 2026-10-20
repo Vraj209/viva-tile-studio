@@ -1,5 +1,54 @@
 # Brochure product provenance
 
+## Current identity and publication mapping
+
+The product index retains **49 distinct designs** across Surface Studies, Artful Surfaces and New Poster Collection. Surface Studies is the original VAVI Tile Studio publication replacing the first brochure. Its product identity, current page numbers and hotspots come from `public/brochures/surface-studies/publication.json`; the website imports those records directly.
+
+| Publication | Distinct designs | Identity |
+| --- | ---: | --- |
+| Surface Studies | 24 | Existing reference codes 10465–10488, displayed as “Design 10465” etc. |
+| Artful Surfaces | 15 | Descriptive artwork labels; no manufacturer product codes are printed |
+| New Poster Collection | 10 | Descriptive artwork labels; no manufacturer product codes are printed |
+
+Surface Studies gives every design its own page. The supplied interior also maps to Design 10465. Chapter titles are editorial headings, not new manufacturer product names:
+
+| Chapter | Design references, in order |
+| --- | --- |
+| Botanical studies | 10465, 10469, 10471, 10474, 10475, 10478, 10485, 10488 |
+| Rhythm & geometry | 10467, 10472, 10479, 10481, 10482, 10483, 10484, 10486 |
+| Ornament & contrast | 10466, 10468, 10470, 10473, 10476, 10477, 10480, 10487 |
+
+Do not use old PDF page numbers for current navigation. `pageNumbers` is the one-based set of pages in the new publication; the reader passes a zero-based index. `getBrochureProduct` resolves this mapping. `getBrochureProductHotspot` uses `publication.hotspots[product.id][String(pageIndex + 1)]` when present, otherwise the product's standard hotspot. This lets the supplied interior and individual design page identify the same product at different visual positions.
+
+The enquiry helper continues carrying the selected product ID, environment and “Feature wall” application. The page-turning engine is independent of the publication layout.
+
+### Confirmed identity versus pending specifications
+
+References 10465–10488 identify the exact artworks already indexed on the website. They are not evidence that source-manufacturer specifications apply to a VAVI product. The original first brochure is restricted to imagery: its former collection name, dimensions, fabrication claims and promotional text must not be reused.
+
+All current Surface Studies product `format` values are `null`. Dimensions, finish, thickness and availability are pending confirmation, as stated in the brochure's selection notes. The other two image-only catalogues also establish no physical product dimensions. Their PDF canvas sizes and the poster filename are not tile specifications.
+
+The separate technical datasheet lacks SKU scope. Product-specific performance, suitability, thickness, finish, manufacturing process and availability cannot be inferred from a depicted room or generic datasheet statements. See `docs/technical-clarifications.md` for the private evidence review.
+
+### Exact artwork and image quality
+
+- The 24 first-brochure panel streams are 400 × 785 pixels. The verified crop `(left=9, top=10, right=392, bottom=776)` removes only the grey matte and offset shadow, preserving the full design and border. Each 383 × 766 image is stored losslessly, without recolouring, sharpening, warping or image generation.
+- The matching supplied Design 10465 interior is an unchanged 794 × 1123 JPEG. Its printed reference was separate PDF text, absent from the extracted image. It shows an entrance door and ivory console table, and is not claimed as a completed VAVI installation.
+- The original introductory ravine scene matches Design 10475 but is not an interior. The new publication does not reproduce that designed page.
+- Artful Surfaces and New Poster contain one complete JPEG artwork per page. Their 25 native image streams remain byte-for-byte copies at 1770/1771 × 3542 dimensions.
+
+Native pixel dimensions limit enlarged detail. High-resolution page rendering does not increase source photographic detail; a high-resolution print edition needs larger originals. Generated gallery and room backgrounds are not source photographs for this brochure. Existing room visualizations remain labelled, with the exact selected artwork rendered separately at its correct aspect ratio.
+
+### Build ownership and public provenance
+
+`scripts/build-vavi-brochure.cjs` owns the first publication's images, products, page mappings and hotspots. Run it before either Python generator. `prepare-brochure-products.py` extracts only the two image-only catalogues, importing the first publication's products and hotspots into generated TypeScript. `prepare-brochure-assets.py` applies the same rule to the brochure array. Both fail if the VAVI publication is missing and reject prior branding in public metadata.
+
+Public manifests use neutral source labels, current asset locations and hashes. Private source filenames and historical mappings remain outside `public/`. Contact sheets under `tmp/pdfs/brochure-products/` are local QA artifacts. Verify complete design coverage, hotspot alignment, native pixel equality, clean PDF metadata and product enquiry identity before publishing.
+
+## Historical extraction record — superseded
+
+**The remainder is private provenance for the previous first-brochure extraction. Its old IDs, page mappings, branding, source specification wording and extraction workflow are superseded by Surface Studies above. They must not be reintroduced into public assets or runtime code.**
+
 Prepared 12 October 2026. The product index maps **49 distinct designs to 51 of the 52 supplied brochure pages**. Only the Evoke cover has no selectable product. The brochure page images, original ordering and downloadable PDFs are unchanged.
 
 ## Coverage and identity

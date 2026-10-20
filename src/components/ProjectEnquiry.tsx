@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import CountrySelect from "./CountrySelect";
+import { studioContact } from "@/lib/contact";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import {
   applications,
@@ -209,6 +210,10 @@ export default function ProjectEnquiry() {
             <p className={styles.invitation} data-motion-item>
               Tell us about your space and the tile you have in mind.
             </p>
+            <address className={styles.contact} aria-label="Contact VAVI Tile Studio" data-motion-item>
+              <a href={`mailto:${studioContact.email}`}>{studioContact.email}</a>
+              <a href={studioContact.phoneHref}>{studioContact.phone}</a>
+            </address>
           </div>
           <div className={styles.relief} aria-hidden="true">
             <Image

@@ -15,7 +15,7 @@ export default function BrochuresPage() {
       <main id="main">
         <BrochureLibrary />
       </main>
-      <SiteFooter homePage={false} />
+      <SiteFooter homePage={false} tone="forest" />
     </div>
   );
 }

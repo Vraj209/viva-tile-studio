@@ -1,11 +1,18 @@
 import Link from "next/link";
+import { studioContact } from "@/lib/contact";
 import BrandLogo from "./BrandLogo";
 
-export default function SiteFooter({ homePage = true }: { homePage?: boolean }) {
+export default function SiteFooter({
+  homePage = true,
+  tone = "paper",
+}: {
+  homePage?: boolean;
+  tone?: "paper" | "forest";
+}) {
   const SectionLink = homePage ? "a" : Link;
   const sectionHref = (id: string) => `${homePage ? "" : "/"}#${id}`;
   return (
-    <footer className="site-footer">
+    <footer className="site-footer" data-tone={tone}>
       <div className="footer-top" data-motion="footer">
         <div className="footer-brand" data-motion-item>
           <SectionLink
@@ -20,6 +27,10 @@ export default function SiteFooter({ homePage = true }: { homePage?: boolean }) 
             <br />
             <em>Endless Possibilities.</em>
           </p>
+          <address className="footer-contact" aria-label="Contact VAVI Tile Studio">
+            <a href={`mailto:${studioContact.email}`}>{studioContact.email}</a>
+            <a href={studioContact.phoneHref}>{studioContact.phone}</a>
+          </address>
         </div>
         <nav aria-label="Footer navigation">
           <div className="footer-link-group">

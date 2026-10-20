@@ -20,10 +20,10 @@ export function BookObject({ brochure, flying = false }: { brochure: Brochure; f
       <span className={styles.bookSpine} />
       <span className={styles.bookCover}>
         {brochure.cover ? (
-          <Image src={brochure.cover} alt={`${brochure.title} original brochure cover`} fill unoptimized sizes="(max-width: 700px) 72vw, 30vw" loading="eager" draggable={false} />
+          <Image src={brochure.cover} alt={`${brochure.title} brochure cover`} fill unoptimized sizes="(max-width: 700px) 72vw, 30vw" loading="eager" draggable={false} />
         ) : (
           <span className={styles.unavailableCover}>
-            <span>ETON</span>
+            <span>VAVI TILE STUDIO</span>
             <strong>{brochure.title}</strong>
             <span>Preview unavailable</span>
           </span>

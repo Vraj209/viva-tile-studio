@@ -1,193 +1,79 @@
 {
-  "generator": "scripts/prepare-brochure-assets.py",
+  "generator": "scripts/build-vavi-brochure.cjs + scripts/prepare-brochure-assets.py",
   "renderLongEdge": 1800,
-  "webpQuality": 88,
   "sources": [
     {
-      "id": "evoke",
-      "source": "data/brouchers/Eton__1200x2400mm_Evoke_Collection.pdf",
-      "sha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
-      "sourceBytes": 4174842,
-      "pageCount": 27,
-      "sourcePageDimensionsPt": [
-        [
-          595.0,
-          842.0
-        ],
-        [
-          595.0,
-          842.0
-        ],
-        [
-          595.0,
-          842.0
-        ],
-        [
-          595.0,
-          842.0
-        ],
-        [
-          595.0,
-          842.0
-        ],
-        [
-          595.0,
-          842.0
-        ],
-        [
-          595.0,
-          842.0
-        ],
-        [
-          595.0,
-          842.0
-        ],
-        [
-          595.0,
-          842.0
-        ],
-        [
-          595.0,
-          842.0
-        ],
-        [
-          595.0,
-          842.0
-        ],
-        [
-          595.0,
-          842.0
-        ],
-        [
-          595.0,
-          842.0
-        ],
-        [
-          595.0,
-          842.0
-        ],
-        [
-          595.0,
-          842.0
-        ],
-        [
-          595.0,
-          842.0
-        ],
-        [
-          595.0,
-          842.0
-        ],
-        [
-          595.0,
-          842.0
-        ],
-        [
-          595.0,
-          842.0
-        ],
-        [
-          595.0,
-          842.0
-        ],
-        [
-          595.0,
-          842.0
-        ],
-        [
-          595.0,
-          842.0
-        ],
-        [
-          595.0,
-          842.0
-        ],
-        [
-          595.0,
-          842.0
-        ],
-        [
-          595.0,
-          842.0
-        ],
-        [
-          595.0,
-          842.0
-        ],
-        [
-          595.0,
-          842.0
-        ]
-      ],
-      "corruptedImagePages": [],
-      "replacementCharacterCount": 1
+      "id": "surface-studies",
+      "title": "Surface Studies",
+      "pageCount": 32,
+      "publication": "VAVI Tile Studio",
+      "sha256": "9cbe71507e58c96204d0fb5ee333cb1c42917891fded0751c99a0b6445ba4a5f"
     },
     {
       "id": "artful-surfaces",
-      "source": "data/brouchers/f304a1b2-c8b1-48aa-b347-d8a0e969b56f.pdf",
       "sha256": "0f6736e2161b2cf8d2248c640ba8675b74d4c5fe6c4969b2a6c2552ab160a993",
       "sourceBytes": 29742111,
       "pageCount": 15,
       "sourcePageDimensionsPt": [
         [
-          850.0,
-          1701.0
+          850,
+          1701
         ],
         [
-          850.0,
-          1701.0
+          850,
+          1701
         ],
         [
-          850.0,
-          1701.0
+          850,
+          1701
         ],
         [
-          850.0,
-          1701.0
+          850,
+          1701
         ],
         [
-          850.0,
-          1701.0
+          850,
+          1701
         ],
         [
-          850.0,
-          1701.0
+          850,
+          1701
         ],
         [
-          850.0,
-          1701.0
+          850,
+          1701
         ],
         [
-          850.0,
-          1701.0
+          850,
+          1701
         ],
         [
-          850.0,
-          1701.0
+          850,
+          1701
         ],
         [
-          850.0,
-          1701.0
+          850,
+          1701
         ],
         [
-          850.0,
-          1701.0
+          850,
+          1701
         ],
         [
-          850.0,
-          1701.0
+          850,
+          1701
         ],
         [
-          850.0,
-          1701.0
+          850,
+          1701
         ],
         [
-          850.0,
-          1701.0
+          850,
+          1701
         ],
         [
-          850.0,
-          1701.0
+          850,
+          1701
         ]
       ],
       "corruptedImagePages": [],
@@ -195,55 +81,53 @@
     },
     {
       "id": "new-poster",
-      "source": "data/brouchers/Eton_NEW-POSTER-2X4.pdf",
       "sha256": "f3ac6521b48b50f45a5a9dd6b84a2fa1b9e96c8495253fb1680859b9d66617f3",
       "sourceBytes": 20064834,
       "pageCount": 10,
       "sourcePageDimensionsPt": [
         [
-          850.0,
-          1701.0
+          850,
+          1701
         ],
         [
-          850.0,
-          1701.0
+          850,
+          1701
         ],
         [
-          850.0,
-          1701.0
+          850,
+          1701
         ],
         [
-          850.0,
-          1701.0
+          850,
+          1701
         ],
         [
-          850.0,
-          1701.0
+          850,
+          1701
         ],
         [
-          850.0,
-          1701.0
+          850,
+          1701
         ],
         [
-          850.0,
-          1701.0
+          850,
+          1701
         ],
         [
-          850.0,
-          1701.0
+          850,
+          1701
         ],
         [
-          850.0,
-          1701.0
+          850,
+          1701
         ],
         [
-          850.0,
-          1701.0
+          850,
+          1701
         ]
       ],
       "corruptedImagePages": [],
-      "replacementCharacterCount": 1,
-      "sourceUrl": "https://drive.google.com/file/d/1_mAIgNT1YPAefgNc3TBGtkFJZmmC6xPf/view?usp=drivesdk"
+      "replacementCharacterCount": 1
     }
   ]
 }

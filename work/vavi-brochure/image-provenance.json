@@ -1,0 +1,395 @@
+{
+  "privateSource": "data\\brouchers\\Eton__1200x2400mm_Evoke_Collection.pdf",
+  "products": [
+    {
+      "id": "surface-studies-10465",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 3,
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/surface-studies-10465.webp",
+      "textureSha256": "a6888cbcdebd26dadf0ad4c8fa720d62fb444aa75778abd99c3047addb7f271d",
+      "textureBytes": 345696
+    },
+    {
+      "id": "surface-studies-10466",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 5,
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/surface-studies-10466.webp",
+      "textureSha256": "0311bdeef1a9f5cfbc49729e108d442526cbe0d7e6ae47933b6ebe63d529d810",
+      "textureBytes": 402994
+    },
+    {
+      "id": "surface-studies-10467",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 6,
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/surface-studies-10467.webp",
+      "textureSha256": "862f2d3155eef3d50f1f0a7e3b9303f4f88dc83d8dc17ab6b33e1f9e5f057ffb",
+      "textureBytes": 416558
+    },
+    {
+      "id": "surface-studies-10468",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 7,
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/surface-studies-10468.webp",
+      "textureSha256": "2140dbbc592d3af9b74ec75e8288dc8135cb90bc9fe1bc240484d5fc69383f42",
+      "textureBytes": 390218
+    },
+    {
+      "id": "surface-studies-10469",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 8,
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/surface-studies-10469.webp",
+      "textureSha256": "d4aa4e87fa75ffae1e6636375a8c54f9832efa8181d34d4f3b9b29606dae7976",
+      "textureBytes": 454650
+    },
+    {
+      "id": "surface-studies-10470",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 9,
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/surface-studies-10470.webp",
+      "textureSha256": "924fd73353d568ad693ef2dfe28b3b54659edd924ec0555f18823b08efce71bf",
+      "textureBytes": 208644
+    },
+    {
+      "id": "surface-studies-10471",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 10,
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/surface-studies-10471.webp",
+      "textureSha256": "f908aa2732042cfd0017448580474cdf9998c7c869a1fbb3a3218ed939aa62a9",
+      "textureBytes": 273132
+    },
+    {
+      "id": "surface-studies-10472",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 11,
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/surface-studies-10472.webp",
+      "textureSha256": "1a027d572e3fff064bdcfe7d67635639dedb2b9143efdc500af8e6c0e1167971",
+      "textureBytes": 374392
+    },
+    {
+      "id": "surface-studies-10473",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 12,
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/surface-studies-10473.webp",
+      "textureSha256": "6fb71958520288842a876df09c1163f40d43c905a9c4b11294a27fe5e816daea",
+      "textureBytes": 398292
+    },
+    {
+      "id": "surface-studies-10474",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 13,
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/surface-studies-10474.webp",
+      "textureSha256": "956831a0ab7efa29284dd91434ca37b53cdb2a0569cd7d0ee037a26845fed902",
+      "textureBytes": 355978
+    },
+    {
+      "id": "surface-studies-10475",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 14,
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/surface-studies-10475.webp",
+      "textureSha256": "0fa5e520e2b8c4bc68151d27a919a22cb74b0a83a186c8b1fe7c20098641e6f4",
+      "textureBytes": 322658
+    },
+    {
+      "id": "surface-studies-10476",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 15,
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/surface-studies-10476.webp",
+      "textureSha256": "14464d1d8fe364ecbf8889d2f15c659a4a1a797bdb9172c1773f54530f1e7553",
+      "textureBytes": 459992
+    },
+    {
+      "id": "surface-studies-10477",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 16,
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/surface-studies-10477.webp",
+      "textureSha256": "aceb74bd47106f0a6a5481f8d884039aec822ceb5cf93eff3b08a0532b193740",
+      "textureBytes": 387488
+    },
+    {
+      "id": "surface-studies-10478",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 17,
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/surface-studies-10478.webp",
+      "textureSha256": "c1e5d38e36da01b9fa8c8a7c42985e409931c23fce3524aba77ced45232a1964",
+      "textureBytes": 344854
+    },
+    {
+      "id": "surface-studies-10479",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 18,
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/surface-studies-10479.webp",
+      "textureSha256": "39d1ab95b7838f0668b85ba1d09c9ea0620dd3f8b1f3c3cd21fe53f3e76cedbe",
+      "textureBytes": 412724
+    },
+    {
+      "id": "surface-studies-10480",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 19,
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/surface-studies-10480.webp",
+      "textureSha256": "75d4021cb18da56556770df67840e466012f136ed6b37586ec240b548444ae0c",
+      "textureBytes": 424150
+    },
+    {
+      "id": "surface-studies-10481",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 20,
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/surface-studies-10481.webp",
+      "textureSha256": "bbff1cf76732db966d9f81a1f273dde599fe14d7abbcf12ab24662de39f2327d",
+      "textureBytes": 219220
+    },
+    {
+      "id": "surface-studies-10482",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 21,
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/surface-studies-10482.webp",
+      "textureSha256": "8c1a2fbd50c5c959cdc0bdb6ebc34203033a3ac05ed310cc1ffb151b88f8541f",
+      "textureBytes": 350680
+    },
+    {
+      "id": "surface-studies-10483",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 22,
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/surface-studies-10483.webp",
+      "textureSha256": "698272984268fc79a7b59273ae223b036df09546fb40fc2ba91d9dbbbfd8ed42",
+      "textureBytes": 389826
+    },
+    {
+      "id": "surface-studies-10484",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 23,
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/surface-studies-10484.webp",
+      "textureSha256": "7792994f878743a65268da2e2e3aefc919ee7f48552cfc512a3b59aeed20a564",
+      "textureBytes": 254376
+    },
+    {
+      "id": "surface-studies-10485",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 24,
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/surface-studies-10485.webp",
+      "textureSha256": "43250d0b59ba802a539e588934473dda6cafaf27f523c187b4c193f5698e1d2d",
+      "textureBytes": 365392
+    },
+    {
+      "id": "surface-studies-10486",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 25,
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/surface-studies-10486.webp",
+      "textureSha256": "f826c3e56850f463154a120d0850d78c8656ca354b09f7fc6b740274c77cdcc7",
+      "textureBytes": 213210
+    },
+    {
+      "id": "surface-studies-10487",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 26,
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/surface-studies-10487.webp",
+      "textureSha256": "971b24553b41393aca8f5c5970a60502799130765161b7dddadb618bd0e1a419",
+      "textureBytes": 317944
+    },
+    {
+      "id": "surface-studies-10488",
+      "sourceSha256": "44f2e330e6dd383eaec5be5c237ae2c95849b03087ca926d47dcfe112caadc40",
+      "sourcePage": 27,
+      "nativeWidth": 400,
+      "nativeHeight": 785,
+      "pixelCrop": [
+        9,
+        10,
+        392,
+        776
+      ],
+      "texture": "/brochures/products/surface-studies-10488.webp",
+      "textureSha256": "dc74d54ba461ef83e4029ad90522335a60143837ef8f1c96fb2c36c70c91136f",
+      "textureBytes": 358036
+    }
+  ],
+  "interior": {
+    "sha256": "0b6649c49b9dbece176887a290d8bf78f922006ad45fe419646d0a9b8434495d",
+    "sourcePage": 4,
+    "width": 794,
+    "height": 1123
+  }
+}

@@ -161,7 +161,7 @@ function InteriorScene({ product, environment, zoom, compact, active, hasPreviou
       </div>}
       <div className={styles.sceneCaption} hidden={!active || !ready && hasPrevious}>
         <span>{String(environments.indexOf(environment) + 1).padStart(2, "0")} / 03</span>
-        <div><p>{original ? "A space from the collection" : room.title}</p><small>{original ? "From the original brochure" : "Interior visualisation"}</small></div>
+        <div><p>{original ? "A space from the collection" : room.title}</p><small>{original ? "Collection interior" : "Interior visualisation"}</small></div>
       </div>
     </div>
   );
@@ -170,8 +170,8 @@ function InteriorScene({ product, environment, zoom, compact, active, hasPreviou
 function ProductArtwork({ product }: { product: BrochureProduct }) {
   const [failed, setFailed] = useState(false);
   return <div className={styles.detailArtwork}>
-    {failed ? <p>The artwork couldn’t load. View it in the original brochure below.</p>
-      : <Image src={product.texture} alt={`${product.name}, original artwork from the ${product.collection} brochure`} width={product.textureWidth} height={product.textureHeight} unoptimized sizes="350px" onError={() => setFailed(true)} />}
+    {failed ? <p>The artwork couldn’t load. View it in the brochure below.</p>
+      : <Image src={product.texture} alt={`${product.name}, artwork from the ${product.collection} brochure`} width={product.textureWidth} height={product.textureHeight} unoptimized sizes="350px" onError={() => setFailed(true)} />}
   </div>;
 }
 
@@ -300,10 +300,14 @@ export default function BrochureInteriorViewer({ product, returnFocus, onClose }
           <p className={styles.description}>{product.description}</p>
           <dl className={styles.specifications}>
             {product.format && <div><dt>Format</dt><dd>{product.format}</dd></div>}
+            {product.brochureId === "surface-studies" && <>
+              {!product.format && <div><dt>Dimensions</dt><dd>To be confirmed</dd></div>}
+              <div><dt>Finish</dt><dd>To be confirmed</dd></div>
+            </>}
             <div><dt>Collection</dt><dd>{product.collection}</dd></div>
             <div><dt>In the brochure</dt><dd>Page {product.sourcePage}</dd></div>
           </dl>
-          <a className={styles.sourceLink} href={`${product.sourcePdf}#page=${product.sourcePage}`} target="_blank" rel="noreferrer">View original brochure page <Arrow diagonal /></a>
+          <a className={styles.sourceLink} href={`${product.sourcePdf}#page=${product.sourcePage}`} target="_blank" rel="noreferrer">View brochure page <Arrow diagonal /></a>
           <p className={styles.visualisationNote}>A decorative wall concept using the original artwork. Confirm dimensions and suitability for your project with the studio.</p>
         </aside>}
       </div>

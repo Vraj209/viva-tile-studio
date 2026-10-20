@@ -1,8 +1,8 @@
-"""Extract exact brochure artwork and generate the product-to-page index.
+"""Extract the two image-only catalogues and retain VAVI's product mapping.
 
-Requires Pillow and pypdf. Source PDFs, brochure page renders and their generator
-are never modified. No generated imagery or invented product dimensions enter
-this index. Run with: python scripts/prepare-brochure-products.py
+Requires Pillow and pypdf. Build Surface Studies first with
+node scripts/build-vavi-brochure.cjs; that publication owns the first brochure's
+images, products and hotspots. Run with: python scripts/prepare-brochure-products.py
 """
 
 from __future__ import annotations
@@ -11,7 +11,6 @@ import hashlib
 import importlib.util
 import json
 import logging
-import re
 import sys
 from pathlib import Path
 
@@ -21,11 +20,7 @@ from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "public/brochures/products"
-# Common native image bounds, visually checked against all 24 Evoke panels.
-# Removes the grey brochure matte/drop shadow; keeps the complete panel border.
-EVOKE_CROP = (9, 10, 392, 776)
 SOURCES = {
-    "evoke": "Eton__1200x2400mm_Evoke_Collection.pdf",
     "artful-surfaces": "f304a1b2-c8b1-48aa-b347-d8a0e969b56f.pdf",
     "new-poster": "Eton_NEW-POSTER-2X4.pdf",
 }
@@ -61,7 +56,9 @@ def source_metadata():
         spec.loader.exec_module(module)
     finally:
         sys.dont_write_bytecode = previous_cache_policy
-    return module.CATALOGUES, module.PAGE_DESCRIPTIONS
+    if {item["id"] for item in module.CATALOGUES} != module.LEGACY_CATALOGUE_IDS:
+        raise SystemExit("This extractor may only publish the two image-only catalogues.")
+    return module, module.load_vavi_publication()
 
 
 def original_jpeg(page) -> bytes:
@@ -79,75 +76,46 @@ def original_jpeg(page) -> bytes:
     return data
 
 
-def evoke_hotspot(page) -> dict:
-    placements = []
-
-    def visit(operation, operands, matrix, text_matrix):
-        if operation == b"Do":
-            placements.append(matrix[:])
-
-    page.extract_text(visitor_operand_before=visit)
-    if len(placements) != 1:
-        raise ValueError("Expected exactly one product image placement")
-    a, b, c, d, e, f = placements[0]
-    if b or c or a <= 0 or d <= 0:
-        raise ValueError("Unexpected rotated or flipped product image")
-    page_width, page_height = float(page.mediabox.width), float(page.mediabox.height)
-    left, top, right, bottom = EVOKE_CROP
-    return {
-        "x": round((e + a * left / 400) / page_width, 8),
-        "y": round((page_height - f - d + d * top / 785) / page_height, 8),
-        "width": round(a * (right - left) / 400 / page_width, 8),
-        "height": round(d * (bottom - top) / 785 / page_height, 8),
-    }
-
-
 def main():
     logging.getLogger("pypdf").setLevel(logging.ERROR)
+    source_module, publication = source_metadata()
+    catalogues, descriptions = source_module.CATALOGUES, source_module.PAGE_DESCRIPTIONS
     OUTPUT.mkdir(parents=True, exist_ok=True)
-    catalogues, descriptions = source_metadata()
     products = []
     provenance = []
+    for product in publication["products"]:
+        texture_path = ROOT / "public" / product["texture"].lstrip("/")
+        provenance.append({
+            "id": product["id"],
+            "source": "Owner-supplied first brochure imagery",
+            "publication": "/brochures/surface-studies/publication.json",
+            "pageNumbers": product["pageNumbers"],
+            "nativeWidth": product["textureWidth"],
+            "nativeHeight": product["textureHeight"],
+            "texture": product["texture"],
+            "textureSha256": sha256(texture_path),
+            "textureBytes": texture_path.stat().st_size,
+        })
     for catalogue in catalogues:
         brochure_id = catalogue["id"]
         source = ROOT / "data/brouchers" / SOURCES[brochure_id]
         reader = PdfReader(source)
-        pages = [3, *range(5, 28)] if brochure_id == "evoke" else range(1, len(reader.pages) + 1)
+        pages = range(1, len(reader.pages) + 1)
         for page_number in pages:
             page = reader.pages[page_number - 1]
             if len(page.images) != 1:
                 raise ValueError(f"Unexpected image count: {brochure_id} page {page_number}")
             embedded = page.images[0]
             native = embedded.image
-            if brochure_id == "evoke":
-                match = re.search(r"(104\d{2})", page.extract_text())
-                if match is None:
-                    raise ValueError(f"Missing Evoke product code on page {page_number}")
-                code = match.group(1)
-                product_id = f"evoke-{code}"
-                name = f"Design {code}"
-                page_numbers = [3, 4] if code == "10465" else [2, 14] if code == "10475" else [page_number]
-                if native.size != (400, 785):
-                    raise ValueError(f"Evoke extraction dimensions changed: {native.size}")
-                # Lossless pixel crop, with no recolouring, scaling or retouching.
-                texture = native.crop(EVOKE_CROP)
-                target = OUTPUT / f"{product_id}.webp"
-                texture.save(target, "WEBP", lossless=True, method=6, exact=True)
-                with Image.open(target) as written:
-                    if written.convert("RGBA").tobytes() != texture.convert("RGBA").tobytes():
-                        raise ValueError(f"Lossless texture validation failed: {product_id}")
-                hotspot = evoke_hotspot(page)
-                description = descriptions[brochure_id][page_number - 1].split(": ", 1)[1]
-            else:
-                product_id = f"{brochure_id}-{page_number:02d}"
-                name = NAMES[brochure_id][page_number - 1]
-                page_numbers = [page_number]
-                # Preserve the complete source JPEG stream byte-for-byte.
-                target = OUTPUT / f"{product_id}.jpg"
-                target.write_bytes(original_jpeg(page))
-                texture = native
-                hotspot = {"x": 0, "y": 0, "width": 1, "height": 1}
-                description = descriptions[brochure_id][page_number - 1]
+            product_id = f"{brochure_id}-{page_number:02d}"
+            name = NAMES[brochure_id][page_number - 1]
+            page_numbers = [page_number]
+            # Preserve the complete source JPEG stream byte-for-byte.
+            target = OUTPUT / f"{product_id}.jpg"
+            target.write_bytes(original_jpeg(page))
+            texture = native
+            hotspot = {"x": 0, "y": 0, "width": 1, "height": 1}
+            description = descriptions[brochure_id][page_number - 1]
             record = {
                 "id": product_id,
                 "brochureId": brochure_id,
@@ -158,33 +126,26 @@ def main():
                 "texture": f"/brochures/products/{target.name}",
                 "textureWidth": texture.width,
                 "textureHeight": texture.height,
-                "format": "1200 × 2400 mm" if brochure_id == "evoke" else None,
+                "format": None,
                 "sourcePdf": f"/brochures/{brochure_id}/catalogue.pdf",
                 "sourcePage": page_number,
                 "hotspot": hotspot,
             }
-            if product_id == "evoke-10465":
-                interior = reader.pages[3].images[0]
-                interior_target = OUTPUT / "evoke-10465-original-interior.jpg"
-                interior_target.write_bytes(original_jpeg(reader.pages[3]))
-                record["originalInterior"] = {
-                    "src": f"/brochures/products/{interior_target.name}",
-                    "width": interior.image.width,
-                    "height": interior.image.height,
-                    "alt": "Supplied Evoke catalogue interior showing Design 10465 beside a timber entrance door and an ivory console table.",
-                }
             products.append(record)
             provenance.append({
-                "id": product_id, "source": f"data/brouchers/{source.name}",
+                "id": product_id,
+                "source": f"Owner-supplied image-only catalogue: {brochure_id}",
                 "sourceSha256": sha256(source), "sourcePage": page_number,
                 "embeddedImage": embedded.name, "nativeWidth": native.width,
                 "nativeHeight": native.height,
-                "pixelCrop": list(EVOKE_CROP) if brochure_id == "evoke" else None,
+                "pixelCrop": None,
                 "texture": record["texture"], "textureSha256": sha256(target),
                 "textureBytes": target.stat().st_size,
             })
 
-    types = '''/** Exact owner-supplied artwork. Regenerate with scripts/prepare-brochure-products.py. */
+    types = '''/** Exact owner-supplied artwork; VAVI publication metadata owns its current layout. */
+import surfaceStudiesPublication from "../../public/brochures/surface-studies/publication.json";
+
 export type BrochureHotspot = { x: number; y: number; width: number; height: number };
 
 export type BrochureProduct = {
@@ -199,7 +160,7 @@ export type BrochureProduct = {
   texture: string;
   textureWidth: number;
   textureHeight: number;
-  /** Printed dimensions only; null when the source does not establish a size. */
+  /** Confirmed VAVI product dimensions only; null until verified. */
   format: string | null;
   sourcePdf: string;
   sourcePage: number;
@@ -207,23 +168,23 @@ export type BrochureProduct = {
   originalInterior?: { src: string; width: number; height: number; alt: string };
 };
 
-export const brochureProducts: BrochureProduct[] = '''
-    helpers = ''';
+export const brochureProducts: BrochureProduct[] = [
+  ...surfaceStudiesPublication.products,
+'''
+    helpers = '''
+];
 
-/** Reader indices are zero-based; the provenance records use printed page numbers. */
+const publicationHotspots: Record<string, Record<string, BrochureHotspot>> =
+  surfaceStudiesPublication.hotspots;
+
+/** Reader indices are zero-based; product records use current publication pages. */
 export function getBrochureProduct(brochureId: string, pageIndex: number): BrochureProduct | undefined {
   return brochureProducts.find((product) => product.brochureId === brochureId && product.pageNumbers.includes(pageIndex + 1));
 }
 
-/** Introductory/room pages place the same product differently from its sample page. */
+/** The publication owns page-specific placements, including its supplied interior. */
 export function getBrochureProductHotspot(product: BrochureProduct, pageIndex: number): BrochureHotspot {
-  if (product.id === "evoke-10475" && pageIndex === 1) {
-    return { x: 0.32, y: 0.356, width: 0.36, height: 0.51 };
-  }
-  if (product.id === "evoke-10465" && pageIndex === 3) {
-    return { x: 0.336, y: 0.03, width: 0.518, height: 0.774 };
-  }
-  return product.hotspot;
+  return publicationHotspots[product.id]?.[String(pageIndex + 1)] ?? product.hotspot;
 }
 
 export function getProductEnquiryHref(product: BrochureProduct, environment: "home" | "hotel" | "office"): string {
@@ -236,18 +197,21 @@ export function getProductEnquiryHref(product: BrochureProduct, environment: "ho
   return `/?${params.toString()}#enquiry`;
 }
 '''
-    (ROOT / "src/lib/brochure-products.ts").write_text(
-        types + json.dumps(products, ensure_ascii=False, indent=2) + helpers, encoding="utf-8"
-    )
+    source_module.assert_public_branding(products)
+    source_module.assert_public_branding(provenance)
+    product_entries = json.dumps(products, ensure_ascii=False, indent=2)[2:-2]
+    (ROOT / "src/lib/brochure-products.ts").write_text(types + product_entries + helpers, encoding="utf-8")
     (OUTPUT / "manifest.json").write_text(json.dumps({
         "generator": "scripts/prepare-brochure-products.py",
         "products": provenance,
     }, indent=2) + "\n", encoding="utf-8")
 
     # Small labelled sheet for visual QA, never shipped as an interior preview.
-    sheet = Image.new("RGB", (7 * 150, 7 * 300), "#f2eee5")
+    all_products = publication["products"] + products
+    rows = (len(all_products) + 6) // 7
+    sheet = Image.new("RGB", (7 * 150, rows * 300), "#f2eee5")
     draw = ImageDraw.Draw(sheet)
-    for index, record in enumerate(products):
+    for index, record in enumerate(all_products):
         with Image.open(ROOT / "public" / record["texture"].lstrip("/")) as source_image:
             thumb = source_image.convert("RGB")
             thumb.thumbnail((136, 266), Image.Resampling.LANCZOS)
@@ -257,7 +221,7 @@ export function getProductEnquiryHref(product: BrochureProduct, environment: "ho
     qa = ROOT / "tmp/pdfs/brochure-products"
     qa.mkdir(parents=True, exist_ok=True)
     sheet.save(qa / "contact-sheet.jpg", quality=90)
-    print(f"Prepared {len(products)} exact product textures across 51 brochure pages.")
+    print(f"Prepared {len(products)} image-only catalogue textures; retained {len(publication['products'])} VAVI publication designs.")
 
 
 if __name__ == "__main__":

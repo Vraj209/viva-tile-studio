@@ -9,6 +9,15 @@ import { brochureProducts, getBrochureProduct, getBrochureProductHotspot, getPro
 import { interiorRooms } from "../src/lib/brochure-interiors";
 
 const publicFile = (src: string) => path.join(process.cwd(), "public", src);
+const surfaceStudiesProductsByPage = new Map([
+  [3, 10465],
+  [5, 10465], [6, 10469], [7, 10471], [8, 10474],
+  [9, 10475], [10, 10478], [11, 10485], [12, 10488],
+  [14, 10467], [15, 10472], [16, 10479], [17, 10481],
+  [18, 10482], [19, 10483], [20, 10484], [21, 10486],
+  [23, 10466], [24, 10468], [25, 10470], [26, 10473],
+  [27, 10476], [28, 10477], [29, 10480], [30, 10487],
+]);
 
 test("every depicted design resolves to its own product, including repeated catalogue scenes", () => {
   assert.equal(brochureProducts.length, 49);
@@ -17,27 +26,27 @@ test("every depicted design resolves to its own product, including repeated cata
   for (const brochure of brochures) {
     brochure.pages.forEach((_, pageIndex) => {
       const matches = brochureProducts.filter((product) => product.brochureId === brochure.id && product.pageNumbers.includes(pageIndex + 1));
-      assert.equal(matches.length, brochure.id === "evoke" && pageIndex === 0 ? 0 : 1);
+      const expected = brochure.id === "surface-studies" ? Number(surfaceStudiesProductsByPage.has(pageIndex + 1)) : 1;
+      assert.equal(matches.length, expected, `${brochure.title}, page ${pageIndex + 1}`);
       if (matches.length) mappedPages++;
     });
   }
-  assert.equal(mappedPages, 51);
-  assert.equal(getBrochureProduct("evoke", 2)?.id, "evoke-10465");
-  assert.equal(getBrochureProduct("evoke", 3)?.id, "evoke-10465");
-  assert.equal(getBrochureProduct("evoke", 1)?.id, "evoke-10475");
-  assert.equal(getBrochureProduct("evoke", 13)?.id, "evoke-10475");
-  assert.equal(getBrochureProduct("evoke", -1), undefined);
-  assert.equal(getBrochureProduct("evoke", 27), undefined);
+  assert.equal(mappedPages, 50);
+  for (const [page, code] of surfaceStudiesProductsByPage) {
+    assert.equal(getBrochureProduct("surface-studies", page - 1)?.id, `surface-studies-${code}`);
+  }
+  assert.equal(getBrochureProduct("surface-studies", -1), undefined);
+  assert.equal(getBrochureProduct("surface-studies", 32), undefined);
   assert.equal(getBrochureProduct("unknown", 0), undefined);
 });
 
-test("product regions stay within their own page and dimensions come only from the printed source", () => {
+test("product regions stay within their own page and unconfirmed dimensions remain unspecified", () => {
   for (const product of brochureProducts) {
     const brochure = brochures.find((item) => item.id === product.brochureId)!;
     assert.ok(brochure);
     assert.ok(product.pageNumbers.includes(product.sourcePage));
     assert.equal(product.sourcePdf, brochure.pdf);
-    assert.equal(product.format, product.brochureId === "evoke" ? "1200 × 2400 mm" : null);
+    assert.equal(product.format, null);
     for (const page of product.pageNumbers) {
       assert.ok(page > 0 && page <= brochure.pageCount);
       const region = getBrochureProductHotspot(product, page - 1);
@@ -45,6 +54,22 @@ test("product regions stay within their own page and dimensions come only from t
       assert.ok(region.x + region.width <= 1 && region.y + region.height <= 1);
     }
   }
+});
+
+test("Surface Studies details open the new product page and preserve the separate room hotspot", () => {
+  const products = brochureProducts.filter((product) => product.brochureId === "surface-studies");
+  assert.equal(products.length, 24);
+  for (const product of products) {
+    assert.equal(product.sourcePdf, "/brochures/surface-studies/catalogue.pdf");
+    assert.equal(`surface-studies-${surfaceStudiesProductsByPage.get(product.sourcePage)}`, product.id);
+    assert.notEqual(product.sourcePage, 3, "Details must link to the product study, not the room photograph");
+    assert.deepEqual(getBrochureProductHotspot(product, product.sourcePage - 1), product.hotspot);
+    const link = new URL(`${product.sourcePdf}#page=${product.sourcePage}`, "https://example.test");
+    assert.equal(link.hash, `#page=${product.sourcePage}`);
+  }
+  const repeatedProduct = getBrochureProduct("surface-studies", 2)!;
+  assert.equal(repeatedProduct.id, "surface-studies-10465");
+  assert.notDeepEqual(getBrochureProductHotspot(repeatedProduct, 2), repeatedProduct.hotspot);
 });
 
 test("the exact texture files match the extraction manifest and have their declared dimensions", async () => {
@@ -61,7 +86,7 @@ test("the exact texture files match the extraction manifest and have their decla
     assert.equal(metadata.height, product.textureHeight);
     if (product.originalInterior) assert.ok(existsSync(publicFile(product.originalInterior.src)));
   }
-  assert.deepEqual(brochureProducts.filter((item) => item.originalInterior).map((item) => item.id), ["evoke-10465"]);
+  assert.deepEqual(brochureProducts.filter((item) => item.originalInterior).map((item) => item.id), ["surface-studies-10465"]);
 });
 
 test("each room provides a real background and an undistorted portrait installation surface", async () => {

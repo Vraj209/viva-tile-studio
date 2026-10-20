@@ -1,7 +1,10 @@
-"""Render owner-supplied PDF catalogues without changing their artwork or page order.
+"""Render the two image-only catalogues and retain VAVI's original publication.
 
 Requires Python 3, Pillow, pypdf and Poppler's pdftoppm. Run from any directory:
     python scripts/prepare-brochure-assets.py
+
+Build Surface Studies first with node scripts/build-vavi-brochure.cjs. Its
+publication, artwork and page order are never regenerated from the old PDF here.
 """
 
 from __future__ import annotations
@@ -10,6 +13,7 @@ import argparse
 import hashlib
 import json
 import logging
+import re
 import shutil
 import subprocess
 import tempfile
@@ -22,18 +26,9 @@ from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "public" / "brochures"
-SOURCE_ORIGINS = {
-    "new-poster": "https://drive.google.com/file/d/1_mAIgNT1YPAefgNc3TBGtkFJZmmC6xPf/view?usp=drivesdk",
-}
+VAVI_PUBLICATION = OUTPUT / "surface-studies" / "publication.json"
+LEGACY_CATALOGUE_IDS = frozenset({"artful-surfaces", "new-poster"})
 CATALOGUES = [
-    {
-        "id": "evoke",
-        "source": "Eton__1200x2400mm_Evoke_Collection.pdf",
-        "title": "Evoke Collection",
-        "subtitle": "Craft, colour & composition",
-        "description": "Explore expressive surfaces, sculptural patterns and room settings from the Evoke collection.",
-        "format": "1200 × 2400 mm",
-    },
     {
         "id": "artful-surfaces",
         "source": "f304a1b2-c8b1-48aa-b347-d8a0e969b56f.pdf",
@@ -52,38 +47,8 @@ CATALOGUES = [
     },
 ]
 
-# Descriptions identify visible content only. Codes are transcribed from the
-# Evoke PDF; the untitled artwork document does not contain product codes.
+# Descriptions identify visible content only, not confirmed product names.
 PAGE_DESCRIPTIONS = {
-    "evoke": [
-        "Cover with hands holding dried foliage against a pale blue background",
-        "Introduction to handmade tiles with a decorative panel in an architectural setting",
-        "Design 10465: layered terracotta leaves and small flowers",
-        "Design 10465 shown beside a timber entrance door and an ivory console table",
-        "Design 10466: gold and brown ornamental scrollwork",
-        "Design 10467: terracotta discs on a blue textured ground",
-        "Design 10468: gold floral medallions on a dark brown ground",
-        "Design 10469: golden leaves and butterflies on a cream ground",
-        "Design 10470: grey ornamental motifs and geometric textures",
-        "Design 10471: gold botanical ornament on ivory",
-        "Design 10472: blue and rust patchwork with ornamental details",
-        "Design 10473: a gold circular medallion on black with patterned borders",
-        "Design 10474: golden foliage on a pale textured ground",
-        "Design 10475: curling branches and small blue flowers on beige",
-        "Design 10476: intricate copper-coloured ornament over teal",
-        "Design 10477: flowing brown and gold floral shapes",
-        "Design 10478: pale botanical relief on a weathered grey ground",
-        "Design 10479: gold medallions on blue and brown patchwork",
-        "Design 10480: a cream ornamental panel with a rust-coloured border",
-        "Design 10481: grey geometric shapes with fine linear textures",
-        "Design 10482: beige patchwork with carved botanical motifs",
-        "Design 10483: overlapping pale wooden bowl-like circles",
-        "Design 10484: angular golden ornament on a black ground",
-        "Design 10485: four long gold-coloured leaves on black",
-        "Design 10486: layered cream and brown geometric forms",
-        "Design 10487: a fine cream ornamental pattern on gold",
-        "Design 10488: an intricate ivory scrolling botanical panel",
-    ],
     "artful-surfaces": [
         "Two white cranes before a golden mosaic sun reflected in water",
         "A blue bird on dark branches before a pale mosaic moon",
@@ -114,6 +79,27 @@ PAGE_DESCRIPTIONS = {
         "A single feather with pale and dark halves against a softly shaded ground",
     ],
 }
+
+
+def load_vavi_publication() -> dict:
+    """Fail before writing outputs if the replacement publication is unavailable."""
+    if not VAVI_PUBLICATION.is_file():
+        raise SystemExit("Build Surface Studies first: node scripts/build-vavi-brochure.cjs")
+    publication = json.loads(VAVI_PUBLICATION.read_text(encoding="utf-8"))
+    if (
+        publication.get("brochure", {}).get("id") != "surface-studies"
+        or not publication.get("products")
+        or not isinstance(publication.get("hotspots"), dict)
+    ):
+        raise SystemExit("Surface Studies publication metadata is incomplete; rebuild it first.")
+    assert_public_branding(publication)
+    return publication
+
+
+def assert_public_branding(value: object) -> None:
+    """Source filenames remain private; public records use neutral provenance."""
+    if re.search(r"evoke|eton", json.dumps(value, ensure_ascii=False), re.IGNORECASE):
+        raise ValueError("Previous source branding must not be written into public metadata.")
 
 
 def find_poppler() -> str:
@@ -196,11 +182,24 @@ def main() -> None:
     parser.add_argument("--quality", type=int, default=88)
     args = parser.parse_args()
     logging.getLogger("pypdf").setLevel(logging.ERROR)
+    publication = load_vavi_publication()
+    if {item["id"] for item in CATALOGUES} != LEGACY_CATALOGUE_IDS:
+        raise SystemExit("This renderer may only publish the two image-only catalogues.")
     executable = find_poppler()
     OUTPUT.mkdir(parents=True, exist_ok=True)
     temp_root = (ROOT / "tmp" / "pdfs").resolve()
     temp_root.mkdir(parents=True, exist_ok=True)
-    records, manifest = [], []
+    publication_pdf = ROOT / "public" / publication["brochure"]["pdf"].lstrip("/")
+    publication_bytes = publication_pdf.read_bytes()
+    records = []
+    manifest = [{
+        "id": "surface-studies",
+        "source": "VAVI Tile Studio original publication",
+        "publication": "/brochures/surface-studies/publication.json",
+        "sha256": hashlib.sha256(publication_bytes).hexdigest(),
+        "sourceBytes": len(publication_bytes),
+        "pageCount": publication["brochure"]["pageCount"],
+    }]
 
     for catalogue in CATALOGUES:
         source = ROOT / "data" / "brouchers" / catalogue["source"]
@@ -224,7 +223,7 @@ def main() -> None:
         })
         source_record = {
             "id": catalogue["id"],
-            "source": str(source.relative_to(ROOT)).replace("\\", "/"),
+            "source": f"Owner-supplied image-only catalogue: {catalogue['id']}",
             "sha256": hashlib.sha256(source_bytes).hexdigest(),
             "sourceBytes": len(source_bytes),
             "pageCount": page_count,
@@ -234,8 +233,6 @@ def main() -> None:
             "corruptedImagePages": damaged,
             "replacementCharacterCount": source_bytes.count(b"\xef\xbf\xbd"),
         }
-        if catalogue["id"] in SOURCE_ORIGINS:
-            source_record["sourceUrl"] = SOURCE_ORIGINS[catalogue["id"]]
         if damaged:
             print(f"{catalogue['id']}: unavailable; damaged JPEG data on {len(damaged)}/{page_count} pages")
         else:
@@ -263,7 +260,9 @@ def main() -> None:
         records.append(record)
         manifest.append(source_record)
 
-    types = '''/** Generated from owner-supplied PDFs; see docs/brochure-assets.md. */
+    types = '''/** VAVI publication and supplied image-only catalogues; see docs/brochure-assets.md. */
+import surfaceStudiesPublication from "../../public/brochures/surface-studies/publication.json";
+
 export type BrochurePage = {
   src: string;
   alt: string;
@@ -289,9 +288,14 @@ export type Brochure = {
   pages: BrochurePage[];
 };
 
-// Regenerate with: python scripts/prepare-brochure-assets.py
-export const brochures: Brochure[] = '''
-    (ROOT / "src/lib/brochures.ts").write_text(types + json.dumps(records, indent=2, ensure_ascii=False) + ";\n", encoding="utf-8")
+// Build Surface Studies with scripts/build-vavi-brochure.cjs before regenerating.
+export const brochures: Brochure[] = [
+  surfaceStudiesPublication.brochure as Brochure,
+'''
+    assert_public_branding(records)
+    assert_public_branding(manifest)
+    catalogue_entries = json.dumps(records, indent=2, ensure_ascii=False)[2:-2]
+    (ROOT / "src/lib/brochures.ts").write_text(types + catalogue_entries + "\n];\n", encoding="utf-8")
     (OUTPUT / "manifest.json").write_text(json.dumps({
         "generator": "scripts/prepare-brochure-assets.py",
         "renderLongEdge": args.long_edge,

@@ -1,0 +1,789 @@
+{
+  "brochure": {
+    "id": "surface-studies",
+    "title": "Surface Studies",
+    "subtitle": "Form, texture & composition",
+    "description": "An original VAVI Tile Studio publication exploring botanical forms, geometric rhythms and intricate ornament.",
+    "format": "Decorative surfaces",
+    "pageCount": 32,
+    "width": 1273,
+    "height": 1800,
+    "cover": "/brochures/surface-studies/page-001.webp",
+    "pdf": "/brochures/surface-studies/catalogue.pdf",
+    "status": "ready",
+    "sourceIssue": null,
+    "pages": [
+      {
+        "src": "/brochures/surface-studies/page-001.webp",
+        "alt": "Surface Studies, page 1. VAVI Tile Studio Surface Studies cover, with a terracotta-toned botanical panel in a supplied interior.",
+        "thumbnail": "/brochures/surface-studies/thumb-001.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-002.webp",
+        "alt": "Surface Studies, page 2. Introduction and contents for Surface Studies, with three visual chapters and selection notes.",
+        "thumbnail": "/brochures/surface-studies/thumb-002.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-003.webp",
+        "alt": "Surface Studies, page 3. Design 10465 shown in the supplied interior beside a timber entrance door and an ivory console.",
+        "thumbnail": "/brochures/surface-studies/thumb-003.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-004.webp",
+        "alt": "Surface Studies, page 4. Botanical studies chapter introduction with a complete image of Design 10475.",
+        "thumbnail": "/brochures/surface-studies/thumb-004.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-005.webp",
+        "alt": "Surface Studies, page 5. Design 10465. Terracotta-toned leaves and clusters of small flowers. Complete panel shown in its original proportions.",
+        "thumbnail": "/brochures/surface-studies/thumb-005.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-006.webp",
+        "alt": "Surface Studies, page 6. Design 10469. Golden foliage and butterflies on a pale ground. Complete panel shown in its original proportions.",
+        "thumbnail": "/brochures/surface-studies/thumb-006.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-007.webp",
+        "alt": "Surface Studies, page 7. Design 10471. Fine golden botanical motifs across an ivory ground. Complete panel shown in its original proportions.",
+        "thumbnail": "/brochures/surface-studies/thumb-007.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-008.webp",
+        "alt": "Surface Studies, page 8. Design 10474. Flowing golden leaves against soft grey tones. Complete panel shown in its original proportions.",
+        "thumbnail": "/brochures/surface-studies/thumb-008.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-009.webp",
+        "alt": "Surface Studies, page 9. Design 10475. Curling branches with small blue flowers. Complete panel shown in its original proportions.",
+        "thumbnail": "/brochures/surface-studies/thumb-009.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-010.webp",
+        "alt": "Surface Studies, page 10. Design 10478. Pale botanical forms on a mottled grey ground. Complete panel shown in its original proportions.",
+        "thumbnail": "/brochures/surface-studies/thumb-010.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-011.webp",
+        "alt": "Surface Studies, page 11. Design 10485. Four slender golden leaves on a charcoal ground. Complete panel shown in its original proportions.",
+        "thumbnail": "/brochures/surface-studies/thumb-011.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-012.webp",
+        "alt": "Surface Studies, page 12. Design 10488. An intricate composition of ivory botanical scrolls. Complete panel shown in its original proportions.",
+        "thumbnail": "/brochures/surface-studies/thumb-012.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-013.webp",
+        "alt": "Surface Studies, page 13. Rhythm & geometry chapter introduction with a complete image of Design 10481.",
+        "thumbnail": "/brochures/surface-studies/thumb-013.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-014.webp",
+        "alt": "Surface Studies, page 14. Design 10467. Rust-coloured circles set against a blue ground. Complete panel shown in its original proportions.",
+        "thumbnail": "/brochures/surface-studies/thumb-014.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-015.webp",
+        "alt": "Surface Studies, page 15. Design 10472. A patchwork of blue, rust and ornamental detail. Complete panel shown in its original proportions.",
+        "thumbnail": "/brochures/surface-studies/thumb-015.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-016.webp",
+        "alt": "Surface Studies, page 16. Design 10479. Golden medallions across blue and brown patches. Complete panel shown in its original proportions.",
+        "thumbnail": "/brochures/surface-studies/thumb-016.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-017.webp",
+        "alt": "Surface Studies, page 17. Design 10481. Grey geometric forms defined by fine parallel lines. Complete panel shown in its original proportions.",
+        "thumbnail": "/brochures/surface-studies/thumb-017.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-018.webp",
+        "alt": "Surface Studies, page 18. Design 10482. A patchwork of botanical and geometric motifs. Complete panel shown in its original proportions.",
+        "thumbnail": "/brochures/surface-studies/thumb-018.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-019.webp",
+        "alt": "Surface Studies, page 19. Design 10483. Overlapping circular forms in pale timber tones. Complete panel shown in its original proportions.",
+        "thumbnail": "/brochures/surface-studies/thumb-019.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-020.webp",
+        "alt": "Surface Studies, page 20. Design 10484. Angular golden ornament on a dark ground. Complete panel shown in its original proportions.",
+        "thumbnail": "/brochures/surface-studies/thumb-020.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-021.webp",
+        "alt": "Surface Studies, page 21. Design 10486. Layered geometric forms in cream and brown. Complete panel shown in its original proportions.",
+        "thumbnail": "/brochures/surface-studies/thumb-021.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-022.webp",
+        "alt": "Surface Studies, page 22. Ornament & contrast chapter introduction with a complete image of Design 10476.",
+        "thumbnail": "/brochures/surface-studies/thumb-022.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-023.webp",
+        "alt": "Surface Studies, page 23. Design 10466. Symmetrical scrollwork in warm brown and gold tones. Complete panel shown in its original proportions.",
+        "thumbnail": "/brochures/surface-studies/thumb-023.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-024.webp",
+        "alt": "Surface Studies, page 24. Design 10468. Golden floral medallions on a deep brown ground. Complete panel shown in its original proportions.",
+        "thumbnail": "/brochures/surface-studies/thumb-024.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-025.webp",
+        "alt": "Surface Studies, page 25. Design 10470. Grey ornament layered with geometric pattern. Complete panel shown in its original proportions.",
+        "thumbnail": "/brochures/surface-studies/thumb-025.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-026.webp",
+        "alt": "Surface Studies, page 26. Design 10473. A circular gold-toned motif framed by dark borders. Complete panel shown in its original proportions.",
+        "thumbnail": "/brochures/surface-studies/thumb-026.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-027.webp",
+        "alt": "Surface Studies, page 27. Design 10476. Copper-toned ornament arranged over deep teal. Complete panel shown in its original proportions.",
+        "thumbnail": "/brochures/surface-studies/thumb-027.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-028.webp",
+        "alt": "Surface Studies, page 28. Design 10477. Sweeping floral shapes in warm brown tones. Complete panel shown in its original proportions.",
+        "thumbnail": "/brochures/surface-studies/thumb-028.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-029.webp",
+        "alt": "Surface Studies, page 29. Design 10480. Ivory scrollwork within a terracotta-toned border. Complete panel shown in its original proportions.",
+        "thumbnail": "/brochures/surface-studies/thumb-029.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-030.webp",
+        "alt": "Surface Studies, page 30. Design 10487. Fine pale ornament across a golden ground. Complete panel shown in its original proportions.",
+        "thumbnail": "/brochures/surface-studies/thumb-030.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-031.webp",
+        "alt": "Surface Studies, page 31. Selection notes: dimensions, finish, thickness, availability and installation suitability require confirmation with VAVI.",
+        "thumbnail": "/brochures/surface-studies/thumb-031.webp",
+        "width": 1273,
+        "height": 1800
+      },
+      {
+        "src": "/brochures/surface-studies/page-032.webp",
+        "alt": "Surface Studies, page 32. VAVI Tile Studio back cover with studio email and phone contact.",
+        "thumbnail": "/brochures/surface-studies/thumb-032.webp",
+        "width": 1273,
+        "height": 1800
+      }
+    ]
+  },
+  "products": [
+    {
+      "id": "surface-studies-10465",
+      "brochureId": "surface-studies",
+      "name": "Design 10465",
+      "collection": "Surface Studies",
+      "description": "Terracotta-toned leaves and clusters of small flowers.",
+      "pageNumbers": [
+        3,
+        5
+      ],
+      "texture": "/brochures/products/surface-studies-10465.webp",
+      "textureWidth": 383,
+      "textureHeight": 766,
+      "format": null,
+      "sourcePdf": "/brochures/surface-studies/catalogue.pdf",
+      "sourcePage": 5,
+      "hotspot": {
+        "x": 0.44537815126050423,
+        "y": 0.15201900237529692,
+        "width": 0.48403361344537815,
+        "height": 0.684085510688836
+      },
+      "originalInterior": {
+        "src": "/brochures/products/surface-studies-10465-interior.jpg",
+        "width": 794,
+        "height": 1123,
+        "alt": "Supplied collection interior showing Design 10465 beside a timber door and an ivory console."
+      }
+    },
+    {
+      "id": "surface-studies-10469",
+      "brochureId": "surface-studies",
+      "name": "Design 10469",
+      "collection": "Surface Studies",
+      "description": "Golden foliage and butterflies on a pale ground.",
+      "pageNumbers": [
+        6
+      ],
+      "texture": "/brochures/products/surface-studies-10469.webp",
+      "textureWidth": 383,
+      "textureHeight": 766,
+      "format": null,
+      "sourcePdf": "/brochures/surface-studies/catalogue.pdf",
+      "sourcePage": 6,
+      "hotspot": {
+        "x": 0.2680672268907563,
+        "y": 0.1496437054631829,
+        "width": 0.4638655462184874,
+        "height": 0.6555819477434679
+      }
+    },
+    {
+      "id": "surface-studies-10471",
+      "brochureId": "surface-studies",
+      "name": "Design 10471",
+      "collection": "Surface Studies",
+      "description": "Fine golden botanical motifs across an ivory ground.",
+      "pageNumbers": [
+        7
+      ],
+      "texture": "/brochures/products/surface-studies-10471.webp",
+      "textureWidth": 383,
+      "textureHeight": 766,
+      "format": null,
+      "sourcePdf": "/brochures/surface-studies/catalogue.pdf",
+      "sourcePage": 7,
+      "hotspot": {
+        "x": 0.07058823529411765,
+        "y": 0.15201900237529692,
+        "width": 0.48403361344537815,
+        "height": 0.684085510688836
+      }
+    },
+    {
+      "id": "surface-studies-10474",
+      "brochureId": "surface-studies",
+      "name": "Design 10474",
+      "collection": "Surface Studies",
+      "description": "Flowing golden leaves against soft grey tones.",
+      "pageNumbers": [
+        8
+      ],
+      "texture": "/brochures/products/surface-studies-10474.webp",
+      "textureWidth": 383,
+      "textureHeight": 766,
+      "format": null,
+      "sourcePdf": "/brochures/surface-studies/catalogue.pdf",
+      "sourcePage": 8,
+      "hotspot": {
+        "x": 0.44537815126050423,
+        "y": 0.15201900237529692,
+        "width": 0.48403361344537815,
+        "height": 0.684085510688836
+      }
+    },
+    {
+      "id": "surface-studies-10475",
+      "brochureId": "surface-studies",
+      "name": "Design 10475",
+      "collection": "Surface Studies",
+      "description": "Curling branches with small blue flowers.",
+      "pageNumbers": [
+        9
+      ],
+      "texture": "/brochures/products/surface-studies-10475.webp",
+      "textureWidth": 383,
+      "textureHeight": 766,
+      "format": null,
+      "sourcePdf": "/brochures/surface-studies/catalogue.pdf",
+      "sourcePage": 9,
+      "hotspot": {
+        "x": 0.2680672268907563,
+        "y": 0.1496437054631829,
+        "width": 0.4638655462184874,
+        "height": 0.6555819477434679
+      }
+    },
+    {
+      "id": "surface-studies-10478",
+      "brochureId": "surface-studies",
+      "name": "Design 10478",
+      "collection": "Surface Studies",
+      "description": "Pale botanical forms on a mottled grey ground.",
+      "pageNumbers": [
+        10
+      ],
+      "texture": "/brochures/products/surface-studies-10478.webp",
+      "textureWidth": 383,
+      "textureHeight": 766,
+      "format": null,
+      "sourcePdf": "/brochures/surface-studies/catalogue.pdf",
+      "sourcePage": 10,
+      "hotspot": {
+        "x": 0.07058823529411765,
+        "y": 0.15201900237529692,
+        "width": 0.48403361344537815,
+        "height": 0.684085510688836
+      }
+    },
+    {
+      "id": "surface-studies-10485",
+      "brochureId": "surface-studies",
+      "name": "Design 10485",
+      "collection": "Surface Studies",
+      "description": "Four slender golden leaves on a charcoal ground.",
+      "pageNumbers": [
+        11
+      ],
+      "texture": "/brochures/products/surface-studies-10485.webp",
+      "textureWidth": 383,
+      "textureHeight": 766,
+      "format": null,
+      "sourcePdf": "/brochures/surface-studies/catalogue.pdf",
+      "sourcePage": 11,
+      "hotspot": {
+        "x": 0.44537815126050423,
+        "y": 0.15201900237529692,
+        "width": 0.48403361344537815,
+        "height": 0.684085510688836
+      }
+    },
+    {
+      "id": "surface-studies-10488",
+      "brochureId": "surface-studies",
+      "name": "Design 10488",
+      "collection": "Surface Studies",
+      "description": "An intricate composition of ivory botanical scrolls.",
+      "pageNumbers": [
+        12
+      ],
+      "texture": "/brochures/products/surface-studies-10488.webp",
+      "textureWidth": 383,
+      "textureHeight": 766,
+      "format": null,
+      "sourcePdf": "/brochures/surface-studies/catalogue.pdf",
+      "sourcePage": 12,
+      "hotspot": {
+        "x": 0.2680672268907563,
+        "y": 0.1496437054631829,
+        "width": 0.4638655462184874,
+        "height": 0.6555819477434679
+      }
+    },
+    {
+      "id": "surface-studies-10467",
+      "brochureId": "surface-studies",
+      "name": "Design 10467",
+      "collection": "Surface Studies",
+      "description": "Rust-coloured circles set against a blue ground.",
+      "pageNumbers": [
+        14
+      ],
+      "texture": "/brochures/products/surface-studies-10467.webp",
+      "textureWidth": 383,
+      "textureHeight": 766,
+      "format": null,
+      "sourcePdf": "/brochures/surface-studies/catalogue.pdf",
+      "sourcePage": 14,
+      "hotspot": {
+        "x": 0.44537815126050423,
+        "y": 0.15201900237529692,
+        "width": 0.48403361344537815,
+        "height": 0.684085510688836
+      }
+    },
+    {
+      "id": "surface-studies-10472",
+      "brochureId": "surface-studies",
+      "name": "Design 10472",
+      "collection": "Surface Studies",
+      "description": "A patchwork of blue, rust and ornamental detail.",
+      "pageNumbers": [
+        15
+      ],
+      "texture": "/brochures/products/surface-studies-10472.webp",
+      "textureWidth": 383,
+      "textureHeight": 766,
+      "format": null,
+      "sourcePdf": "/brochures/surface-studies/catalogue.pdf",
+      "sourcePage": 15,
+      "hotspot": {
+        "x": 0.2680672268907563,
+        "y": 0.1496437054631829,
+        "width": 0.4638655462184874,
+        "height": 0.6555819477434679
+      }
+    },
+    {
+      "id": "surface-studies-10479",
+      "brochureId": "surface-studies",
+      "name": "Design 10479",
+      "collection": "Surface Studies",
+      "description": "Golden medallions across blue and brown patches.",
+      "pageNumbers": [
+        16
+      ],
+      "texture": "/brochures/products/surface-studies-10479.webp",
+      "textureWidth": 383,
+      "textureHeight": 766,
+      "format": null,
+      "sourcePdf": "/brochures/surface-studies/catalogue.pdf",
+      "sourcePage": 16,
+      "hotspot": {
+        "x": 0.07058823529411765,
+        "y": 0.15201900237529692,
+        "width": 0.48403361344537815,
+        "height": 0.684085510688836
+      }
+    },
+    {
+      "id": "surface-studies-10481",
+      "brochureId": "surface-studies",
+      "name": "Design 10481",
+      "collection": "Surface Studies",
+      "description": "Grey geometric forms defined by fine parallel lines.",
+      "pageNumbers": [
+        17
+      ],
+      "texture": "/brochures/products/surface-studies-10481.webp",
+      "textureWidth": 383,
+      "textureHeight": 766,
+      "format": null,
+      "sourcePdf": "/brochures/surface-studies/catalogue.pdf",
+      "sourcePage": 17,
+      "hotspot": {
+        "x": 0.44537815126050423,
+        "y": 0.15201900237529692,
+        "width": 0.48403361344537815,
+        "height": 0.684085510688836
+      }
+    },
+    {
+      "id": "surface-studies-10482",
+      "brochureId": "surface-studies",
+      "name": "Design 10482",
+      "collection": "Surface Studies",
+      "description": "A patchwork of botanical and geometric motifs.",
+      "pageNumbers": [
+        18
+      ],
+      "texture": "/brochures/products/surface-studies-10482.webp",
+      "textureWidth": 383,
+      "textureHeight": 766,
+      "format": null,
+      "sourcePdf": "/brochures/surface-studies/catalogue.pdf",
+      "sourcePage": 18,
+      "hotspot": {
+        "x": 0.2680672268907563,
+        "y": 0.1496437054631829,
+        "width": 0.4638655462184874,
+        "height": 0.6555819477434679
+      }
+    },
+    {
+      "id": "surface-studies-10483",
+      "brochureId": "surface-studies",
+      "name": "Design 10483",
+      "collection": "Surface Studies",
+      "description": "Overlapping circular forms in pale timber tones.",
+      "pageNumbers": [
+        19
+      ],
+      "texture": "/brochures/products/surface-studies-10483.webp",
+      "textureWidth": 383,
+      "textureHeight": 766,
+      "format": null,
+      "sourcePdf": "/brochures/surface-studies/catalogue.pdf",
+      "sourcePage": 19,
+      "hotspot": {
+        "x": 0.07058823529411765,
+        "y": 0.15201900237529692,
+        "width": 0.48403361344537815,
+        "height": 0.684085510688836
+      }
+    },
+    {
+      "id": "surface-studies-10484",
+      "brochureId": "surface-studies",
+      "name": "Design 10484",
+      "collection": "Surface Studies",
+      "description": "Angular golden ornament on a dark ground.",
+      "pageNumbers": [
+        20
+      ],
+      "texture": "/brochures/products/surface-studies-10484.webp",
+      "textureWidth": 383,
+      "textureHeight": 766,
+      "format": null,
+      "sourcePdf": "/brochures/surface-studies/catalogue.pdf",
+      "sourcePage": 20,
+      "hotspot": {
+        "x": 0.44537815126050423,
+        "y": 0.15201900237529692,
+        "width": 0.48403361344537815,
+        "height": 0.684085510688836
+      }
+    },
+    {
+      "id": "surface-studies-10486",
+      "brochureId": "surface-studies",
+      "name": "Design 10486",
+      "collection": "Surface Studies",
+      "description": "Layered geometric forms in cream and brown.",
+      "pageNumbers": [
+        21
+      ],
+      "texture": "/brochures/products/surface-studies-10486.webp",
+      "textureWidth": 383,
+      "textureHeight": 766,
+      "format": null,
+      "sourcePdf": "/brochures/surface-studies/catalogue.pdf",
+      "sourcePage": 21,
+      "hotspot": {
+        "x": 0.2680672268907563,
+        "y": 0.1496437054631829,
+        "width": 0.4638655462184874,
+        "height": 0.6555819477434679
+      }
+    },
+    {
+      "id": "surface-studies-10466",
+      "brochureId": "surface-studies",
+      "name": "Design 10466",
+      "collection": "Surface Studies",
+      "description": "Symmetrical scrollwork in warm brown and gold tones.",
+      "pageNumbers": [
+        23
+      ],
+      "texture": "/brochures/products/surface-studies-10466.webp",
+      "textureWidth": 383,
+      "textureHeight": 766,
+      "format": null,
+      "sourcePdf": "/brochures/surface-studies/catalogue.pdf",
+      "sourcePage": 23,
+      "hotspot": {
+        "x": 0.44537815126050423,
+        "y": 0.15201900237529692,
+        "width": 0.48403361344537815,
+        "height": 0.684085510688836
+      }
+    },
+    {
+      "id": "surface-studies-10468",
+      "brochureId": "surface-studies",
+      "name": "Design 10468",
+      "collection": "Surface Studies",
+      "description": "Golden floral medallions on a deep brown ground.",
+      "pageNumbers": [
+        24
+      ],
+      "texture": "/brochures/products/surface-studies-10468.webp",
+      "textureWidth": 383,
+      "textureHeight": 766,
+      "format": null,
+      "sourcePdf": "/brochures/surface-studies/catalogue.pdf",
+      "sourcePage": 24,
+      "hotspot": {
+        "x": 0.2680672268907563,
+        "y": 0.1496437054631829,
+        "width": 0.4638655462184874,
+        "height": 0.6555819477434679
+      }
+    },
+    {
+      "id": "surface-studies-10470",
+      "brochureId": "surface-studies",
+      "name": "Design 10470",
+      "collection": "Surface Studies",
+      "description": "Grey ornament layered with geometric pattern.",
+      "pageNumbers": [
+        25
+      ],
+      "texture": "/brochures/products/surface-studies-10470.webp",
+      "textureWidth": 383,
+      "textureHeight": 766,
+      "format": null,
+      "sourcePdf": "/brochures/surface-studies/catalogue.pdf",
+      "sourcePage": 25,
+      "hotspot": {
+        "x": 0.07058823529411765,
+        "y": 0.15201900237529692,
+        "width": 0.48403361344537815,
+        "height": 0.684085510688836
+      }
+    },
+    {
+      "id": "surface-studies-10473",
+      "brochureId": "surface-studies",
+      "name": "Design 10473",
+      "collection": "Surface Studies",
+      "description": "A circular gold-toned motif framed by dark borders.",
+      "pageNumbers": [
+        26
+      ],
+      "texture": "/brochures/products/surface-studies-10473.webp",
+      "textureWidth": 383,
+      "textureHeight": 766,
+      "format": null,
+      "sourcePdf": "/brochures/surface-studies/catalogue.pdf",
+      "sourcePage": 26,
+      "hotspot": {
+        "x": 0.44537815126050423,
+        "y": 0.15201900237529692,
+        "width": 0.48403361344537815,
+        "height": 0.684085510688836
+      }
+    },
+    {
+      "id": "surface-studies-10476",
+      "brochureId": "surface-studies",
+      "name": "Design 10476",
+      "collection": "Surface Studies",
+      "description": "Copper-toned ornament arranged over deep teal.",
+      "pageNumbers": [
+        27
+      ],
+      "texture": "/brochures/products/surface-studies-10476.webp",
+      "textureWidth": 383,
+      "textureHeight": 766,
+      "format": null,
+      "sourcePdf": "/brochures/surface-studies/catalogue.pdf",
+      "sourcePage": 27,
+      "hotspot": {
+        "x": 0.2680672268907563,
+        "y": 0.1496437054631829,
+        "width": 0.4638655462184874,
+        "height": 0.6555819477434679
+      }
+    },
+    {
+      "id": "surface-studies-10477",
+      "brochureId": "surface-studies",
+      "name": "Design 10477",
+      "collection": "Surface Studies",
+      "description": "Sweeping floral shapes in warm brown tones.",
+      "pageNumbers": [
+        28
+      ],
+      "texture": "/brochures/products/surface-studies-10477.webp",
+      "textureWidth": 383,
+      "textureHeight": 766,
+      "format": null,
+      "sourcePdf": "/brochures/surface-studies/catalogue.pdf",
+      "sourcePage": 28,
+      "hotspot": {
+        "x": 0.07058823529411765,
+        "y": 0.15201900237529692,
+        "width": 0.48403361344537815,
+        "height": 0.684085510688836
+      }
+    },
+    {
+      "id": "surface-studies-10480",
+      "brochureId": "surface-studies",
+      "name": "Design 10480",
+      "collection": "Surface Studies",
+      "description": "Ivory scrollwork within a terracotta-toned border.",
+      "pageNumbers": [
+        29
+      ],
+      "texture": "/brochures/products/surface-studies-10480.webp",
+      "textureWidth": 383,
+      "textureHeight": 766,
+      "format": null,
+      "sourcePdf": "/brochures/surface-studies/catalogue.pdf",
+      "sourcePage": 29,
+      "hotspot": {
+        "x": 0.44537815126050423,
+        "y": 0.15201900237529692,
+        "width": 0.48403361344537815,
+        "height": 0.684085510688836
+      }
+    },
+    {
+      "id": "surface-studies-10487",
+      "brochureId": "surface-studies",
+      "name": "Design 10487",
+      "collection": "Surface Studies",
+      "description": "Fine pale ornament across a golden ground.",
+      "pageNumbers": [
+        30
+      ],
+      "texture": "/brochures/products/surface-studies-10487.webp",
+      "textureWidth": 383,
+      "textureHeight": 766,
+      "format": null,
+      "sourcePdf": "/brochures/surface-studies/catalogue.pdf",
+      "sourcePage": 30,
+      "hotspot": {
+        "x": 0.2680672268907563,
+        "y": 0.1496437054631829,
+        "width": 0.4638655462184874,
+        "height": 0.6555819477434679
+      }
+    }
+  ],
+  "hotspots": {
+    "surface-studies-10465": {
+      "3": {
+        "x": 0.3922285714285714,
+        "y": 0.16578384798099763,
+        "width": 0.34040000000000004,
+        "height": 0.5083396674584323
+      }
+    }
+  }
+}
