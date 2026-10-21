@@ -65,7 +65,8 @@ async function verify() {
       assert.ok(row.received_at);
       if (withFile) {
         assert.equal(row.inspiration_bucket, config.bucket);
-        assert.equal(row.inspiration_key, `enquiries/${result.reference}/inspiration.pdf`);
+        assert.match(row.request_hash, /^[a-f0-9]{64}$/);
+        assert.equal(row.inspiration_key, `enquiries/${result.reference}/${row.request_hash}/inspiration.pdf`);
         assert.equal(row.inspiration_original_name, "test-concept.pdf");
         assert.equal(row.inspiration_mime, "application/pdf");
         assert.equal(row.inspiration_bytes, Buffer.byteLength(fileBytes));

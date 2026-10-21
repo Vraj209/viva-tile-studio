@@ -1,0 +1,34 @@
+VAVI Tile Studio
+
+You’ve received a new inquiry.
+
+A visitor has submitted an inquiry through the VAVI Tile Studio website. Review their details below and open your dashboard to follow up.
+
+Name: Alex Morgan
+
+Email address: alex.morgan@example.test
+
+Phone number: +1 226 555 0100
+
+Company / studio: Morgan Design Studio
+
+Project type: Residential
+
+Application: Feature wall
+
+Location: Canada
+
+Dimensions / area: 3 × 2 metres
+
+Desired date: January 20, 2027
+
+Message: We are planning a botanical feature wall for a quiet reading room.
+Please advise on the tile finish and installation options.
+
+Submitted: October 20, 2026 at 1:45 p.m. GMT-04:00 (America/Toronto)
+
+Reply directly to this email to contact the visitor, or open your dashboard to review the inquiry.
+
+View Inquiry Dashboard: https://vavi-tile-studio-dashboard.vercel.app/
+
+Reference: cb6d2e8a-a4bb-4db7-a875-bdd987bd98f7

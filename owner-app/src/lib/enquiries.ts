@@ -228,15 +228,24 @@ export async function getEnquiryAttachment(reference: string, services: EnquiryS
   const bucket = env.ENQUIRY_STORAGE_BUCKET?.trim() || "viva-tile-studio";
   const mime = string(row.inspiration_mime);
   const extension = ({ "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "application/pdf": "pdf" } as Record<string, string>)[mime];
-  const expectedKey = `enquiries/${reference.toLowerCase()}/inspiration.${extension}`;
+  const key = string(row.inspiration_key);
+  const prefix = `enquiries/${reference.toLowerCase()}/`;
+  const filename = `inspiration.${extension}`;
+  const suffix = key.startsWith(prefix) ? key.slice(prefix.length) : "";
+  // Keep historical attachments readable while accepting the content-hashed
+  // paths used to prevent conflicting retries from overwriting a saved file.
+  const validKey = suffix === filename || (
+    /^[a-f0-9]{64}$/.test(suffix.slice(0, 64)) &&
+    suffix.slice(64) === `/${filename}`
+  );
   const expectedBytes = count(row.inspiration_bytes);
-  if (!extension || row.inspiration_bucket !== bucket || row.inspiration_key !== expectedKey || expectedBytes < 1 || expectedBytes > MAX_ATTACHMENT_BYTES)
+  if (!extension || row.inspiration_bucket !== bucket || !validKey || expectedBytes < 1 || expectedBytes > MAX_ATTACHMENT_BYTES)
     throw new EnquiryUnavailableError();
 
   const signal = AbortSignal.timeout(15_000);
   let client: S3Client | undefined;
   try {
-    const input = { Bucket: bucket, Key: expectedKey };
+    const input = { Bucket: bucket, Key: key };
     let object: StoredObject;
     if (services.readObject) object = await services.readObject(input, signal);
     else {

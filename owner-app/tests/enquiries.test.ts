@@ -198,6 +198,12 @@ test("attachment metadata cannot select another bucket, key, type or oversized o
   for (const change of [
     { inspiration_bucket: "another-bucket" },
     { inspiration_key: "admin/private.json" },
+    { inspiration_key: `enquiries/00000000-0000-4000-8000-000000000000/${"a".repeat(64)}/inspiration.pdf` },
+    { inspiration_key: `enquiries/${reference}/${"a".repeat(63)}/inspiration.pdf` },
+    { inspiration_key: `enquiries/${reference}/${"g".repeat(64)}/inspiration.pdf` },
+    { inspiration_key: `enquiries/${reference}/${"a".repeat(64)}/../inspiration.pdf` },
+    { inspiration_key: `enquiries/${reference}/${"a".repeat(64)}/inspiration.pdf\n` },
+    { inspiration_key: `enquiries/${reference}/${"a".repeat(64)}/inspiration.png` },
     { inspiration_mime: "text/html" },
     { inspiration_bytes: 0 },
     { inspiration_bytes: 5 * 1024 * 1024 + 1 },
@@ -211,6 +217,22 @@ test("attachment metadata cannot select another bucket, key, type or oversized o
     }), EnquiryUnavailableError);
     assert.equal(downloaded, false);
   }
+});
+
+test("hashed attachments download using the exact stored key", async () => {
+  const bytes = new TextEncoder().encode("%PDF-1.4\nhello");
+  const key = `enquiries/${reference}/${"0a".repeat(32)}/inspiration.pdf`;
+  const response = await getEnquiryAttachment(reference.toUpperCase(), {
+    authorize,
+    env: {},
+    query: async () => [{ ...fixture, inspiration_key: key, inspiration_bytes: bytes.length }],
+    readObject: async (input) => {
+      assert.deepEqual(input, { Bucket: "viva-tile-studio", Key: key });
+      return storedObject(bytes);
+    },
+  });
+  assert.equal(response.status, 200);
+  assert.deepEqual(new Uint8Array(await response.arrayBuffer()), bytes);
 });
 
 test("attachment reads reject mismatched lengths and bound streams even without Content-Length", async () => {

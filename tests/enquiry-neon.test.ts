@@ -7,6 +7,7 @@ import {
   type EnquiryNeonServices,
 } from "../src/lib/enquiry-neon";
 import type { Upload } from "../src/lib/enquiry";
+import { EnquiryConflictError, enquiryFingerprint } from "../src/lib/enquiry-idempotency";
 
 const env = {
   DATABASE_URL: "postgresql://test:secret@ep-test.neon.tech/neondb?sslmode=require",
@@ -98,7 +99,10 @@ test("every enquiry field is bound as a SQL parameter, including SQL-like user t
     sql: async (strings, ...parameters) => {
       inserts++;
       const query = strings.join("?");
+      assert.match(query, /WITH saved AS/);
       assert.match(query, /INSERT INTO public\.project_enquiries/);
+      assert.match(query, /INSERT INTO public\.enquiry_notifications/);
+      assert.match(query, /SELECT reference, \?::jsonb FROM saved/);
       assert.ok(!query.includes(submitted.idea));
       assert.ok(!query.includes(submitted.email));
       assert.deepEqual(parameters, [
@@ -115,7 +119,10 @@ test("every enquiry field is bound as a SQL parameter, including SQL-like user t
         submitted.phone,
         submitted.desiredDate,
         null, null, null, null, null,
+        enquiryFingerprint(submitted),
+        JSON.stringify(submitted),
       ]);
+      return [{ reference: submitted.reference }];
     },
     putObject: async () => assert.fail("No object upload without an attachment"),
   });
@@ -124,7 +131,10 @@ test("every enquiry field is bound as a SQL parameter, including SQL-like user t
 
 test("optional empty date becomes SQL NULL", async () => {
   await persistNeonEnquiry(config, { ...record, desiredDate: "" }, undefined, {
-    sql: async (_strings, ...parameters) => assert.equal(parameters[11], null),
+    sql: async (_strings, ...parameters) => {
+      assert.equal(parameters[11], null);
+      return [{ reference: record.reference }];
+    },
   });
 });
 
@@ -136,7 +146,8 @@ test("database-only configuration persists an enquiry with no attachment", async
       inserts++;
       assert.equal(parameters[0], record.reference);
       assert.equal(parameters[3], record.email);
-      assert.deepEqual(parameters.slice(12), [null, null, null, null, null]);
+      assert.deepEqual(parameters.slice(12, 17), [null, null, null, null, null]);
+      return [{ reference: record.reference }];
     },
     putObject: async () => assert.fail("No upload without storage configuration"),
   });
@@ -156,7 +167,7 @@ test("database-only persistence rejects attachments before any transport", async
 
 test("uploads remain private and are confirmed before their database record is inserted", async () => {
   const events: string[] = [];
-  const key = `enquiries/${record.reference}/inspiration.pdf`;
+  const key = `enquiries/${record.reference}/${enquiryFingerprint(withUpload, upload)}/inspiration.pdf`;
   await persistNeonEnquiry(config, withUpload, upload, {
     putObject: async (input, signal) => {
       events.push("upload");
@@ -172,11 +183,12 @@ test("uploads remain private and are confirmed before their database record is i
     },
     sql: async (_strings, ...parameters) => {
       events.push("insert");
-      assert.deepEqual(parameters.slice(12), [
+      assert.deepEqual(parameters.slice(12, 17), [
         "viva-tile-studio", key, upload.originalName, upload.mime, upload.bytes.length,
       ]);
       assert.ok(!parameters.includes(env.AWS_SECRET_ACCESS_KEY));
       assert.ok(!parameters.includes(env.AWS_ENDPOINT_URL_S3));
+      return [{ reference: record.reference }];
     },
   });
   assert.deepEqual(events, ["upload", "insert"]);
@@ -225,4 +237,112 @@ test("unsafe object paths and incomplete attachment records fail before transpor
   );
   await assert.rejects(persistNeonEnquiry(config, record, upload, services));
   await assert.rejects(persistNeonEnquiry(config, withUpload, undefined, services));
+});
+
+test("a retry with the same submission key and content confirms the existing inquiry without another job", async () => {
+  let savedHash = "";
+  let attempts = 0;
+  let jobs = 0;
+  let duplicateReads = 0;
+  const sql: NonNullable<EnquiryNeonServices["sql"]> = async (strings, ...parameters) => {
+    if (strings.join("?").includes("WITH saved AS")) {
+      assert.match(strings.join("?"), /ON CONFLICT \(reference\) DO NOTHING/);
+      attempts++;
+      if (savedHash) return [];
+      savedHash = String(parameters[17]);
+      jobs++;
+      return [{ reference: record.reference }];
+    }
+    duplicateReads++;
+    assert.match(strings.join("?"), /SELECT request_hash FROM public\.project_enquiries/);
+    assert.deepEqual(parameters, [record.reference]);
+    return [{ request_hash: savedHash }];
+  };
+  assert.deepEqual(await persistNeonEnquiry(config, record, undefined, { sql }), { duplicate: false });
+  const retried = { ...record, receivedAt: "2026-09-27T17:01:00.000Z" };
+  assert.deepEqual(await persistNeonEnquiry(config, retried, undefined, { sql }), { duplicate: true });
+  assert.equal(attempts, 2);
+  assert.equal(jobs, 1);
+  assert.equal(duplicateReads, 1);
+});
+
+test("reusing a saved submission key with changed visitor fields fails as a conflict", async () => {
+  for (const field of ["name", "email", "idea", "phone", "company", "projectType", "application", "location", "dimensions", "desiredDate"] as const) {
+    const originalHash = enquiryFingerprint(record);
+    const changed = { ...record, [field]: `${record[field]} changed` };
+    let calls = 0;
+    await assert.rejects(persistNeonEnquiry(config, changed, undefined, {
+      sql: async (_strings, ...parameters) => {
+        calls++;
+        if (calls === 1) {
+          assert.notEqual(parameters[17], originalHash, field);
+          return [];
+        }
+        return [{ request_hash: originalHash }];
+      },
+    }), EnquiryConflictError);
+    assert.equal(calls, 2);
+  }
+});
+
+test("changed attachment bytes conflict without overwriting the original attachment path", async () => {
+  const originalHash = enquiryFingerprint(withUpload, upload);
+  const originalKey = `enquiries/${record.reference}/${originalHash}/inspiration.pdf`;
+  // Same size/name/type: content bytes themselves must distinguish this retry.
+  const altered = { ...upload, bytes: Buffer.from("%PDF-1.4\nchanged") };
+  assert.equal(altered.bytes.length, upload.bytes.length);
+  let newKey: string | undefined;
+  let calls = 0;
+  await assert.rejects(persistNeonEnquiry(config, withUpload, altered, {
+    putObject: async (input) => { newKey = input.Key; },
+    sql: async (_strings, ...parameters) => {
+      calls++;
+      if (calls === 1) {
+        assert.notEqual(parameters[17], originalHash);
+        assert.equal(parameters[13], newKey);
+        return [];
+      }
+      return [{ request_hash: originalHash }];
+    },
+  }), EnquiryConflictError);
+  assert.notEqual(newKey, originalKey);
+  assert.match(newKey!, /^enquiries\/[0-9a-f-]{36}\/[0-9a-f]{64}\/inspiration\.pdf$/);
+});
+
+test("matching attachment retries preserve their private key and reuse the saved inquiry", async () => {
+  const originalHash = enquiryFingerprint(withUpload, upload);
+  let calls = 0;
+  const result = await persistNeonEnquiry(config, { ...withUpload, receivedAt: "2026-09-28T17:00:00Z" }, upload, {
+    putObject: async (input) => {
+      assert.equal(input.Key, `enquiries/${record.reference}/${originalHash}/inspiration.pdf`);
+    },
+    sql: async () => (++calls === 1 ? [] : [{ request_hash: originalHash }]),
+  });
+  assert.deepEqual(result, { duplicate: true });
+});
+
+test("a missing or historical unhashed record never receives a false duplicate confirmation", async () => {
+  for (const existing of [[], [{ request_hash: null }]]) {
+    let calls = 0;
+    await assert.rejects(persistNeonEnquiry(config, record, undefined, {
+      sql: async () => (++calls === 1 ? [] : existing),
+    }));
+  }
+});
+
+test("inquiry persistence and its notification use one atomic statement with no follow-up enqueue on failure", async () => {
+  let calls = 0;
+  const databaseError = new Error("Outbox insertion rejected");
+  await assert.rejects(persistNeonEnquiry(config, record, undefined, {
+    sql: async (strings) => {
+      calls++;
+      const query = strings.join("?");
+      assert.match(query, /WITH saved AS \(/);
+      assert.match(query, /INSERT INTO public\.project_enquiries/);
+      assert.match(query, /INSERT INTO public\.enquiry_notifications/);
+      assert.match(query, /FROM saved/);
+      throw databaseError;
+    },
+  }), (error) => error === databaseError);
+  assert.equal(calls, 1);
 });

@@ -1,4 +1,4 @@
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import { neon } from "@neondatabase/serverless";
 
 // Run with Node's --env-file option so credentials never enter source or CLI arguments.
@@ -13,18 +13,19 @@ async function migrate() {
     throw new Error("Migrations require a direct Postgres connection in DATABASE_URL_UNPOOLED.");
   }
 
-  const migration = await readFile(
-    new URL("../db/migrations/001_project_enquiries.sql", import.meta.url),
-    "utf8",
-  );
-  // Explicit delimiters keep SQL parsing out of this runner (including quoted semicolons).
-  const statements = migration.split(/^--> statement-breakpoint\s*$/m)
-    .map((statement) => statement.trim()).filter(Boolean);
   const sql = neon(connectionString, {
     fetchOptions: { signal: AbortSignal.timeout(30_000) },
   });
-  await sql.transaction(statements.map((statement) => sql.query(statement)));
-  console.log("Enquiry migration applied: 001_project_enquiries.sql");
+  const directory = new URL("../db/migrations/", import.meta.url);
+  const files = (await readdir(directory)).filter((name) => /^\d+.*\.sql$/.test(name)).sort();
+  for (const file of files) {
+    const migration = await readFile(new URL(file, directory), "utf8");
+    // Each migration is repeatable and applied atomically, in numeric order.
+    const statements = migration.split(/^--> statement-breakpoint\s*$/m)
+      .map((statement) => statement.trim()).filter(Boolean);
+    await sql.transaction(statements.map((statement) => sql.query(statement)));
+    console.log(`Enquiry migration applied: ${file}`);
+  }
 }
 
 migrate().catch((error) => {

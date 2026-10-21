@@ -5,6 +5,10 @@ import CountrySelect from "./CountrySelect";
 import { studioContact } from "@/lib/contact";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import {
+  enquirySubmissionIdentity,
+  type EnquirySubmissionIdentity,
+} from "../lib/enquiry-submission";
+import {
   applications,
   enquiryFields,
   MAX_UPLOAD_BYTES,
@@ -35,6 +39,8 @@ export default function ProjectEnquiry() {
   const formRef = useRef<HTMLFormElement>(null);
   const detailsRef = useRef<HTMLDetailsElement>(null);
   const messageRef = useRef<HTMLParagraphElement>(null);
+  const submissionLock = useRef(false);
+  const submissionIdentity = useRef<EnquirySubmissionIdentity | null>(null);
   const [uploadsAvailable, setUploadsAvailable] = useState(false);
   const [submission, setSubmission] = useState<Submission>("idle");
   const [message, setMessage] = useState("");
@@ -109,7 +115,7 @@ export default function ProjectEnquiry() {
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (submission === "pending" || submission === "success")
+    if (submissionLock.current || submission === "pending" || submission === "success")
       return;
     const body = new FormData(event.currentTarget);
     const file = body.get("inspiration");
@@ -125,12 +131,20 @@ export default function ProjectEnquiry() {
         ?.focus();
       return;
     }
+    // Lock before the first await; React state alone leaves a double-click window.
+    submissionLock.current = true;
+    let saved = false;
     setSubmission("pending");
     setErrors({});
-    setMessage("Sending your project enquiry…");
+    setMessage("Saving your project enquiry…");
     try {
+      submissionIdentity.current = await enquirySubmissionIdentity(
+        body,
+        submissionIdentity.current,
+      );
       const result = await fetch("/api/enquiry", {
         method: "POST",
+        headers: { "Idempotency-Key": submissionIdentity.current.key },
         body,
         signal: AbortSignal.timeout(20_000),
       });
@@ -160,9 +174,10 @@ export default function ProjectEnquiry() {
         });
         return;
       }
+      saved = true;
       setSubmission("success");
       setMessage(
-        data.message || "Thank you. Your project enquiry has been received.",
+        data.message || "Thank you. Your project enquiry has been saved. Our studio will follow up with you.",
       );
       setReference(data.reference ?? "");
       requestAnimationFrame(() => messageRef.current?.focus());
@@ -172,6 +187,10 @@ export default function ProjectEnquiry() {
         "We could not confirm receipt. Your information is still here; check your connection and try again later.",
       );
       requestAnimationFrame(() => messageRef.current?.focus());
+    } finally {
+      // A confirmed submission stays locked until “Start another enquiry”.
+      // Failed/uncertain requests retain their identity for a safe retry.
+      if (!saved) submissionLock.current = false;
     }
   }
 
@@ -507,9 +526,9 @@ export default function ProjectEnquiry() {
                 }
               >
                 {submission === "pending"
-                  ? "Sending enquiry…"
+                  ? "Saving enquiry…"
                   : submission === "success"
-                    ? "Enquiry received"
+                    ? "Enquiry saved"
                     : "Send project enquiry"}
                 <span
                   aria-hidden="true"
@@ -523,6 +542,8 @@ export default function ProjectEnquiry() {
                   className={styles.check}
                   type="button"
                   onClick={() => {
+                    submissionLock.current = false;
+                    submissionIdentity.current = null;
                     formRef.current?.reset();
                     setProjectType("Not sure yet");
                     setApplication("Not sure yet");

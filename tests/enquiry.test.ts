@@ -9,6 +9,7 @@ import {
   validateEnquiry,
 } from "../src/lib/enquiry";
 import { MAX_UPLOAD_BYTES } from "../src/lib/enquiry-config";
+import { EnquiryConflictError } from "../src/lib/enquiry-idempotency";
 
 const origin = "https://vavi.example";
 const webhookEnv = {
@@ -344,7 +345,8 @@ test("Neon submission passes validated fields and attachment to persistence befo
   assert.equal(result.status, 201);
   const body = await result.json();
   assert.match(body.reference, /^[0-9a-f-]{36}$/);
-  assert.deepEqual(Object.keys(body).sort(), ["message", "reference"]);
+  assert.deepEqual(Object.keys(body).sort(), ["message", "reference", "saved"]);
+  assert.equal(body.saved, true);
 });
 
 test("Neon write failures return an honest error without credentials or false confirmation", async () => {
@@ -368,4 +370,192 @@ test("invalid Neon enquiries never reach database or storage", async () => {
   }));
   assert.equal(result.status, 422);
   assert.equal(writes, 0);
+});
+
+test("notification scheduling happens only after the saved inquiry is confirmed", async () => {
+  const events: string[] = [];
+  const submissionKey = "CB6D2E8A-A4BB-4DB7-A875-BDD987BD98F7";
+  const result = await handleEnquiry(request(form(), { "idempotency-key": submissionKey }), services({
+    env: neonEnv,
+    persistNeon: async (_config, record) => {
+      assert.equal(record.reference, submissionKey.toLowerCase());
+      events.push("saving");
+      await Promise.resolve();
+      events.push("saved");
+      return { duplicate: false };
+    },
+    onSaved: async (reference) => {
+      assert.equal(reference, submissionKey.toLowerCase());
+      assert.deepEqual(events, ["saving", "saved"]);
+      events.push("scheduled");
+    },
+  }));
+  assert.equal(result.status, 201);
+  assert.deepEqual(events, ["saving", "saved", "scheduled"]);
+  const body = await result.json();
+  assert.equal(body.saved, true);
+  assert.equal(body.reference, submissionKey.toLowerCase());
+});
+
+test("invalid submissions and failed persistence never schedule a notification", async () => {
+  const invalid = form();
+  invalid.set("email", "visitor@example.com,owner@example.com");
+  const invalidResult = await handleEnquiry(request(invalid), services({
+    env: neonEnv,
+    persistNeon: async () => assert.fail("No save for invalid visitor email"),
+    onSaved: async () => assert.fail("No notification for invalid visitor email"),
+  }));
+  assert.equal(invalidResult.status, 422);
+  const failedResult = await handleEnquiry(request(), services({
+    env: neonEnv,
+    persistNeon: async () => { throw new Error("Database unavailable"); },
+    onSaved: async () => assert.fail("No notification after failed save"),
+  }));
+  assert.equal(failedResult.status, 502);
+  assert.equal((await failedResult.json()).saved, undefined);
+});
+
+test("notification scheduling failure preserves the visitor saved confirmation and logs only the reference", async (t) => {
+  const logging = t.mock.method(console, "error", () => {});
+  const result = await handleEnquiry(request(), services({
+    env: neonEnv,
+    persistNeon: async () => ({ duplicate: false }),
+    onSaved: async () => { throw new Error("private provider credentials"); },
+  }));
+  assert.equal(result.status, 201);
+  const body = await result.json();
+  assert.equal(body.saved, true);
+  assert.match(body.message, /has been saved/);
+  assert.equal(logging.mock.calls.length, 1);
+  assert.deepEqual(logging.mock.calls[0].arguments, ["[enquiry-notification]", {
+    reference: body.reference, code: "scheduling_failed",
+  }]);
+});
+
+test("invalid submission keys are rejected before persistence or scheduling", async () => {
+  for (const key of ["../private", "not-a-uuid", "cb6d2e8a-a4bb-1db7-a875-bdd987bd98f7"]) {
+    const result = await handleEnquiry(request(form(), { "idempotency-key": key }), services({
+      env: neonEnv,
+      persistNeon: async () => assert.fail("No save for invalid submission key"),
+      onSaved: async () => assert.fail("No notification for invalid submission key"),
+    }));
+    assert.equal(result.status, 400);
+    assert.equal((await result.json()).saved, undefined);
+  }
+});
+
+test("a submission-key conflict responds with 409 without scheduling another notification", async () => {
+  const result = await handleEnquiry(request(form(), {
+    "idempotency-key": "cb6d2e8a-a4bb-4db7-a875-bdd987bd98f7",
+  }), services({
+    env: neonEnv,
+    persistNeon: async () => { throw new EnquiryConflictError(); },
+    onSaved: async () => assert.fail("No notification for conflicted submission"),
+  }));
+  assert.equal(result.status, 409);
+  assert.equal((await result.json()).saved, undefined);
+});
+
+test("a confirmed duplicate still returns saved and wakes the existing notification job", async () => {
+  const key = "cb6d2e8a-a4bb-4db7-a875-bdd987bd98f7";
+  let schedules = 0;
+  const result = await handleEnquiry(request(form(), { "idempotency-key": key }), services({
+    env: neonEnv,
+    persistNeon: async () => ({ duplicate: true }),
+    onSaved: async (reference) => {
+      assert.equal(reference, key);
+      schedules++;
+    },
+  }));
+  assert.equal(result.status, 201);
+  assert.equal((await result.json()).saved, true);
+  assert.equal(schedules, 1);
+});
+
+test("filesystem retries reuse the saved reference and first timestamp, while changed content conflicts", async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), "vavi-enquiry-retry-test-"));
+  const key = "cb6d2e8a-a4bb-4db7-a875-bdd987bd98f7";
+  const firstTime = Date.parse("2026-10-20T17:00:00Z");
+  const data = () => {
+    const fields = form();
+    fields.set("inspiration", new Blob(["%PDF-1.4\nconcept"], { type: "application/pdf" }), "original.pdf");
+    return fields;
+  };
+  const send = (fields: FormData, time: number) => handleEnquiry(
+    request(fields, { "idempotency-key": key }),
+    services({ env: { ENQUIRY_STORAGE_DIR: directory }, now: () => time }),
+  );
+  try {
+    const first = await send(data(), firstTime);
+    assert.equal(first.status, 201);
+    assert.equal((await first.json()).reference, key);
+    const retry = await send(data(), firstTime + 60_000);
+    assert.equal(retry.status, 201);
+    const confirmation = await retry.json();
+    assert.equal(confirmation.reference, key);
+    assert.equal(confirmation.saved, true);
+    assert.deepEqual(await readdir(directory), [key]);
+    const original = await readFile(path.join(directory, key, "enquiry.json"), "utf8");
+    assert.equal(JSON.parse(original).receivedAt, new Date(firstTime).toISOString());
+    assert.equal(await readFile(path.join(directory, key, "inspiration.pdf"), "utf8"), "%PDF-1.4\nconcept");
+
+    const changed = data();
+    changed.set("idea", "A different project using the same submission reference.");
+    const conflict = await send(changed, firstTime + 120_000);
+    assert.equal(conflict.status, 409);
+    assert.equal((await conflict.json()).saved, undefined);
+    assert.deepEqual(await readdir(directory), [key]);
+    assert.equal(await readFile(path.join(directory, key, "enquiry.json"), "utf8"), original);
+  } finally {
+    assert.ok(path.resolve(directory).startsWith(path.resolve(os.tmpdir()) + path.sep));
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test("webhooks receive the same idempotency key and reference on retries with authorization preserved", async () => {
+  const key = "cb6d2e8a-a4bb-4db7-a875-bdd987bd98f7";
+  let deliveries = 0;
+  const deliver: typeof fetch = async (_input, init) => {
+    deliveries++;
+    const headers = new Headers(init?.headers);
+    assert.equal(headers.get("Idempotency-Key"), key);
+    assert.equal(headers.get("Authorization"), "Bearer receiver-test-secret");
+    assert.ok(init?.body instanceof FormData);
+    const record = JSON.parse(String(init.body.get("enquiry")));
+    assert.equal(record.reference, key);
+    assert.equal(record.email, "designer@example.com");
+    return new Response(null, { status: 202 });
+  };
+  for (const time of [1000, 61_000]) {
+    const result = await handleEnquiry(request(form(), { "idempotency-key": key }), services({
+      env: { ...webhookEnv, ENQUIRY_WEBHOOK_TOKEN: "receiver-test-secret" },
+      fetch: deliver,
+      now: () => time,
+    }));
+    assert.equal(result.status, 201);
+    assert.equal((await result.json()).reference, key);
+  }
+  assert.equal(deliveries, 2);
+});
+
+test("visitor email validation rejects header injection and multiple Reply-To mailboxes before saving", async () => {
+  for (const email of [
+    "visitor@example.com\r\nBcc: extra@example.com",
+    "visitor@example.com\nReply-To: extra@example.com",
+    "visitor@example.com,extra@example.com",
+    "visitor@example.com;extra@example.com",
+    "Visitor <visitor@example.com>",
+  ]) {
+    const fields = form();
+    fields.set("email", email);
+    const result = await handleEnquiry(request(fields), services({
+      env: neonEnv,
+      persistNeon: async () => assert.fail("Unsafe Reply-To must not be saved"),
+      onSaved: async () => assert.fail("Unsafe Reply-To must not trigger notification"),
+    }));
+    assert.equal(result.status, 422);
+    const body = await result.json();
+    assert.ok(body.errors.email);
+    assert.equal(body.saved, undefined);
+  }
 });

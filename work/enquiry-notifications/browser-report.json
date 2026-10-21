@@ -1,0 +1,111 @@
+{
+  "baseURL": "http://127.0.0.1:3110",
+  "createdAt": "2026-10-21T01:25:30.179Z",
+  "boundary": "Local production build, isolated Neon branch, no real Resend credentials. Browser verifies saved form state; provider delivery is tested separately with test doubles.",
+  "scenarios": [
+    {
+      "name": "desktop real save, loading and synchronous duplicate prevention",
+      "passed": true,
+      "durationMs": 1846,
+      "posts": [
+        {
+          "key": "71fb815b-3da0-4559-8a12-6738dda28368",
+          "status": 201,
+          "body": {
+            "message": "Your enquiry has been saved. Thank you for sharing your idea. Our studio will follow up with you.",
+            "reference": "71fb815b-3da0-4559-8a12-6738dda28368",
+            "saved": true
+          }
+        }
+      ],
+      "message": "Your enquiry has been saved. Thank you for sharing your idea. Our studio will follow up with you.\nReference: 71fb815b-3da0-4559-8a12-6738dda28368",
+      "geometry": {
+        "viewport": 1440,
+        "document": 1440
+      },
+      "browserErrors": []
+    },
+    {
+      "name": "mobile real save, loading and synchronous duplicate prevention",
+      "passed": true,
+      "durationMs": 1013,
+      "posts": [
+        {
+          "key": "f99fd4b3-9048-465d-9299-3e837ae9f8df",
+          "status": 201,
+          "body": {
+            "message": "Your enquiry has been saved. Thank you for sharing your idea. Our studio will follow up with you.",
+            "reference": "f99fd4b3-9048-465d-9299-3e837ae9f8df",
+            "saved": true
+          }
+        }
+      ],
+      "message": "Your enquiry has been saved. Thank you for sharing your idea. Our studio will follow up with you.\nReference: f99fd4b3-9048-465d-9299-3e837ae9f8df",
+      "geometry": {
+        "viewport": 390,
+        "document": 390
+      },
+      "browserErrors": []
+    },
+    {
+      "name": "lost successful response retries the same saved inquiry and UUID",
+      "passed": true,
+      "durationMs": 1401,
+      "posts": [
+        {
+          "key": "cf21b1df-87c3-4a77-a424-cf9a7eed7a32",
+          "status": 201,
+          "body": {
+            "message": "Your enquiry has been saved. Thank you for sharing your idea. Our studio will follow up with you.",
+            "reference": "cf21b1df-87c3-4a77-a424-cf9a7eed7a32",
+            "saved": true
+          }
+        },
+        {
+          "key": "cf21b1df-87c3-4a77-a424-cf9a7eed7a32",
+          "status": 201,
+          "body": {
+            "message": "Your enquiry has been saved. Thank you for sharing your idea. Our studio will follow up with you.",
+            "reference": "cf21b1df-87c3-4a77-a424-cf9a7eed7a32",
+            "saved": true
+          }
+        }
+      ],
+      "message": "Your enquiry has been saved. Thank you for sharing your idea. Our studio will follow up with you.\nReference: cf21b1df-87c3-4a77-a424-cf9a7eed7a32",
+      "browserErrors": []
+    },
+    {
+      "name": "email template 390px rendering and links",
+      "passed": true,
+      "durationMs": 160,
+      "geometry": {
+        "viewport": 390,
+        "document": 390
+      },
+      "dashboardURL": "https://vavi-tile-studio-dashboard.vercel.app/"
+    },
+    {
+      "name": "email template 600px rendering and links",
+      "passed": true,
+      "durationMs": 181,
+      "geometry": {
+        "viewport": 600,
+        "document": 600
+      },
+      "dashboardURL": "https://vavi-tile-studio-dashboard.vercel.app/"
+    },
+    {
+      "name": "published dashboard URL reaches protected owner sign-in",
+      "passed": true,
+      "durationMs": 2043,
+      "requestedURL": "https://vavi-tile-studio-dashboard.vercel.app/",
+      "finalURL": "https://vavi-tile-studio-dashboard.vercel.app/login",
+      "status": 200,
+      "title": "VAVI · Owner workspace",
+      "heading": [
+        "Welcome back."
+      ],
+      "boundary": "Unauthenticated browser check only. No credentials supplied or authentication bypassed."
+    }
+  ]
+}

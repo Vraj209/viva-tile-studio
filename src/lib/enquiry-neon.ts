@@ -5,6 +5,7 @@ import {
   type PutObjectCommandInput,
 } from "@aws-sdk/client-s3";
 import type { EnquiryData, Upload } from "./enquiry";
+import { EnquiryConflictError, enquiryFingerprint } from "./enquiry-idempotency";
 
 export type NeonEnquiryConfig = {
   kind: "neon";
@@ -135,8 +136,9 @@ export async function persistNeonEnquiry(
     throw new Error("Invalid enquiry storage record");
 
   const signal = AbortSignal.timeout(15_000);
+  const requestHash = enquiryFingerprint(record, upload);
   const key = upload
-    ? `enquiries/${record.reference}/inspiration.${upload.extension}`
+    ? `enquiries/${record.reference}/${requestHash}/inspiration.${upload.extension}`
     : null;
   if (upload) {
     // Never accept an attachment unless it can be stored, including direct callers.
@@ -160,19 +162,35 @@ export async function persistNeonEnquiry(
   // All enquiry values are bound parameters. No credentials or private URLs are stored.
   // Keep any uploaded object on a database timeout: the INSERT may have committed
   // even when its acknowledgement was lost. Reconcile private orphans separately.
-  await sql`
+  const inserted = await sql`
+    WITH saved AS (
     INSERT INTO public.project_enquiries (
       reference, received_at, name, email, idea, project_type, application,
       location, dimensions, company, phone, desired_date,
       inspiration_bucket, inspiration_key, inspiration_original_name,
-      inspiration_mime, inspiration_bytes
+      inspiration_mime, inspiration_bytes, request_hash
     ) VALUES (
       ${record.reference}, ${record.receivedAt}, ${record.name}, ${record.email},
       ${record.idea}, ${record.projectType}, ${record.application},
       ${record.location}, ${record.dimensions}, ${record.company}, ${record.phone},
       ${record.desiredDate || null}, ${upload ? config.bucket : null}, ${key},
       ${upload?.originalName ?? null}, ${upload?.mime ?? null},
-      ${upload?.bytes.length ?? null}
+      ${upload?.bytes.length ?? null}, ${requestHash}
     )
+    ON CONFLICT (reference) DO NOTHING
+    RETURNING reference
+    )
+    INSERT INTO public.enquiry_notifications (reference, record)
+    SELECT reference, ${JSON.stringify(record)}::jsonb FROM saved
+    RETURNING reference
   `;
+  if (Array.isArray(inserted) && inserted.length) return { duplicate: false };
+  // A separate statement sees a competing transaction after ON CONFLICT waited
+  // for it. A single CTE snapshot cannot reliably read that competing INSERT.
+  const existing = await sql`
+    SELECT request_hash FROM public.project_enquiries WHERE reference = ${record.reference}
+  ` as { request_hash: string | null }[];
+  if (!existing[0]) throw new Error("Saved enquiry could not be confirmed");
+  if (existing[0].request_hash !== requestHash) throw new EnquiryConflictError();
+  return { duplicate: true };
 }

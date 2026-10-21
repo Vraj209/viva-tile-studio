@@ -1,6 +1,8 @@
 import { randomUUID } from "node:crypto";
-import { mkdir, realpath, rename, rm, writeFile } from "node:fs/promises";
+import { mkdir, readFile, realpath, rename, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { EnquiryConflictError, enquiryFingerprint, SUBMISSION_KEY_PATTERN } from "./enquiry-idempotency";
+import { isNotificationEmail } from "./enquiry-notifications";
 import {
   neonEnquiryConfiguration,
   persistNeonEnquiry,
@@ -54,7 +56,8 @@ export type EnquiryServices = {
   fetch?: typeof fetch;
   now?: () => number;
   buckets?: Map<string, Bucket>;
-  persistNeon?: typeof persistNeonEnquiry;
+  persistNeon?: (...args: Parameters<typeof persistNeonEnquiry>) => Promise<{ duplicate: boolean } | void>;
+  onSaved?: (reference: string) => void | Promise<void>;
 };
 
 // Per-process safeguard. See docs/enquiry.md for multi-instance limits and proxy setup.
@@ -227,7 +230,7 @@ export async function validateEnquiry(
     else if (/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/.test(value))
       errors[field] = "Please remove unsupported control characters.";
   }
-  if (data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))
+  if (data.email && !isNotificationEmail(data.email))
     errors.email = "Enter a valid email address.";
   for (const [key, limit] of Object.entries(optionalLimits)) {
     const entry = form.get(key);
@@ -284,7 +287,7 @@ export async function validateEnquiry(
 async function persist(
   directory: string,
   reference: string,
-  record: object,
+  record: EnquiryRecord,
   upload?: Upload,
 ) {
   await mkdir(directory, { recursive: true, mode: 0o700 });
@@ -300,6 +303,14 @@ async function persist(
       !path.isAbsolute(relativeToPublic))
   )
     throw new Error("unsafe storage");
+  const requestHash = enquiryFingerprint(record, upload);
+  try {
+    const saved = JSON.parse(await readFile(path.join(destination, reference, "enquiry.json"), "utf8"));
+    if (saved.requestHash !== requestHash) throw new EnquiryConflictError();
+    return;
+  } catch (error) {
+    if (!(error && typeof error === "object" && "code" in error && error.code === "ENOENT")) throw error;
+  }
   // A randomized private staging directory is renamed only after every write succeeds.
   const staging = path.join(destination, `.pending-${reference}`);
   await mkdir(staging, { mode: 0o700 });
@@ -312,7 +323,7 @@ async function persist(
       );
     await writeFile(
       path.join(staging, "enquiry.json"),
-      JSON.stringify(record, null, 2),
+      JSON.stringify({ ...record, requestHash }, null, 2),
       { flag: "wx", mode: 0o600 },
     );
     await rename(staging, path.join(destination, reference));
@@ -400,7 +411,10 @@ export async function handleEnquiry(
       "Please check the highlighted fields. Your idea has not been sent.",
       { errors },
     );
-  const reference = randomUUID();
+  const submissionKey = request.headers.get("idempotency-key");
+  if (submissionKey && !SUBMISSION_KEY_PATTERN.test(submissionKey))
+    return response(400, "The submission reference is invalid. Please reload and try again.");
+  const reference = submissionKey?.toLowerCase() || randomUUID();
   const record: EnquiryRecord = {
     reference,
     receivedAt: new Date((services.now ?? Date.now)()).toISOString(),
@@ -431,24 +445,33 @@ export async function handleEnquiry(
       const result = await (services.fetch ?? fetch)(config.url, {
         method: "POST",
         body,
-        headers: config.token
-          ? { Authorization: `Bearer ${config.token}` }
-          : undefined,
+        headers: {
+          "Idempotency-Key": reference,
+          ...(config.token ? { Authorization: `Bearer ${config.token}` } : {}),
+        },
         signal: AbortSignal.timeout(12_000),
         redirect: "error",
       });
       if (!result.ok) throw new Error("delivery not accepted");
     }
-  } catch {
+  } catch (error) {
+    if (error instanceof EnquiryConflictError)
+      return response(409, "This submission reference was already used. Start a new enquiry for different details.");
     // Never log enquiry content or expose transport details in a browser response.
     return response(
       502,
       "We could not confirm receipt. Your information is still here; please try again later.",
     );
   }
+  // Delivery is scheduled only after storage confirms the record and outbox job.
+  // A scheduling failure must not turn a saved inquiry into a visitor error.
+  if (config.kind === "neon" && services.onSaved) {
+    try { await services.onSaved(reference); }
+    catch { console.error("[enquiry-notification]", { reference, code: "scheduling_failed" }); }
+  }
   return response(
     201,
-    "Your enquiry has been received. Thank you for sharing your idea.",
-    { reference },
+    "Your enquiry has been saved. Thank you for sharing your idea. Our studio will follow up with you.",
+    { reference, saved: true },
   );
 }

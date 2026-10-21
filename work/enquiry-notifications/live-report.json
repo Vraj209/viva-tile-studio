@@ -1,0 +1,59 @@
+{
+  "target": "isolated Neon database branch",
+  "verifiedAt": "2026-10-21T01:26:16.859Z",
+  "realEmailsSent": 0,
+  "checks": [
+    {
+      "name": "historical inquiries have no notification job",
+      "status": "passed"
+    },
+    {
+      "name": "invalid form cannot save or schedule a notification",
+      "status": "passed"
+    },
+    {
+      "name": "concurrent duplicate submissions commit one inquiry and one outbox job",
+      "status": "passed"
+    },
+    {
+      "name": "reusing a submission key for different content returns conflict",
+      "status": "passed"
+    },
+    {
+      "name": "owner dashboard list and details read the saved inquiry",
+      "status": "passed"
+    },
+    {
+      "name": "parallel notification workers make one provider request",
+      "status": "passed"
+    },
+    {
+      "name": "provider failure preserves the inquiry and retries its frozen payload",
+      "status": "passed"
+    },
+    {
+      "name": "provider acceptance before a failed state write replays one provider message",
+      "status": "passed"
+    },
+    {
+      "name": "a committed sent state survives a lost database acknowledgement",
+      "status": "passed"
+    },
+    {
+      "name": "expired ambiguous sends require review without contacting the provider",
+      "status": "passed"
+    },
+    {
+      "name": "expired leases recover and stale workers cannot overwrite the new lease",
+      "status": "passed"
+    },
+    {
+      "name": "historical inquiry remains unqueued and outbox access stays private",
+      "status": "passed"
+    }
+  ],
+  "providerRequests": 7,
+  "uniqueSimulatedEmails": 5,
+  "syntheticInquiriesRemoved": 7,
+  "authenticatedBrowserVerified": false
+}
