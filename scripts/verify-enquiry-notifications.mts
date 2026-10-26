@@ -233,8 +233,8 @@ async function verify() {
       assert.deepEqual(payload.to, [env.ENQUIRY_NOTIFICATION_TO]);
       assert.match(payload.html, /You’ve received a new inquiry\./);
       assert.match(payload.html, /View Inquiry Dashboard/);
-      assert.equal((payload.html.match(/href="https:\/\/vavi-tile-studio-dashboard\.vercel\.app\/"/g) ?? []).length, 2);
-      assert.ok(payload.text.includes("https://vavi-tile-studio-dashboard.vercel.app/"));
+      assert.equal((payload.html.match(/href="https:\/\/dashboard\.vavitilestudio\.com\/"/g) ?? []).length, 2);
+      assert.ok(payload.text.includes("https://dashboard.vavitilestudio.com/"));
       for (const value of [fields.name, email, fields.idea, fields.phone, fields.company, fields.projectType, fields.application, fields.location, fields.dimensions, "America/Toronto"]) {
         assert.ok(payload.text.includes(value));
       }

@@ -135,8 +135,8 @@ test("a claimed saved inquiry sends the branded email with validated Reply-To an
   assert.equal(payload.subject, "New Inquiry — VAVI Tile Studio");
   assert.match(payload.html, /You’ve received a new inquiry\./);
   assert.match(payload.html, /View Inquiry Dashboard/);
-  assert.ok((payload.html.match(/href="https:\/\/vavi-tile-studio-dashboard\.vercel\.app\/"/g) ?? []).length >= 2);
-  assert.ok(payload.text.includes("https://vavi-tile-studio-dashboard.vercel.app/"));
+  assert.ok((payload.html.match(/href="https:\/\/dashboard\.vavitilestudio\.com\/"/g) ?? []).length >= 2);
+  assert.ok(payload.text.includes("https://dashboard.vavitilestudio.com/"));
   for (const value of [record.name, record.email, record.idea, record.phone, record.projectType, record.application, record.location, record.dimensions, record.company, "America/Toronto"]) {
     assert.ok(payload.html.includes(value));
     assert.ok(payload.text.includes(value));

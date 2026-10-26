@@ -28,11 +28,28 @@ npm run db:migrate
 
 The command loads `.env.local` and applies the numbered SQL migrations in order. `001_project_enquiries.sql` creates the inquiry table. `002_enquiry_notifications.sql` adds `request_hash` and the private notification queue. Each migration is repeatable and runs in a transaction. Both tables have row-level security and no anonymous browser access. A missing queue migration prevents the atomic save; it cannot silently accept an inquiry without its notification job. Restart or redeploy the website after changing its environment. Local configuration and migration do not update a hosted deployment.
 
+### Troubleshoot `notification_configuration_missing`
+
+This code is logged before any request reaches Resend. It means the API key, sender, recipient, or timezone failed local configuration validation; a verified Resend domain does not resolve missing application settings.
+
+In Vercel, configure these server variables for **Production on the public website project serving `www.vavitilestudio.com`**:
+
+| Variable | Value |
+| --- | --- |
+| `RESEND_API_KEY` | The private Resend key with email-sending access. The application does **not** read `RESEND_EMAIL_API_KEY`. |
+| `ENQUIRY_NOTIFICATION_FROM` | `info@vavitilestudio.com` |
+| `ENQUIRY_NOTIFICATION_TO` | `info@vavitilestudio.com` |
+| `ENQUIRY_NOTIFICATION_TIMEZONE` | Optional; use `America/Toronto` or another valid IANA timezone. |
+
+Use bare email addresses without display names or address lists. Settings on the owner dashboard project, or only in Preview/Development, do not configure the production website. Redeploy the public website after saving environment changes so the new deployment receives them.
+
+Previously queued jobs that failed only configuration validation remain retryable: no provider request was made and their first-attempt time remains unset. After correcting the environment, invoke the [manual retry](#manual-retry) or authenticated [hosted retry endpoint](#hosted-retry-schedule) once the jobs are due (configuration failures wait five minutes). This repository configures no automatic retry scheduler, and redeployment alone does not drain the backlog. These setup steps do not establish that a live email was accepted or delivered; verify the resulting notification state and Resend event separately.
+
 ## Email content and submission identity
 
 The notification subject is **New Inquiry — VAVI Tile Studio**. HTML and plain-text bodies contain the visitor's name, validated email, message, every supplied optional project/contact field, and an explicitly labelled submission timezone. Empty optional fields are omitted. If present, the inspiration filename is included; the private file is accessed through the dashboard. Visitor text is HTML-escaped.
 
-The primary **View Inquiry Dashboard** button and the visible fallback link both open [the owner dashboard](https://vavi-tile-studio-dashboard.vercel.app/). `Reply-To` contains only the validated visitor mailbox, so the owner can reply directly. The destination recipient and sender come from server configuration.
+The primary **View Inquiry Dashboard** button, visible fallback link, and plain-text link open [the owner dashboard](https://dashboard.vavitilestudio.com/). `Reply-To` contains only the validated visitor mailbox, so the owner can reply directly. The destination recipient and sender come from server configuration.
 
 The form disables repeated clicks immediately and retains an idempotency key in memory for retries of identical fields and file bytes. Changed content or “Start another enquiry” creates a new key. The server accepts a UUID v4 `Idempotency-Key` header, stores its reference uniquely, and compares a SHA-256 fingerprint before confirming a retry. A key reused for different content returns HTTP 409. The saved inquiry and notification job are inserted together; competing identical requests cannot create a second job. Page reloads/new tabs and independent submissions have separate identities and are not treated as the same inquiry merely because their text happens to match.
 

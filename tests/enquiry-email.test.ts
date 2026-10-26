@@ -39,7 +39,7 @@ test("owner email includes the requested copy, all supplied fields, and both das
   }
   assert.ok(email.html.includes(record.idea.replace("\n", "<br />")));
   assert.ok(email.text.includes(record.idea));
-  assert.equal(ENQUIRY_DASHBOARD_URL, "https://vavi-tile-studio-dashboard.vercel.app/");
+  assert.equal(ENQUIRY_DASHBOARD_URL, "https://dashboard.vavitilestudio.com/");
   assert.equal(email.html.split(`href="${ENQUIRY_DASHBOARD_URL}"`).length - 1, 2);
   assert.ok(email.html.includes(`>${ENQUIRY_DASHBOARD_URL}</a>`));
   assert.ok(email.html.includes(">View Inquiry Dashboard</a>"));

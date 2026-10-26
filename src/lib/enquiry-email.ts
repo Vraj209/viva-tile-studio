@@ -1,7 +1,7 @@
 import type { EnquiryRecord } from "./enquiry-neon";
 
 export const ENQUIRY_DASHBOARD_URL =
-  "https://vavi-tile-studio-dashboard.vercel.app/";
+  "https://dashboard.vavitilestudio.com/";
 
 const subject = "New Inquiry — VAVI Tile Studio";
 const heading = "You’ve received a new inquiry.";
