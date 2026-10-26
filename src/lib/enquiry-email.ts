@@ -83,8 +83,9 @@ export function renderEnquiryEmail(
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:600px;table-layout:fixed;background-color:#faf8f4;">
         <tr><td style="height:5px;background-color:#303c32;font-size:0;line-height:0;">&nbsp;</td></tr>
         <tr><td class="email-content" style="padding:40px 40px 32px;">
-          <p style="margin:0;color:#303c32;font:32px/1.1 Georgia,'Times New Roman',serif;letter-spacing:5px;">VAVI</p>
-          <p style="margin:8px 0 36px;color:#57534d;font:10px/1.5 Arial,sans-serif;letter-spacing:3px;">TILE STUDIO</p>
+          <p style="margin:0 0 32px;">
+            <img src="https://www.vavitilestudio.com/images/logo-transparent.png" alt="VAVI Tile Studio" width="128" height="146" style="display:block;width:128px;height:146px;border:0;outline:none;text-decoration:none;" />
+          </p>
           <h1 class="email-heading" style="margin:0 0 18px;color:#303c32;font:normal 38px/1.14 Georgia,'Times New Roman',serif;">${heading}</h1>
           <p style="margin:0 0 28px;color:#57534d;font:15px/1.7 Arial,sans-serif;">${introduction}</p>
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;table-layout:fixed;border-top:1px solid #d0c6ba;">
